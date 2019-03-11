@@ -1,0 +1,90 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['set', 'var', 'to', '\"', 'hello', '\"']\n",
+      "set matches: set\n",
+      "var matches: identifier\n",
+      "to matches: to\n",
+      "hello matches: identifier\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "\n",
+    "\n",
+    "class Lexer:\n",
+    "    TOKENS = {\n",
+    "        \"set\": \"set\",\n",
+    "        \"to\": \"to\",\n",
+    "        \"str\": '\"[\\w]\"',\n",
+    "        \"identifier\": \"[a-z][a-zA-z0-9]+\",\n",
+    "        \"inum\": \"^[-+]?[1-9][0-9]*$|0\",\n",
+    "        \"fnum\": \"^[-+]?[0-9]*[.][0-9]+\",\n",
+    "        \"bool\": \"true|false|on|off\",\n",
+    "        \n",
+    "        \"plus\": \"[+]\",\n",
+    "        \"minus\": \"[-]\",\n",
+    "        \"multiply\": \"[*]\",\n",
+    "        \"divide\": \"[/]\",\n",
+    "        \"modulo\": \"[%]\",\n",
+    "\n",
+    "        \"equals\": \"==\",\n",
+    "        \"greater\": \">\",\n",
+    "        \"less\": \"<\"\n",
+    "    }\n",
+    "\n",
+    "    def lex(self, string):\n",
+    "        potential_tokens = re.findall(r\"[\\w']+|\\\"\", string)\n",
+    "        print(potential_tokens)\n",
+    "\n",
+    "        for string in potential_tokens:\n",
+    "            for key, val in self.TOKENS.items():\n",
+    "                pattern = re.compile(val)\n",
+    "                if pattern.match(string):\n",
+    "                    print(string, \"matches:\", key)\n",
+    "                    break\n",
+    "\n",
+    "\n",
+    "lexer = Lexer()\n",
+    "lexer.lex('set var to \"hello\"')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.2"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
