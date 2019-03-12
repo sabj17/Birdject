@@ -1,0 +1,31 @@
+number1 = 4;
+fnumber = 23;
+
+string1 = "hello";
+string2 = "hel"lo";
+string3 = "the increase is"+fnumber+"%";
+
+
+
+LivingRoom{
+	set temp1 to Thermometer;
+	set window1 to pin10;
+	
+	function getTemp1(){
+		return temp1 * 5;	
+	}
+	
+	function openWindow(){
+		window1.turnOn();
+	}
+}
+
+function globalFunc(){
+	return 0;
+}
+
+when(run LivingRoom getTemp1() > 20){
+	run LivingRoom.window1.open();
+	run LivingRoom.openWindow();
+	run globalFunc();
+}
