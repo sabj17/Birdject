@@ -1,5 +1,7 @@
 number1 = 4;
-fnumber = 23;
+fnumber = 23.5;
+
+//this is nice
 
 string1 = "hello";
 string2 = "hel"lo";
