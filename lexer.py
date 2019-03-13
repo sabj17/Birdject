@@ -32,8 +32,8 @@ class Lexer:
         "str": r'["][\w\s]*["]',
         "identifier": "[a-z][a-zA-z0-9]*",
         "obj-identifier": "[A-Z][a-zA-z0-9]*",
-        "fnum": "^[-+]?[0-9]*[.][0-9]+",
-        "inum": "^[-+]?[1-9][0-9]*$|0",
+        "fnum": "[-+]?[0-9]*[.][0-9]+",
+        "inum": "[-+]?[1-9][0-9]*|0",
         "lparen": "[\(]",
         "hparen": "[\)]",
         "lcurly": "[\{]",
@@ -60,8 +60,11 @@ class Lexer:
         string = re.sub(self.TOKENS["comment"], '', string)
         #print(string, "\n")
 
+        print(re.findall(r'["][\w\s]*["]', string))
+        string = re.sub(r'["][\w\s]*["]', 'str', string)
+
         # use the regular expression to find the individual tokens
-        potential_tokens = re.findall(re_string, string)
+        potential_tokens = re.findall(r'[;]|[a-zA-Z0-9]*', string)
         potential_tokens = list(filter(lambda a: a != '', potential_tokens))
         print(potential_tokens, "\n")
 
@@ -73,7 +76,7 @@ class Lexer:
                     break
 
 
-with open("jen.txt", "r") as jen:
+with open("ArdujenoCode\Example.jnr", "r") as jen:
     lexer = Lexer()
     lexer.lex(jen.read(10000))
 
