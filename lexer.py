@@ -1,8 +1,8 @@
 import re
+from token import Token
 
 
 # rewrite of code: https://docs.python.org/3/library/re.html in the bottom of the page
-
 class Lexer:
     keywords = {'for each', 'in', 'is', 'when', 'function', 'if', 'else', 'in', 'run', 'return', 'and', 'or', 'not',\
                 'function', 'set', 'to', 'input', 'output', 'delay', 'date', 'read', 'write', 'print'}
@@ -92,8 +92,6 @@ class Lexer:
 
 
 '''
-For testing
-
 lexer = Lexer("ArdujenoCode/Example.jnr")
 for token in lexer.lex():
     print(token)
