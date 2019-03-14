@@ -4,15 +4,15 @@ from token import Token
 
 # rewrite of code: https://docs.python.org/3/library/re.html in the bottom of the page
 class Lexer:
-    keywords = {'for each', 'in', 'is', 'when', 'function', 'if', 'else', 'in', 'run', 'return', 'and', 'or', 'not',\
+    keywords = {'foreach', 'in', 'is', 'when', 'function', 'if', 'else', 'in', 'run', 'return', 'and', 'or', 'not',\
                 'function', 'set', 'to', 'input', 'output', 'delay', 'date', 'read', 'write', 'print'}
     token_specification = [
-        ('COMMENT', r'//.*[\n]*'),
+        ('COMMENT', r'//.*[\n]*'),  # Comments
 
-        ('NUMBER',  r'\d+(\.\d*)?'),  # Integer or decimal number
-        ('STRING',  r'["][^"]*["]'),  # String value
-        ('BOOL',    r'true|false|on|off'),  # Boolean
-        ('PIN',     r'pin[A]?[\d]+'),  # Identifiers
+        ('NUMBER',  r'\d+(\.\d*)?'),  # Integer or Float number: 25 or 36.24
+        ('STRING',  r'["]([^"]|\")*["]'),  # String value: "Hello World"
+        ('BOOL',    r'true|false|on|off'),  # Boolean: true, false or on, off
+        ('PIN',     r'pin[A]?[\d]+'),  # Arduino pins: pin15 or pinA3
         ('ID',      r'[a-zA-Z][\w]+'),  # Identifiers
 
         # Operators
@@ -26,14 +26,14 @@ class Lexer:
         ('LESS',    r'[<]'),
 
         # Allowed symbols
-        ('END',     r';'),  # Statement terminator
+        ('END',     r';'),
         ('LPAREN',  r'[\(]'),
         ('RPAREN',  r'[\)]'),
         ('LCURLY',  r'[\{]'),
         ('RCURLY',  r'[\}]'),
-        ('DOT', r'[.]'),
+        ('DOT',     r'[.]'),
 
-        ('NEWLINE', r'\n'),  # Line endings
+        ('NEWLINE', r'\n'),  # Newline
         ('SKIP',    r'[ \t]+'),  # Skip over spaces and tabs
         ('MISMATCH',r'.'),  # Any other character
     ]
@@ -70,7 +70,7 @@ class Lexer:
 
             elif kind == 'ID':
                 if value in self.keywords:  # if there kind was ID where it should have been a keyword
-                    kind = value.upper()  # make the value upper case
+                    kind = value.upper()  # make the value upper case, just for the sake of consistency
 
                 elif value[0].isupper():  # if the first letter is upper case
                     kind = 'OBJ-ID'
@@ -91,9 +91,9 @@ class Lexer:
         return tokens
 
 
-'''
-lexer = Lexer("ArdujenoCode/Example.jnr")
+string = 'set string to "hello\n"'
+lexer = Lexer(program_string=string)
 for token in lexer.lex():
-    print(token)
-'''
+    print(repr(token.__str__()))
+
 
