@@ -2,16 +2,6 @@ import re
 
 
 # rewrite of code: https://docs.python.org/3/library/re.html in the bottom of the page
-class Token:
-    def __init__(self, kind, value, line, column):
-        self.kind = kind
-        self.value = value
-        self.line = line
-        self.column = column
-
-    def __str__(self):
-        return f"Token(type='{self.kind}', value='{self.value}', line='{self.line}', column='{self.column}')"
-
 
 class Lexer:
     keywords = {'for each', 'in', 'is', 'when', 'function', 'if', 'else', 'in', 'run', 'return', 'and', 'or', 'not',\
