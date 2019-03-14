@@ -1,24 +1,21 @@
-number1 = 4;
-fnumber = 23.5;
+set number1 to 4;
+set fnumber to 23.5;
 
-//this is nice
-
-string1 = "hello";
-string2 = "hel"lo";
-string3 = "the increase is"+fnumber+"%";
-
+set string1 to "hello";
+set string2 to "hello";
+set string3 to "the increase is"+fnumber+"%";
 
 
 LivingRoom{
 	set temp1 to Thermometer;
-	set window1 to pin10;
-	
+	set window1 to pinA10;
+
 	function getTemp1(){
-		return temp1 * 5;	
+		return temp1 * 5;
 	}
-	
+
 	function openWindow(){
-		window1.turnOn();
+		run window1.turnOn();
 	}
 }
 

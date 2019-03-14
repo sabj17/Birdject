@@ -1,86 +1,111 @@
 import re
 
 
+# rewrite of code: https://docs.python.org/3/library/re.html in the bottom of the page
+class Token:
+    def __init__(self, kind, value, line, column):
+        self.kind = kind
+        self.value = value
+        self.line = line
+        self.column = column
+
+    def __str__(self):
+        return f"Token(type='{self.kind}', value='{self.value}', line='{self.line}', column='{self.column}')"
+
+
 class Lexer:
-    TOKENS = {
-        "comment": r'//.*[\n]*',
-        "set": "set",
-        "to": "to",
+    keywords = {'for each', 'in', 'is', 'when', 'function', 'if', 'else', 'in', 'run', 'return', 'and', 'or', 'not',\
+                'function', 'set', 'to', 'input', 'output', 'delay', 'date', 'read', 'write', 'print'}
+    token_specification = [
+        ('COMMENT', r'//.*[\n]*'),
 
-        "foreach": "for each",
-        "in": "in",
-        "is": "is",
-        "when": "when",
-        "if": "if",
-        "else": "else",
-        "run": "run",
-        "return": "return",
-        "and": "and",
-        "or": "or",
-        "function": "function",
+        ('NUMBER',  r'\d+(\.\d*)?'),  # Integer or decimal number
+        ('STRING',  r'["][^"]*["]'),  # String value
+        ('BOOL',    r'true|false|on|off'),  # Boolean
+        ('PIN',     r'pin[A]?[\d]+'),  # Identifiers
+        ('ID',      r'[a-zA-Z][\w]+'),  # Identifiers
 
-        "input": "input",
-        "output": "output",
-        "delay": "delay",
-        "date": "date",
-        "read": "read",
-        "write": "write",
-        "print": "print",
-        "bool": "true|false|on|off",
-        "not": 'not',
+        # Operators
+        ('PLUS',    r'[+]'),
+        ('MINUS',   r'[\-]'),
+        ('MULT',    r'[*]'),
+        ('DIVIDE',  r'[/]'),
+        ('MODULO',  r'[%]'),
+        ('EQUALS',  r'=='),
+        ('GREATER', r'[>]'),
+        ('LESS',    r'[<]'),
 
-        "str": r'["][\w\s]*["]',
-        "identifier": "[a-z][a-zA-z0-9]*",
-        "obj-identifier": "[A-Z][a-zA-z0-9]*",
-        "fnum": "[-+]?[0-9]*[.][0-9]+",
-        "inum": "[-+]?[1-9][0-9]*|0",
-        "lparen": "[\(]",
-        "hparen": "[\)]",
-        "lcurly": "[\{]",
-        "rcurly": "[\}]",
+        # Allowed symbols
+        ('END',     r';'),  # Statement terminator
+        ('LPAREN',  r'[\(]'),
+        ('RPAREN',  r'[\)]'),
+        ('LCURLY',  r'[\{]'),
+        ('RCURLY',  r'[\}]'),
+        ('DOT', r'[.]'),
 
-        "plus": "[+]",
-        "minus": "[-]",
-        "multiply": "[*]",
-        "divide": "[/]",
-        "modulo": "[%]",
-        "assign": "[=]",
+        ('NEWLINE', r'\n'),  # Line endings
+        ('SKIP',    r'[ \t]+'),  # Skip over spaces and tabs
+        ('MISMATCH',r'.'),  # Any other character
+    ]
 
-        "equals": "==",
-        "greater": ">",
-        "less": "<"
-    }
+    def __init__(self, file_path=None, program_string=None):
+        if file_path:
+            with open(file_path, "r") as program_file:
+                self.program = program_file.read()
 
-    def lex(self, string):
-        # Create regular expression from all non-terminals
-        re_string = "(" + "|".join(self.TOKENS.values()) + ")"
-        print(re_string)
+        elif program_string:
+            self.program = program_string
 
-        # substitute comment in favor of an empty string
-        string = re.sub(self.TOKENS["comment"], '', string)
-        #print(string, "\n")
+    def lex(self):
+        tokens = []
 
-        print(re.findall(r'["][\w\s]*["]', string))
-        string = re.sub(r'["][\w\s]*["]', 'str', string)
+        tok_regex = '|'.join('(?P<%s>%s)' % pair for pair in self.token_specification)
 
-        # use the regular expression to find the individual tokens
-        potential_tokens = re.findall(r'[;]|[a-zA-Z0-9]*', string)
-        potential_tokens = list(filter(lambda a: a != '', potential_tokens))
-        print(potential_tokens, "\n")
+        line_num = 1
+        line_start = 0
+        for matches in re.finditer(tok_regex, self.program):
+            # finditer returns an iterator over all non-overlapping matches for the regular expression
 
-        for string in potential_tokens:
-            for key, val in self.TOKENS.items():
-                pattern = re.compile(val)
-                if pattern.match(string):
-                    #print(string, "matches:", key)
-                    break
+            kind = matches.lastgroup  # returns the name of the matched group/kind
+            value = matches.group()  # returns value that was matched e.g. "if"
+            column = matches.start() - line_start  # where in the where in the code the match was found
+
+            if kind == 'NUMBER':
+                if '.' in value:
+                    value = float(value)
+                    kind = 'FLOAT'
+                else:
+                    value = int(value)
+                    kind = 'INTEGER'
+
+            elif kind == 'ID':
+                if value in self.keywords:  # if there kind was ID where it should have been a keyword
+                    kind = value.upper()  # make the value upper case
+
+                elif value[0].isupper():  # if the first letter is upper case
+                    kind = 'OBJ-ID'
+
+            elif kind == 'NEWLINE' or kind == 'COMMENT':
+                line_start = matches.end()  # set the new starting point, to the end of the newline/comment
+                line_num += 1  # count up number of lines
+                continue
+
+            elif kind == 'SKIP':
+                continue
+
+            elif kind == 'MISMATCH':
+                raise RuntimeError(f'{value!r} unexpected on line {line_num}')
+
+            tokens.append(Token(kind, value, line_num, column))
+
+        return tokens
 
 
-with open("ArdujenoCode\Example.jnr", "r") as jen:
-    lexer = Lexer()
-    lexer.lex(jen.read(10000))
+'''
+For testing
 
-
-
-
+lexer = Lexer("ArdujenoCode/Example.jnr")
+for token in lexer.lex():
+    print(token)
+'''
 
