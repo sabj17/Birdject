@@ -2,6 +2,11 @@ import re
 
 
 class Lexer:
+    class Token:
+        def __init__(self, _type, value):
+            self.type = type(_type)
+            self.value = value
+
     TOKENS = {
         "comment": r'//.*[\n]*',
         "set": "set",
@@ -58,7 +63,7 @@ class Lexer:
 
         # substitute comment in favor of an empty string
         string = re.sub(self.TOKENS["comment"], '', string)
-        #print(string, "\n")
+        # print(string, "\n")
 
         print(re.findall(r'["][\w\s]*["]', string))
         string = re.sub(r'["][\w\s]*["]', 'str', string)
@@ -72,15 +77,10 @@ class Lexer:
             for key, val in self.TOKENS.items():
                 pattern = re.compile(val)
                 if pattern.match(string):
-                    #print(string, "matches:", key)
+                    # print(string, "matches:", key)
                     break
 
 
 with open("ArdujenoCode\Example.jnr", "r") as jen:
     lexer = Lexer()
     lexer.lex(jen.read(10000))
-
-
-
-
-
