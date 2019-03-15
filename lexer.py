@@ -1,6 +1,6 @@
 import re
 from token import Token
-
+import ArdujenoCode
 
 # rewrite of code: https://docs.python.org/3/library/re.html in the bottom of the page
 class Lexer:
@@ -9,11 +9,13 @@ class Lexer:
     token_specification = [
         ('COMMENT', r'//.*[\n]*'),  # Comments
 
-        ('NUMBER',  r'\d+(\.\d*)?'),  # Integer or Float number: 25 or 36.24
+        ('FLOAT', r'\d+[.]\d*'),  # Float
+        ('INTEGER',  r'\d+'),  # Integer
         ('STRING',  r'["]([^"]|\")*["]'),  # String value: "Hello World"
         ('BOOL',    r'true|false|on|off'),  # Boolean: true, false or on, off
         ('PIN',     r'pin[A]?[\d]+'),  # Arduino pins: pin15 or pinA3
-        ('ID',      r'[a-zA-Z][\w]+'),  # Identifiers
+        ('ID',      r'[a-z][\w]+'),  # Identifiers
+        ('OBJ_ID', r'[A-Z][\w]+'),  # Object identifiers
 
         # Operators
         ('PLUS',    r'[+]'),
@@ -23,9 +25,9 @@ class Lexer:
         ('MODULO',  r'[%]'),
         ('EQUALS',  r'=='),
         ('GREATER', r'[>]'),
-        ('LESS',    r'[<]'),
 
         # Allowed symbols
+        ('LESS',    r'[<]'),
         ('END',     r';'),
         ('LPAREN',  r'[\(]'),
         ('RPAREN',  r'[\)]'),
@@ -49,34 +51,23 @@ class Lexer:
     def lex(self):
         tokens = []
 
-        tok_regex = '|'.join('(?P<%s>%s)' % pair for pair in self.token_specification)
+        token_re = '|'.join('(?P<%s>%s)' % pair for pair in self.token_specification)
 
         line_num = 1
         line_start = 0
-        for matches in re.finditer(tok_regex, self.program):
+        for match in re.finditer(token_re, self.program):
             # finditer returns an iterator over all non-overlapping matches for the regular expression
 
-            kind = matches.lastgroup  # returns the name of the matched group/kind
-            value = matches.group()  # returns value that was matched e.g. "if"
-            column = matches.start() - line_start  # where in the where in the code the match was found
+            kind = match.lastgroup  # returns the name of the matched group/kind
+            value = match.group()  # returns value that was matched e.g. "if"
+            column = match.start() - line_start  # where in the code the match was found
 
-            if kind == 'NUMBER':
-                if '.' in value:
-                    value = float(value)
-                    kind = 'FLOAT'
-                else:
-                    value = int(value)
-                    kind = 'INTEGER'
-
-            elif kind == 'ID':
-                if value in self.keywords:  # if there kind was ID where it should have been a keyword
-                    kind = value.upper()  # make the value upper case, just for the sake of consistency
-
-                elif value[0].isupper():  # if the first letter is upper case
-                    kind = 'OBJ-ID'
+            if kind == 'ID':
+                if value in self.keywords:  # if the kind was ID where it should have been a keyword
+                    kind = value.upper()  # set kind to value/keyword
 
             elif kind == 'NEWLINE' or kind == 'COMMENT':
-                line_start = matches.end()  # set the new starting point, to the end of the newline/comment
+                line_start = match.end()  # set the new starting point, to the end of the newline/comment
                 line_num += 1  # count up number of lines
                 continue
 
@@ -90,10 +81,10 @@ class Lexer:
 
         return tokens
 
-
-string = 'set string to "hello\n"'
+'''
+string = 'set string to Thermoboi 32 2.555'
 lexer = Lexer(program_string=string)
 for token in lexer.lex():
     print(repr(token.__str__()))
-
+'''
 
