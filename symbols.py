@@ -1,5 +1,4 @@
 class Symbol:
-
     def __init__(self, name):
         self.name = name
 
@@ -13,17 +12,17 @@ class Terminal(Symbol):
 
 
 class Nonterminal(Symbol):
-
-    def __init__(self, name, productions):
+    def __init__(self, name, *args):
         super().__init__(name)
         self.visitedfollow = False
         self.visitedfirst = False
         self.derivesempty = False
         self.productions = []
-        self.productions.append(productions)
-        print(name, ": ", productions)
+        for production in args:
+            if isinstance(production, list):
+                self.productions.append(production)
 
-    def addproduction(self, production):
+    def add_production(self, production):
         self.productions.append(production)
 
     def occurences(self, A):
@@ -32,3 +31,5 @@ class Nonterminal(Symbol):
             if A in production:
                 ans.append(production)
         return ans
+
+

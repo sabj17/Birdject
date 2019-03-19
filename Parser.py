@@ -37,11 +37,9 @@ class Production:
     d = Terminal("d")
 
     B = Nonterminal("B", [b])
-    B.derivesempty = False
-    A = Nonterminal("A", [a])
-    A.addproduction([c])
-    A.addproduction([d])
-    A.derivesempty = False
+    B.derivesempty = True
+    A = Nonterminal("A", [a, B, d],  [B, a])
+    A.derivesempty = True
     S = Nonterminal("S", [A, B, c])
     S.derivesempty = False
 
@@ -61,13 +59,13 @@ class Production:
     def first(self, symbols):
         for A in self.nonterminals:
             A.visitedfirst = False
-        ans = self._internalfirst(symbols)
+        ans = self._internalfirst(list(symbols))
         return ans
 
     def _internalfirst(self, symbols):
         ans = []
         if not symbols:  # empty array
-            return []
+            return set()
 
         first_symbol = symbols[0]
         symbols.pop(0)  # Removes the first symbol from the array
@@ -75,7 +73,7 @@ class Production:
         # If the symbol is a terminal, it is returned
         if first_symbol in self.terminals:
             ans.append(first_symbol)
-            return ans
+            return set(ans)
 
         # If the symbol is a nonterminal and hasn't been visited first
         if not first_symbol.visitedfirst:
@@ -88,20 +86,31 @@ class Production:
         if first_symbol.derivesempty:
             if symbols:
                 ans.extend(self._internalfirst(symbols))
-        return ans
-
-
+        return set(ans)
 
     def follow(self, A):
-        for A in self.nonterminals:
-            A.visitedfollow = False
+        for a in self.nonterminals:
+            a.visitedfollow = False
+        return self._internalfollow(A)
 
-    def internalfollow(self, A):
+
+    def _internalfollow(self, A):
+        ans = []
         if not A.visitedfollow:
             A.visitedfollow = True
+            for nonterminal in self.occurences(A):
+                for occurence in nonterminal.occurences(A):
+                    tail = self._tail(occurence, A)
+                    ans.extend(self.first(tail))
+                    if self._allderiveempty(tail):
+                        ans.extend(self._internalfollow(nonterminal))
+        return set(ans)
 
-
-
+    def _allderiveempty(self, production):
+        for X in production:
+            if isinstance(X, Terminal) or not X.derivesempty:
+                return False
+        return True
 
     #  Returns a list of all RHS, where nonterminal A is
     def occurences(self, A):
@@ -109,6 +118,16 @@ class Production:
         for nonterminal in self.nonterminals:
             if nonterminal.occurences(A):
                 ans.append(nonterminal)
+        return ans
+
+    def _tail(self, production, A):
+        ans = []
+        found = False
+        for a in production:
+            if found:
+                ans.append(a)
+            if a.name == A.name:
+                found = True
         return ans
 
 
@@ -128,23 +147,15 @@ class Stack:
     def tos(self):
         return self.items[len(self.items)-1]
 
-
 p = Production()
+
+ans = p.follow(p.B)
+for a in ans:
+    print(a)
+
+'''
 answer = p.first(p.symbols)
 print("Completjens")
 for x in answer:
     print(x)
 '''
-h = []
-h.append(["a", "b"])
-for a in h:
-    print(a)
-print(h)
-'''
-#print("NOU")
-#for q in p.nonterminals:
-#    for x in p.occurences(q):
-#        print(q.name + ": Occurence: ")
-#        for i in x:
-#            print(i.name)
-
