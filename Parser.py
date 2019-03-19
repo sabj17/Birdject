@@ -31,23 +31,23 @@ class Parser:
 
 class Production:
     # Gotta make a map with integers for indexes for the table
-
     a = Terminal("a")
     b = Terminal("b")
     c = Terminal("c")
     d = Terminal("d")
 
     B = Nonterminal("B", [b])
-    B.derivesempty = True
+    B.derivesempty = False
     A = Nonterminal("A", [a])
-    A.derivesempty = True
+    A.addproduction([c])
+    A.addproduction([d])
+    A.derivesempty = False
     S = Nonterminal("S", [A, B, c])
-    S.derivesempty = True
+    S.derivesempty = False
 
     nonterminals = [S, A, B]
     terminals = [a, b, c, d]
     symbols = [S]
-    symbolsIterator = iter(symbols)
 
     def filltable(self, lltable):
         for A in self.nonterminals:
@@ -67,8 +67,7 @@ class Production:
     def _internalfirst(self, symbols):
         ans = []
         if not symbols:  # empty array
-            return None
-        #if len(symbols) == 1:
+            return []
 
         first_symbol = symbols[0]
         symbols.pop(0)  # Removes the first symbol from the array
@@ -79,17 +78,38 @@ class Production:
             return ans
 
         # If the symbol is a nonterminal and hasn't been visited first
-        print(first_symbol.name)
         if not first_symbol.visitedfirst:
             first_symbol.visitedfirst = True
             # Gets the right hand side and calls it self recursively
-            for rhs in first_symbol.productions:
-                ans.extend(self._internalfirst([rhs]))
+            for production in first_symbol.productions:
+                if production:
+                    ans.extend(self._internalfirst(production))
         # If the symbol derives to lambda
         if first_symbol.derivesempty:
-            if len(symbols) != 0:
+            if symbols:
                 ans.extend(self._internalfirst(symbols))
-            return ans
+        return ans
+
+
+
+    def follow(self, A):
+        for A in self.nonterminals:
+            A.visitedfollow = False
+
+    def internalfollow(self, A):
+        if not A.visitedfollow:
+            A.visitedfollow = True
+
+
+
+
+    #  Returns a list of all RHS, where nonterminal A is
+    def occurences(self, A):
+        ans = []
+        for nonterminal in self.nonterminals:
+            if nonterminal.occurences(A):
+                ans.append(nonterminal)
+        return ans
 
 
 class Stack:
@@ -114,4 +134,17 @@ answer = p.first(p.symbols)
 print("Completjens")
 for x in answer:
     print(x)
+'''
+h = []
+h.append(["a", "b"])
+for a in h:
+    print(a)
+print(h)
+'''
+#print("NOU")
+#for q in p.nonterminals:
+#    for x in p.occurences(q):
+#        print(q.name + ": Occurence: ")
+#        for i in x:
+#            print(i.name)
 

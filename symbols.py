@@ -13,10 +13,22 @@ class Terminal(Symbol):
 
 
 class Nonterminal(Symbol):
-    visitedfirst = False
-    derivesempty = False
-    productions = []
 
     def __init__(self, name, productions):
         super().__init__(name)
-        self.productions = productions
+        self.visitedfollow = False
+        self.visitedfirst = False
+        self.derivesempty = False
+        self.productions = []
+        self.productions.append(productions)
+        print(name, ": ", productions)
+
+    def addproduction(self, production):
+        self.productions.append(production)
+
+    def occurences(self, A):
+        ans = []
+        for production in self.productions:
+            if A in production:
+                ans.append(production)
+        return ans
