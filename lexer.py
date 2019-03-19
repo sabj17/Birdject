@@ -83,10 +83,10 @@ class Lexer:
         tokens.append(Token('$', '$', -1, -1))
         return tokens
 
-
+'''
 string = 'set string to Thermoboi 32 2.555'
 lexer = Lexer(program_string=string)
 for token in lexer.lex():
     print(repr(token.__str__()))
-
+'''
 
