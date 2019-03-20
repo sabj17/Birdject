@@ -35,16 +35,22 @@ class Production:
     b = Terminal("b")
     c = Terminal("c")
     d = Terminal("d")
+    q = Terminal("q")
 
-    B = Nonterminal("B", [b])
+    Q = Nonterminal("Q", [q])
+    Q.derivesempty = True
+    B = Nonterminal("B")
+    B.add_production([b, B])
     B.derivesempty = True
-    A = Nonterminal("A", [a, B, d],  [B, a])
-    A.derivesempty = True
-    S = Nonterminal("S", [A, B, c])
+    C = Nonterminal("C", [c])
+    C.derivesempty = True
+    A = Nonterminal("A", [a, B, C, d], [B, Q])
+    A.derivesempty = False
+    S = Nonterminal("S", [A, C])
     S.derivesempty = False
 
-    nonterminals = [S, A, B]
-    terminals = [a, b, c, d]
+    nonterminals = [S, A, B, Q, C]
+    terminals = [a, b, c, d, q]
     symbols = [S]
 
     def filltable(self, lltable):
@@ -83,10 +89,11 @@ class Production:
                 if production:
                     ans.extend(self._internalfirst(production))
         # If the symbol derives to lambda
-        if first_symbol.derivesempty:
+        if first_symbol.symbolderivesempty():
             if symbols:
                 ans.extend(self._internalfirst(symbols))
         return set(ans)
+
 
     def follow(self, A):
         for a in self.nonterminals:
@@ -130,6 +137,14 @@ class Production:
                 found = True
         return ans
 
+    def predict(self, A, production):
+        ans = self.first(production)
+        for a in ans:
+            print("First: ", a)
+        if self._allderiveempty(production):
+            ans.update(self.follow(A))
+        return ans
+
 
 class Stack:
     def __init__(self):
@@ -149,9 +164,11 @@ class Stack:
 
 p = Production()
 
-ans = p.follow(p.B)
+
+ans = p.predict(p.B, p.B.productions[0])
 for a in ans:
-    print(a)
+    print("All of dem:", a)
+
 
 '''
 answer = p.first(p.symbols)

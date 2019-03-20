@@ -32,4 +32,14 @@ class Nonterminal(Symbol):
                 ans.append(production)
         return ans
 
+    def symbolderivesempty(self):
+        for production in self.productions:
+            p_derives_empty = True
+            for x in production:
+                if isinstance(x, Terminal) or not x.derivesempty:
+                    p_derives_empty = False
 
+            if p_derives_empty:
+                return True
+
+        return False
