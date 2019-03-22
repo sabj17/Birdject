@@ -9,21 +9,33 @@ class Parser:
         pass
 
     def create_parse_table(self):
-        parse_table = [[0 for _ in range(len(Grammar.terminals))] for _ in range(len(Grammar.nonterminals))]
+        parse_table = {}
+        for nonterm in Grammar.nonterminals.keys():
+            inside_dict = {}
+            for term in Grammar.terminals.keys():
+                inside_dict[term] = 0
+            parse_table[nonterm] = inside_dict
+
+        for rule in Grammar.rules:
+            predict_set = Grammar.predict(rule)
+            for terminal in predict_set:
+                if parse_table[rule.LHS.name][terminal] == 0:
+                    parse_table[rule.LHS.name][terminal] = rule.rule_nr
+
+        return parse_table
+        # for item in parse_table.items():
+            # print(item)
 
 
-        for list in parse_table:
-            print(list, "\n")
-
-Grammar.terminals = {'a': Terminal('a'), 'b': Terminal('b'), 'c': Terminal('c'), 'd': Terminal('d'), 'q': Terminal('q')}
+Grammar.terminals = {'a': Terminal('a'), 'b': Terminal('b'), 'c': Terminal('c'), 'd': Terminal('d'), 'q': Terminal('q'), '$': Terminal('$')}
 Grammar.nonterminals = {'A': Nonterminal('A'), 'B': Nonterminal('B'), 'C': Nonterminal('C'), 'Q': Nonterminal('Q'), 'S': Nonterminal('S')}
-Grammar.add_rule(Rule('S', ['A', 'C']))
+Grammar.add_rule(Rule('S', ['A', 'C', '$']))
+Grammar.add_rule(Rule('C', ['c']))
+Grammar.add_rule(Rule('C', ['λ']))
 Grammar.add_rule(Rule('A', ['a', 'B', 'C', 'd']))
 Grammar.add_rule(Rule('A', ['B', 'Q']))
 Grammar.add_rule(Rule('B', ['b', 'B']))
 Grammar.add_rule(Rule('B', ['λ']))
-Grammar.add_rule(Rule('C', ['c']))
-Grammar.add_rule(Rule('C', ['λ']))
 Grammar.add_rule(Rule('Q', ['q']))
 Grammar.add_rule(Rule('Q', ['λ']))
 
@@ -34,5 +46,6 @@ ans = Grammar.predict(Rule('B', ['λ']))
 
 parser = Parser()
 parser.create_parse_table()
+
 
 # print(Grammar.to_str())

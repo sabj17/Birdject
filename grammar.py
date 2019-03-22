@@ -2,10 +2,13 @@ import abc
 
 
 class Rule:
+    rule_count = 1
 
     def __init__(self, LHS, RHS):
         self.LHS = Grammar.get_symbol(LHS, 'non-terminals')
         self.RHS = Production(RHS)
+        self.rule_nr = self.rule_count
+        Rule.rule_count += 1
 
     def __str__(self):
         return self.LHS.name + " -> " + self.RHS.__str__()
@@ -31,8 +34,11 @@ class Production:
         return " ".join([symbol.name for symbol in self.symbols])
 
     def all_derive_empty(self):
+        if self.symbols is None:
+            return True
+
         for X in self.symbols:
-            if Grammar.symbolderivesempty(X.name) == False:
+            if Grammar.symbolderivesempty(X.name) is False:
                 return False
         return True
 
@@ -145,18 +151,20 @@ class Grammar(object):
 
     @staticmethod
     def symbolderivesempty(A):
+        if A in Grammar.terminals:
+            return False
+        elif A == 'λ':
+            return True
+
         matches = [rule for rule in Grammar.rules if rule.LHS.name == A]
+
         p_derives_empty = True
         for rule in matches:
             rhs = rule.RHS.symbols
 
             for symbol in rhs:
-                if isinstance(symbol, Nonterminal):
-                    p_derives_empty = Grammar.symbolderivesempty(symbol.name)
-                else:
-                    p_derives_empty = symbol.derives_empty()
-
-                if not p_derives_empty:
+                p_derives_empty = Grammar.symbolderivesempty(symbol.name)
+                if p_derives_empty is False:
                     break
 
             if p_derives_empty:
@@ -226,8 +234,6 @@ class Grammar(object):
     @staticmethod
     def predict(rule):
         ans = Grammar.first(rule.RHS)
-        for a in ans:
-            print("First: ", a)
         if rule.RHS.all_derive_empty():
             ans.update(Grammar.follow(rule.LHS.name))
         return ans
