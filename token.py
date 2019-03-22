@@ -7,3 +7,19 @@ class Token:
 
     def __str__(self):
         return f'Token(type: {self.kind}, value: {self.value}, line: {self.line}, column: {self.column})'
+
+
+class TokenStream:
+    def __init__(self, tokens):
+        self.tokens = tokens
+        self.length = len(tokens)
+        self.current_index = 0
+
+    def peek(self):
+        if self.length > self.current_index:
+            return self.tokens[self.current_index + 1]
+
+    def advance(self):
+        if self.length > self.current_index:
+            self.current_index += 1
+            return self.tokens[self.current_index]
