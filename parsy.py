@@ -20,8 +20,9 @@ class Stack:
 
 
 class Parser:
-    def __init__(self):
-        stack = Stack()
+    def __init__(self, grammar):
+        self.stack = Stack()
+        self.grammar = grammar
 
     def parse(self, tokens):
         pass
@@ -56,16 +57,16 @@ class Parser:
         else:
             print("You fucked up")
 
-    def create_parse_table(self, grammar):
+    def create_parse_table(self):
         parse_table = {}
-        for nonterm in grammar.nonterminals.keys():
+        for nonterm in self.grammar.nonterminals.keys():
             inside_dict = {}
-            for term in grammar.terminals.keys():
+            for term in self.grammar.terminals.keys():
                 inside_dict[term] = 0
             parse_table[nonterm] = inside_dict
 
-        for rule in grammar.rules:
-            predict_set = grammar.predict(rule)
+        for rule in self.grammar.rules:
+            predict_set = self.grammar.predict(rule)
             for terminal in predict_set:
                 if parse_table[rule.LHS.name][terminal] == 0:
                     parse_table[rule.LHS.name][terminal] = rule.rule_nr
@@ -92,8 +93,8 @@ grammar = grammarbuilder.build()
 for rule in grammar.rules:
     print(rule)
 
-parser = Parser()
-table = parser.create_parse_table(grammar)
+parser = Parser(grammar)
+table = parser.create_parse_table()
 
 print("Parse Table:")
 print("  ", [x for x in table['S'].keys()])
