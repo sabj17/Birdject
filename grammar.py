@@ -133,6 +133,12 @@ class Grammar:
                 ans.append(rule)
         return ans
 
+    def get_rule_from_line(self, line_number):
+        for rule in self.rules:
+            if rule.rule_nr == line_number:
+                return rule
+        return None
+
     def to_str(self):
         return "\n".join(rule.__str__() for rule in self.rules)
 

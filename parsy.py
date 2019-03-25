@@ -18,41 +18,45 @@ class Stack:
     def top_of_stack(self):
         return self.items[len(self.items)-1]
 
+    def __str__(self):
+        return ", ".join([x.name for x in self.items])
+
 
 class Parser:
     def __init__(self, grammar):
         self.stack = Stack()
         self.grammar = grammar
+        self.parse_table = self.create_parse_table()
 
     def parse(self, tokens):
         pass
 
     def llparser(self, tokens):
-        self.stack.push("S")
+        self.stack.push(Nonterminal("S"))
         ts = TokenStream(tokens)
         accepted = False
         while not accepted:
-            if isinstance(self.stack.tos(), Terminal):  # is terminal
-                self.match(ts, self.stack.tos())
-                if self.stack.tos() == "$":
+            tos = self.stack.top_of_stack
+            if isinstance(tos, Terminal):  # is terminal
+                self.match(ts, tos)
+                if tos.name == "$":
                     accepted = True
                 self.stack.pop()
             else:
-                p = 0  # LLtable[TOS( ), ts.peek( )]
-                if p == 0:
+                rule_number = self.parse_table[tos.name][ts.peek().kind]
+                if rule_number == 0:
                     print("Syntax error—no production applicable")
                 else:
-                    self.apply(p, self.stack)
+                    self.apply(rule_number, self.stack)
 
-    # Gotta change this func
-    def apply(self, p, s):
-        a = []
-        s.pop()
-        for x in range(len(a) - 1, 0):
-            s.push(a[x])
+    def apply(self, rule_number, stack):
+        stack.pop()
+        rule = grammar.get_rule_from_line(rule_number)
+        for symbol in reversed(rule.RHS.symbols):  # iterates the list in reverse
+            stack.push(symbol)
 
-    def match(self, ts, token):
-        if ts.peek() == token:
+    def match(self, ts, symbol):
+        if ts.peek().kind == symbol.name:
             ts.advance()
         else:
             print("You fucked up")
@@ -100,5 +104,16 @@ print("Parse Table:")
 print("  ", [x for x in table['S'].keys()])
 for key in table.keys():
     print(f"{key}:", [str(x) for x in table[key].values()])
+
+s = Stack()
+s.push(Symbol("S"))
+print(s, "hello")
+print(grammar.get_rule_from_line(1))
+parser.apply(1, s)
+print(s, "hello2")
+while not s.is_empty():
+    symbol = s.pop()
+    print(symbol.name)
+
 
 # print(Grammar.to_str())
