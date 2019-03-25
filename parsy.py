@@ -1,4 +1,4 @@
-from grammar import Grammar, Terminal, Production, Nonterminal, Rule
+from grammar import *
 from token import Token, TokenStream
 
 
@@ -56,46 +56,48 @@ class Parser:
         else:
             print("You fucked up")
 
-
-    def create_parse_table(self):
+    def create_parse_table(self, grammar):
         parse_table = {}
-        for nonterm in Grammar.nonterminals.keys():
+        for nonterm in grammar.nonterminals.keys():
             inside_dict = {}
-            for term in Grammar.terminals.keys():
+            for term in grammar.terminals.keys():
                 inside_dict[term] = 0
             parse_table[nonterm] = inside_dict
 
-        for rule in Grammar.rules:
-            predict_set = Grammar.predict(rule)
+        for rule in grammar.rules:
+            predict_set = grammar.predict(rule)
             for terminal in predict_set:
                 if parse_table[rule.LHS.name][terminal] == 0:
                     parse_table[rule.LHS.name][terminal] = rule.rule_nr
 
-       # for item in parse_table.items():
-        #    print(item)
-
         return parse_table
 
 
-Grammar.terminals = {'a': Terminal('a'), 'b': Terminal('b'), 'c': Terminal('c'), 'd': Terminal('d'), 'q': Terminal('q'), '$': Terminal('$')}
-Grammar.nonterminals = {'A': Nonterminal('A'), 'B': Nonterminal('B'), 'C': Nonterminal('C'), 'Q': Nonterminal('Q'), 'S': Nonterminal('S')}
-Grammar.add_rule(Rule('S', ['A', 'C', '$']))
-Grammar.add_rule(Rule('C', ['c']))
-Grammar.add_rule(Rule('C', ['λ']))
-Grammar.add_rule(Rule('A', ['a', 'B', 'C', 'd']))
-Grammar.add_rule(Rule('A', ['B', 'Q']))
-Grammar.add_rule(Rule('B', ['b', 'B']))
-Grammar.add_rule(Rule('B', ['λ']))
-Grammar.add_rule(Rule('Q', ['q']))
-Grammar.add_rule(Rule('Q', ['λ']))
+grammarbuilder = GrammarBuilder()
+grammarbuilder.add_terminals(['a', 'b', 'c', 'd', 'q', '$'])
+grammarbuilder.add_nonterminals(['S', 'A', 'B', 'C', 'Q'])
 
+grammarbuilder.add_rule('S', ['A', 'C', '$'])
+grammarbuilder.add_rule('C', ['c'])
+grammarbuilder.add_rule('C', [LAMBDA])
+grammarbuilder.add_rule('A', ['a', 'B', 'C', 'd'])
+grammarbuilder.add_rule('A', ['B', 'Q'])
+grammarbuilder.add_rule('B', ['b', 'B'])
+grammarbuilder.add_rule('B', [LAMBDA])
+grammarbuilder.add_rule('Q', ['q'])
+grammarbuilder.add_rule('Q', [LAMBDA])
 
-p = Production(['Q'])
-ans = Grammar.predict(Rule('B', ['λ']))
-#ans = Grammar.follow('B')
+grammar = grammarbuilder.build()
+
+for rule in grammar.rules:
+    print(rule)
 
 parser = Parser()
-parser.create_parse_table()
+table = parser.create_parse_table(grammar)
 
+print("Parse Table:")
+print("  ", [x for x in table['S'].keys()])
+for key in table.keys():
+    print(f"{key}:", [str(x) for x in table[key].values()])
 
 # print(Grammar.to_str())
