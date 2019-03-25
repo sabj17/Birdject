@@ -1,6 +1,6 @@
-from grammar import *
-from token import Token
-from parser2 import Parser
+from src.grammar import *
+from src.token import Token
+from src.parser import Parser
 
 
 grammarbuilder = GrammarBuilder()
@@ -29,6 +29,7 @@ print("  ", [x for x in table['S'].keys()])
 for key in table.keys():
     print(f"{key}:", [str(x) for x in table[key].values()])
 
+print("\nMatches:")
 
 tokens = []
 token_names = ['b', 'q', 'c', '$']
