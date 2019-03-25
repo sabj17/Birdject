@@ -38,7 +38,6 @@ class Parser:
         accepted = False
         while not accepted:
             tos = self.stack.top_of_stack()
-            # print(tos.name)
             if isinstance(tos, Terminal):  # is terminal
                 self.match(ts, tos)
                 if tos.name == '$':
@@ -52,10 +51,9 @@ class Parser:
                     self.apply(rule_number, self.stack)
 
     def apply(self, rule_number, stack):
-        popped = stack.pop()
+        stack.pop()
 
-        rule = grammar.get_rule_from_line(rule_number)
-        print(popped.name, "->", rule.RHS, rule.rule_nr)
+        rule = self.grammar.get_rule_from_line(rule_number)
         if rule.RHS.is_lambda:
             return
 
@@ -64,7 +62,7 @@ class Parser:
 
     def match(self, ts, symbol):
         if ts.peek().kind == symbol.name:
-            print("Match boiiii", ts.peek().kind)
+            print("Matched: ", ts.peek().kind)
             ts.advance()
         else:
             print("You fucked up")
@@ -84,43 +82,3 @@ class Parser:
                     parse_table[rule.LHS.name][terminal] = rule.rule_nr
 
         return parse_table
-
-
-grammarbuilder = GrammarBuilder()
-grammarbuilder.add_terminals(['a', 'b', 'c', 'd', 'q', '$'])
-grammarbuilder.add_nonterminals(['S', 'A', 'B', 'C', 'Q'])
-
-grammarbuilder.add_rule('S', ['A', 'C', '$'])
-grammarbuilder.add_rule('C', ['c'])
-grammarbuilder.add_rule('C', [LAMBDA])
-grammarbuilder.add_rule('A', ['a', 'B', 'C', 'd'])
-grammarbuilder.add_rule('A', ['B', 'Q'])
-grammarbuilder.add_rule('B', ['b', 'B'])
-grammarbuilder.add_rule('B', [LAMBDA])
-grammarbuilder.add_rule('Q', ['q'])
-grammarbuilder.add_rule('Q', [LAMBDA])
-
-grammar = grammarbuilder.build()
-
-for rule in grammar.rules:
-    print(rule)
-
-parser = Parser(grammar)
-table = parser.create_parse_table()
-
-print("Parse Table:")
-print("  ", [x for x in table['S'].keys()])
-for key in table.keys():
-    print(f"{key}:", [str(x) for x in table[key].values()])
-
-
-tokens = []
-token_names = ['b', 'q', 'c', '$']
-
-for x in token_names:
-    tokens.append(Token(x, 0, 0, 0))
-
-
-parser.llparser(tokens)
-
-# print(Grammar.to_str())
