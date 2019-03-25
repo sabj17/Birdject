@@ -28,10 +28,8 @@ class Parser:
         self.grammar = grammar
         self.parse_table = self.create_parse_table()
 
-    def parse(self, tokens):
-        pass
 
-    def llparser(self, tokens):
+    def parse(self, tokens):
         self.stack.push(Nonterminal("S"))
         ts = TokenStream(tokens)
 

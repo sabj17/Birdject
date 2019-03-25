@@ -1,12 +1,12 @@
 import re
-from token import Token
+from src.token import Token
 import ArdujenoCode
 
 
 # rewrite of code: https://docs.python.org/3/library/re.html in the bottom of the page
 class Lexer:
     keywords = {'foreach', 'in', 'is', 'when', 'function', 'if', 'else', 'in', 'run', 'return', 'and', 'or', 'not',\
-                'function', 'set', 'to', 'input', 'output', 'delay', 'date', 'read', 'write', 'print'}
+                'function', 'set', 'to', 'input', 'output', 'delay', 'date', 'read', 'write', 'print', 'wait'}
     token_specification = [
         ('COMMENT', r'//.*[\n]*'),  # Comments
 
@@ -26,15 +26,16 @@ class Lexer:
         ('MODULO',  r'[%]'),
         ('EQUALS',  r'=='),
         ('GREATER', r'[>]'),
+        ('LESS', r'[<]'),
 
         # Allowed symbols
-        ('LESS',    r'[<]'),
         ('END',     r';'),
         ('LPAREN',  r'[\(]'),
         ('RPAREN',  r'[\)]'),
         ('LCURLY',  r'[\{]'),
         ('RCURLY',  r'[\}]'),
         ('DOT',     r'[.]'),
+        ('COMMA',   r'[,]'),
 
         ('NEWLINE', r'\n'),  # Newline
         ('SKIP',    r'[ \t]+'),  # Skip over spaces and tabs
@@ -80,11 +81,11 @@ class Lexer:
 
             tokens.append(Token(kind, value, line_num, column))
 
-        tokens.append(Token('$', '$', -1, -1))
+        tokens.append(Token('$', '$', None, None))
         return tokens
 
 
-string = 'set string to Thermoboi 32 2.555'
+string = 'set string to Thermoboi wait 32 2.555'
 lexer = Lexer(program_string=string)
 for token in lexer.lex():
     print(repr(token.__str__()))
