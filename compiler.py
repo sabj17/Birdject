@@ -1,5 +1,6 @@
 from grammar import *
-from parser import *
+from token import Token
+from parser2 import Parser
 
 
 grammarbuilder = GrammarBuilder()
