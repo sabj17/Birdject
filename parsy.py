@@ -116,6 +116,7 @@ for key in table.keys():
 
 tokens = []
 token_names = ['b', 'q', 'c', '$']
+
 for x in token_names:
     tokens.append(Token(x, 0, 0, 0))
 
