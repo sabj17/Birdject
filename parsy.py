@@ -34,12 +34,14 @@ class Parser:
     def llparser(self, tokens):
         self.stack.push(Nonterminal("S"))
         ts = TokenStream(tokens)
+
         accepted = False
         while not accepted:
-            tos = self.stack.top_of_stack
+            tos = self.stack.top_of_stack()
+            # print(tos.name)
             if isinstance(tos, Terminal):  # is terminal
                 self.match(ts, tos)
-                if tos.name == "$":
+                if tos.name == '$':
                     accepted = True
                 self.stack.pop()
             else:
@@ -50,13 +52,19 @@ class Parser:
                     self.apply(rule_number, self.stack)
 
     def apply(self, rule_number, stack):
-        stack.pop()
+        popped = stack.pop()
+
         rule = grammar.get_rule_from_line(rule_number)
+        print(popped.name, "->", rule.RHS, rule.rule_nr)
+        if rule.RHS.is_lambda:
+            return
+
         for symbol in reversed(rule.RHS.symbols):  # iterates the list in reverse
             stack.push(symbol)
 
     def match(self, ts, symbol):
         if ts.peek().kind == symbol.name:
+            print("Match boiiii", ts.peek().kind)
             ts.advance()
         else:
             print("You fucked up")
@@ -105,15 +113,13 @@ print("  ", [x for x in table['S'].keys()])
 for key in table.keys():
     print(f"{key}:", [str(x) for x in table[key].values()])
 
-s = Stack()
-s.push(Symbol("S"))
-print(s, "hello")
-print(grammar.get_rule_from_line(1))
-parser.apply(1, s)
-print(s, "hello2")
-while not s.is_empty():
-    symbol = s.pop()
-    print(symbol.name)
 
+tokens = []
+token_names = ['b', 'q', 'c', '$']
+for x in token_names:
+    tokens.append(Token(x, 0, 0, 0))
+
+
+parser.llparser(tokens)
 
 # print(Grammar.to_str())

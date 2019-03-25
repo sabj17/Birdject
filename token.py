@@ -13,7 +13,7 @@ class TokenStream:
     def __init__(self, tokens):
         self.tokens = tokens
         self.length = len(tokens)
-        self.current_index = 0
+        self.current_index = -1
 
     def peek(self):
         if self.length > self.current_index:

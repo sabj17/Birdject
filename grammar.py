@@ -27,7 +27,8 @@ class Production:
         self.symbols = symbols
         if len(symbols) == 1 and isinstance(symbols[0], Lambda):
             self.is_lambda = True
-        self.is_lambda = False
+        else:
+            self.is_lambda = False
 
     def __str__(self):
         return " ".join([symbol.name for symbol in self.symbols])

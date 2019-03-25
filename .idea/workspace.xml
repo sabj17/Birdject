@@ -4,7 +4,9 @@
     <list default="true" id="b9be5607-0297-4f53-ba99-8433bf7f7169" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grammar.py" beforeDir="false" afterPath="$PROJECT_DIR$/grammar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lexer.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parsy.py" beforeDir="false" afterPath="$PROJECT_DIR$/parsy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/token.py" beforeDir="false" afterPath="$PROJECT_DIR$/token.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,50 +15,33 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Birdject$Parser_v2.coverage" NAME="Parser_v2 Coverage Results" MODIFIED="1553173652416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Birdject$Parser.coverage" NAME="Parser Coverage Results" MODIFIED="1553157323616" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Birdject$parsy.coverage" NAME="parsy Coverage Results" MODIFIED="1553503372444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Birdject$grammar.coverage" NAME="grammar Coverage Results" MODIFIED="1553173691553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Birdject$parsy.coverage" NAME="parsy Coverage Results" MODIFIED="1553505311741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Birdject$Parser.coverage" NAME="Parser Coverage Results" MODIFIED="1553157323616" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Birdject$Parser_v2.coverage" NAME="Parser_v2 Coverage Results" MODIFIED="1553173652416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Birdject$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1553501544230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lexer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Parser.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symbols.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
+            <state relative-caret-position="484">
               <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grammar.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="139" column="19" selection-start-line="139" selection-start-column="19" selection-end-line="139" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -64,10 +49,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/parsy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+            <state relative-caret-position="284">
+              <caret line="117" column="27" selection-start-line="117" selection-start-column="27" selection-end-line="117" selection-end-column="27" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#0#68#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,8 +61,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/token.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+            <state relative-caret-position="255">
+              <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grammar.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -98,14 +92,23 @@
       <find>occurences</find>
       <find>get_symbol</find>
       <find>len</find>
-      <find>print</find>
       <find>tail</find>
       <find>allder</find>
-      <find>symbolderivesempty</find>
       <find>all</find>
       <find>all_</find>
       <find>all_der</find>
-      <find>match</find>
+      <find>print</find>
+      <find>symbold</find>
+      <find>Gramma</find>
+      <find>derives</find>
+      <find>symbolderivesempty</find>
+      <find>first_symbol</find>
+      <find>visited_first</find>
+      <find>derives_empty</find>
+      <find>Gram</find>
+      <find>Grammar</find>
+      <find>Production</find>
+      <find>'λ'</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -116,24 +119,23 @@
       <list>
         <option value="$PROJECT_DIR$/src/lexer.py" />
         <option value="$PROJECT_DIR$/Token.py" />
-        <option value="$PROJECT_DIR$/lexer.py" />
         <option value="$PROJECT_DIR$/src/Terminals.py" />
+        <option value="$PROJECT_DIR$/Parser.py" />
         <option value="$PROJECT_DIR$/src/Parser_v2.py" />
         <option value="$PROJECT_DIR$/ArdujenoCode/Example.jnr" />
         <option value="$PROJECT_DIR$/symbols.py" />
         <option value="$PROJECT_DIR$/Parser_v2.py" />
-        <option value="$PROJECT_DIR$/Parser.py" />
-        <option value="$PROJECT_DIR$/token.py" />
+        <option value="$PROJECT_DIR$/lexer.py" />
         <option value="$PROJECT_DIR$/grammar.py" />
+        <option value="$PROJECT_DIR$/token.py" />
         <option value="$PROJECT_DIR$/parsy.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="237" />
-    <option name="y" value="436" />
-    <option name="width" value="1692" />
-    <option name="height" value="415" />
+    <option name="x" value="-7" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -255,6 +257,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="lexer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="P4" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lexer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="parsy" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="P4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -280,6 +304,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.parsy" />
+        <item itemvalue="Python.lexer" />
         <item itemvalue="Python.grammar" />
         <item itemvalue="Python.Parser_v2" />
         <item itemvalue="Python.Parser" />
@@ -299,9 +324,8 @@
       <workItem from="1552391575320" duration="1299000" />
       <workItem from="1552479663335" duration="2966000" />
       <workItem from="1552897397956" duration="506000" />
-      <workItem from="1552897931892" duration="49168000" />
-      <workItem from="1553253911239" duration="3816000" />
-      <workItem from="1553500903458" duration="2560000" />
+      <workItem from="1552897931892" duration="49146000" />
+      <workItem from="1553253162219" duration="16834000" />
     </task>
     <task id="LOCAL-00001" summary="Here is the first function, it is very good and nou and nou gottem haha, hehe :-)">
       <created>1552897844632</created>
@@ -338,25 +362,32 @@
       <option name="project" value="LOCAL" />
       <updated>1553173066336</updated>
     </task>
-    <task id="LOCAL-00006" summary="dont know">
-      <created>1553175472799</created>
+    <task id="LOCAL-00006" summary="created parse table method done">
+      <created>1553257278016</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1553175472799</updated>
+      <updated>1553257278016</updated>
     </task>
-    <task id="LOCAL-00007" summary="some parser stuff">
-      <created>1553259558685</created>
+    <task id="LOCAL-00007" summary="added GrammarBuilder">
+      <created>1553500854209</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1553259558685</updated>
+      <updated>1553500854209</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="changed a bit">
+      <created>1553501353139</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1553501353139</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83128000" />
+    <option name="totallyTimeSpent" value="93564000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -368,14 +399,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1618" height="877" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16046213" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15831557" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49935815" visible="true" weight="0.20134228" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49935815" visible="true" weight="0.40086675" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -390,7 +423,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32995737" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15661104" />
@@ -425,9 +458,10 @@
     <MESSAGE value="Follow done" />
     <MESSAGE value="Predict done" />
     <MESSAGE value="Restrucjens" />
-    <MESSAGE value="dont know" />
-    <MESSAGE value="some parser stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="some parser stuff" />
+    <MESSAGE value="created parse table method done" />
+    <MESSAGE value="added GrammarBuilder" />
+    <MESSAGE value="changed a bit" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed a bit" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/lexer.py" />
@@ -439,13 +473,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/tokenize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="40" column="4" lean-forward="true" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/tokenize.py" />
     <entry file="file://$PROJECT_DIR$/src/Untitled.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -469,7 +497,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lexer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="423">
+          <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -478,8 +507,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Parser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+        <state relative-caret-position="288">
+          <caret line="140" column="4" selection-start-line="140" selection-start-column="4" selection-end-line="147" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -488,31 +517,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symbols.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
+        <state relative-caret-position="484">
           <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/token.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grammar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="139" column="19" selection-start-line="139" selection-start-column="19" selection-end-line="139" selection-end-column="19" />
+        <state relative-caret-position="152">
+          <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/token.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/parsy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+        <state relative-caret-position="284">
+          <caret line="117" column="27" selection-start-line="117" selection-start-column="27" selection-end-line="117" selection-end-column="27" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#0#68#0" expanded="true" />
           </folding>
         </state>
       </provider>
