@@ -20,7 +20,6 @@ class Lexer:
         ('GREATER', r'[>]'),
         ('LESS', r'[<]'),
 
-
         ('FLOAT', r'\d+[.]\d*'),  # Float
         ('INTEGER',  r'\d+'),  # Integer
         ('STRING',  r'["][^"]*["]'),  # String value: "Hello World"
@@ -28,7 +27,6 @@ class Lexer:
         ('PIN',     r'pin[A]?[\d]+'),  # Arduino pins: pin15 or pinA3
         ('ID',      r'[a-z][\w]+'),  # Identifiers
         ('OBJ_ID', r'[A-Z][\w]+'),  # Object identifiers
-
 
         # Allowed symbols
         ('END',     r';'),
