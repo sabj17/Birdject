@@ -26,11 +26,10 @@ for val in parser.parse_table:
 #print(ptable)
 
 
-
 print("\nMatches:")
 
 tokens = []
-token_names = ['SET', 'ID', 'TO', 'FLOAT', '$']
+token_names = ['SET', 'ID', 'TO', 'FLOAT', 'END', '$']
 
 for x in token_names:
     tokens.append(Token(x, 0, 0, 0))

@@ -1,4 +1,4 @@
-<prog> -> <dcls>, <stmts> $
+<prog> -> <dcls>, <stmts>, $
 <stmts> -> <stmt>, END, <stmts>
 <stmts> -> LAMBDA
 <dcls> -> <dcl>, <dcls>
