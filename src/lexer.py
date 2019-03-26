@@ -20,6 +20,7 @@ class Lexer:
         ('GREATER', r'[>]'),
         ('LESS', r'[<]'),
 
+
         ('FLOAT', r'\d+[.]\d*'),  # Float
         ('INTEGER',  r'\d+'),  # Integer
         ('STRING',  r'["][^"]*["]'),  # String value: "Hello World"
