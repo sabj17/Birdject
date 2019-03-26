@@ -1,12 +1,11 @@
 from src.grammar import *
-from src.lexer import *
 from src.token import Token
 from src.parser import Parser
 import os
 from prettytable import PrettyTable
 
 wd = os.getcwd()
-grammar_file = os.path.join(wd, 'resources/grammar.txt')
+grammar_file = os.path.join(wd, 'resources/testgrammar.txt')
 
 grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
@@ -29,9 +28,11 @@ for val in parser.parse_table:
 
 print("\nMatches:")
 
-string = 'set string to "hello " + "there";'
-lexer = Lexer(program_string=string)
-tokens = lexer.lex()
-print("\n".join([str(x) for x in tokens]))
+print([str(x) for x in grammar.rules])
+tokens = []
+token_names = ['a', 'b', 'c', 'd', '$']
+
+for x in token_names:
+    tokens.append(Token(x, 0, 0, 0))
 
 parser.parse(tokens)

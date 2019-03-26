@@ -1,5 +1,6 @@
 from src.grammar import *
 from src.token import Token, TokenStream
+from src.parsetree import Node, Tree
 
 
 class Stack:
@@ -30,12 +31,13 @@ class Parser:
 
     def parse(self, tokens):
         start = self.grammar.start_symbol
-        print(start.name)
         self.stack.push(start)
+        parse_tree = Tree(Node(start))
         ts = TokenStream(tokens)
 
         accepted = False
         while not accepted:
+            #print("Stack: ", self.stack)
             tos = self.stack.top_of_stack()
             if isinstance(tos, Terminal):  # is terminal
                 self.match(ts, tos)
@@ -47,12 +49,26 @@ class Parser:
                 if rule_number == 0:
                     raise Exception(f"Syntax error — no production applicable for {tos.name} and {ts.peek().kind}")
                 else:
-                    self.apply(rule_number, self.stack)
+                    self.apply(rule_number, self.stack, parse_tree)
+        print(parse_tree)
+        for node in parse_tree.root.children:
+            for n in node.children:
+                for nn in n.children:
+                    if nn.value.name == 'B':
+                        print("hello: ", [j.value.name for j in nn.children])
+        parse_tree.root.find_node('c', parse_tree.root)
 
-    def apply(self, rule_number, stack):
+    def apply(self, rule_number, stack, parse_tree):
         stack.pop()
-
         rule = self.grammar.get_rule_from_line(rule_number)
+
+        # make nodes
+        nodes = []
+        for symbol in rule.RHS.symbols:
+            # print(rule.LHS.name, ": ", symbol.name)
+            nodes.append(Node(symbol))
+        parse_tree.add_nodes(nodes)
+
         if rule.RHS.is_lambda:
             return
 
@@ -61,7 +77,7 @@ class Parser:
 
     def match(self, ts, symbol):
         if ts.peek().kind == symbol.name:
-            print("Matched: ", ts.peek().kind)
+            #print("Matched: ", ts.peek().kind)
             ts.advance()
         else:
             print("You fucked up")
