@@ -79,5 +79,7 @@ class Parser:
             for terminal in predict_set:
                 if parse_table[rule.LHS.name][terminal] == 0:
                     parse_table[rule.LHS.name][terminal] = rule.rule_nr
+                else:
+                    raise Exception("Grammar not LL(1)")
 
         return parse_table

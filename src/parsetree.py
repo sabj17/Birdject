@@ -39,3 +39,4 @@ class Node:
         if self.is_leaf:
             return self.value.name
         return self.value.name
+
