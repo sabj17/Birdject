@@ -28,9 +28,10 @@ class Parser:
         self.grammar = grammar
         self.parse_table = self.create_parse_table()
 
-
     def parse(self, tokens):
-        self.stack.push(Nonterminal("S"))
+        start = self.grammar.start_symbol
+        print(start.name)
+        self.stack.push(start)
         ts = TokenStream(tokens)
 
         accepted = False
@@ -44,7 +45,7 @@ class Parser:
             else:
                 rule_number = self.parse_table[tos.name][ts.peek().kind]
                 if rule_number == 0:
-                    print("Syntax error—no production applicable")
+                    raise Exception(f"Syntax error — no production applicable for {tos.name} and {ts.peek().kind}")
                 else:
                     self.apply(rule_number, self.stack)
 

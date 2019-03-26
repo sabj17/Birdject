@@ -1,41 +1,38 @@
 from src.grammar import *
 from src.token import Token
 from src.parser import Parser
+import os
+from prettytable import PrettyTable
 
+wd = os.getcwd()
+grammar_file = os.path.join(wd, 'resources/grammar.txt')
 
-grammarbuilder = GrammarBuilder()
-grammarbuilder.add_terminals(['a', 'b', 'c', 'd', 'q', '$'])
-grammarbuilder.add_nonterminals(['S', 'A', 'B', 'C', 'Q'])
+grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
-grammarbuilder.add_rule('S', ['A', 'C', '$'])
-grammarbuilder.add_rule('C', ['c'])
-grammarbuilder.add_rule('C', [LAMBDA])
-grammarbuilder.add_rule('A', ['a', 'B', 'C', 'd'])
-grammarbuilder.add_rule('A', ['B', 'Q'])
-grammarbuilder.add_rule('B', ['b', 'B'])
-grammarbuilder.add_rule('B', [LAMBDA])
-grammarbuilder.add_rule('Q', ['q'])
-grammarbuilder.add_rule('Q', [LAMBDA])
-
-grammar = grammarbuilder.build()
-
-print(grammar.to_str())
+#for n in grammar.terminals:
+    #print(n)
 
 parser = Parser(grammar)
-table = parser.create_parse_table()
 
-print("\nParse Table:")
-print("  ", [x for x in table['S'].keys()])
-for key in table.keys():
-    print(f"{key}:", [str(x) for x in table[key].values()])
+#print("Parse table")
+ptable = PrettyTable(['Nonterminals'] + list(grammar.terminals.keys()))
+
+for val in parser.parse_table:
+    row = []
+    for key, value in parser.parse_table[val].items():
+        row.append(value)
+    ptable.add_row([val] + row)
+
+#print(ptable)
+
+
 
 print("\nMatches:")
 
 tokens = []
-token_names = ['b', 'q', 'c', '$']
+token_names = ['SET', 'ID', 'TO', 'FLOAT', '$']
 
 for x in token_names:
     tokens.append(Token(x, 0, 0, 0))
-
 
 parser.parse(tokens)

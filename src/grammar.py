@@ -126,6 +126,7 @@ class Grammar:
         self.terminals = terminals
         self.nonterminals = nonterminals
         self.rules = rules
+        self.start_symbol = rules[0].LHS
 
     def get_rules_for(self, A):
         ans = []
@@ -242,10 +243,55 @@ class GrammarBuilder:
         # input: RHS='A', LHS=['a','b','c']
         self.rules.append((LHS, RHS))
 
+    @staticmethod
+    def build_grammar_from_file(file_path):
+        res = GrammarBuilder()
+        res.add_rules_from_file(file_path)
 
-    def add_rules_from_file(self, file_path):
-        with open(file_path, 'r') as rules_file:
-            pass
+        res.nonterminals = GrammarBuilder._find_nonterminals_from_rules(res.rules)
+        res.terminals = GrammarBuilder._find_terminals_from_rules(res.rules, res.nonterminals)
+
+        return res.build()
+
+    @staticmethod
+    def _find_nonterminals_from_rules(rules):
+        nonterms = set()
+        for lhs, _ in rules:
+            nonterms.add(lhs)
+        return list(nonterms)
+
+    @staticmethod
+    def _find_terminals_from_rules(rules, nonterminals):
+        terminals = set()
+        for _, rhs in rules:
+            for symbol in rhs:
+                if symbol not in nonterminals:
+                    terminals.add(symbol)
+
+        return list(terminals)
+
+    def add_rules_from_file(self, file):
+        with open(file, 'r') as rules_file:
+            for index, line in enumerate(rules_file, start=1):
+                lhs, rhs = self._format_line(line, index)
+
+                if lhs and rhs:
+                    self.add_rule(lhs, rhs)
+
+    def _format_line(self, line, index):
+        string = line.replace(' ', '')
+        string = string.replace('\n', '')
+        string = string.replace('LAMBDA', LAMBDA)
+
+        split = string.split("->", maxsplit=2)
+
+        if len(split) != 2:
+            raise Exception(f'Error in grammar: line {index}')
+
+        lhs, rhs = split
+        rhs = rhs.split(',')
+
+        return lhs, rhs
 
     def build(self):
         terminal_dict = {}

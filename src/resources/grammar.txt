@@ -1,0 +1,66 @@
+<prog> -> <dcls>, <stmts> $
+<stmts> -> <stmt>, END, <stmts>
+<stmts> -> LAMBDA
+<dcls> -> <dcl>, <dcls>
+<dcls> -> LAMBDA
+<stmt> -> <var-dcl>
+<stmt> -> <when-stmt>
+<stmt> -> <for-stmt>
+<stmt> -> <if-stmt>
+<stmt> -> <block>
+<stmt> -> <run>
+<stmt> -> <return>
+<dcl> -> <func-dcl>
+<dcl> -> <class-dcl>
+<func-dcl> -> FUNCTION, <id>, LPAREN, <params>, RPAREN, <block>
+<class-dcl> -> <id>, LCURLY, <class-body>, RCURLY
+<class-body> -> <class-contents>
+<class-contents> -> <class-content>, <class-contents>
+<class-contents> -> LAMBDA
+<class-content> -> <var-dcl>
+<class-content> -> <func-dcl>
+<class-content> -> <class-dcl>
+<var-dcl> -> SET, <id>, TO, <expr>
+<params> -> <expr>, <multi-params>
+<params> -> LAMBDA
+<multi-params> -> COMMA, <expr>, <multi-params>
+<multi-params> -> LAMBDA
+<if-stmt> -> IF, LPAREN, <expr>, RPAREN, <block>, <else-clause>
+<else-clause> -> ELSE, <block>
+<else-clause> -> LAMBDA
+<for-stmt> -> FOREACH, <id>, IN, <expr>, <block>
+<when-stmt> -> WHEN, LPAREN, <expr>, RPAREN, <block>
+<block> -> LCURLY, <stmts>, RCURLY
+<return> -> RETURN, <expr>
+<run> -> RUN, <func>, LPAREN, <params>, RPAREN
+<func> -> <reserved-func>
+<func> -> <id>
+<func> -> <object-ref>, <func>
+<object-ref> -> <object-term>, DOT
+<expr> -> <term>, <operation>
+<expr> -> <object-term>, LPAREN, <params>, RPAREN
+<expr> -> <prefix-operator>, <expr>
+<expr> -> <run>
+<operation> -> <infix-operator>, <expr>
+<operation> -> LAMBDA
+<infix-operator> -> OR
+<infix-operator> -> AND
+<infix-operator> -> EQUALS
+<infix-operator> -> LESS
+<infix-operator> -> GREATER
+<infix-operator> -> PLUS
+<infix-operator> -> MINUS
+<infix-operator> -> MULT
+<infix-operator> -> DIVIDE
+<infix-operator> -> MODULO
+<prefix-operator> -> NOT
+<term> -> <id>
+<term> -> STRING
+<term> -> FLOAT
+<term> -> INTEGER
+<term> -> BOOL
+<id> -> ID
+<object-term> -> OBJ-ID
+<object-term> -> <reserved-object>
+<reserved-object> -> THERMOMETER
+<reserved-func> -> WAIT

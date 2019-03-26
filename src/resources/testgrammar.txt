@@ -1,0 +1,9 @@
+S -> A, C, $
+C -> c
+C -> LAMBDA
+A -> a, B, C, d
+A -> B, Q
+B -> b, B
+B -> LAMBDA
+Q -> q
+Q -> LAMBDA

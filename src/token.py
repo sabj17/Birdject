@@ -16,8 +16,10 @@ class TokenStream:
         self.current_index = -1
 
     def peek(self):
-        if self.length > self.current_index:
+        if self.current_index < self.length - 1:
             return self.tokens[self.current_index + 1]
+        else:
+            raise Exception("Reached end of token stream")
 
     def advance(self):
         if self.length > self.current_index:
