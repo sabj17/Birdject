@@ -10,23 +10,24 @@ class Lexer:
     token_specification = [
         ('COMMENT', r'//.*[\n]*'),  # Comments
 
+        # Operators
+        ('PLUS', r'[+]'),
+        ('MINUS', r'[\-]'),
+        ('MULT', r'[*]'),
+        ('DIVIDE', r'[/]'),
+        ('MODULO', r'[%]'),
+        ('EQUALS', r'=='),
+        ('GREATER', r'[>]'),
+        ('LESS', r'[<]'),
+
         ('FLOAT', r'\d+[.]\d*'),  # Float
         ('INTEGER',  r'\d+'),  # Integer
-        ('STRING',  r'["]([^"]|\")*["]'),  # String value: "Hello World"
+        ('STRING',  r'["][^"]*["]'),  # String value: "Hello World"
         ('BOOL',    r'true|false|on|off'),  # Boolean: true, false or on, off
         ('PIN',     r'pin[A]?[\d]+'),  # Arduino pins: pin15 or pinA3
         ('ID',      r'[a-z][\w]+'),  # Identifiers
         ('OBJ_ID', r'[A-Z][\w]+'),  # Object identifiers
 
-        # Operators
-        ('PLUS',    r'[+]'),
-        ('MINUS',   r'[\-]'),
-        ('MULT',    r'[*]'),
-        ('DIVIDE',  r'[/]'),
-        ('MODULO',  r'[%]'),
-        ('EQUALS',  r'=='),
-        ('GREATER', r'[>]'),
-        ('LESS', r'[<]'),
 
         # Allowed symbols
         ('END',     r';'),
@@ -83,11 +84,3 @@ class Lexer:
 
         tokens.append(Token('$', '$', None, None))
         return tokens
-
-
-string = 'set string to Thermoboi wait 32 2.555'
-lexer = Lexer(program_string=string)
-for token in lexer.lex():
-    print(repr(token.__str__()))
-
-
