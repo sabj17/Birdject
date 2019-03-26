@@ -223,6 +223,9 @@ class Grammar:
             ans.update(self.follow(rule.LHS.name))
         return ans
 
+    def __str__(self):
+        return "\n".join([str(x) for x in self.rules])
+
 
 class GrammarBuilder:
 
@@ -250,6 +253,9 @@ class GrammarBuilder:
 
         res.nonterminals = GrammarBuilder._find_nonterminals_from_rules(res.rules)
         res.terminals = GrammarBuilder._find_terminals_from_rules(res.rules, res.nonterminals)
+
+        if LAMBDA in res.terminals:
+            res.terminals.remove(LAMBDA)
 
         return res.build()
 

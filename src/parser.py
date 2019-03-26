@@ -37,7 +37,6 @@ class Parser:
 
         accepted = False
         while not accepted:
-            #print("Stack: ", self.stack)
             tos = self.stack.top_of_stack()
             if isinstance(tos, Terminal):  # is terminal
                 self.match(ts, tos)
@@ -50,13 +49,8 @@ class Parser:
                     raise Exception(f"Syntax error — no production applicable for {tos.name} and {ts.peek().kind}")
                 else:
                     self.apply(rule_number, self.stack, parse_tree)
-        print(parse_tree)
-        for node in parse_tree.root.children:
-            for n in node.children:
-                for nn in n.children:
-                    if nn.value.name == 'B':
-                        print("hello: ", [j.value.name for j in nn.children])
-        parse_tree.root.find_node('c', parse_tree.root)
+
+        return parse_tree
 
     def apply(self, rule_number, stack, parse_tree):
         stack.pop()
@@ -65,7 +59,6 @@ class Parser:
         # make nodes
         nodes = []
         for symbol in rule.RHS.symbols:
-            # print(rule.LHS.name, ": ", symbol.name)
             nodes.append(Node(symbol))
         parse_tree.add_nodes(nodes)
 
@@ -77,7 +70,6 @@ class Parser:
 
     def match(self, ts, symbol):
         if ts.peek().kind == symbol.name:
-            #print("Matched: ", ts.peek().kind)
             ts.advance()
         else:
             print("You fucked up")
