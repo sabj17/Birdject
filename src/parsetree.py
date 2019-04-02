@@ -1,4 +1,6 @@
 from src.grammar import *
+from graphviz import Digraph, nohtml
+import random
 
 
 class Node:
@@ -11,6 +13,15 @@ class Node:
 
     def add_child(self, child):
         self.children.append(child)
+
+    def graph(self, graph, parent=None):
+        id = str(random.randint(1, 10000000))
+        graph.node(id, nohtml(self.value.name))
+        if parent is not None:
+            graph.edge(parent, id)
+
+        for child in self.children:
+            child.graph(graph, id)
 
     def __str__(self, level=0):
         ret = "\t" * level + repr(self.value.name) + "\n"
@@ -53,6 +64,13 @@ class Tree:
                     self.current_node = child
                     break
 
+    def graph(self):
+        graph = Digraph('G', node_attr={'style': 'filled'}, graph_attr={'ratio': 'fill', 'ranksep': '1.5'})
+        graph.attr(overlap='false')
+        self.root.graph(graph)
+        graph.save(filename='parse_tree.gv')
+
     def __str__(self):
         return self.root.__str__()
+
 

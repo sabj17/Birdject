@@ -1,6 +1,6 @@
 from src.grammar import *
 from src.token import Token, TokenStream
-from src.parsetree import Node, Tree
+from src.parsetree import *
 
 
 class Stack:
@@ -46,7 +46,7 @@ class Parser:
             else:
                 rule_number = self.parse_table[tos.name][ts.peek().kind]
                 if rule_number == 0:
-                    raise Exception(f"Syntax error — no production applicable for {tos.name} and {ts.peek().kind}")
+                    raise Exception(f"Syntax error — no production applicable for {tos.name} and {ts.peek().kind}: {ts.peek()}")
                 else:
                     self.apply(rule_number, self.stack, parse_tree)
 
@@ -69,6 +69,7 @@ class Parser:
             stack.push(symbol)
 
     def match(self, ts, symbol):
+        print(ts.peek(), symbol.name)
         if ts.peek().kind == symbol.name:
             ts.advance()
         else:

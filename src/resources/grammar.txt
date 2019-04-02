@@ -13,11 +13,11 @@
 <dcl> -> <func-dcl>
 <dcl> -> <class-dcl>
 <func-dcl> -> FUNCTION, <id>, LPAREN, <params>, RPAREN, <block>
-<class-dcl> -> <id>, LCURLY, <class-body>, RCURLY
+<class-dcl> -> OBJ_ID, LCURLY, <class-body>, RCURLY
 <class-body> -> <class-contents>
 <class-contents> -> <class-content>, <class-contents>
 <class-contents> -> LAMBDA
-<class-content> -> <var-dcl>
+<class-content> -> <var-dcl>, END
 <class-content> -> <func-dcl>
 <class-content> -> <class-dcl>
 <var-dcl> -> SET, <id>, TO, <expr>
@@ -34,13 +34,14 @@
 <return> -> RETURN, <expr>
 <run> -> RUN, <func>, LPAREN, <params>, RPAREN
 <func> -> <reserved-func>
-<func> -> <id>
-<func> -> <object-ref>, <func>
-<object-ref> -> <object-term>, DOT
+<func> -> ID, <ref>
+<func> -> OBJ_ID, <ref>
+<ref> -> DOT, <id>, <ref>
+<ref> -> LAMBDA
 <expr> -> <term>, <operation>
 <expr> -> <object-term>, LPAREN, <params>, RPAREN
 <expr> -> <prefix-operator>, <expr>
-<expr> -> <run>
+<expr> -> PIN
 <operation> -> <infix-operator>, <expr>
 <operation> -> LAMBDA
 <infix-operator> -> OR
@@ -54,13 +55,14 @@
 <infix-operator> -> DIVIDE
 <infix-operator> -> MODULO
 <prefix-operator> -> NOT
+<term> -> <run>
 <term> -> <id>
 <term> -> STRING
 <term> -> FLOAT
 <term> -> INTEGER
 <term> -> BOOL
 <id> -> ID
-<object-term> -> OBJ-ID
+<object-term> -> OBJ_ID
 <object-term> -> <reserved-object>
 <reserved-object> -> THERMOMETER
 <reserved-func> -> WAIT
