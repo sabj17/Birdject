@@ -2,22 +2,23 @@ import abc
 
 LAMBDA = 'λ'
 
+
 class Rule:
     rule_count = 1
 
     def __init__(self, LHS, RHS):
-        self.LHS = LHS
-        self.RHS = RHS
+        self.LHS = LHS  # A Non terminal
+        self.RHS = RHS  # A Production
         self.rule_num = self.rule_count
         Rule.rule_count += 1
 
     def __repr__(self):
         return self.LHS.name + " -> " + self.RHS.__str__()
 
-
     def __str__(self):
         return self.LHS.name + " -> " + self.RHS.__str__()
 
+    # Checks if the symbol with name 'A' is within in a rules' RHS
     def in_RHS(self, A):
         for symbol in self.RHS.symbols:
             if symbol.name == A:
@@ -26,7 +27,7 @@ class Rule:
 
 
 class Production:
-
+    # List of symbols
     def __init__(self, symbols):
         self.symbols = symbols
         if len(symbols) == 1 and isinstance(symbols[0], Lambda):
@@ -37,6 +38,7 @@ class Production:
     def __str__(self):
         return " ".join([symbol.name for symbol in self.symbols])
 
+    # Checks if all of the symbols in a production can derive empty
     def all_derive_empty(self, rules):
         if self.symbols is None:
             return True
@@ -46,6 +48,7 @@ class Production:
                 return False
         return True
 
+    # Returns a production, which is all the symbols after 'A' in the RHS
     def tail(self, A):
         ans = []
         found = False
@@ -93,7 +96,9 @@ class Nonterminal(Symbol):
     def __init__(self, name):
         super().__init__(name)
 
+    # Checks if a non terminal has a rule that derives empty
     def derives_empty(self, rules):
+        # Finds all rules where this non terminal is the LHS
         matches = [rule for rule in rules if rule.LHS.name == self.name]
 
         p_derives_empty = True
@@ -105,7 +110,6 @@ class Nonterminal(Symbol):
                     p_derives_empty = False
                 else:
                     p_derives_empty = symbol.derives_empty(rules)
-
                 if p_derives_empty is False:
                     break
 
@@ -132,7 +136,7 @@ class Grammar:
         self.rules = rules
         self.start_symbol = rules[0].LHS
 
-    # get_rules_for returns all rules for that nonterminal
+    # get_rules_for returns all rules where the nonterminal 'A' is the LHS
     def get_rules_for(self, A):
         ans = []
         for rule in self.rules:
@@ -140,7 +144,7 @@ class Grammar:
                 ans.append(rule)
         return ans
 
-    # get_rule_from_line returns the rules with that line number
+    # get_rule_from_line returns the rule with that line number
     def get_rule_from_line(self, line_number):
         for rule in self.rules:
             if rule.rule_num == line_number:
@@ -182,21 +186,20 @@ class Grammar:
 
     def _internalfirst(self, production, visited_first):
         ans = []
-        if production.is_empty():  # empty array
+        if production.is_empty():
             return set()
 
         first_symbol = production.pop_first_symbol()
 
-        # If the symbol is a terminal, it is returned
+        # If the symbol is a terminal, it is added to ans and ans is returned
         if first_symbol.name in self.terminals.keys():
             ans.append(first_symbol.name)
             return set(ans)
 
-        # If the symbol is a nonterminal and hasn't been visited first
-
+        # If the symbol is a non terminal and hasn't been visited first
         if first_symbol.name != LAMBDA and visited_first[first_symbol.name] is False:
             visited_first[first_symbol.name] = True
-            # Gets the right hand side and calls it self recursively
+            # Gets the right hand side and calls internalfirst recursively
             for rhs in [rule.RHS for rule in self.get_rules_for(first_symbol.name)]:
                 if rhs:
                     rhs = Production.get_copy(rhs)
@@ -222,14 +225,16 @@ class Grammar:
             visited_follow[A] = True
             for rule in self.occurrence(A):
                 tail = rule.RHS.tail(A)
-                ans.extend(self.first(tail))
+                ans.extend(self.first(tail))  # adds the first set of the tail to ans
+                # if all the symbols in tail derive empty, then follow is called on the LHS of the rule
                 if tail.all_derive_empty(self.rules):
                     ans.extend(self._internalfollow(rule.LHS.name, visited_follow))
         return set(ans)
 
     # predict returns the predict set
     def predict(self, rule):
-        ans = self.first(rule.RHS)
+        ans = self.first(rule.RHS)  # Adds the first set to ans
+        # All of the RHS derive empty and follow is called on the LHS
         if rule.RHS.all_derive_empty(self.rules):
             ans.update(self.follow(rule.LHS.name))
         return ans

@@ -38,25 +38,26 @@ class Parser:
         accepted = False
         while not accepted:
             tos = self.stack.top_of_stack()
-            if isinstance(tos, Terminal):  # is terminal
+            if isinstance(tos, Terminal):  # The next symbol is terminal
                 self.match(ts, tos, parse_tree)
-                if tos.name == '$':
+                if tos.name == '$':  # EOF symbol reached and loop is stopped
                     accepted = True
                 self.stack.pop()
-            else:
+            else:  # Top of stack is a non terminal
                 rule_number = self.parse_table[tos.name][ts.peek().kind]
                 if rule_number == 0:
                     raise Exception(f"Syntax error — no production applicable for {tos.name} and {ts.peek().kind}: {ts.peek()}")
-                else:
+                else:  # Applies the RHS to the stack
                     self.apply(rule_number, self.stack, parse_tree)
 
         return parse_tree
 
+    # Adds a rules RHS to the stack after popping the LHS from the stack
     def apply(self, rule_number, stack, parse_tree):
         stack.pop()
         rule = self.grammar.get_rule_from_line(rule_number)
 
-        # make nodes
+        # Making nodes for parse tree
         nodes = []
         for symbol in rule.RHS.symbols:
             node = Node(symbol, None)
@@ -65,10 +66,11 @@ class Parser:
 
         if rule.RHS.is_lambda:
             return
-
-        for symbol in reversed(rule.RHS.symbols):  # iterates the list in reverse
+        # Adds the RHS symbol in reverse to the stack, to be in the right order
+        for symbol in reversed(rule.RHS.symbols):
             stack.push(symbol)
 
+    # Checks if the next token matches with the symbol at TOS
     def match(self, ts, symbol, parse_tree):
         parse_tree.leaf_found(ts.peek().value)
         print(ts.peek(), symbol.name)
