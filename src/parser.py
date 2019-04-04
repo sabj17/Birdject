@@ -87,7 +87,7 @@ class Parser:
             predict_set = self.grammar.predict(rule)
             for terminal in predict_set:
                 if parse_table[rule.LHS.name][terminal] == 0:
-                    parse_table[rule.LHS.name][terminal] = rule.rule_nr
+                    parse_table[rule.LHS.name][terminal] = rule.rule_num
                 else:
                     raise Exception("Grammar not LL(1)")
 

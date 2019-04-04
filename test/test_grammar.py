@@ -1,19 +1,14 @@
 import os
 from unittest import TestCase
-
-from src.grammar import GrammarBuilder, Grammar, Rule
-from src.parser import Parser
+from src.grammar import GrammarBuilder
 
 
 class TestGrammar(TestCase):
 
     @classmethod
-    def setUpClass(self):  # Before all tests
+    def setUpClass(cls):  # Before all tests
         grammar_file = os.path.abspath('../src/resources/testgrammar.txt')
-
-        self.grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
-
-        parser = Parser(self.grammar)
+        cls.grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
     @classmethod
     def tearDownClass(cls):  # After all tests
@@ -25,17 +20,107 @@ class TestGrammar(TestCase):
     def tearDown(self):  # After each test
         pass
 
-    def test_get_rules_for(self):
-        pass
+    #        TESTS
+    # -----------------------
 
-    def test_get_rule_from_line(self):
-        pass
+    #################
+    # GET_RULES_FOR #
+    #################
 
-    def test_get_symbol(self):
-        pass
+    def test_get_rules_for_1(self):
+        expected_rules = ['A -> a B C d', 'A -> B Q']
+        rules_from_file = [(repr(rule)) for rule in self.grammar.get_rules_for("A")]
 
-    def test_occurrence(self):
-        pass
+        self.assertListEqual(rules_from_file, expected_rules)
+
+    def test_get_rules_for_2(self):
+        expected_rules = ['Q -> q', 'Q -> λ']
+        rules_from_file = [(repr(rule)) for rule in self.grammar.get_rules_for("Q")]
+
+        self.assertListEqual(rules_from_file, expected_rules)
+
+    def test_get_rules_for_3(self):
+        expected_rules = ['S -> A C $']
+        rules_from_file = [(repr(rule)) for rule in self.grammar.get_rules_for("S")]
+
+        self.assertListEqual(rules_from_file, expected_rules)
+
+    # Should fail because C -> c and C - LAMBDA
+    def test_get_rules_for_4(self):
+        expected_rules = ['C -> c']
+        rules_from_file = [(repr(rule)) for rule in self.grammar.get_rules_for("S")]
+
+        self.assertNotEqual(rules_from_file, expected_rules)
+
+    #######################
+    # GET_RULES_FROM_LINE #
+    #######################
+
+    def test_get_rule_from_line_1(self):
+        self.assertEqual(repr(self.grammar.get_rule_from_line(1)), "S -> A C $")
+
+    # Testing that the non-terminal on LHS has be the correct one, see A should be S
+    def test_get_rule_from_line_2(self):
+        self.assertNotEqual(repr(self.grammar.get_rule_from_line(1)), "A -> A C $")
+
+    def test_get_rule_from_line_3(self):
+        self.assertEqual(repr(self.grammar.get_rule_from_line(4)), "A -> a B C d")
+
+    # Testing if it differentiate between a terminal and non-terminal, see D should be d
+    def test_get_rule_from_line_4(self):
+        self.assertNotEqual(repr(self.grammar.get_rule_from_line(1)), "A -> a B C D")
+
+    # Returns none because the there is no rule on line 10
+    def test_get_rule_from_line_5(self):
+        self.assertEqual(repr(self.grammar.get_rule_from_line(10)), "None")
+
+    ##############
+    # GET_SYMBOL #
+    ##############
+
+    # Tests that it can't get a non-terminal if the parameter terminals is passed to the function
+    def test_get_symbol_1(self):
+        self.assertFalse(self.grammar.get_symbol('A', 'terminals'))
+
+    def test_get_symbol_2(self):
+        self.assertTrue(self.grammar.get_symbol('A', 'non-terminals'))
+
+    # Test that the function gives a non-terminal without non-terminals as parameter
+    def test_get_symbol_3(self):
+        self.assertTrue(self.grammar.get_symbol('A'))
+
+    # Test that it can't get a terminal if the non-terminals is passed as parameter to the function
+    def test_get_symbol_4(self):
+        self.assertFalse(self.grammar.get_symbol('a', 'non-terminals'))
+
+    def test_get_symbol_5(self):
+        self.assertTrue(self.grammar.get_symbol('a', 'terminals'))
+
+    # Test that it outputs a terminal without the terminals as parameter
+    def test_get_symbol_6(self):
+        self.assertTrue(self.grammar.get_symbol('a'))
+
+    ##############
+    # OCCURRENCE #
+    ##############
+
+    def test_occurrence_1(self):
+        expected_occurrence = ['A -> a B C d', 'A -> B Q', 'B -> b B']
+        occurrence_from_file = [(repr(occurrence)) for occurrence in self.grammar.occurrence('B')]
+
+        self.assertListEqual(occurrence_from_file, expected_occurrence)
+
+    def test_occurrence_2(self):
+        expected_occurrence = ['C -> λ', 'B -> λ', 'Q -> λ']
+        occurrence_from_file = [(repr(occurrence)) for occurrence in self.grammar.occurrence('λ')]
+
+        self.assertListEqual(occurrence_from_file, expected_occurrence)
+
+    def test_occurrence_3(self):
+        expected_occurrence = ['S -> A C $']
+        occurrence_from_file = [(repr(occurrence)) for occurrence in self.grammar.occurrence('$')]
+
+        self.assertListEqual(occurrence_from_file, expected_occurrence)
 
     ##############
     # FIRST SETS #

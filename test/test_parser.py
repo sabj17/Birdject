@@ -24,9 +24,6 @@ class TestParser(TestCase):
     def test_parse(self):
         self.assertTrue(True)
 
-    def test_llparser(self):
-        self.assertTrue(True)
-
     def test_apply(self):
         self.assertTrue(True)
 

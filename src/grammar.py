@@ -8,8 +8,12 @@ class Rule:
     def __init__(self, LHS, RHS):
         self.LHS = LHS
         self.RHS = RHS
-        self.rule_nr = self.rule_count
+        self.rule_num = self.rule_count
         Rule.rule_count += 1
+
+    def __repr__(self):
+        return self.LHS.name + " -> " + self.RHS.__str__()
+
 
     def __str__(self):
         return self.LHS.name + " -> " + self.RHS.__str__()
@@ -128,6 +132,7 @@ class Grammar:
         self.rules = rules
         self.start_symbol = rules[0].LHS
 
+    # get_rules_for returns all rules for that nonterminal
     def get_rules_for(self, A):
         ans = []
         for rule in self.rules:
@@ -135,15 +140,17 @@ class Grammar:
                 ans.append(rule)
         return ans
 
+    # get_rule_from_line returns the rules with that line number
     def get_rule_from_line(self, line_number):
         for rule in self.rules:
-            if rule.rule_nr == line_number:
+            if rule.rule_num == line_number:
                 return rule
         return None
 
     def to_str(self):
         return "\n".join(rule.__str__() for rule in self.rules)
 
+    # get_symbol returns the terminal or non terminal with that name
     def get_symbol(self, name, allowed='both'):
         if allowed == 'non-terminals' or allowed == 'both':
             if name in self.nonterminals.keys():
@@ -155,6 +162,7 @@ class Grammar:
 
         return None
 
+    # occurrence finds all the rules where that symbol is in the RHS
     def occurrence(self, symbol):
         ans = []
         for rule in self.rules:
@@ -162,6 +170,7 @@ class Grammar:
                 ans.append(rule)
         return ans
 
+    # first returns the first set
     def first(self, production):
         visited_first = {}
         for nonterm in self.nonterminals.keys():
@@ -200,6 +209,7 @@ class Grammar:
 
         return set(ans)
 
+    # follow returns the follow set
     def follow(self, A):
         visited_follow = {}
         for nonterm in self.nonterminals.keys():
@@ -217,6 +227,7 @@ class Grammar:
                     ans.extend(self._internalfollow(rule.LHS.name, visited_follow))
         return set(ans)
 
+    # predict returns the predict set
     def predict(self, rule):
         ans = self.first(rule.RHS)
         if rule.RHS.all_derive_empty(self.rules):
