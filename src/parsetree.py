@@ -5,9 +5,11 @@ import random
 
 class Node:
 
-    def __init__(self, value, parent=None):
+    def __init__(self, symbol, value, parent=None):
+        self.name = symbol.name
         self.children = []
         self.value = value
+        self.symbol = symbol
         self.parent = parent
         self.is_checked = False
 
@@ -16,7 +18,7 @@ class Node:
 
     def graph(self, graph, parent=None):
         id = str(random.randint(1, 10000000))
-        graph.node(id, nohtml(self.value.name))
+        graph.node(id, nohtml(self.name + ": " + str(self.value)))
         if parent is not None:
             graph.edge(parent, id)
 
@@ -24,7 +26,7 @@ class Node:
             child.graph(graph, id)
 
     def __str__(self, level=0):
-        ret = "\t" * level + repr(self.value.name) + "\n"
+        ret = "\t" * level + repr(self.symbol.name) + "\n"
         for child in self.children:
             ret += child.__str__(level + 1)
         return ret
@@ -44,7 +46,7 @@ class Tree:
         self.current_node.children = nodes
         for node in self.current_node.children:
             node.parent = self.current_node
-            if isinstance(node.value, Terminal) or isinstance(node.value, Lambda):
+            if isinstance(node.symbol, Lambda):
                 node.is_checked = True
         self.find_next()
 
@@ -63,6 +65,10 @@ class Tree:
                 if child.is_checked is False:
                     self.current_node = child
                     break
+
+    def leaf_found(self, value):
+        self.current_node.value = value
+        self.find_next()
 
     def graph(self):
         graph = Digraph('G', node_attr={'style': 'filled'}, graph_attr={'ratio': 'fill', 'ranksep': '1.5'})

@@ -32,14 +32,14 @@ class Parser:
     def parse(self, tokens):
         start = self.grammar.start_symbol
         self.stack.push(start)
-        parse_tree = Tree(Node(start))
+        parse_tree = Tree(Node(start, None))
         ts = TokenStream(tokens)
 
         accepted = False
         while not accepted:
             tos = self.stack.top_of_stack()
             if isinstance(tos, Terminal):  # is terminal
-                self.match(ts, tos)
+                self.match(ts, tos, parse_tree)
                 if tos.name == '$':
                     accepted = True
                 self.stack.pop()
@@ -59,7 +59,8 @@ class Parser:
         # make nodes
         nodes = []
         for symbol in rule.RHS.symbols:
-            nodes.append(Node(symbol))
+            node = Node(symbol, None)
+            nodes.append(node)
         parse_tree.add_nodes(nodes)
 
         if rule.RHS.is_lambda:
@@ -68,12 +69,13 @@ class Parser:
         for symbol in reversed(rule.RHS.symbols):  # iterates the list in reverse
             stack.push(symbol)
 
-    def match(self, ts, symbol):
+    def match(self, ts, symbol, parse_tree):
+        parse_tree.leaf_found(ts.peek().value)
         print(ts.peek(), symbol.name)
         if ts.peek().kind == symbol.name:
             ts.advance()
         else:
-            print("You fucked up")
+            raise Exception("stop ad hoc")
 
     def create_parse_table(self):
         parse_table = {}

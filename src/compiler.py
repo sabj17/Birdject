@@ -29,8 +29,12 @@ print("\nMatches:")
 tokens = []
 token_names = ['a', 'b', 'c', 'd', '$']
 
+count = 0
 for x in token_names:
-    tokens.append(Token(x, 0, 0, 0))
+    tokens.append(Token(x, str(count), 0, 0))
+    count += 1
 
 parse_tree = parser.parse(tokens)
 print(parse_tree)
+
+parse_tree.graph()
