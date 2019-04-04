@@ -57,8 +57,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test/test_grammar.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="531">
-                  <caret line="114" column="27" lean-forward="true" selection-start-line="114" selection-start-column="27" selection-end-line="114" selection-end-column="27" />
+                <state relative-caret-position="-1447">
+                  <caret line="136" column="27" lean-forward="true" selection-start-line="136" selection-start-column="27" selection-end-line="136" selection-end-column="27" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -381,7 +381,7 @@
       <workItem from="1554045264927" duration="12035000" />
       <workItem from="1554189526946" duration="17390000" />
       <workItem from="1554275445820" duration="13792000" />
-      <workItem from="1554364046060" duration="6530000" />
+      <workItem from="1554364046060" duration="6801000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1553513025633</created>
@@ -443,9 +443,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 11h 34m 29s.xml">
-      <configuration name="Unittests in test_grammar.py" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 11h 35m 51s.xml">
       <configuration name="Unittests in test_grammar.py" configurationId="tests" />
     </history-entry>
@@ -473,13 +470,15 @@
     <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 12h 02m 01s.xml">
       <configuration name="Unittests in test_grammar.py" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 12h 08m 29s.xml">
+      <configuration name="Unittests in test_grammar.py" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82842000" />
+    <option name="totallyTimeSpent" value="83113000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="2" width="1922" height="1079" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -621,8 +620,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test_grammar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="114" column="27" lean-forward="true" selection-start-line="114" selection-start-column="27" selection-end-line="114" selection-end-column="27" />
+        <state relative-caret-position="-1447">
+          <caret line="136" column="27" lean-forward="true" selection-start-line="136" selection-start-column="27" selection-end-line="136" selection-end-column="27" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
