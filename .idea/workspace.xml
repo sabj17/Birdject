@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="311eaa91-087f-4edd-b12e-d967ecc45f3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Birdject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/grammar.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/grammar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_grammar.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_grammar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_parser.py" afterDir="false" />
-    </list>
+    <list default="true" id="311eaa91-087f-4edd-b12e-d967ecc45f3e" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -381,7 +373,7 @@
       <workItem from="1554045264927" duration="12035000" />
       <workItem from="1554189526946" duration="17390000" />
       <workItem from="1554275445820" duration="13792000" />
-      <workItem from="1554364046060" duration="6801000" />
+      <workItem from="1554364046060" duration="7063000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1553513025633</created>
@@ -439,7 +431,28 @@
       <option name="project" value="LOCAL" />
       <updated>1553606024100</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added exception to parser">
+      <created>1554372641740</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1554372641740</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added exception to parser">
+      <created>1554372830833</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1554372830833</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added exception to parser">
+      <created>1554372903026</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1554372903026</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -475,7 +488,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83113000" />
+    <option name="totallyTimeSpent" value="83375000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="2" width="1922" height="1079" extended-state="6" />
