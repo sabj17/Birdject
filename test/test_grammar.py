@@ -99,40 +99,40 @@ class TestGrammar(TestCase):
 
     def test_predict_1(self):
         predict_set = self.grammar.predict(self.grammar.rules[0])
-        self.assertEqual(predict_set, {'a', 'b', 'c', 'q', '$'})
+        self.assertEqual(predict_set, {'a', 'b', 'c', 'q', '$'}, "Predict set calculation error")
 
     def test_predict_2(self):
         predict_set = self.grammar.predict(self.grammar.rules[1])
-        self.assertEqual(predict_set, {'c'})
+        self.assertEqual(predict_set, {'c'}, "Predict set calculation error")
 
     def test_predict_3(self):
         predict_set = self.grammar.predict(self.grammar.rules[2])
-        self.assertEqual(predict_set, {'d', '$'})
+        self.assertEqual(predict_set, {'d', '$'}, "Predict set calculation error")
 
     def test_predict_4(self):
         predict_set = self.grammar.predict(self.grammar.rules[3])
-        self.assertEqual(predict_set, {'a'})
+        self.assertEqual(predict_set, {'a'}, "Predict set calculation error")
 
     def test_predict_5(self):
         predict_set = self.grammar.predict(self.grammar.rules[4])
-        self.assertEqual(predict_set, {'b', 'c', 'q', '$'})
+        self.assertEqual(predict_set, {'b', 'c', 'q', '$'}, "Predict set calculation error")
 
     def test_predict_6(self):
         predict_set = self.grammar.predict(self.grammar.rules[5])
-        self.assertEqual(predict_set, {'b'})
+        self.assertEqual(predict_set, {'b'}, "Predict set calculation error")
 
     def test_predict_7(self):
         predict_set = self.grammar.predict(self.grammar.rules[6])
-        self.assertEqual(predict_set, {'d', 'c', 'q', '$'})
+        self.assertEqual(predict_set, {'d', 'c', 'q', '$'}, "Predict set calculation error")
 
     def test_predict_8(self):
         predict_set = self.grammar.predict(self.grammar.rules[7])
-        self.assertEqual(predict_set, {'q'})
+        self.assertEqual(predict_set, {'q'}, "Predict set calculation error")
 
     def test_predict_9(self):
         predict_set = self.grammar.predict(self.grammar.rules[8])
-        self.assertEqual(predict_set, {'c', '$'})
+        self.assertEqual(predict_set, {'c', '$'}, "Predict set calculation error")
 
     def test_predict_not_equal(self):
         predict_set = self.grammar.predict(self.grammar.rules[8])
-        self.assertNotEqual(predict_set, {'c', 'a'})
+        self.assertNotEqual(predict_set, {'c', 'a'}, "Predict set calculation error")
