@@ -1,5 +1,5 @@
 from src.grammar import *
-from src.token import Token
+from src.tokens import Token
 from src.parser import Parser
 import os
 from prettytable import PrettyTable
@@ -27,7 +27,7 @@ print("\n", ptable)
 print("\nMatches:")
 
 tokens = []
-token_names = ['a','b', 'c', 'd','$']
+token_names = ['a', 'b', 'c', 'd', '$']
 
 for x in token_names:
     tokens.append(Token(x, 0, 0, 0))

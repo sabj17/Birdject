@@ -1,5 +1,5 @@
 from src.grammar import *
-from src.token import Token, TokenStream
+from src.tokens import Token, TokenStream
 from src.parsetree import *
 
 

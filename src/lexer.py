@@ -1,5 +1,5 @@
 import re
-from src.token import Token
+from src.tokens import Token
 import ArdujenoCode
 
 
