@@ -233,8 +233,8 @@ class Grammar:
 
     # predict returns the predict set
     def predict(self, rule):
-        ans = self.first(rule.RHS)  # Adds the first set to ans
-        # All of the RHS derive empty and follow is called on the LHS
+        ans = self.first(rule.RHS)  # Adds the first set of the rules' RHS to ans
+        # All of the RHS derive empty then follow is called on the LHS
         if rule.RHS.all_derive_empty(self.rules):
             ans.update(self.follow(rule.LHS.name))
         return ans

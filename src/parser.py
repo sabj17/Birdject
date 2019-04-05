@@ -81,12 +81,14 @@ class Parser:
 
     def create_parse_table(self):
         parse_table = {}
+        # Non terminals as rows and terminals as columns
         for nonterm in self.grammar.nonterminals.keys():
             inside_dict = {}
             for term in self.grammar.terminals.keys():
                 inside_dict[term] = 0
             parse_table[nonterm] = inside_dict
 
+        # Adds the rule numbers as entry by calling the predict set on each rule
         for rule in self.grammar.rules:
             predict_set = self.grammar.predict(rule)
             for terminal in predict_set:
