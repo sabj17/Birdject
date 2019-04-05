@@ -20,13 +20,11 @@ class TestGrammar(TestCase):
     def tearDown(self):  # After each test
         pass
 
-    #        TESTS
-    # -----------------------
-
+    #################
+    #     TESTS     #
     #################
     # GET_RULES_FOR #
     #################
-    #HELLO FRIENDS
 
     def test_get_rules_for_1(self):
         expected_rules = ['A -> a B C d', 'A -> B Q']
