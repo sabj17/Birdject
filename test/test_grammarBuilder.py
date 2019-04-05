@@ -1,7 +1,7 @@
 import os
 from unittest import TestCase
 
-from src.grammar import GrammarBuilder, Rule, Production, Nonterminal, Terminal
+from src.grammar import GrammarBuilder, Rule, Production, Nonterminal, Terminal, Symbol, LAMBDA
 
 
 class TestGrammarBuilder(TestCase):
@@ -40,14 +40,36 @@ class TestGrammarBuilder(TestCase):
         self.assertEqual(test_set, {'A', 'B', 'C', 'Q', 'S'})
 
     def test_add_rule(self):
-        self.grammar_builder.add_rule(self.grammar.rules[0].LHS, self.grammar.rules[0].RHS)
+        # Construct rule for testing
         start = Nonterminal('S')
         a = Nonterminal('A')
         c = Nonterminal('C')
         dollar = Terminal('$')
         production = Production([a, c, dollar])
         test_rule = Rule(start, production)
-        self.assertEqual(self.grammar_builder.rules[0], test_rule)
+
+        # Get lhs and rhs of rule. Lhs in string and rhs in list of strings. Add as rule to grammar_builder
+        lhs = self.grammar.rules[0].LHS.name
+        rhs = [symbol.name for symbol in self.grammar.rules[0].RHS.symbols]
+        self.grammar_builder.add_rule(lhs, rhs)
+
+        # Unpack grammar_builder rule of index 0
+        x, y = self.grammar_builder.rules[0]
+        x_nonterminal = Nonterminal(x)
+        symbol_list = []
+
+        # Make all strings from rhs into relevant symbol type
+        for s in y:
+            if s is not '$' and s is not LAMBDA and s.isupper:
+                s_symbol = Nonterminal(s)
+            else:
+                s_symbol = Terminal(s)
+
+            symbol_list.append(s_symbol)
+
+        y_production = Production(symbol_list)
+        builder_rule = Rule(x_nonterminal, y_production)
+        self.assertEqual(builder_rule.__str__(), test_rule.__str__())
 
     def test_build_grammar_from_file(self):
         pass
