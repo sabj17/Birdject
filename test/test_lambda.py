@@ -1,12 +1,9 @@
 import os
-import unittest
 from unittest import TestCase
+from src.grammar import *
 
-from src.grammar import GrammarBuilder
 
-
-class TestParser(TestCase):
-
+class TestLambda(TestCase):
     @classmethod
     def setUpClass(cls):  # Before all tests
         grammar_file = os.path.abspath('../src/resources/testgrammar.txt')
@@ -25,14 +22,6 @@ class TestParser(TestCase):
     #        TESTS
     # -----------------------
 
-    def test_parse(self):
-        self.assertTrue(True)
-
-    def test_apply(self):
-        self.assertTrue(True)
-
-    def test_match(self):
-        self.assertTrue(True)
-
-    def test_create_parse_table(self):
-        self.assertTrue(True)
+    def test_derives_empty(self):
+        symbol = Lambda()
+        self.assertTrue(symbol.derives_empty(self.grammar.rules))

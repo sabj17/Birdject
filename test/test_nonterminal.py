@@ -1,11 +1,9 @@
 import os
-import unittest
 from unittest import TestCase
-
 from src.grammar import GrammarBuilder
 
 
-class TestParser(TestCase):
+class TestNonterminal(TestCase):
 
     @classmethod
     def setUpClass(cls):  # Before all tests
@@ -25,14 +23,14 @@ class TestParser(TestCase):
     #        TESTS
     # -----------------------
 
-    def test_parse(self):
-        self.assertTrue(True)
+    def test_derives_empty_1(self):
+        symbol = self.grammar.get_symbol("A")
+        self.assertTrue(symbol.derives_empty(self.grammar.rules))
 
-    def test_apply(self):
-        self.assertTrue(True)
+    def test_derives_empty_2(self):
+        symbol = self.grammar.get_symbol("S")
+        self.assertFalse(symbol.derives_empty(self.grammar.rules))
 
-    def test_match(self):
-        self.assertTrue(True)
-
-    def test_create_parse_table(self):
-        self.assertTrue(True)
+    def test_derives_empty_3(self):
+        symbol = self.grammar.get_symbol("$")
+        self.assertFalse(symbol.derives_empty(self.grammar.rules))
