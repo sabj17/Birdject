@@ -1,7 +1,7 @@
 import os
 from unittest import TestCase
 
-from src.grammar import GrammarBuilder, Rule, Production, Nonterminal, Terminal, Symbol, LAMBDA
+from src.grammar import GrammarBuilder, Rule, Production, Nonterminal, Terminal, Symbol, LAMBDA, Grammar
 
 
 class TestGrammarBuilder(TestCase):
@@ -41,12 +41,12 @@ class TestGrammarBuilder(TestCase):
 
     def test_add_rule(self):
         # Construct rule for testing
-        start = Nonterminal('S')
-        a = Nonterminal('A')
-        c = Nonterminal('C')
+        S = Nonterminal('S')
+        A = Nonterminal('A')
+        C = Nonterminal('C')
         dollar = Terminal('$')
-        production = Production([a, c, dollar])
-        test_rule = Rule(start, production)
+        production = Production([A, C, dollar])
+        test_rule = Rule(S, production)
 
         # Get lhs and rhs of rule. Lhs in string and rhs in list of strings. Add as rule to grammar_builder
         lhs = self.grammar.rules[0].LHS.name
@@ -59,11 +59,11 @@ class TestGrammarBuilder(TestCase):
         symbol_list = []
 
         # Make all strings from rhs into relevant symbol type
-        for s in y:
-            if s is not '$' and s is not LAMBDA and s.isupper:
-                s_symbol = Nonterminal(s)
+        for S in y:
+            if S is not '$' and S is not LAMBDA and S.isupper:
+                s_symbol = Nonterminal(S)
             else:
-                s_symbol = Terminal(s)
+                s_symbol = Terminal(S)
 
             symbol_list.append(s_symbol)
 
@@ -72,7 +72,25 @@ class TestGrammarBuilder(TestCase):
         self.assertEqual(builder_rule.__str__(), test_rule.__str__())
 
     def test_build_grammar_from_file(self):
-        pass
+        terminals = ['a', 'b', 'c', 'd', 'q', '$']
+        nonterminals = ['S', 'A', 'B', 'C', 'Q']
+
+        grammar_builder = GrammarBuilder()
+        grammar_builder.add_terminals(terminals)
+        grammar_builder.add_nonterminals(nonterminals)
+
+        grammar_builder.add_rule('S', ['A', 'C', '$'])
+        grammar_builder.add_rule('C', ['c'])
+        grammar_builder.add_rule('C', [LAMBDA])
+        grammar_builder.add_rule('A', ['a', 'B', 'C', 'd'])
+        grammar_builder.add_rule('A', ['B', 'Q'])
+        grammar_builder.add_rule('B', ['b', 'B'])
+        grammar_builder.add_rule('B', [LAMBDA])
+        grammar_builder.add_rule('Q', ['q'])
+        grammar_builder.add_rule('Q', [LAMBDA])
+
+        test_grammar = grammar_builder.build()
+        self.assertEqual(self.grammar.to_str(), test_grammar.to_str())
 
     def test__find_nonterminals_from_rules(self):
         pass
