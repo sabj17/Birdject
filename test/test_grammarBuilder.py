@@ -12,6 +12,26 @@ class TestGrammarBuilder(TestCase):
         cls.grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
         cls.grammar_builder = GrammarBuilder()
 
+        # Set up of manual grammar builder
+        cls.terminals = ['a', 'b', 'c', 'd', 'q', '$', LAMBDA]
+        cls.nonterminals = ['S', 'A', 'B', 'C', 'Q']
+
+        cls.grammar_builder_manual = GrammarBuilder()
+        cls.grammar_builder_manual.add_terminals(cls.terminals)
+        cls.grammar_builder_manual.add_nonterminals(cls.nonterminals)
+
+        cls.grammar_builder_manual.add_rule('S', ['A', 'C', '$'])
+        cls.grammar_builder_manual.add_rule('C', ['c'])
+        cls.grammar_builder_manual.add_rule('C', [LAMBDA])
+        cls.grammar_builder_manual.add_rule('A', ['a', 'B', 'C', 'd'])
+        cls.grammar_builder_manual.add_rule('A', ['B', 'Q'])
+        cls.grammar_builder_manual.add_rule('B', ['b', 'B'])
+        cls.grammar_builder_manual.add_rule('B', [LAMBDA])
+        cls.grammar_builder_manual.add_rule('Q', ['q'])
+        cls.grammar_builder_manual.add_rule('Q', [LAMBDA])
+
+        cls.builder_rules = cls.grammar_builder_manual.rules
+
 
     @classmethod
     def tearDownClass(cls):  # After all tests
@@ -72,34 +92,24 @@ class TestGrammarBuilder(TestCase):
         self.assertEqual(builder_rule.__str__(), test_rule.__str__())
 
     def test_build_grammar_from_file(self):
-        terminals = ['a', 'b', 'c', 'd', 'q', '$']
-        nonterminals = ['S', 'A', 'B', 'C', 'Q']
-
-        grammar_builder = GrammarBuilder()
-        grammar_builder.add_terminals(terminals)
-        grammar_builder.add_nonterminals(nonterminals)
-
-        grammar_builder.add_rule('S', ['A', 'C', '$'])
-        grammar_builder.add_rule('C', ['c'])
-        grammar_builder.add_rule('C', [LAMBDA])
-        grammar_builder.add_rule('A', ['a', 'B', 'C', 'd'])
-        grammar_builder.add_rule('A', ['B', 'Q'])
-        grammar_builder.add_rule('B', ['b', 'B'])
-        grammar_builder.add_rule('B', [LAMBDA])
-        grammar_builder.add_rule('Q', ['q'])
-        grammar_builder.add_rule('Q', [LAMBDA])
-
-        test_grammar = grammar_builder.build()
+        test_grammar = self.grammar_builder_manual.build()
         self.assertEqual(self.grammar.to_str(), test_grammar.to_str())
 
     def test__find_nonterminals_from_rules(self):
-        pass
+        nonterminals_from_rules = self.grammar_builder_manual._find_nonterminals_from_rules(self.builder_rules)
+        self.assertEqual(set(nonterminals_from_rules), set(self.nonterminals))
 
     def test__find_terminals_from_rules(self):
-        pass
+        terminals_from_rules = self.grammar_builder_manual._find_terminals_from_rules(self.builder_rules,
+                                                                                      self.nonterminals)
+        self.assertEqual(set(terminals_from_rules), set(self.terminals))
 
     def test_add_rules_from_file(self):
-        pass
+        grammar_file = os.path.abspath('../src/resources/testgrammar.txt')
+        test_builder = GrammarBuilder()
+        test_builder.add_rules_from_file(grammar_file)
+
+        self.assertEqual(test_builder.rules, self.builder_rules)
 
     def test__format_line(self):
         pass
