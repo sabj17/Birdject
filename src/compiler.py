@@ -12,7 +12,7 @@ program_file = os.path.join(wd, 'resources/Example.jnr')
 
 grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
-print(grammar)
+#print(grammar)
 
 lexer = Lexer(file_path=program_file)
 tokens = lexer.lex()
@@ -29,7 +29,7 @@ for val in parser.parse_table:
         row.append(value)
     ptable.add_row([val] + row)
 
-print("\n", ptable)
+#print("\n", ptable)
 
 
 parse_tree = parser.parse(tokens)

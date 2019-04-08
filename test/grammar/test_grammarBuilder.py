@@ -8,7 +8,7 @@ class TestGrammarBuilder(TestCase):
 
     @classmethod
     def setUpClass(cls):  # Before all tests
-        grammar_file = os.path.abspath('../src/resources/testgrammar.txt')
+        grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/testgrammar.txt'))
         cls.grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
         cls.grammar_builder = GrammarBuilder()
 
@@ -82,7 +82,7 @@ class TestGrammarBuilder(TestCase):
         self.assertEqual(builder_rule.__str__(), test_rule.__str__())
 
     def test_add_rules_from_file(self):
-        grammar_file = os.path.abspath('../src/resources/testgrammar.txt')
+        grammar_file = os.path.abspath('../../src/resources/testgrammar.txt')
         test_builder = GrammarBuilder()
         test_builder.add_rules_from_file(grammar_file)
 
