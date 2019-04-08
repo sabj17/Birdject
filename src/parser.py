@@ -73,11 +73,10 @@ class Parser:
     # Checks if the next token matches with the symbol at TOS
     def match(self, ts, symbol, parse_tree):
         parse_tree.leaf_found(ts.peek().value)
-        print(ts.peek(), symbol.name)
         if ts.peek().kind == symbol.name:
             ts.advance()
         else:
-            raise Exception("stop ad hoc")
+            raise Exception(f"stop ad hoc, {ts.peek()} and {symbol.name}")
 
     def create_parse_table(self):
         parse_table = {}
