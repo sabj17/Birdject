@@ -111,8 +111,30 @@ class TestGrammarBuilder(TestCase):
 
         self.assertEqual(test_builder.rules, self.builder_rules)
 
-    def test__format_line(self):
-        pass
+    def test__format_line_1(self):
+        test_string = 'S -> A, C, $'
+        test_split = self.grammar_builder._format_line(test_string, 1)
+        self.assertEqual(test_split, ('S', ['A', 'C', '$']))
+
+    def test__format_line_2(self):
+        test_string = 'C -> LAMBDA'
+        test_split = self.grammar_builder._format_line(test_string, 1)
+        self.assertEqual(test_split, ('C', ['λ']))
+
+    def test__format_line_3(self):
+        test_string = 'A -> a, B, C, d'
+        test_split = self.grammar_builder._format_line(test_string, 1)
+        self.assertEqual(test_split, ('A', ['a', 'B', 'C', 'd']))
+
+    def test__format_line_4(self):
+        test_string = 'B -> b, B'
+        test_split = self.grammar_builder._format_line(test_string, 1)
+        self.assertEqual(test_split, ('B', ['b', 'B']))
+
+    def test__format_line_5(self):
+        test_string = 'Q -> q'
+        test_split = self.grammar_builder._format_line(test_string, 1)
+        self.assertEqual(test_split, ('Q', ['q']))
 
     def test_build(self):
         pass
