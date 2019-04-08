@@ -38,6 +38,9 @@ class Production:
     def __str__(self):
         return " ".join([symbol.name for symbol in self.symbols])
 
+    def __repr__(self):
+        return " ".join([symbol.name for symbol in self.symbols])
+
     # Checks if all of the symbols in a production can derive empty
     def all_derive_empty(self, rules):
         if self.symbols is None:

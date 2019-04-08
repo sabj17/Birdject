@@ -10,19 +10,14 @@ class TestTerminal(TestCase):
         grammar_file = os.path.abspath('../src/resources/testgrammar.txt')
         cls.grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
-    @classmethod
-    def tearDownClass(cls):  # After all tests
-        pass
+    #################
+    #     TESTS     #
+    #################
 
-    def setUp(self):  # Before each test
-        pass
-
-    def tearDown(self):  # After each test
-        pass
-
-    #        TESTS
-    # -----------------------
-
-    def test_derives_empty_1(self):
+    # Can't derive empty since it's a terminal
+    def test_terminal_derives_empty(self):
         symbol = self.grammar.get_symbol('a')
-        self.assertFalse(symbol.derives_empty(self.grammar.get_rules_for(symbol.name)))
+        self.assertFalse(symbol.derives_empty(self.grammar.rules))
+
+        symbol = self.grammar.get_symbol('d')
+        self.assertFalse(symbol.derives_empty(self.grammar.rules))

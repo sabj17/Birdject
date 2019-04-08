@@ -10,119 +10,83 @@ class TestGrammar(TestCase):
         grammar_file = os.path.abspath('../src/resources/testgrammar.txt')
         cls.grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
-    @classmethod
-    def tearDownClass(cls):  # After all tests
-        pass
-
-    def setUp(self):  # Before each test
-        pass
-
-    def tearDown(self):  # After each test
-        pass
-
     #################
     #     TESTS     #
     #################
-    # GET_RULES_FOR #
+    # get rules for #
     #################
 
     def test_get_rules_for_1(self):
         expected_rules = ['A -> a B C d', 'A -> B Q']
         rules_from_file = [(repr(rule)) for rule in self.grammar.get_rules_for("A")]
-
         self.assertListEqual(rules_from_file, expected_rules)
 
-    def test_get_rules_for_2(self):
         expected_rules = ['Q -> q', 'Q -> λ']
         rules_from_file = [(repr(rule)) for rule in self.grammar.get_rules_for("Q")]
-
         self.assertListEqual(rules_from_file, expected_rules)
 
-    def test_get_rules_for_3(self):
         expected_rules = ['S -> A C $']
         rules_from_file = [(repr(rule)) for rule in self.grammar.get_rules_for("S")]
-
         self.assertListEqual(rules_from_file, expected_rules)
 
-    # Should fail because C -> c and C - LAMBDA
-    def test_get_rules_for_4(self):
+    def test_get_rules_for_is_sensitive_to_upper_and_lower_case(self):
+        expected_rules = ['C -> C', 'C -> λ']
+        rules_from_file = [(repr(rule)) for rule in self.grammar.get_rules_for("S")]
+        self.assertNotEqual(rules_from_file, expected_rules)
+
+    def test_get_rules_for_fails_if_a_rule_is_missing(self):
         expected_rules = ['C -> c']
         rules_from_file = [(repr(rule)) for rule in self.grammar.get_rules_for("S")]
-
         self.assertNotEqual(rules_from_file, expected_rules)
 
     #######################
-    # GET_RULES_FROM_LINE #
+    # get rules from line #
     #######################
 
-    def test_get_rule_from_line_1(self):
+    def test_get_rule_from_line(self):
         self.assertEqual(repr(self.grammar.get_rule_from_line(1)), "S -> A C $")
-
-    # Testing that the non-terminal on LHS has be the correct one, see A should be S
-    def test_get_rule_from_line_2(self):
-        self.assertNotEqual(repr(self.grammar.get_rule_from_line(1)), "A -> A C $")
-
-    def test_get_rule_from_line_3(self):
         self.assertEqual(repr(self.grammar.get_rule_from_line(4)), "A -> a B C d")
-
-    # Testing if it differentiate between a terminal and non-terminal, see D should be d
-    def test_get_rule_from_line_4(self):
-        self.assertNotEqual(repr(self.grammar.get_rule_from_line(1)), "A -> a B C D")
-
-    # Returns none because the there is no rule on line 10
-    def test_get_rule_from_line_5(self):
         self.assertEqual(repr(self.grammar.get_rule_from_line(10)), "None")
 
+    def test_get_rule_from_line_fails_if_not_exact_match(self):
+        self.assertNotEqual(repr(self.grammar.get_rule_from_line(1)), "A -> A C $")
+        self.assertNotEqual(repr(self.grammar.get_rule_from_line(4)), "A -> a B C D")
+
     ##############
-    # GET_SYMBOL #
+    # get symbol #
     ##############
 
-    # Tests that it can't get a non-terminal if the parameter terminals is passed to the function
-    def test_get_symbol_1(self):
-        self.assertFalse(self.grammar.get_symbol('A', 'terminals'))
-
-    def test_get_symbol_2(self):
-        self.assertTrue(self.grammar.get_symbol('A', 'non-terminals'))
-
-    # Test that the function gives a non-terminal without non-terminals as parameter
-    def test_get_symbol_3(self):
+    def test_get_symbol(self):
         self.assertTrue(self.grammar.get_symbol('A'))
-
-    # Test that it can't get a terminal if the non-terminals is passed as parameter to the function
-    def test_get_symbol_4(self):
-        self.assertFalse(self.grammar.get_symbol('a', 'non-terminals'))
-
-    def test_get_symbol_5(self):
-        self.assertTrue(self.grammar.get_symbol('a', 'terminals'))
-
-    # Test that it outputs a terminal without the terminals as parameter
-    def test_get_symbol_6(self):
         self.assertTrue(self.grammar.get_symbol('a'))
 
+    def test_get_symbol_w_matching_second_parameter(self):
+        self.assertTrue(self.grammar.get_symbol('a', 'terminals'))
+        self.assertTrue(self.grammar.get_symbol('A', 'non-terminals'))
+
+    def test_get_symbol_fails_w_second_parameter_not_matching(self):
+        self.assertFalse(self.grammar.get_symbol('A', 'terminals'))
+        self.assertFalse(self.grammar.get_symbol('a', 'non-terminals'))
+
     ##############
-    # OCCURRENCE #
+    # occurrence #
     ##############
 
-    def test_occurrence_1(self):
+    def test_occurrence(self):
         expected_occurrence = ['A -> a B C d', 'A -> B Q', 'B -> b B']
         occurrence_from_file = [(repr(occurrence)) for occurrence in self.grammar.occurrence('B')]
-
         self.assertListEqual(occurrence_from_file, expected_occurrence)
 
-    def test_occurrence_2(self):
         expected_occurrence = ['C -> λ', 'B -> λ', 'Q -> λ']
         occurrence_from_file = [(repr(occurrence)) for occurrence in self.grammar.occurrence('λ')]
-
         self.assertListEqual(occurrence_from_file, expected_occurrence)
 
-    def test_occurrence_3(self):
         expected_occurrence = ['S -> A C $']
         occurrence_from_file = [(repr(occurrence)) for occurrence in self.grammar.occurrence('$')]
-
         self.assertListEqual(occurrence_from_file, expected_occurrence)
 
     ##############
-    # FIRST SETS #
+    # first sets #
     ##############
 
     def test_first_1(self):
@@ -150,7 +114,7 @@ class TestGrammar(TestCase):
         self.assertNotEqual(first_set, {'q', '$'}, "First set calculation error")
 
     ###############
-    # FOLLOW SETS #
+    # follow sets #
     ###############
 
     def test_follow_1(self):
@@ -178,7 +142,7 @@ class TestGrammar(TestCase):
         self.assertNotEqual(follow_set, {'c', 'a', '$'}, "Follow set calculation error")
 
     ################
-    # PREDICT SETS #
+    # predict sets #
     ################
 
     def test_predict_1(self):
