@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="311eaa91-087f-4edd-b12e-d967ecc45f3e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test/test_stack.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/grammar/test_grammar.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_grammar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/grammar/test_grammarBuilder.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_grammarBuilder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/grammar/test_lambda.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_lambda.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/grammar/test_nonterminal.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_nonterminal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/grammar/test_production.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_production.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/grammar/test_rule.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_rule.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/grammar/test_symbol.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_symbol.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/grammar/test_terminal.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_terminal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/parser/test_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_parser.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,11 +31,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test/test_grammarBuilder.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="190">
-                  <caret line="124" selection-start-line="124" selection-end-line="124" />
+                <state relative-caret-position="270">
+                  <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -33,11 +43,20 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test/test_parser.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="330">
-                  <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+                <state relative-caret-position="60">
+                  <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test/test_stack.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="315">
+                  <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
                 </state>
               </provider>
             </entry>
@@ -45,8 +64,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test/test_grammar.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="195">
-                  <caret line="15" selection-start-line="15" selection-end-line="15" />
+                <state relative-caret-position="105">
+                  <caret line="9" column="91" lean-forward="true" selection-start-line="9" selection-start-column="91" selection-end-line="9" selection-end-column="91" />
                 </state>
               </provider>
             </entry>
@@ -58,8 +77,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/parser.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1110">
-                  <caret line="74" column="46" selection-start-line="74" selection-start-column="46" selection-end-line="74" selection-end-column="46" />
+                <state relative-caret-position="120">
+                  <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
                   <folding>
                     <element signature="e#0#25#0" expanded="true" />
                   </folding>
@@ -125,6 +144,9 @@
         <option value="$PROJECT_DIR$/src/resources/grammar.txt" />
         <option value="$PROJECT_DIR$/src/lexer.py" />
         <option value="$PROJECT_DIR$/src/compiler.py" />
+        <option value="$PROJECT_DIR$/test/parser/test_stack.py" />
+        <option value="$PROJECT_DIR$/test/grammar/test_grammar.py" />
+        <option value="$PROJECT_DIR$/test/grammar/test_grammarBuilder.py" />
       </list>
     </option>
   </component>
@@ -202,10 +224,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test" />
+      <recent name="$PROJECT_DIR$/test/grammar" />
+      <recent name="$PROJECT_DIR$/test/parser" />
       <recent name="$PROJECT_DIR$/src/resources" />
       <recent name="C:\Users\Rasmus\PycharmProjects\Birdject\src\resources" />
-      <recent name="C:\Users\Rasmus\PycharmProjects\Birdject\ArdujenoCode" />
-      <recent name="C:\Users\Rasmus\PycharmProjects\Birdject\test" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -220,7 +243,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.compiler">
+  <component name="RunManager" selected="Python tests.Unittests in test_grammar.py">
     <configuration name="compiler" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Birdject" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -265,29 +288,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="parser" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Birdject" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/parser.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for test.grammar.test_grammar.TestGrammar" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests in test_grammarBuilder.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Birdject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -296,10 +297,24 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_pattern" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test.grammar.test_grammar.TestGrammar&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/test_grammarBuilder.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests in test_grammarBuilder.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Birdject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/grammar" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/test_grammarBuilder.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="Unittests in test_grammar.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -313,7 +328,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/grammar/test_grammar.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/test_grammar.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
@@ -345,17 +360,17 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/parser/test_parser.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/test_parser.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests in test_grammar.py" />
+        <item itemvalue="Python tests.Unittests in test_grammarBuilder.py" />
+        <item itemvalue="Python tests.Unittests in test_grammarBuilder.py (1)" />
         <item itemvalue="Python.compiler" />
         <item itemvalue="Python.lexer" />
-        <item itemvalue="Python tests.Unittests in test_grammar.py" />
-        <item itemvalue="Python tests.Unittests for test.grammar.test_grammar.TestGrammar" />
-        <item itemvalue="Python.parser" />
       </list>
     </recent_temporary>
   </component>
@@ -489,39 +504,46 @@
       <option name="project" value="LOCAL" />
       <updated>1554713044784</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="GrammarBuilder tests done">
+      <created>1554716524962</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1554716524962</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 11h 35m 51s.xml">
+    <history-entry file="Unittests_in_test_grammar_py - 2019.04.08 at 12h 30m 42s.xml">
       <configuration name="Unittests in test_grammar.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 11h 53m 50s.xml">
+    <history-entry file="Unittests_in_test_grammarBuilder_py - 2019.04.08 at 12h 35m 20s.xml">
+      <configuration name="Unittests in test_grammarBuilder.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_grammarBuilder_py - 2019.04.08 at 12h 35m 30s.xml">
+      <configuration name="Unittests in test_grammarBuilder.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_grammarBuilder_py - 2019.04.08 at 12h 35m 34s.xml">
+      <configuration name="Unittests in test_grammarBuilder.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_grammar_py - 2019.04.08 at 12h 36m 40s.xml">
       <configuration name="Unittests in test_grammar.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 11h 54m 37s.xml">
-      <configuration name="Unittests in test_grammar.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_grammarBuilder_py - 2019.04.08 at 12h 44m 32s.xml">
+      <configuration name="Unittests in test_grammarBuilder.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 11h 55m 33s.xml">
-      <configuration name="Unittests in test_grammar.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_grammarBuilder_py_(1) - 2019.04.08 at 12h 45m 30s.xml">
+      <configuration name="Unittests in test_grammarBuilder.py (1)" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 11h 57m 18s.xml">
-      <configuration name="Unittests in test_grammar.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_grammarBuilder_py_(1) - 2019.04.08 at 12h 46m 52s.xml">
+      <configuration name="Unittests in test_grammarBuilder.py (1)" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 11h 57m 37s.xml">
-      <configuration name="Unittests in test_grammar.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_grammarBuilder_py - 2019.04.08 at 12h 48m 15s.xml">
+      <configuration name="Unittests in test_grammarBuilder.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 12h 00m 18s.xml">
-      <configuration name="Unittests in test_grammar.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 12h 01m 18s.xml">
-      <configuration name="Unittests in test_grammar.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 12h 02m 01s.xml">
-      <configuration name="Unittests in test_grammar.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_grammar_py - 2019.04.04 at 12h 08m 29s.xml">
-      <configuration name="Unittests in test_grammar.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_grammarBuilder_py - 2019.04.08 at 12h 49m 00s.xml">
+      <configuration name="Unittests in test_grammarBuilder.py" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
@@ -641,13 +663,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_grammar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/testgrammar.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -659,16 +674,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_grammarBuilder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="124" selection-start-line="124" selection-end-line="124" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -691,19 +696,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_parser.py">
+    <entry file="file://$PROJECT_DIR$/src/parser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="120">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/parser.py">
+    <entry file="file://$PROJECT_DIR$/test/test_stack.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1110">
-          <caret line="74" column="46" selection-start-line="74" selection-start-column="46" selection-end-line="74" selection-end-column="46" />
+        <state relative-caret-position="315">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_grammar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="9" column="91" lean-forward="true" selection-start-line="9" selection-start-column="91" selection-end-line="9" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_grammarBuilder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
