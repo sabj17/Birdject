@@ -1,3 +1,11 @@
+
+set number1 to 4;
+set fnumber to 23.5;
+
+set string1 to "hello";
+set string2 to "hello";
+set string3 to "the increase is"+fnumber+"%";
+
 LivingRoom{
 	set temp1 to Thermometer();
 	set window1 to pinA10;
@@ -16,16 +24,8 @@ function globalFunc(){
 }
 
 
-set number1 to 4;
-set fnumber to 23.5;
-
-set string1 to "hello";
-set string2 to "hello";
-set string3 to "the increase is"+fnumber+"%";
-
-
 when(run LivingRoom.getTemp1() > 20){
 	run LivingRoom.window1.open();
 	run LivingRoom.openWindow();
 	run globalFunc();
-};
+}

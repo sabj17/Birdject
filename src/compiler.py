@@ -1,19 +1,26 @@
 from src.grammar import *
 from src.tokens import Token
 from src.parser import Parser
+from src.lexer import Lexer
 import os
 from prettytable import PrettyTable
 
 
 wd = os.getcwd()
-grammar_file = os.path.join(wd, 'resources/testgrammar.txt')
+grammar_file = os.path.join(wd, 'resources/grammar.txt')
+program_file = os.path.join(wd, 'resources/Example.jnr')
 
 grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
 print(grammar)
 
-parser = Parser(grammar)
+lexer = Lexer(file_path=program_file)
+tokens = lexer.lex()
 
+print()
+print(",".join([str(x) for x in tokens]))
+
+parser = Parser(grammar)
 
 ptable = PrettyTable(['Nonterminals'] + list(grammar.terminals.keys()))
 for val in parser.parse_table:
@@ -24,17 +31,7 @@ for val in parser.parse_table:
 
 print("\n", ptable)
 
-print("\nMatches:")
-
-tokens = []
-token_names = ['a', 'b', 'c', 'd', '$']
-
-count = 0
-for x in token_names:
-    tokens.append(Token(x, str(count), 0, 0))
-    count += 1
 
 parse_tree = parser.parse(tokens)
-print(parse_tree)
 
 parse_tree.graph()

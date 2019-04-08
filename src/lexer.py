@@ -1,12 +1,11 @@
 import re
 from src.tokens import Token
-import ArdujenoCode
 
 
 # rewrite of code: https://docs.python.org/3/library/re.html in the bottom of the page
 class Lexer:
-    keywords = {'foreach', 'in', 'is', 'when', 'function', 'if', 'else', 'in', 'run', 'return', 'and', 'or', 'not',\
-                'function', 'set', 'to', 'input', 'output', 'delay', 'date', 'read', 'write', 'print', 'wait'}
+    keywords = {'foreach', 'is', 'when', 'if', 'else', 'in', 'run', 'return', 'and', 'or', 'not',
+                'function', 'set', 'to'}
     token_specification = [
         ('COMMENT', r'//.*[\n]*'),  # Comments
 
@@ -17,6 +16,7 @@ class Lexer:
         ('DIVIDE', r'[/]'),
         ('MODULO', r'[%]'),
         ('EQUALS', r'=='),
+        ('NOTEQUALS', r'!='),
         ('GREATER', r'[>]'),
         ('LESS', r'[<]'),
 
@@ -24,9 +24,7 @@ class Lexer:
         ('INTEGER',  r'\d+'),  # Integer
         ('STRING',  r'["][^"]*["]'),  # String value: "Hello World"
         ('BOOL',    r'true|false|on|off'),  # Boolean: true, false or on, off
-        ('PIN',     r'pin[A]?[\d]+'),  # Arduino pins: pin15 or pinA3
-        ('ID',      r'[a-z][\w]+'),  # Identifiers
-        ('OBJ_ID', r'[A-Z][\w]+'),  # Object identifiers
+        ('ID',      r'[\w]+'),  # Identifiers
 
         # Allowed symbols
         ('END',     r';'),
@@ -34,6 +32,8 @@ class Lexer:
         ('RPAREN',  r'[\)]'),
         ('LCURLY',  r'[\{]'),
         ('RCURLY',  r'[\}]'),
+        ('LSQUARE', r'[\[]'),
+        ('RSQUARE', r'[\]]'),
         ('DOT',     r'[.]'),
         ('COMMA',   r'[,]'),
 
