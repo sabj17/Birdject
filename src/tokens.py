@@ -8,6 +8,9 @@ class Token:
     def __str__(self):
         return f'Token(type: {self.kind}, value: {self.value}, line: {self.line}, column: {self.column})'
 
+    def __repr__(self):
+        return f'Token(type: {self.kind}, value: {self.value}, line: {self.line}, column: {self.column})'
+
 
 class TokenStream:
     def __init__(self, tokens):
