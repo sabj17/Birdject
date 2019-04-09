@@ -1,7 +1,7 @@
 import os
 from unittest import TestCase
 
-from src.grammar import GrammarBuilder, Rule, Production, Nonterminal, Terminal, LAMBDA
+from src.grammar import GrammarBuilder, Rule, Production, Nonterminal, Terminal, LAMBDA, Grammar
 
 
 class TestGrammarBuilder(TestCase):
@@ -93,8 +93,10 @@ class TestGrammarBuilder(TestCase):
     ###################
 
     def test_build_grammar_from_file(self):
-        test_grammar = self.grammar_builder_manual.build()
-        self.assertEqual(self.grammar.to_str(), test_grammar.to_str())
+        test_grammar_from_file = GrammarBuilder().build_grammar_from_file(self.grammar_file)
+        grammar_string = 'S -> A C $\nC -> c\nC -> λ\nA -> a B C d\nA -> B Q\nB -> b B\nB -> λ\nQ -> q\nQ -> λ'
+
+        self.assertEqual(test_grammar_from_file.__str__(), grammar_string)
 
     def test__find_nonterminals_from_rules(self):
         nonterminals_from_rules = self.grammar_builder_manual._find_nonterminals_from_rules(self.builder_rules)
