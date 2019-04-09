@@ -2,6 +2,8 @@ import os
 import unittest
 from unittest import TestCase
 
+from prettytable import PrettyTable
+
 from src.grammar import GrammarBuilder, Terminal
 from src.lexer import Lexer
 from src.parser import Parser, Stack, Tree, Node
@@ -24,7 +26,6 @@ class TestParser(TestCase):
         self.lexer = Lexer(program_string='set number1 to 4;')
         self.tokens = self.lexer.lex()
 
-        self.parse_table = self.parser.create_parse_table()
         self.stack = Stack()
 
     def tearDown(self):  # After each test
@@ -47,40 +48,15 @@ class TestParser(TestCase):
 
         self.assertEqual(parse_tree.__str__(), expected_parse_tree.__str__())
 
-    def test_apply(self):
-        # start = self.grammar.start_symbol
-        # self.stack.push(start)
-        # parse_tree = Tree(Node(start, None))
-        # ts = TokenStream(self.tokens)
-        #
-        # tos = self.stack.top_of_stack()
-        # if isinstance(tos, Terminal):  # The next symbol is terminal
-        #     self.match(ts, tos, parse_tree)
-        #     if tos.name == '$':  # EOF symbol reached and loop is stopped
-        #         accepted = True
-        #     self.stack.pop()
-        # else:  # Top of stack is a non terminal
-        #     rule_number = self.parse_table[tos.name][ts.peek().kind]
-        #     if rule_number == 0:
-        #         raise Exception(
-        #             f"Syntax error — no production applicable for {tos.name} and {ts.peek().kind}: {ts.peek()}")
-        #     else:  # Applies the RHS to the stack
-        #         self.apply(rule_number, self.stack, parse_tree)
-        #
-        #
-        # parse_tree = self.parser.parse(self.tokens)
-        # self.stack.push(self.grammar.get_rule_from_line(1))
-        # tos = self.stack.top_of_stack()
-        # rule_number = self.parse_table[tos.name][ts.peek().kind]
-        # print("STACK 1:", self.parser.stack)
-        # print(self.grammar.get_rule_from_line(1))
-        #
-        # self.parser.apply(1, self.parser.stack, parse_tree)
-        # print("STACK 2:", self.parser.stack)
-        pass
-
     def test_match(self):
         self.assertTrue(True)
 
     def test_create_parse_table(self):
-        self.assertTrue(True)
+        test_grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/testgrammar.txt'))
+        test_grammar = GrammarBuilder.build_grammar_from_file(test_grammar_file)
+        test_parser = Parser(test_grammar)
+
+        nonterminal_dict = {'A': 0, 'S': 0, 'C': 0, 'B': 0, 'Q': 0}  # we only need the keys
+        test_parse_table = test_parser.create_parse_table()
+
+        self.assertEqual(test_parse_table.keys(), nonterminal_dict.keys())
