@@ -52,7 +52,7 @@ class Parser:
 
         return parse_tree
 
-    # Adds a rules RHS to the stack after popping the LHS from the stack
+    # Adds a rule's RHS to the stack after popping the LHS from the stack
     def apply(self, rule_number, stack, parse_tree):
         stack.pop()
         rule = self.grammar.get_rule_from_line(rule_number)
