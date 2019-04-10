@@ -31,7 +31,6 @@ for val in parser.parse_table:
 
 print("\n", ptable)
 
-
 parse_tree = parser.parse(tokens)
 
 parse_tree.graph()
