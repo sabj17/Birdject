@@ -48,9 +48,6 @@ class TestParser(TestCase):
 
         self.assertEqual(parse_tree.__str__(), expected_parse_tree.__str__())
 
-    def test_match(self):
-        self.assertTrue(True)
-
     def test_create_parse_table(self):
         test_grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/testgrammar.txt'))
         test_grammar = GrammarBuilder.build_grammar_from_file(test_grammar_file)
