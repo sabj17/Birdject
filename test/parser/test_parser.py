@@ -14,22 +14,17 @@ class TestParser(TestCase):
 
     @classmethod
     def setUpClass(cls):  # Before all tests
-        cls.grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/grammar.txt'))
-        cls.grammar = GrammarBuilder.build_grammar_from_file(cls.grammar_file)
+        # Makes a parser with the real grammar
+        grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/grammar.txt'))
+        grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
+        cls.parser = Parser(grammar)
+        lexer = Lexer(program_string='set number1 to 4;')
+        cls.tokens = lexer.lex()
 
-    @classmethod
-    def tearDownClass(cls):  # After all tests
-        pass
-
-    def setUp(self):  # Before each test
-        self.parser = Parser(self.grammar)
-        self.lexer = Lexer(program_string='set number1 to 4;')
-        self.tokens = self.lexer.lex()
-
-        self.stack = Stack()
-
-    def tearDown(self):  # After each test
-        pass
+        # Makes a parser with the test grammar
+        test_grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/testgrammar.txt'))
+        test_grammar = GrammarBuilder.build_grammar_from_file(test_grammar_file)
+        cls.test_parser = Parser(test_grammar)
 
     #########
     # tests #
@@ -45,24 +40,15 @@ class TestParser(TestCase):
 
         parse_tree = self.parser.parse(self.tokens)
         expected_parse_tree = self.parser.parse(expected_tokens)
-
         self.assertEqual(parse_tree.__str__(), expected_parse_tree.__str__())
 
     def test_parse_raise_exception(self):
-        test_grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/testgrammar.txt'))
-        test_grammar = GrammarBuilder.build_grammar_from_file(test_grammar_file)
-        test_parser = Parser(test_grammar)
         with self.assertRaises(Exception):
-            test_parser.parse([Token("a", 1, 0, 0), Token("q", 1, 0, 0), Token("$", 1, 0, 0)])
+            self.test_parser.parse([Token("a", 1, 0, 0), Token("q", 1, 0, 0), Token("$", 1, 0, 0)])
 
     def test_create_parse_table(self):
-        test_grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/testgrammar.txt'))
-        test_grammar = GrammarBuilder.build_grammar_from_file(test_grammar_file)
-        test_parser = Parser(test_grammar)
-
         nonterminal_dict = {'A': 0, 'S': 0, 'C': 0, 'B': 0, 'Q': 0}  # we only need the keys
-        test_parse_table = test_parser.create_parse_table()
-
+        test_parse_table = self.test_parser.create_parse_table()
         self.assertEqual(test_parse_table.keys(), nonterminal_dict.keys())
 
     # Double entry in parse table 'S -> A c | A b'
