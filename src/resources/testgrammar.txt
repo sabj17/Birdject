@@ -1,9 +1,25 @@
-S -> A, C, $
-C -> c
-C -> LAMBDA
-A -> a, B, C, d
-A -> B, Q
-B -> b, B
-B -> LAMBDA
-Q -> q
-Q -> LAMBDA
+<prog> -> <stmts>, $
+<stmts> -> <stmt>, <stmts>
+<stmts> -> LAMBDA
+<stmt> -> <when-stmt>
+<stmt> -> <for-stmt>
+<stmt> -> <if-stmt>
+<stmt> -> <var-dcl>
+<if-stmt> -> IF, LPAREN, <expr>, RPAREN, <block>, <else-clause>
+<else-clause> -> ELSE, <else>
+<else-clause> -> LAMBDA
+<else> -> <block>
+<else> -> <if-stmt>
+<for-stmt> -> FOREACH, <id>, IN, <expr>, <block>
+<when-stmt> -> WHEN, LPAREN, <expr>, RPAREN, <block>
+<block> -> LCURLY, <block-body>, RCURLY
+<block-body> -> <block-body-part>, <block-body>
+<block-body> -> LAMBDA
+<block-body-part> -> <for-stmt>
+<block-body-part> -> <if-stmt>
+<block-body-part> -> <var-dcl>
+<var-dcl> -> SET, <id>, <dot-ref>, TO, <expr>, END
+<expr> -> PLUS, <expr>
+<expr> -> MINUS, <expr>
+<dot-ref> -> LAMBDA
+<id> -> ID
