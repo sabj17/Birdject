@@ -35,7 +35,7 @@ class TestGrammarBuilder(TestCase):
         id = Nonterminal('<id>')
 
         dollar = Terminal('$')
-        lambda_terminal = Terminal('LAMBDA')
+        lambda_terminal = Terminal('λ')
         if_terminal = Terminal('IF')
         lparen_terminal = Terminal('LPAREN')
         rparen_terminal = Terminal('RPAREN')
@@ -75,34 +75,34 @@ class TestGrammarBuilder(TestCase):
         vardcl_prod = [set_terminal.name, id.name, dotref.name, to_terminal.name, expr.name, end_terminal.name]
         expr_prod_1 = [plus_terminal.name, expr.name]
         expr_prod_2 = [minus_terminal.name, expr.name]
-        dotref_prod = [dotref.name, lambda_terminal.name]
+        dotref_prod = [lambda_terminal.name]
         id_prod = [id_terminal.name]
 
-        self.grammar_builder_manual.add_rule(prog, prog_prod)
-        self.grammar_builder_manual.add_rule(stmts, stmts_prod_1)
-        self.grammar_builder_manual.add_rule(stmts, stmts_prod_2)
-        self.grammar_builder_manual.add_rule(stmt, stmt_prod_1)
-        self.grammar_builder_manual.add_rule(stmt, stmt_prod_2)
-        self.grammar_builder_manual.add_rule(stmt, stmt_prod_3)
-        self.grammar_builder_manual.add_rule(stmt, stmt_prod_4)
-        self.grammar_builder_manual.add_rule(ifstmt, ifstmt_prod)
-        self.grammar_builder_manual.add_rule(elseclause, elseclause_prod_1)
-        self.grammar_builder_manual.add_rule(elseclause, elseclause_prod_2)
-        self.grammar_builder_manual.add_rule(else_s, else_prod_1)
-        self.grammar_builder_manual.add_rule(else_s, else_prod_2)
-        self.grammar_builder_manual.add_rule(forstmt, forstmt_prod)
-        self.grammar_builder_manual.add_rule(whenstmt, whenstmt_prod)
-        self.grammar_builder_manual.add_rule(block, block_prod)
-        self.grammar_builder_manual.add_rule(blockbody, blockbody_prod_1)
-        self.grammar_builder_manual.add_rule(blockbody, blockbody_prod_2)
-        self.grammar_builder_manual.add_rule(blockbodypart, blockbodypart_prod_1)
-        self.grammar_builder_manual.add_rule(blockbodypart, blockbodypart_prod_2)
-        self.grammar_builder_manual.add_rule(blockbodypart, blockbodypart_prod_3)
-        self.grammar_builder_manual.add_rule(vardcl, vardcl_prod)
-        self.grammar_builder_manual.add_rule(expr, expr_prod_1)
-        self.grammar_builder_manual.add_rule(expr, expr_prod_2)
-        self.grammar_builder_manual.add_rule(dotref, dotref_prod)
-        self.grammar_builder_manual.add_rule(id, id_prod)
+        self.grammar_builder_manual.add_rule(prog.name, prog_prod)
+        self.grammar_builder_manual.add_rule(stmts.name, stmts_prod_1)
+        self.grammar_builder_manual.add_rule(stmts.name, stmts_prod_2)
+        self.grammar_builder_manual.add_rule(stmt.name, stmt_prod_1)
+        self.grammar_builder_manual.add_rule(stmt.name, stmt_prod_2)
+        self.grammar_builder_manual.add_rule(stmt.name, stmt_prod_3)
+        self.grammar_builder_manual.add_rule(stmt.name, stmt_prod_4)
+        self.grammar_builder_manual.add_rule(ifstmt.name, ifstmt_prod)
+        self.grammar_builder_manual.add_rule(elseclause.name, elseclause_prod_1)
+        self.grammar_builder_manual.add_rule(elseclause.name, elseclause_prod_2)
+        self.grammar_builder_manual.add_rule(else_s.name, else_prod_1)
+        self.grammar_builder_manual.add_rule(else_s.name, else_prod_2)
+        self.grammar_builder_manual.add_rule(forstmt.name, forstmt_prod)
+        self.grammar_builder_manual.add_rule(whenstmt.name, whenstmt_prod)
+        self.grammar_builder_manual.add_rule(block.name, block_prod)
+        self.grammar_builder_manual.add_rule(blockbody.name, blockbody_prod_1)
+        self.grammar_builder_manual.add_rule(blockbody.name, blockbody_prod_2)
+        self.grammar_builder_manual.add_rule(blockbodypart.name, blockbodypart_prod_1)
+        self.grammar_builder_manual.add_rule(blockbodypart.name, blockbodypart_prod_2)
+        self.grammar_builder_manual.add_rule(blockbodypart.name, blockbodypart_prod_3)
+        self.grammar_builder_manual.add_rule(vardcl.name, vardcl_prod)
+        self.grammar_builder_manual.add_rule(expr.name, expr_prod_1)
+        self.grammar_builder_manual.add_rule(expr.name, expr_prod_2)
+        self.grammar_builder_manual.add_rule(dotref.name, dotref_prod)
+        self.grammar_builder_manual.add_rule(id.name, id_prod)
 
         self.builder_rules = self.grammar_builder_manual.rules
 
@@ -187,13 +187,12 @@ class TestGrammarBuilder(TestCase):
 
     def test__find_nonterminals_from_rules(self):
         nonterminals_from_rules = self.grammar_builder_manual._find_nonterminals_from_rules(self.builder_rules)
-        nonterminal_names = [nt.name for nt in nonterminals_from_rules]
-        self.assertEqual(set(nonterminal_names), set(self.nonterminals))
+        self.assertEqual(set(nonterminals_from_rules), set(self.nonterminals))
 
     def test__find_terminals_from_rules(self):
         terminals_from_rules = self.grammar_builder_manual._find_terminals_from_rules(self.builder_rules,
                                                                                       self.nonterminals)
-        terminals_from_rules.remove('LAMBDA')
+        terminals_from_rules.remove('λ')
         terminal_names = [t for t in terminals_from_rules]
         self.assertEqual(set(terminal_names), set(self.terminals))
 
@@ -204,9 +203,17 @@ class TestGrammarBuilder(TestCase):
         self.assertEqual(self.grammar_builder._format_line('B -> b, B', 1), ('B', ['b', 'B']))
         self.assertEqual(self.grammar_builder._format_line('Q -> q', 1), ('Q', ['q']))
 
-    # def test_build(self):
-    #     test_grammar = self.grammar_builder_manual.build()
-    #     self.assertEqual(test_grammar.to_str(), self.grammar.to_str())
+    def test_build(self):
+        nonterminals_list = [nonterm for nonterm in self.grammar_builder_manual._find_nonterminals_from_rules(
+            self.grammar_builder_manual.rules
+        )]
+        terminals_list = [term for term in self.grammar_builder_manual._find_terminals_from_rules(
+            self.grammar_builder_manual.rules, nonterminals_list)]
+        self.grammar_builder_manual.nonterminals = nonterminals_list
+        self.grammar_builder_manual.terminals = terminals_list
+
+        test_grammar = self.grammar_builder_manual.build()
+        self.assertEqual(test_grammar.to_str(), self.grammar.to_str())
 
     # def test__get_production(self):
     #     terminal_dict = {}
