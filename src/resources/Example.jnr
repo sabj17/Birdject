@@ -1,5 +1,6 @@
 set number1 to 4 + 2 * 3 - 4;
-set fnumber to 23.5 / 6;
+set string to "Hello";
+set hello to simon;
 
 LivingRoom{
 	set temp1 to Thermometer();

@@ -3,6 +3,7 @@ from graphviz import Digraph, nohtml
 import random
 from src.ast import *
 
+
 class PTNode:
 
     def __init__(self, symbol, value, parent=None):
@@ -179,7 +180,7 @@ class BuildASTVisitor:
         body_parts.append(body_part)
         body_parts.extend(body)
 
-        return body_parts # return the list of body parts
+        return body_parts  # return the list of body parts
 
     def visit_CLASS_BODY_PART(self, node):
         # <class-body-part> -> <var-dcl> | <func-dcl> | <class-dcl>
@@ -211,8 +212,10 @@ class BuildASTVisitor:
     def visit_IF_STMT(self, node):
         # <if-stmt> -> IF, LPAREN, <expr>, RPAREN, <block>, <else-clause>
         expr = self.visit_EXPR(node.children[2])  # visit_EXPR to get the expression
-        block_true = self.visit_BLOCK(node.children[4])  # visit_BLOCK to get the block which will execute if the expr is true
-        block_flase = self.visit_ELSE_CLAUSE(node.children[5])  # visit_ELSE_CLAUSE block/statement that will execute if expr is false
+        block_true = self.visit_BLOCK(
+            node.children[4])  # visit_BLOCK to get the block which will execute if the expr is true
+        block_flase = self.visit_ELSE_CLAUSE(
+            node.children[5])  # visit_ELSE_CLAUSE block/statement that will execute if expr is false
 
         return IfNode(expr, block_true, block_flase)  # Create an IfNode and return it
 
@@ -399,7 +402,8 @@ class BuildASTVisitor:
         # if <compare-op1> does not derive lambda return either a EqualsNode or a NotEqualNode else just return the expression
         if not isinstance(comp_op_children[0].symbol, Lambda):
             left_operant = expr_node  # use the expr_node as the left operant
-            right_operant = self.visit_COMPARE_EXPR_1(comp_op_children[1])  # visit_COMPARE_EXPR_1 to find the right operant
+            right_operant = self.visit_COMPARE_EXPR_1(
+                comp_op_children[1])  # visit_COMPARE_EXPR_1 to find the right operant
 
             if comp_op_children[0].name == 'EQUALS':
                 return EqualsNode(left_operant, right_operant)
@@ -412,12 +416,14 @@ class BuildASTVisitor:
         # <compare-expr2> -> <arith-expr1>, <compare-op2>
         expr_node = self.visit_ARITH_EXPR_1(node.children[0])
 
-        comp_op2_children = node.children[1].children  # <compare-op2> -> LESS <compare-expr2> | GREATER <compare-expr2> | LAMBDA
+        comp_op2_children = node.children[
+            1].children  # <compare-op2> -> LESS <compare-expr2> | GREATER <compare-expr2> | LAMBDA
         # if <compare-op2> does not derive lambda return either a LessThanNode or a GreaterThanNode
         # else just return the expression
         if not isinstance(comp_op2_children[0].symbol, Lambda):
             left_operant = expr_node  # use the expr_node as the left operant
-            right_operant = self.visit_COMPARE_EXPR_2(comp_op2_children[1])  # visit_COMPARE_EXPR_2 to find the right operant
+            right_operant = self.visit_COMPARE_EXPR_2(
+                comp_op2_children[1])  # visit_COMPARE_EXPR_2 to find the right operant
 
             if comp_op2_children[0].name == 'LESS':
                 return LessThanNode(left_operant, right_operant)
@@ -435,8 +441,9 @@ class BuildASTVisitor:
         # if <arith-op1> does not derive lambda return either a PlusNode or a MinusNode else just return the expression
 
         if not isinstance(arith_op1_children[0].symbol, Lambda):
-            left_operant = expr_node   # use the expr_node as the left operant
-            right_operant = self.visit_ARITH_EXPR_1(arith_op1_children[1])  # visit_ARITH_EXPR_1 to find the right operant
+            left_operant = expr_node  # use the expr_node as the left operant
+            right_operant = self.visit_ARITH_EXPR_1(
+                arith_op1_children[1])  # visit_ARITH_EXPR_1 to find the right operant
 
             if arith_op1_children[0].name == 'PLUS':
                 return PlusNode(left_operant, right_operant)
@@ -456,7 +463,8 @@ class BuildASTVisitor:
 
         if not isinstance(arith_op2_children[0].symbol, Lambda):  # if <arith-op2> does not derive lambda
             left_operant = expr_node  # use the expr_node as the left operant
-            right_operant = self.visit_ARITH_EXPR_2(arith_op2_children[1])  # visit_ARITH_EXPR_1 to find the right operant
+            right_operant = self.visit_ARITH_EXPR_2(
+                arith_op2_children[1])  # visit_ARITH_EXPR_1 to find the right operant
 
             if arith_op2_children[0].name == 'MULT':
                 return MultiplyNode(left_operant, right_operant)
@@ -508,6 +516,9 @@ class BuildASTVisitor:
         # <id-operator> -> <dot-ref> | LPAREN <params> RPAREN
 
         if id_operator_children[0].name == '<dot-ref>':
+            if isinstance(id_operator_children[0].children[0].symbol, Lambda):
+                return id
+
             id_list = []
             ids = self.visit_DOT_REF(id_operator_children[0])  # find the rest of the ids
 
@@ -519,8 +530,6 @@ class BuildASTVisitor:
         elif id_operator_children[0].name == 'LPAREN':
             param_node = self.visit_PARAMS(id_operator_children[1])  # visit_PARAMS to get the ParamNode
             return NewObjectNode(id, param_node)  # use the ParamNode to make a NewObejctNode and return it
-
-        return id
 
     def visit_VAL(self, node):
         # visit either float or integer depending on the node
