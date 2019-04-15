@@ -10,7 +10,7 @@
 <stmt> -> <class-dcl>
 <func-dcl> -> FUNCTION, ID, LPAREN, <params>, RPAREN, <block>
 <class-dcl> -> ID, LCURLY, <class-body>, RCURLY
-<var-dcl> -> SET, <id>, <dot-ref>, TO, <expr>, END
+<var-dcl> -> SET, <id-ref>, TO, <expr>, END
 <if-stmt> -> IF, LPAREN, <expr>, RPAREN, <block>, <else-clause>
 <else-clause> -> ELSE, <else>
 <else-clause> -> LAMBDA
@@ -20,7 +20,7 @@
 <when-stmt> -> WHEN, LPAREN, <expr>, RPAREN, <block>
 <return> -> RETURN, <expr>, END
 <break> -> BREAK, END
-<run> -> RUN, <func>, LPAREN, <params>, RPAREN
+<run> -> RUN, <id-ref>, LPAREN, <params>, RPAREN
 <block> -> LCURLY, <block-body>, RCURLY
 <block-body> -> <block-body-part>, <block-body>
 <block-body> -> LAMBDA
@@ -30,9 +30,8 @@
 <block-body-part> -> <return>
 <block-body-part> -> <var-dcl>
 <block-body-part> -> <break>
-<class-body> -> <class-body-parts>
-<class-body-parts> -> <class-body-part>, <class-body-parts>
-<class-body-parts> -> LAMBDA
+<class-body> -> <class-body-part>, <class-body>
+<class-body> -> LAMBDA
 <class-body-part> -> <var-dcl>
 <class-body-part> -> <func-dcl>
 <class-body-part> -> <class-dcl>
@@ -40,15 +39,12 @@
 <params> -> LAMBDA
 <multi-params> -> COMMA, <expr>, <multi-params>
 <multi-params> -> LAMBDA
-<func> -> <id>, <dot-ref>
-<expr> -> <not>, <logic-expr1>
-<not> -> NOT
-<not> -> LAMBDA
-<logic-expr1> -> <logic-expr2>, <or>
-<or> -> OR, <logic-expr1>
+<id-ref> -> <id>, <dot-ref>
+<expr> -> <logic-expr>, <or>
+<or> -> OR, <expr>
 <or> -> LAMBDA
-<logic-expr2> -> <compare-expr1>, <and>
-<and> -> AND, <logic-expr2>
+<logic-expr> -> <compare-expr1>, <and>
+<and> -> AND, <logic-expr>
 <and> -> LAMBDA
 <compare-expr1> -> <compare-expr2>, <compare-op1>
 <compare-op1> -> EQUALS, <compare-expr1>
@@ -70,13 +66,15 @@
 <arith-expr3> -> <term>
 <arith-expr3> -> LPAREN, <expr>, RPAREN
 <arith-expr3> ->  MINUS, <arith-expr3>
-<term> -> <id>, <id-operation>
+<arith-expr3> -> NOT, <arith-expr3>
+<term> -> <id-operation>
 <term> -> <boolean>
 <term> -> <val>
 <term> -> <string>
 <term> -> <run>
-<id-operation> -> <dot-ref>
-<id-operation> -> LPAREN, <params>, RPAREN
+<id-operation> -> <id>, <id-operator>
+<id-operator> -> <dot-ref>
+<id-operator> -> LPAREN, <params>, RPAREN
 <boolean> -> BOOL
 <string> -> STRING
 <val> -> INTEGER

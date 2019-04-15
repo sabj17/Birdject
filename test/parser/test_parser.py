@@ -6,7 +6,7 @@ from prettytable import PrettyTable
 
 from src.grammar import GrammarBuilder, Terminal
 from src.lexer import Lexer
-from src.parser import Parser, Stack, Tree, Node
+from src.parser import Parser, Stack, ParseTree, PTNode
 from src.tokens import Token, TokenStream
 
 

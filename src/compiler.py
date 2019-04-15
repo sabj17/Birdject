@@ -12,13 +12,17 @@ program_file = os.path.join(wd, 'resources/Example.jnr')
 
 grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
-print(grammar)
+program = '''
+    set dab to Thermometer();
+'''
+
+#print(grammar)
 
 lexer = Lexer(file_path=program_file)
 tokens = lexer.lex()
 
-print()
-print(",".join([str(x) for x in tokens]))
+#print()
+#print(",".join([str(x) for x in tokens]))
 
 parser = Parser(grammar)
 
@@ -29,8 +33,10 @@ for val in parser.parse_table:
         row.append(value)
     ptable.add_row([val] + row)
 
-print("\n", ptable)
+#print("\n", ptable)
 
 parse_tree = parser.parse(tokens)
 
 parse_tree.graph()
+
+parse_tree.to_AST()
