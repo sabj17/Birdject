@@ -337,6 +337,7 @@ class BuildASTVisitor:
         # <id> -> ID <array-subscript>
         id_node = self.visit_ID(node.children[0])  # ID
 
+        # <array-subscript> -> LSQUARE, INTEGER, RSQUARE | LAMBDA
         array_ss_child = node.children[1].children[0]
         if not isinstance(array_ss_child.symbol, Lambda):  # if <array-script> does not derive lambda
             integer_node = self.visit_INT(node.children[1].children[1])  #  visit second production for <array-subscript> -> LSQUARE INTEGER RSQUARE
