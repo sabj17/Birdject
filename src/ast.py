@@ -154,9 +154,12 @@ class ParenthesesNode(UnaryExpNode):
         super().__init__(expr)
 
 
-class NewObjectNode(UnaryExpNode):
-    def __init__(self, expr):
-        super().__init__(expr)
+class NewObjectNode(AbstractNode):
+    def __init__(self, id, param):
+        super().__init__()
+        self.id = id
+        self.param = param
+
 
 
 # BINARY EXPRESSIONS #

@@ -2,7 +2,7 @@ set number1 to 4 + 2 * 3 - 4;
 set fnumber to 23.5 / 6;
 
 LivingRoom{
-	set temp1 to Thermometer(n);
+	set temp1 to Thermometer();
 	set hello.there to 5 * (10 + 4) / 4 - 3 % 2;
 
 	function getTemp1(n){

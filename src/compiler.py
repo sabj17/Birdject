@@ -39,4 +39,5 @@ parse_tree = parser.parse(tokens)
 
 parse_tree.graph()
 
-parse_tree.to_AST()
+ast = parse_tree.to_AST()
+ast.graph()
