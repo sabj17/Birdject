@@ -158,12 +158,27 @@ class TestGrammarBuilder(TestCase):
         builder_rule = Rule(x_nonterminal, y_production)
         self.assertEqual(builder_rule.__str__(), test_rule.__str__())
 
-    # TODO make specific output to test against?
-    # def test_add_rules_from_file(self):
-    #     test_builder = GrammarBuilder()
-    #     test_builder.add_rules_from_file(self.grammar_file)
-    #
-    #     self.assertEqual(test_builder.rules, self.grammar_builder_manual.rules)
+    def test_add_rules_from_file(self):
+        test_builder = GrammarBuilder()
+        test_builder.add_rules_from_file(self.grammar_file)
+
+        self.assertEqual(test_builder.rules, [('<prog>', ['<stmts>', '$']),
+                                              ('<stmts>', ['<stmt>', '<stmts>']),
+                                              ('<stmts>', ['λ']), ('<stmt>', ['<when-stmt>']),
+                                              ('<stmt>', ['<for-stmt>']), ('<stmt>', ['<if-stmt>']),
+                                              ('<stmt>', ['<var-dcl>']),
+                                              ('<if-stmt>', ['IF', 'LPAREN', '<expr>', 'RPAREN', '<block>', '<else-clause>']),
+                                              ('<else-clause>', ['ELSE', '<else>']), ('<else-clause>', ['λ']),
+                                              ('<else>', ['<block>']), ('<else>', ['<if-stmt>']),
+                                              ('<for-stmt>', ['FOREACH', '<id>', 'IN', '<expr>', '<block>']),
+                                              ('<when-stmt>', ['WHEN', 'LPAREN', '<expr>', 'RPAREN', '<block>']),
+                                              ('<block>', ['LCURLY', '<block-body>', 'RCURLY']),
+                                              ('<block-body>', ['<block-body-part>', '<block-body>']),
+                                              ('<block-body>', ['λ']), ('<block-body-part>', ['<for-stmt>']),
+                                              ('<block-body-part>', ['<if-stmt>']), ('<block-body-part>', ['<var-dcl>']),
+                                              ('<var-dcl>', ['SET', '<id>', '<dot-ref>', 'TO', '<expr>', 'END']),
+                                              ('<expr>', ['PLUS', '<expr>']), ('<expr>', ['MINUS', '<expr>']),
+                                              ('<dot-ref>', ['λ']), ('<id>', ['ID'])])
 
     ###################
     # everything else #
@@ -215,32 +230,40 @@ class TestGrammarBuilder(TestCase):
         test_grammar = self.grammar_builder_manual.build()
         self.assertEqual(test_grammar.to_str(), self.grammar.to_str())
 
-    # def test__get_production(self):
-    #     terminal_dict = {}
-    #     nonterminal_dict = {}
-    #
-    #     for terminal in self.grammar_builder_manual.terminals:
-    #         terminal_dict[terminal] = Terminal(terminal)
-    #
-    #     for nonterminal in self.grammar_builder_manual.nonterminals:
-    #         nonterminal_dict[nonterminal] = Nonterminal(nonterminal)
+    def test__get_production(self):
+        nonterminals_list = [nonterm for nonterm in self.grammar_builder_manual._find_nonterminals_from_rules(
+            self.grammar_builder_manual.rules
+        )]
+        terminals_list = [term for term in self.grammar_builder_manual._find_terminals_from_rules(
+            self.grammar_builder_manual.rules, nonterminals_list)]
 
-        # for rule in self.grammar.rules:
-        #     lhs = rule.LHS.name
-        #     rhs = [symbol.name for symbol in rule.RHS.symbols]
-        #     self.grammar_builder.add_rule(lhs, rhs)
-        #
-        # LHS_1, RHS_1 = self.grammar_builder_manual.rules[0]
-        # LHS_2, RHS_2 = self.grammar_builder_manual.rules[3]
-        # LHS_3, RHS_3 = self.grammar_builder_manual.rules[6]
-        # LHS_4, RHS_4 = self.grammar_builder_manual.rules[7]
-        #
-        # test_production_1 = self.grammar_builder_manual._get_production(RHS_1, terminal_dict, nonterminal_dict)
-        # test_production_2 = self.grammar_builder_manual._get_production(RHS_2, terminal_dict, nonterminal_dict)
-        # test_production_3 = self.grammar_builder_manual._get_production(RHS_3, terminal_dict, nonterminal_dict)
-        # test_production_4 = self.grammar_builder_manual._get_production(RHS_4, terminal_dict, nonterminal_dict)
-        #
-        # self.assertEqual(test_production_1.__str__(), 'A C $')
-        # self.assertEqual(test_production_2.__str__(), 'a B C d')
-        # self.assertEqual(test_production_3.__str__(), LAMBDA)
-        # self.assertNotEqual(test_production_4.__str__(), 'a')
+        terminal_dict = {}
+        nonterminal_dict = {}
+
+        for terminal in terminals_list:
+            terminal_dict[terminal] = Terminal(terminal)
+
+        for nonterminal in nonterminals_list:
+            nonterminal_dict[nonterminal] = Nonterminal(nonterminal)
+
+        for rule in self.grammar.rules:
+            lhs = rule.LHS.name
+            rhs = [symbol.name for symbol in rule.RHS.symbols]
+            self.grammar_builder.add_rule(lhs, rhs)
+
+        LHS_1, RHS_1 = self.grammar_builder_manual.rules[0]
+        LHS_2, RHS_2 = self.grammar_builder_manual.rules[5]
+        LHS_3, RHS_3 = self.grammar_builder_manual.rules[10]
+        LHS_4, RHS_4 = self.grammar_builder_manual.rules[15]
+        print(LHS_4, RHS_4)
+
+        test_production_1 = self.grammar_builder_manual._get_production(RHS_1, terminal_dict, nonterminal_dict)
+        test_production_2 = self.grammar_builder_manual._get_production(RHS_2, terminal_dict, nonterminal_dict)
+        test_production_3 = self.grammar_builder_manual._get_production(RHS_3, terminal_dict, nonterminal_dict)
+        test_production_4 = self.grammar_builder_manual._get_production(RHS_4, terminal_dict, nonterminal_dict)
+
+        self.assertEqual(test_production_1.__str__(), '<stmts> $')
+        self.assertEqual(test_production_2.__str__(), '<if-stmt>')
+        self.assertEqual(test_production_3.__str__(), '<block>')
+        self.assertEqual(test_production_4.__str__(), '<block-body-part> <block-body>')
+        self.assertNotEqual(test_production_4.__str__(), '<stmts>')

@@ -346,5 +346,6 @@ class GrammarBuilder:
             elif symbol in nonterminal_dict:
                 actual_symbols.append(nonterminal_dict[symbol])
             else:
-                raise Exception('Unknown symbol')  # TODO: change this to be better
+                msg = "Unknown symbol: " + symbol
+                raise Exception(msg)
         return Production(actual_symbols)
