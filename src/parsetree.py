@@ -536,6 +536,7 @@ class BuildASTVisitor:
         child = node.children[0]
         if child.name == 'FLOAT':
             return self.visit_FLOAT(child)
+
         elif child.name == 'INTEGER':
             return self.visit_INT(child)
 
