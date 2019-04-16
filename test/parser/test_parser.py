@@ -20,7 +20,7 @@ class TestParser(TestCase):
     def setUp(self):  # Before each test
         self.parser = Parser(self.grammar)
         self.lexer = Lexer(program_string='set x to 4;\n'
-                                          'set y to 5\n;'
+                                          'set y to 5;\n'
                                           'if(x<y){\n'
                                           '  run print("yay");\n'
                                           '  if(x>y){\n'
@@ -57,22 +57,22 @@ class TestParser(TestCase):
                            Token('ID', 'x', '3', '3'),
                            Token('LESS', '<', '3', '4'),
                            Token('ID', 'y', '3', '5'),
-                           Token('RPAREN', '(', '3', '6'),
+                           Token('RPAREN', ')', '3', '6'),
                            Token('LCURLY', '{', '3', '7'),
                            Token('RUN', 'run', '4', '2'),
                            Token('ID', 'print', '4', '6'),
-                           Token('LPAREN', '(', '4', '8'),
-                           Token('STRING', '"yay"', '4', '9'),
-                           Token('RPAREN', ')', '4', '13'),
-                           Token('END', ';', '4', '14'),
+                           Token('LPAREN', '(', '4', '11'),
+                           Token('STRING', '"yay"', '4', '12'),
+                           Token('RPAREN', ')', '4', '17'),
+                           Token('END', ';', '4', '18'),
 
-                           Token('IF', 'if', '5', '0'),
-                           Token('LPAREN', '(', '5', '2'),
-                           Token('ID', 'x', '5', '3'),
-                           Token('GREATER', '>', '3', '4'),
-                           Token('ID', 'y', '3', '5'),
-                           Token('RPAREN', '(', '5', '6'),
-                           Token('LCURLY', '{', '5', '7'),
+                           Token('IF', 'if', '5', '2'),
+                           Token('LPAREN', '(', '5', '4'),
+                           Token('ID', 'x', '5', '5'),
+                           Token('GREATER', '>', '5', '6'),
+                           Token('ID', 'y', '5', '7'),
+                           Token('RPAREN', ')', '5', '8'),
+                           Token('LCURLY', '{', '5', '9'),
                            Token('RUN', 'run', '6', '4'),
                            Token('ID', 'print', '6', '8'),
                            Token('LPAREN', '(', '6', '13'),
@@ -82,13 +82,13 @@ class TestParser(TestCase):
 
                            Token('RCURLY', '}', '7', '2'),
                            Token('ELSE', 'else', '7', '3'),
-                           Token('LCURLY', '{', '7', '4'),
+                           Token('LCURLY', '{', '7', '7'),
                            Token('RUN', 'run', '8', '4'),
                            Token('ID', 'print', '8', '8'),
-                           Token('LPAREN', '(', '8', '9'),
-                           Token('STRING', '"nooo"', '8', '10'),
-                           Token('RPAREN', ')', '8', '16'),
-                           Token('END', ';', '8', '17'),
+                           Token('LPAREN', '(', '8', '13'),
+                           Token('STRING', '"nooo"', '8', '14'),
+                           Token('RPAREN', ')', '8', '20'),
+                           Token('END', ';', '8', '21'),
                            Token('RCURLY', '}', '9', '2'),
                            Token('RCURLY', '}', '10', '0'),
 

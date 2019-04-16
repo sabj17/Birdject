@@ -15,14 +15,14 @@ class TestNonterminal(TestCase):
     #################
 
     def test_nonterminal_derives_empty(self):
-        symbol = self.grammar.get_symbol("A")
+        symbol = self.grammar.get_symbol("<stmts>")
         self.assertTrue(symbol.derives_empty(self.grammar.rules))
 
-        symbol = self.grammar.get_symbol("B")
+        symbol = self.grammar.get_symbol("<block-body>")
         self.assertTrue(symbol.derives_empty(self.grammar.rules))
 
     def test_nonterminal_derives_empty_fails_if_not_empty(self):
-        symbol = self.grammar.get_symbol("S")
+        symbol = self.grammar.get_symbol("<var-dcl>")
         self.assertFalse(symbol.derives_empty(self.grammar.rules))
 
         symbol = self.grammar.get_symbol("$")

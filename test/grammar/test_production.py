@@ -19,7 +19,7 @@ class TestProduction(TestCase):
         production = self.grammar.get_rule_from_line(3).RHS
         self.assertTrue(production.all_derive_empty(self.grammar.rules))
 
-        production = self.grammar.get_rule_from_line(5).RHS
+        production = self.grammar.get_rule_from_line(10).RHS
         self.assertTrue(production.all_derive_empty(self.grammar.rules))
 
     def test_all_derives_empty_fails_if_not_empty(self):
@@ -37,22 +37,22 @@ class TestProduction(TestCase):
     ########
 
     def test_tail(self):
-        expected_tail = 'C d'
-        self.assertEqual(repr(self.grammar.get_rule_from_line(4).RHS.tail('B')), expected_tail)
+        expected_tail = ''
+        self.assertEqual(repr(self.grammar.get_rule_from_line(4).RHS.tail('<when-stmt>')), expected_tail)
 
     def test_tail_is_upper_lower_sensitive(self):
-        expected_tail = 'C D'
-        self.assertNotEqual(repr(self.grammar.get_rule_from_line(4).RHS.tail('B')), expected_tail)
+        expected_tail = '<expr> RPAREN <BLOCK> <else-clause>'
+        self.assertNotEqual(repr(self.grammar.get_rule_from_line(8).RHS.tail('LPAREN')), expected_tail)
 
     ############
     # is empty #
     ############
     def test_production_is_empty(self):
-        production = self.grammar.get_rule_from_line(4).RHS.tail('d')
+        production = self.grammar.get_rule_from_line(6).RHS.tail('<if-stmt>')
         self.assertTrue(production.is_empty())
 
     def test_production_is_not_empty(self):
-        production = self.grammar.get_rule_from_line(4).RHS.tail('B')
+        production = self.grammar.get_rule_from_line(16).RHS.tail('<block-body-part>')
         self.assertFalse(production.is_empty())
 
     ############

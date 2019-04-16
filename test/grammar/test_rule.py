@@ -22,14 +22,14 @@ class TestRule(TestCase):
         self.assertTrue(rule.in_RHS(LAMBDA))
 
         rule = self.grammar.get_rule_from_line(4)
-        self.assertTrue(rule.in_RHS('d'))
+        self.assertTrue(rule.in_RHS('<when-stmt>'))
 
     def test_is_not_in_RHS_4(self):
         rule = self.grammar.get_rule_from_line(3)
-        self.assertFalse(rule.in_RHS('c'))
+        self.assertFalse(rule.in_RHS('<if-stmt'))
 
-        rule = self.grammar.get_rule_from_line(4)
+        rule = self.grammar.get_rule_from_line(9)
         self.assertFalse(rule.in_RHS(LAMBDA))
 
-        rule = self.grammar.get_rule_from_line(4)
+        rule = self.grammar.get_rule_from_line(22)
         self.assertFalse(rule.in_RHS('$'))
