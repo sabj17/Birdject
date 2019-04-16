@@ -2,8 +2,8 @@ import os
 from unittest import TestCase
 from src.grammar import GrammarBuilder
 from src.lexer import Lexer
-from src.parser import Parser, Stack
-from src.tokens import Token
+from src.parser import Parser, Stack, ParseTree, PTNode
+from src.tokens import Token, TokenStream
 
 
 class TestParser(TestCase):
@@ -96,15 +96,11 @@ class TestParser(TestCase):
 
         parse_tree = self.parser.parse(self.tokens)
         expected_parse_tree = self.parser.parse(expected_tokens)
-
         self.assertEqual(parse_tree.__str__(), expected_parse_tree.__str__())
 
     def test_parse_raise_exception(self):
-        test_grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/testgrammar.txt'))
-        test_grammar = GrammarBuilder.build_grammar_from_file(test_grammar_file)
-        test_parser = Parser(test_grammar)
         with self.assertRaises(Exception):
-            test_parser.parse([Token("a", 1, 0, 0), Token("q", 1, 0, 0), Token("$", 1, 0, 0)])
+            self.test_parser.parse([Token("a", 1, 0, 0), Token("q", 1, 0, 0), Token("$", 1, 0, 0)])
 
     def test_create_parse_table(self):
         test_grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/testgrammar.txt'))
@@ -116,7 +112,6 @@ class TestParser(TestCase):
                             '<stmts>': 0, '<expr>': 0, '<dot-ref>': 0, '<block-body-part>': 0, '<when-stmt>': 0,
                             '<prog>': 0, '<block>': 0, '<block-body>': 0, '<else>': 0, '<id>': 0}
         test_parse_table = test_parser.create_parse_table()
-
         self.assertEqual(test_parse_table.keys(), nonterminal_dict.keys())
 
     # Double entry in parse table 'S -> A c | A b'

@@ -32,7 +32,7 @@ class Parser:
     def parse(self, tokens):
         start = self.grammar.start_symbol
         self.stack.push(start)
-        parse_tree = Tree(Node(start, None))
+        parse_tree = ParseTree(PTNode(start, None))
         ts = TokenStream(tokens)
 
         accepted = False
@@ -60,7 +60,7 @@ class Parser:
         # Making nodes for parse tree
         nodes = []
         for symbol in rule.RHS.symbols:
-            node = Node(symbol, None)
+            node = PTNode(symbol, None)
             nodes.append(node)
         parse_tree.add_nodes(nodes)
 

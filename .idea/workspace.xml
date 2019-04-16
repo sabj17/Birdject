@@ -346,8 +346,30 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in test_grammar.py">
-    <configuration name="Unittests in test_grammarBuilder.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.compiler">
+    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Birdject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/grammar" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/grammar/__init__.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="compiler" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Birdject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -398,17 +420,19 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_pattern" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/grammar/test_nonterminal.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/grammar/test_grammarBuilder.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests in test_tokenStream.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests in test_lambda.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Birdject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/grammar" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -482,7 +506,11 @@
       <workItem from="1554373824136" duration="9828000" />
       <workItem from="1554459290911" duration="8885000" />
       <workItem from="1554707296303" duration="2406000" />
-      <workItem from="1554710342219" duration="366000" />
+      <workItem from="1554710342219" duration="34965000" />
+      <workItem from="1554894531496" duration="2311000" />
+      <workItem from="1554903426032" duration="10011000" />
+      <workItem from="1554978433231" duration="7497000" />
+      <workItem from="1555050498933" duration="44967000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1553513025633</created>
@@ -582,146 +610,31 @@
       <option name="project" value="LOCAL" />
       <updated>1554385437076</updated>
     </task>
-    <task id="LOCAL-00015" summary="GrammarBuilder tests done">
-      <created>1554713044784</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1554713044784</updated>
-    </task>
-    <task id="LOCAL-00016" summary="GrammarBuilder tests done">
-      <created>1554716524962</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1554716524962</updated>
-    </task>
-    <task id="LOCAL-00017" summary="currently works">
-      <created>1554720664822</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1554720664822</updated>
-    </task>
-    <task id="LOCAL-00018" summary="tests for stack class done">
-      <created>1554724014081</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1554724014081</updated>
-    </task>
-    <task id="LOCAL-00019" summary="updated test_build_grammar_from_file">
-      <created>1554797259074</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1554797259074</updated>
-    </task>
-    <task id="LOCAL-00020" summary="jen">
-      <created>1554807110529</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1554807110529</updated>
-    </task>
-    <task id="LOCAL-00021" summary="only need test_match for parser tests now">
-      <created>1554816599830</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1554816599830</updated>
-    </task>
-    <task id="LOCAL-00022" summary="update on test_grammarBuilder with new testgrammar">
-      <created>1555071773804</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1555071773804</updated>
-    </task>
-    <task id="LOCAL-00023" summary="update 2">
-      <created>1555074291017</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1555074291017</updated>
-    </task>
-    <task id="LOCAL-00024" summary="grammarBuilder fully works with new test grammar">
-      <created>1555314340678</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1555314340678</updated>
-    </task>
-    <task id="LOCAL-00025" summary="test_grammar updated">
-      <created>1555401907814</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1555401907814</updated>
-    </task>
-    <option name="localTasksCounter" value="26" />
-    <servers />
-  </component>
-  <component name="TestHistory">
-    <history-entry file="Unittests_in_test_parser_py - 2019.04.16 at 11h 18m 11s.xml">
-      <configuration name="Unittests in test_parser.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_terminal_py - 2019.04.16 at 11h 18m 15s.xml">
-      <configuration name="Unittests in test_terminal.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_symbol_py - 2019.04.16 at 11h 18m 18s.xml">
-      <configuration name="Unittests in test_symbol.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_rule_py - 2019.04.16 at 11h 18m 23s.xml">
-      <configuration name="Unittests in test_rule.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_production_py - 2019.04.16 at 11h 18m 26s.xml">
-      <configuration name="Unittests in test_production.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_nonterminal_py - 2019.04.16 at 11h 18m 29s.xml">
-      <configuration name="Unittests in test_nonterminal.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_lambda_py - 2019.04.16 at 11h 18m 33s.xml">
-      <configuration name="Unittests in test_lambda.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_grammarBuilder_py - 2019.04.16 at 11h 18m 36s.xml">
-      <configuration name="Unittests in test_grammarBuilder.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_grammar_py - 2019.04.16 at 11h 18m 41s.xml">
-      <configuration name="Unittests in test_grammar.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_tokenStream_py - 2019.04.16 at 11h 18m 47s.xml">
-      <configuration name="Unittests in test_tokenStream.py" configurationId="tests" />
-    </history-entry>
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105579000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-1" y="2" width="1922" height="1079" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.113336846" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.1687966" />
+      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32916668" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32395834" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34527686" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3995657" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32916668" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3293348" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.13361612" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32899022" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Coverage" order="5" side_tool="true" weight="0.32960597" />
     </layout>
     <layout-to-restore>
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -772,10 +685,16 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Birdject$Unittests_for_test_grammar_TestGrammar_test_get_rules_for.coverage" NAME="Unittests for test_grammar.TestGrammar.test_get_rules_for Coverage Results" MODIFIED="1554312997343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/Birdject$Unittests_in_test_grammar_py__1_.coverage" NAME="Unittests in test_grammar.py (1) Coverage Results" MODIFIED="1554902958105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/grammar" />
     <SUITE FILE_PATH="coverage/Birdject$Unittests_in_test_grammar_py.coverage" NAME="Unittests in test_grammar.py Coverage Results" MODIFIED="1554372509218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/Birdject$Unittests_for_test_grammar_TestGrammar.coverage" NAME="Unittests for test_grammar.TestGrammar Coverage Results" MODIFIED="1554903179400" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/grammar" />
     <SUITE FILE_PATH="coverage/Birdject$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1554665954240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1554710662503" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Birdject$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1554902964485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/grammar" />
+    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1555327511479" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Birdject$Unittests_in_test_lambda_py.coverage" NAME="Unittests in test_lambda.py Coverage Results" MODIFIED="1554903008856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/grammar" />
     <SUITE FILE_PATH="coverage/Birdject$parser.coverage" NAME="parser Coverage Results" MODIFIED="1553767623223" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Birdject$pytest_in_test.coverage" NAME="pytest in test Coverage Results" MODIFIED="1554903478273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/Birdject$Unittests_in_grammar.coverage" NAME="Unittests in grammar Coverage Results" MODIFIED="1554903168835" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/grammar" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/numpy/core/__init__.py" />
@@ -958,7 +877,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/parser/test_parser.py">
+    <entry file="file://$PROJECT_DIR$/src/ast.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
@@ -973,7 +892,7 @@
         <state relative-caret-position="825">
           <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
