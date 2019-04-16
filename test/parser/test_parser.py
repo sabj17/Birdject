@@ -1,10 +1,6 @@
 import os
-import unittest
 from unittest import TestCase
-
-from prettytable import PrettyTable
-
-from src.grammar import GrammarBuilder, Terminal
+from src.grammar import GrammarBuilder
 from src.lexer import Lexer
 from src.parser import Parser, Stack, ParseTree, PTNode
 from src.tokens import Token, TokenStream
@@ -14,17 +10,31 @@ class TestParser(TestCase):
 
     @classmethod
     def setUpClass(cls):  # Before all tests
-        # Makes a parser with the real grammar
-        grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/grammar.txt'))
-        grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
-        cls.parser = Parser(grammar)
-        lexer = Lexer(program_string='set number1 to 4;')
-        cls.tokens = lexer.lex()
+        cls.grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/grammar.txt'))
+        cls.grammar = GrammarBuilder.build_grammar_from_file(cls.grammar_file)
 
-        # Makes a parser with the test grammar
-        test_grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/testgrammar.txt'))
-        test_grammar = GrammarBuilder.build_grammar_from_file(test_grammar_file)
-        cls.test_parser = Parser(test_grammar)
+    @classmethod
+    def tearDownClass(cls):  # After all tests
+        pass
+
+    def setUp(self):  # Before each test
+        self.parser = Parser(self.grammar)
+        self.lexer = Lexer(program_string='set x to 4;\n'
+                                          'set y to 5;\n'
+                                          'if(x<y){\n'
+                                          '  run print("yay");\n'
+                                          '  if(x>y){\n'
+                                          '    run print("yay2");\n'
+                                          '  }else{\n'
+                                          '    run print("nooo");\n'
+                                          '  }\n'
+                                          '}')
+        self.tokens = self.lexer.lex()
+
+        self.stack = Stack()
+
+    def tearDown(self):  # After each test
+        pass
 
     #########
     # tests #
@@ -32,10 +42,56 @@ class TestParser(TestCase):
 
     def test_parse(self):
         expected_tokens = [Token('SET', 'set', '1', '0'),
-                           Token('ID', 'number1', '1', '4'),
-                           Token('TO', 'to', '1', '12'),
-                           Token('INTEGER', '4', '1', '15'),
-                           Token('END', ';', '1', '16'),
+                           Token('ID', 'x', '1', '4'),
+                           Token('TO', 'to', '1', '6'),
+                           Token('INTEGER', '4', '1', '9'),
+                           Token('END', ';', '1', '10'),
+                           Token('SET', 'set', '2', '0'),
+                           Token('ID', 'y', '2', '4'),
+                           Token('TO', 'to', '2', '6'),
+                           Token('INTEGER', '5', '2', '9'),
+                           Token('END', ';', '2', '10'),
+
+                           Token('IF', 'if', '3', '0'),
+                           Token('LPAREN', '(', '3', '2'),
+                           Token('ID', 'x', '3', '3'),
+                           Token('LESS', '<', '3', '4'),
+                           Token('ID', 'y', '3', '5'),
+                           Token('RPAREN', ')', '3', '6'),
+                           Token('LCURLY', '{', '3', '7'),
+                           Token('RUN', 'run', '4', '2'),
+                           Token('ID', 'print', '4', '6'),
+                           Token('LPAREN', '(', '4', '11'),
+                           Token('STRING', '"yay"', '4', '12'),
+                           Token('RPAREN', ')', '4', '17'),
+                           Token('END', ';', '4', '18'),
+
+                           Token('IF', 'if', '5', '2'),
+                           Token('LPAREN', '(', '5', '4'),
+                           Token('ID', 'x', '5', '5'),
+                           Token('GREATER', '>', '5', '6'),
+                           Token('ID', 'y', '5', '7'),
+                           Token('RPAREN', ')', '5', '8'),
+                           Token('LCURLY', '{', '5', '9'),
+                           Token('RUN', 'run', '6', '4'),
+                           Token('ID', 'print', '6', '8'),
+                           Token('LPAREN', '(', '6', '13'),
+                           Token('STRING', '"yay2"', '6', '14'),
+                           Token('RPAREN', ')', '6', '20'),
+                           Token('END', ';', '6', '21'),
+
+                           Token('RCURLY', '}', '7', '2'),
+                           Token('ELSE', 'else', '7', '3'),
+                           Token('LCURLY', '{', '7', '7'),
+                           Token('RUN', 'run', '8', '4'),
+                           Token('ID', 'print', '8', '8'),
+                           Token('LPAREN', '(', '8', '13'),
+                           Token('STRING', '"nooo"', '8', '14'),
+                           Token('RPAREN', ')', '8', '20'),
+                           Token('END', ';', '8', '21'),
+                           Token('RCURLY', '}', '9', '2'),
+                           Token('RCURLY', '}', '10', '0'),
+
                            Token('$', '$', 'None', 'None')]
 
         parse_tree = self.parser.parse(self.tokens)
@@ -47,8 +103,15 @@ class TestParser(TestCase):
             self.test_parser.parse([Token("a", 1, 0, 0), Token("q", 1, 0, 0), Token("$", 1, 0, 0)])
 
     def test_create_parse_table(self):
-        nonterminal_dict = {'A': 0, 'S': 0, 'C': 0, 'B': 0, 'Q': 0}  # we only need the keys
-        test_parse_table = self.test_parser.create_parse_table()
+        test_grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/testgrammar.txt'))
+        test_grammar = GrammarBuilder.build_grammar_from_file(test_grammar_file)
+        test_parser = Parser(test_grammar)
+
+        # we only need the keys
+        nonterminal_dict = {'<stmt>': 0, '<var-dcl>': 0, '<else-clause>': 0, '<for-stmt>': 0, '<if-stmt>': 0,
+                            '<stmts>': 0, '<expr>': 0, '<dot-ref>': 0, '<block-body-part>': 0, '<when-stmt>': 0,
+                            '<prog>': 0, '<block>': 0, '<block-body>': 0, '<else>': 0, '<id>': 0}
+        test_parse_table = test_parser.create_parse_table()
         self.assertEqual(test_parse_table.keys(), nonterminal_dict.keys())
 
     # Double entry in parse table 'S -> A c | A b'

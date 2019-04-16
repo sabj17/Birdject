@@ -13,7 +13,6 @@ class TestTokenStream(TestCase):
     def setUp(self):
         self.token_stream = TokenStream(self.tokens_from_program_string)
 
-
     #################
     #     TESTS     #
     #################

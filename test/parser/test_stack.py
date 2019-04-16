@@ -7,8 +7,8 @@ from src.parser import Stack, GrammarBuilder, LAMBDA
 class TestStack(TestCase):
     @classmethod
     def setUpClass(cls):  # Before all tests
-        grammar_file = os.path.abspath('../src/resources/testgrammar.txt')
-        cls.grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
+        cls.grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/grammar.txt'))
+        cls.grammar = GrammarBuilder.build_grammar_from_file(cls.grammar_file)
 
     @classmethod
     def tearDownClass(cls):  # After all tests

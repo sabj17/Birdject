@@ -1,6 +1,6 @@
 import os
 from unittest import TestCase
-from src.grammar import GrammarBuilder
+from src.grammar import GrammarBuilder, LAMBDA
 
 
 class TestTerminal(TestCase):
@@ -16,8 +16,8 @@ class TestTerminal(TestCase):
 
     # Can't derive empty since it's a terminal
     def test_terminal_derives_empty(self):
-        symbol = self.grammar.get_symbol('a')
+        symbol = self.grammar.get_symbol('SET')
         self.assertFalse(symbol.derives_empty(self.grammar.rules))
 
-        symbol = self.grammar.get_symbol('d')
+        symbol = self.grammar.get_symbol('FOREACH')
         self.assertFalse(symbol.derives_empty(self.grammar.rules))

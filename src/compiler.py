@@ -38,6 +38,5 @@ for val in parser.parse_table:
 parse_tree = parser.parse(tokens)
 
 parse_tree.graph()
-
 ast = parse_tree.to_AST()
 ast.graph()
