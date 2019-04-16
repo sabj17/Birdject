@@ -1,13 +1,9 @@
 import os
-import unittest
 from unittest import TestCase
-
-from prettytable import PrettyTable
-
-from src.grammar import GrammarBuilder, Terminal
+from src.grammar import GrammarBuilder
 from src.lexer import Lexer
-from src.parser import Parser, Stack, Tree, Node
-from src.tokens import Token, TokenStream
+from src.parser import Parser, Stack
+from src.tokens import Token
 
 
 class TestParser(TestCase):
@@ -23,7 +19,16 @@ class TestParser(TestCase):
 
     def setUp(self):  # Before each test
         self.parser = Parser(self.grammar)
-        self.lexer = Lexer(program_string='set number1 to 4;')
+        self.lexer = Lexer(program_string='set x to 4;\n'
+                                          'set y to 5\n;'
+                                          'if(x<y){\n'
+                                          '  run print("yay");\n'
+                                          '  if(x>y){\n'
+                                          '    run print("yay2");\n'
+                                          '  }else{\n'
+                                          '    run print("nooo");\n'
+                                          '  }\n'
+                                          '}')
         self.tokens = self.lexer.lex()
 
         self.stack = Stack()
@@ -37,10 +42,56 @@ class TestParser(TestCase):
 
     def test_parse(self):
         expected_tokens = [Token('SET', 'set', '1', '0'),
-                           Token('ID', 'number1', '1', '4'),
-                           Token('TO', 'to', '1', '12'),
-                           Token('INTEGER', '4', '1', '15'),
-                           Token('END', ';', '1', '16'),
+                           Token('ID', 'x', '1', '4'),
+                           Token('TO', 'to', '1', '6'),
+                           Token('INTEGER', '4', '1', '9'),
+                           Token('END', ';', '1', '10'),
+                           Token('SET', 'set', '2', '0'),
+                           Token('ID', 'y', '2', '4'),
+                           Token('TO', 'to', '2', '6'),
+                           Token('INTEGER', '5', '2', '9'),
+                           Token('END', ';', '2', '10'),
+
+                           Token('IF', 'if', '3', '0'),
+                           Token('LPAREN', '(', '3', '2'),
+                           Token('ID', 'x', '3', '3'),
+                           Token('LESS', '<', '3', '4'),
+                           Token('ID', 'y', '3', '5'),
+                           Token('RPAREN', '(', '3', '6'),
+                           Token('LCURLY', '{', '3', '7'),
+                           Token('RUN', 'run', '4', '2'),
+                           Token('ID', 'print', '4', '6'),
+                           Token('LPAREN', '(', '4', '8'),
+                           Token('STRING', '"yay"', '4', '9'),
+                           Token('RPAREN', ')', '4', '13'),
+                           Token('END', ';', '4', '14'),
+
+                           Token('IF', 'if', '5', '0'),
+                           Token('LPAREN', '(', '5', '2'),
+                           Token('ID', 'x', '5', '3'),
+                           Token('GREATER', '>', '3', '4'),
+                           Token('ID', 'y', '3', '5'),
+                           Token('RPAREN', '(', '5', '6'),
+                           Token('LCURLY', '{', '5', '7'),
+                           Token('RUN', 'run', '6', '4'),
+                           Token('ID', 'print', '6', '8'),
+                           Token('LPAREN', '(', '6', '13'),
+                           Token('STRING', '"yay2"', '6', '14'),
+                           Token('RPAREN', ')', '6', '20'),
+                           Token('END', ';', '6', '21'),
+
+                           Token('RCURLY', '}', '7', '2'),
+                           Token('ELSE', 'else', '7', '3'),
+                           Token('LCURLY', '{', '7', '4'),
+                           Token('RUN', 'run', '8', '4'),
+                           Token('ID', 'print', '8', '8'),
+                           Token('LPAREN', '(', '8', '9'),
+                           Token('STRING', '"nooo"', '8', '10'),
+                           Token('RPAREN', ')', '8', '16'),
+                           Token('END', ';', '8', '17'),
+                           Token('RCURLY', '}', '9', '2'),
+                           Token('RCURLY', '}', '10', '0'),
+
                            Token('$', '$', 'None', 'None')]
 
         parse_tree = self.parser.parse(self.tokens)
@@ -60,7 +111,10 @@ class TestParser(TestCase):
         test_grammar = GrammarBuilder.build_grammar_from_file(test_grammar_file)
         test_parser = Parser(test_grammar)
 
-        nonterminal_dict = {'A': 0, 'S': 0, 'C': 0, 'B': 0, 'Q': 0}  # we only need the keys
+        # we only need the keys
+        nonterminal_dict = {'<stmt>': 0, '<var-dcl>': 0, '<else-clause>': 0, '<for-stmt>': 0, '<if-stmt>': 0,
+                            '<stmts>': 0, '<expr>': 0, '<dot-ref>': 0, '<block-body-part>': 0, '<when-stmt>': 0,
+                            '<prog>': 0, '<block>': 0, '<block-body>': 0, '<else>': 0, '<id>': 0}
         test_parse_table = test_parser.create_parse_table()
 
         self.assertEqual(test_parse_table.keys(), nonterminal_dict.keys())
