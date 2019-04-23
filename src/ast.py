@@ -32,6 +32,12 @@ class AbstractNode:
                     graph.node(id2, nohtml(child))
                     graph.edge(id, id2)
 
+    def has_children(self):
+        for child in vars(self).values():
+            if isinstance(child, AbstractNode):
+                return True
+        return False
+
     def __str__(self):
         return type(self).__name__
 

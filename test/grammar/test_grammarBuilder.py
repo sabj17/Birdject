@@ -1,7 +1,7 @@
 import os
 from unittest import TestCase
 
-from src.grammar import GrammarBuilder, Rule, Production, Nonterminal, Terminal, LAMBDA, Grammar
+from src.grammar import GrammarBuilder, Rule, Production, Nonterminal, Terminal, LAMBDA
 
 
 class TestGrammarBuilder(TestCase):
