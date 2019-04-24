@@ -1,4 +1,5 @@
 from src.grammar import *
+from src.symbol_table import SymbolTable
 from src.tokens import Token
 from src.parser import Parser
 from src.lexer import Lexer
@@ -40,3 +41,6 @@ parse_tree = parser.parse(tokens)
 parse_tree.graph()
 ast = parse_tree.to_AST()
 ast.graph()
+
+symtable = SymbolTable()
+symtable.build_symbol_table(ast)
