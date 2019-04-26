@@ -167,7 +167,6 @@ class NewObjectNode(AbstractNode):
         self.param = param
 
 
-
 # BINARY EXPRESSIONS #
 class PlusNode(BinaryExpNode):
     def __init__(self, expr1, expr2):

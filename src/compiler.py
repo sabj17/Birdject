@@ -42,5 +42,4 @@ parse_tree.graph()
 ast = parse_tree.to_AST()
 ast.graph()
 
-symtable = SymbolTable()
-symtable.build_symbol_table(ast)
+symtable = SymbolTable(ast)
