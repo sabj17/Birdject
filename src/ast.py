@@ -38,6 +38,9 @@ class AbstractNode:
                 return True
         return False
 
+    def accept(self, node_visitor):
+        node_visitor.dispatch(self)
+
     def __str__(self):
         return type(self).__name__
 
