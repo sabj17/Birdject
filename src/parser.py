@@ -19,6 +19,9 @@ class Stack:
     def top_of_stack(self):
         return self.items[len(self.items)-1]
 
+    def bottom_of_stack(self):
+        return self.items[0]
+
     def __str__(self):
         return ", ".join([x.name for x in self.items])
 

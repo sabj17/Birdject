@@ -55,9 +55,9 @@ class ProgNode(AbstractNode):
             stmt.graph(graph, id)
 
 
-###############
+##############
 # STATEMENTS #
-###############
+##############
 class StatementNode(AbstractNode):
     pass
 
