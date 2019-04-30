@@ -13,7 +13,8 @@ class SymbolTable:
 
     def process_node(self, node):
         if isinstance(node, TermNode):
-            self.add_symbol(node.__str__)
+            if not self.is_declared_locally(node):
+                self.add_symbol(node.__str__)
 
         elif isinstance(node, BlockNode):
             self.open_scope(node)
@@ -21,7 +22,7 @@ class SymbolTable:
         elif isinstance(node, AssignNode):
             node_vars = vars(node)
             for child in node_vars.values():
-                if isinstance(child, TermNode):
+                if isinstance(child, str):
                     self.add_symbol(child.__str__())
 
         self.process_all_children_nodes(node)
@@ -30,24 +31,29 @@ class SymbolTable:
             self.close_scope()
 
     def process_all_children_nodes(self, node):
-        node_children = vars(node)
-        print(type(node), node_children)
-        for child in node_children.values():
-            if isinstance(child, list):  # if node has more than one child, the child variable will be a list
-                for cc in child:
-                    self.process_node(cc)
-            elif isinstance(child, AbstractNode):
-                self.process_node(child)  # powerful recursjens
+        try:
+            node_children = vars(node)
+            if node_children.values():
+                for child in node_children.values():
+                    if isinstance(child, list):  # if node has more than one child, child is a list
+                        for cc in child:
+                            self.process_node(cc)
+                    elif isinstance(child, str):
+                        self.add_symbol(child)
+                    else:
+                        self.process_node(child)  # powerful recursjens
+        except:
+            print("EXCEPTION", type(node))
 
     def open_scope(self, block_node):
-        print(vars(block_node))
         table_scope = SymbolTable(block_node)
-        self.scope[table_scope] = None    # TODO: review
+        self.scope[table_scope] = None  # TODO: review
         self.scope_stack.push(table_scope)
-        self.current_scope = self.scope_stack.top_of_stack()
+        print(self.current_scope)
+        self.set_current_scope()
+        print(self.current_scope)
 
     def close_scope(self):
-        print("should close last opened scope")  # TODO: can maybe be done after reaching last child node in scope
         self.scope_stack.pop()
         self.set_current_scope()
 
@@ -59,7 +65,6 @@ class SymbolTable:
             self.current_scope[node_name] = None  # TODO: review
 
     def get_symbol(self, node_name):
-        print("gets value of a currently declared symbol. Check current scope only?")
         if self.is_declared_locally(node_name):
             return self.current_scope[node_name]
         elif node_name in self.scope_stack.bottom_of_stack():
