@@ -23,7 +23,7 @@ program = '''
 
 #print(grammar)
 
-lexer = Lexer(program_string=program)
+lexer = Lexer(program_file=program_file)
 tokens = lexer.lex()
 
 #print()
