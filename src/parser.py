@@ -47,7 +47,11 @@ class Parser:
                     accepted = True
                 self.stack.pop()
             else:  # Top of stack is a non terminal
-                rule_number = self.parse_table[tos.name][ts.peek().kind]
+                if ts.peek().kind in self.parse_table[tos.name]:  # if the token exists in the table
+                    rule_number = self.parse_table[tos.name][ts.peek().kind]
+                else:
+                    raise Exception(f"Could not recognize token: {ts.peek()}")
+
                 if rule_number == 0:
                     raise Exception(f"Syntax error — no production applicable for {tos.name} and {ts.peek().kind}: {ts.peek()}")
                 else:  # Applies the RHS to the stack

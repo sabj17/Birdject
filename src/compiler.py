@@ -14,16 +14,16 @@ program_file = os.path.join(wd, 'resources/Example.jnr')
 grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
 program = '''
-    set dab to Thermometer();
+    set dab to true is not false;
 '''
 
 #print(grammar)
 
-lexer = Lexer(file_path=program_file)
+lexer = Lexer(program_string=program)
 tokens = lexer.lex()
 
 #print()
-#print(",".join([str(x) for x in tokens]))
+print(",".join([str(x) for x in tokens]))
 
 parser = Parser(grammar)
 

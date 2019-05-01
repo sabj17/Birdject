@@ -4,7 +4,7 @@ set hello to simon;
 
 LivingRoom{
 	set temp1 to Thermometer();
-	set hello.there to 5 * (10 + 4) / 4 - 3 % 2;
+	set constant to 5 * (10 + 4) / 4 - 3 % 2;
 
 	function getTemp1(n){
 		return temp1 * n[4];
@@ -15,19 +15,13 @@ LivingRoom{
 	}
 }
 
-function globalFunc(){
-	if (true){
+function globalFunc(input1, input2){
+	if (input1){
 	    return false;
-	} else if (false) {
+	} else if (input2) {
 	    return true;
-	} else {
-	    return dab;
-	}
-
-	if (true){
-	    return false;
-	} else {
-	    return dab;
+	} else{
+	    return true;
 	}
 
 }
@@ -35,5 +29,5 @@ function globalFunc(){
 when(run LivingRoom.getTemp1() > 20){
 	run LivingRoom.window1.open();
 	run LivingRoom.openWindow();
-	run globalFunc(xd, nou);
+	run globalFunc(4, 6);
 }

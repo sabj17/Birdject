@@ -4,24 +4,23 @@ from src.tokens import Token
 
 # rewrite of code: https://docs.python.org/3/library/re.html in the bottom of the page
 class Lexer:
-    keywords = {'foreach', 'is', 'when', 'if', 'else', 'in', 'run', 'return', 'and', 'or', 'not',
-                'function', 'set', 'to'}
+    keywords = {'foreach', 'when', 'if', 'else', 'run', 'return', 'and', 'or', 'not', 'function', 'set', 'to'}
     token_specification = [
         ('COMMENT', r'//.*[\n]*'),  # Comments
 
         # Operators
-        ('PLUS', r'[+]'),
-        ('MINUS', r'[\-]'),
-        ('MULT', r'[*]'),
-        ('DIVIDE', r'[/]'),
-        ('MODULO', r'[%]'),
-        ('EQUALS', r'=='),
-        ('NOTEQUALS', r'!='),
-        ('GREATER', r'[>]'),
-        ('LESS', r'[<]'),
+        ('PLUS',     r'[+]'),
+        ('MINUS',    r'[\-]'),
+        ('MULT',     r'[*]'),
+        ('DIVIDE',   r'[/]'),
+        ('MODULO',   r'[%]'),
+        ('NOTEQUALS',r'is not'),
+        ('EQUALS',   r'is'),
+        ('GREATER',  r'[>]'),
+        ('LESS',     r'[<]'),
 
-        ('FLOAT', r'\d+[.]\d*'),  # Float
-        ('INTEGER',  r'\d+'),  # Integer
+        ('FLOAT',   r'\d+[.]\d*'),  # Float
+        ('INTEGER', r'\d+'),  # Integer
         ('STRING',  r'["][^"]*["]'),  # String value: "Hello World"
         ('BOOL',    r'true|false|on|off'),  # Boolean: true, false or on, off
         ('ID',      r'[\w]+'),  # Identifiers
