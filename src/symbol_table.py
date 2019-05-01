@@ -16,7 +16,7 @@ class SymbolTable:
             if not self.is_declared_locally(node):
                 self.add_symbol(node.__str__)
 
-        elif isinstance(node, BlockNode):
+        elif isinstance(node, BlockNode) or isinstance(node, ClassBodyNode):
             self.open_scope(node)
 
         elif isinstance(node, AssignNode):
@@ -33,15 +33,14 @@ class SymbolTable:
     def process_all_children_nodes(self, node):
         try:
             node_children = vars(node)
-            if node_children.values():
-                for child in node_children.values():
-                    if isinstance(child, list):  # if node has more than one child, child is a list
-                        for cc in child:
-                            self.process_node(cc)
-                    elif isinstance(child, str):
-                        self.add_symbol(child)
-                    else:
-                        self.process_node(child)  # powerful recursjens
+            for child in node_children.values():
+                if isinstance(child, list):  # if node has more than one child, child is a list
+                    for cc in child:
+                        self.process_node(cc)
+                elif isinstance(child, str):
+                    self.add_symbol(child)
+                else:
+                    self.process_node(child)  # powerful recursjens
         except:
             print("EXCEPTION", type(node))
 
