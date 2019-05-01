@@ -289,7 +289,7 @@ class BuildASTVisitor:
         if not isinstance(first_child.symbol, Lambda):
             expr_list = []
             first_expr = self.visit_EXPR(first_child)  # get the expression
-            multi_params = self.visit_ACTUAL_MULTI_PARAMS(node.children[1])  # get the rest of the expressions
+            multi_params = self.visit_MULTI_ACTUAL_PARAMS(node.children[1])  # get the rest of the expressions
 
             # append all expressions to a list
             expr_list.append(first_expr)
@@ -299,13 +299,13 @@ class BuildASTVisitor:
 
         return None  # return None if <actual-params> derives lambda
 
-    def visit_ACTUAL_MULTI_PARAMS(self, node):
+    def visit_MULTI_ACTUAL_PARAMS(self, node):
         # <multi-actual-params> -> COMMA ID <multi-actual-params> | LAMBDA
         expr_list = []
         first_child = node.children[0]
         if not isinstance(first_child.symbol, Lambda):
             expr = self.visit_EXPR(node.children[1])  # get the expression
-            multi_params = self.visit_ACTUAL_MULTI_PARAMS(node.children[2])  # get the rest of the expressions
+            multi_params = self.visit_MULTI_ACTUAL_PARAMS(node.children[2])  # get the rest of the expressions
 
             # append all expression to a list
             expr_list.append(expr)
@@ -322,7 +322,7 @@ class BuildASTVisitor:
         if not isinstance(first_child.symbol, Lambda):
             id_list = []
             first_id = self.visit_ID(first_child)  # get the id
-            multi_params = self.visit_FORMAL_MULTI_PARAMS(node.children[1])  # get the rest of the ids
+            multi_params = self.visit_MULTI_FORMAL_PARAMS(node.children[1])  # get the rest of the ids
 
             # append all expressions to a list
             id_list.append(first_id)
@@ -332,13 +332,13 @@ class BuildASTVisitor:
 
         return None  # return None if <formal-params> derives lambda
 
-    def visit_FORMAL_MULTI_PARAMS(self, node):
+    def visit_MULTI_FORMAL_PARAMS(self, node):
         # <multi-formal-params> -> COMMA ID <multi-formal-params> | LAMBDA
         id_list = []
         first_child = node.children[0]
         if not isinstance(first_child.symbol, Lambda):
             id = self.visit_ID(node.children[1])  # get the id
-            multi_params = self.visit_FORMAL_MULTI_PARAMS(node.children[2])  # get the rest of the ids
+            multi_params = self.visit_MULTI_FORMAL_PARAMS(node.children[2])  # get the rest of the ids
 
             # append all expression to a list
             id_list.append(id)
