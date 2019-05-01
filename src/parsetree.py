@@ -145,14 +145,14 @@ class BuildASTVisitor:
     def visit_RUN(self, node):
         # <run> -> RUN, <id-ref>, LPAREN, <params>, RPAREN
         id = self.visit_ID_REF(node.children[1])  # visit_ID_REF to get the id
-        params = self.visit_PARAMS(node.children[3])  # visit params to get the param node
+        params = self.visit_ACTUAL_PARAMS(node.children[3])  # visit params to get the param node
 
         return RunNode(id, params)  # Make a RunNode and return it
 
     def visit_FUNC_DCL(self, node):
         # <func-dcl> -> FUNCTION, ID, LPAREN, <params>, RPAREN, <block>
         id = self.visit_ID(node.children[1])  # visit_ID to get the IdNode
-        params = self.visit_PARAMS(node.children[3])  # visit_PARAMS to get the ParamNode
+        params = self.visit_FORMAL_PARAMS(node.children[3])  # visit_PARAMS to get the ParamNode
         block = self.visit_BLOCK(node.children[-1])  # visit_BLOCK to get the BlockNode
 
         return FunctionNode(id, params, block)  # Make a FunctionNode and return it
@@ -282,30 +282,30 @@ class BuildASTVisitor:
     def visit_BREAK(self, node):
         return BreakNode()  # return a BreakNode
 
-    def visit_PARAMS(self, node):
+    def visit_ACTUAL_PARAMS(self, node):
         # <params> -> <expr> <multi-params> | <params> -> LAMBDA
         first_child = node.children[0]
 
         if not isinstance(first_child.symbol, Lambda):
             expr_list = []
             first_expr = self.visit_EXPR(first_child)  # get the expression
-            multi_params = self.visit_MULTI_PARAMS(node.children[1])  # get the rest of the expressions
+            multi_params = self.visit_ACTUAL_MULTI_PARAMS(node.children[1])  # get the rest of the expressions
 
             # append all expressions to a list
             expr_list.append(first_expr)
             expr_list.extend(multi_params)
 
-            return ParameterNode(expr_list)  # Create a ParameterNode using the list of expressions and return it
+            return ActualParameterNode(expr_list)  # Create a ParameterNode using the list of expressions and return it
 
         return None  # return None if <params> derives lambda
 
-    def visit_MULTI_PARAMS(self, node):
+    def visit_ACTUAL_MULTI_PARAMS(self, node):
         # <multi-params> -> COMMA <expr> <multi-params> | LAMBDA
         expr_list = []
         first_child = node.children[0]
         if not isinstance(first_child.symbol, Lambda):
             expr = self.visit_EXPR(node.children[1])  # get the expression
-            multi_params = self.visit_MULTI_PARAMS(node.children[2])  # get the rest of the expressions
+            multi_params = self.visit_ACTUAL_MULTI_PARAMS(node.children[2])  # get the rest of the expressions
 
             # append all expression to a list
             expr_list.append(expr)
@@ -314,6 +314,39 @@ class BuildASTVisitor:
         # if <multi-params> derives empty return and empty list of expressions
         # else return a list of expressions
         return expr_list
+
+    def visit_FORMAL_PARAMS(self, node):
+        # <params> -> <expr> <multi-params> | <params> -> LAMBDA
+        first_child = node.children[0]
+
+        if not isinstance(first_child.symbol, Lambda):
+            id_list = []
+            first_id = self.visit_ID(first_child)  # get the expression
+            multi_params = self.visit_FORMAL_MULTI_PARAMS(node.children[1])  # get the rest of the expressions
+
+            # append all expressions to a list
+            id_list.append(first_id)
+            id_list.extend(multi_params)
+
+            return FormalParameterNode(id_list)  # Create a ParameterNode using the list of expressions and return it
+
+        return None  # return None if <params> derives lambda
+
+    def visit_FORMAL_MULTI_PARAMS(self, node):
+        # <multi-params> -> COMMA <expr> <multi-params> | LAMBDA
+        id_list = []
+        first_child = node.children[0]
+        if not isinstance(first_child.symbol, Lambda):
+            id = self.visit_ID(node.children[1])  # get the expression
+            multi_params = self.visit_FORMAL_MULTI_PARAMS(node.children[2])  # get the rest of the expressions
+
+            # append all expression to a list
+            id_list.append(id)
+            id_list.extend(multi_params)
+
+        # if <multi-params> derives empty return and empty list of expressions
+        # else return a list of expressions
+        return id_list
 
     def visit_ID_REF(self, node):
         # <id-ref> -> <id> <dot-ref>
@@ -528,7 +561,7 @@ class BuildASTVisitor:
             return DotNode(id_list)  # create a DotNode using the list of ids
 
         elif id_operator_children[0].name == 'LPAREN':
-            param_node = self.visit_PARAMS(id_operator_children[1])  # visit_PARAMS to get the ParamNode
+            param_node = self.visit_ACTUAL_PARAMS(id_operator_children[1])  # visit_PARAMS to get the ParamNode
             return NewObjectNode(id, param_node)  # use the ParamNode to make a NewObejctNode and return it
 
     def visit_VAL(self, node):

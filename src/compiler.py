@@ -14,7 +14,11 @@ program_file = os.path.join(wd, 'resources/Example.jnr')
 grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
 program = '''
-    set dab to true is not false;
+    function hello(x, y, z){
+        run dostuff();
+    }
+    
+    run hello(1, 2, 3);
 '''
 
 #print(grammar)
@@ -23,7 +27,7 @@ lexer = Lexer(program_string=program)
 tokens = lexer.lex()
 
 #print()
-print(",".join([str(x) for x in tokens]))
+#print(",".join([str(x) for x in tokens]))
 
 parser = Parser(grammar)
 

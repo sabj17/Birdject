@@ -266,7 +266,7 @@ class RunNode(BlockBodyPartNode):
 ###################
 # PARAMETER STUFF #
 ###################
-class ParameterNode(AbstractNode):
+class ActualParameterNode(AbstractNode):
     def __init__(self, expr_list):
         super().__init__()
         self.expr_list = expr_list
@@ -278,6 +278,22 @@ class ParameterNode(AbstractNode):
             graph.edge(parent, id)
 
         for child in self.expr_list:
+            if isinstance(child, AbstractNode):
+                child.graph(graph, id)
+
+
+class FormalParameterNode(AbstractNode):
+    def __init__(self, id_list):
+        super().__init__()
+        self.id_list = id_list
+
+    def graph(self, graph, parent=None):
+        id = str(random.randint(1, 10000000))
+        graph.node(id, nohtml(self.__str__()))
+        if parent:
+            graph.edge(parent, id)
+
+        for child in self.id_list:
             if isinstance(child, AbstractNode):
                 child.graph(graph, id)
 

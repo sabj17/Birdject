@@ -8,7 +8,7 @@
 <stmt> -> <var-dcl>
 <stmt> -> <func-dcl>
 <stmt> -> <class-dcl>
-<func-dcl> -> FUNCTION, ID, LPAREN, <params>, RPAREN, <block>
+<func-dcl> -> FUNCTION, ID, LPAREN, <formal-params>, RPAREN, <block>
 <class-dcl> -> ID, LCURLY, <class-body>, RCURLY
 <var-dcl> -> SET, <id-ref>, TO, <expr>, END
 <if-stmt> -> IF, LPAREN, <expr>, RPAREN, <block>, <else-clause>
@@ -20,7 +20,7 @@
 <when-stmt> -> WHEN, LPAREN, <expr>, RPAREN, <block>
 <return> -> RETURN, <expr>, END
 <break> -> BREAK, END
-<run> -> RUN, <id-ref>, LPAREN, <params>, RPAREN
+<run> -> RUN, <id-ref>, LPAREN, <actual-params>, RPAREN
 <block> -> LCURLY, <block-body>, RCURLY
 <block-body> -> <block-body-part>, <block-body>
 <block-body> -> LAMBDA
@@ -35,10 +35,14 @@
 <class-body-part> -> <var-dcl>
 <class-body-part> -> <func-dcl>
 <class-body-part> -> <class-dcl>
-<params> -> <expr>, <multi-params>
-<params> -> LAMBDA
-<multi-params> -> COMMA, <expr>, <multi-params>
-<multi-params> -> LAMBDA
+<formal-params> -> ID, <multi-formal-params>
+<formal-params> -> LAMBDA
+<multi-formal-params> -> COMMA, ID, <multi-formal-params>
+<multi-formal-params> -> LAMBDA
+<actual-params> -> <expr>, <multi-actual-params>
+<actual-params> -> LAMBDA
+<multi-actual-params> -> COMMA, <expr>, <multi-actual-params>
+<multi-actual-params> -> LAMBDA
 <id-ref> -> <id>, <dot-ref>
 <expr> -> <logic-expr>, <or>
 <or> -> OR, <expr>
@@ -74,7 +78,7 @@
 <term> -> <run>
 <id-operation> -> <id>, <id-operator>
 <id-operator> -> <dot-ref>
-<id-operator> -> LPAREN, <params>, RPAREN
+<id-operator> -> LPAREN, <actual-params>, RPAREN
 <boolean> -> BOOL
 <string> -> STRING
 <val> -> INTEGER

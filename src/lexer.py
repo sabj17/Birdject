@@ -41,9 +41,9 @@ class Lexer:
         ('MISMATCH',r'.'),  # Any other character
     ]
 
-    def __init__(self, file_path=None, program_string=None):
-        if file_path:
-            with open(file_path, "r") as program_file:
+    def __init__(self, program_file=None, program_string=None):
+        if program_file:
+            with open(program_file, "r") as program_file:
                 self.program = program_file.read()
 
         elif program_string:
