@@ -283,7 +283,7 @@ class BuildASTVisitor:
         return BreakNode()  # return a BreakNode
 
     def visit_ACTUAL_PARAMS(self, node):
-        # <params> -> <expr> <multi-params> | <params> -> LAMBDA
+        # <actual-params> -> <expr> <multi-actual-params> | <params> -> LAMBDA
         first_child = node.children[0]
 
         if not isinstance(first_child.symbol, Lambda):
@@ -295,12 +295,12 @@ class BuildASTVisitor:
             expr_list.append(first_expr)
             expr_list.extend(multi_params)
 
-            return ActualParameterNode(expr_list)  # Create a ParameterNode using the list of expressions and return it
+            return ActualParameterNode(expr_list)  # Create a ActualParameterNode using the list of expressions and return it
 
-        return None  # return None if <params> derives lambda
+        return None  # return None if <actual-params> derives lambda
 
     def visit_ACTUAL_MULTI_PARAMS(self, node):
-        # <multi-params> -> COMMA <expr> <multi-params> | LAMBDA
+        # <multi-actual-params> -> COMMA ID <multi-actual-params> | LAMBDA
         expr_list = []
         first_child = node.children[0]
         if not isinstance(first_child.symbol, Lambda):
@@ -311,41 +311,41 @@ class BuildASTVisitor:
             expr_list.append(expr)
             expr_list.extend(multi_params)
 
-        # if <multi-params> derives empty return and empty list of expressions
+        # if <multi-actual-params> derives empty return and empty list of expressions
         # else return a list of expressions
         return expr_list
 
     def visit_FORMAL_PARAMS(self, node):
-        # <params> -> <expr> <multi-params> | <params> -> LAMBDA
+        # <formal-params> -> ID <multi-formal-params> | <formal-params> -> LAMBDA
         first_child = node.children[0]
 
         if not isinstance(first_child.symbol, Lambda):
             id_list = []
-            first_id = self.visit_ID(first_child)  # get the expression
-            multi_params = self.visit_FORMAL_MULTI_PARAMS(node.children[1])  # get the rest of the expressions
+            first_id = self.visit_ID(first_child)  # get the id
+            multi_params = self.visit_FORMAL_MULTI_PARAMS(node.children[1])  # get the rest of the ids
 
             # append all expressions to a list
             id_list.append(first_id)
             id_list.extend(multi_params)
 
-            return FormalParameterNode(id_list)  # Create a ParameterNode using the list of expressions and return it
+            return FormalParameterNode(id_list)  # Create a FormalParameterNode using the list of ids and return it
 
-        return None  # return None if <params> derives lambda
+        return None  # return None if <formal-params> derives lambda
 
     def visit_FORMAL_MULTI_PARAMS(self, node):
-        # <multi-params> -> COMMA <expr> <multi-params> | LAMBDA
+        # <multi-formal-params> -> COMMA ID <multi-formal-params> | LAMBDA
         id_list = []
         first_child = node.children[0]
         if not isinstance(first_child.symbol, Lambda):
-            id = self.visit_ID(node.children[1])  # get the expression
-            multi_params = self.visit_FORMAL_MULTI_PARAMS(node.children[2])  # get the rest of the expressions
+            id = self.visit_ID(node.children[1])  # get the id
+            multi_params = self.visit_FORMAL_MULTI_PARAMS(node.children[2])  # get the rest of the ids
 
             # append all expression to a list
             id_list.append(id)
             id_list.extend(multi_params)
 
-        # if <multi-params> derives empty return and empty list of expressions
-        # else return a list of expressions
+        # if <multi-formal-params> derives empty return and empty list of ids
+        # else return a list of ids
         return id_list
 
     def visit_ID_REF(self, node):
