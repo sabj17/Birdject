@@ -14,7 +14,6 @@ class SymbolTable:
     def open_scope(self, visitor, node):
         node.visit_children(visitor)
         table_scope = visitor.symtab
-        #print("---------------------------SCOPE SOMETHING:", table_scope)
         self.scope[table_scope] = None  # TODO: review
         self.scope_stack.push(table_scope)
 
@@ -27,7 +26,8 @@ class SymbolTable:
 
     def add_symbol(self, node_name):
         if node_name not in self.current_scope.keys():
-            self.current_scope[node_name] = None  # TODO: review
+            self.current_scope[node_name] = None  # TODO: add types
+            print("Node added:", node_name, self.current_scope[node_name])
 
     def get_symbol(self, node_name):
         if self.is_declared_locally(node_name):
@@ -45,7 +45,6 @@ class SymbolTable:
 class NodeVisitor(object):
 
     def visit(self, node):
-        print(node)
         method_name = 'visit_' + type(node).__name__
 
         if hasattr(self, method_name):
@@ -55,21 +54,12 @@ class NodeVisitor(object):
         node.visit_children(self)
 
 
-class AstNodeVisitor(NodeVisitor):
+class AstNodeVisitor(NodeVisitor):    # TODO: make sure only dcls are added to symbol table
     def __init__(self):
         self.symtab = SymbolTable()
 
-    def visit_IdNode(self, node):
-        print("IdNode med var_name ", node.name)
-        if not self.symtab.is_declared_locally(node.name):
-            self.symtab.add_symbol(node.name)
-    # TODO: unless is already declared - then ref. Remember to do DotNode - should ref to first id(?)
-    # TODO: make sure only dcls are added to symbol table
-# suk a dik jen
     def visit_BlockNode(self, node):
-        print("-----------------SCOPE STACK", self.symtab.scope)
         self.symtab.open_scope(self, node)
-        print("-----------------SCOPE STACK", self.symtab.scope)
         self.symtab.close_scope()
 
     def visit_ClassBodyNode(self, node):
@@ -87,14 +77,5 @@ class AstNodeVisitor(NodeVisitor):
     def visit_FunctionNode(self, node):
         self.symtab.add_symbol(node.id.name)
 
-    def visit_IntegerNode(self, node):
-        print("IntegerNode med værdien ", node.value)
-        value = node.value          # TODO something and save it in the symboltable
-
-    def visit_StringNode(self, node):
-        print("StringNode med strengen", node.value)
-        string_value = node.value
-
-    def visit_BoolNode(self,node):
-        print("BoolNode med udfaldet ", node.value)
-
+    def visit_DotNode(self, node):
+        self.symtab.add_symbol(node.ids[0].name)
