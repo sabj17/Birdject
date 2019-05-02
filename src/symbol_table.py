@@ -4,12 +4,12 @@ from src.parser import Stack
 
 class SymbolTable:
 
-    def __init__(self, ast_root):
+    def __init__(self):
         self.scope = {}
         self.scope_stack = Stack()
         self.scope_stack.push(self.scope)
         self.current_scope = self.scope_stack.top_of_stack()
-        self.process_node(ast_root)
+        #self.process_node(ast_root)
 
     def process_node(self, node):
         if isinstance(node, str):
@@ -69,3 +69,36 @@ class SymbolTable:
 
     def is_declared_locally(self, node_name):
         return node_name in self.current_scope
+
+
+class NodeVisitor(object):
+
+    def visit(self, node):
+        method_name = 'visit_' + type(node).__name__
+
+        if hasattr(self, method_name):
+            visitor = getattr(self, method_name)
+            return visitor(node)
+        else:
+            node.visit_children(self)
+
+
+class AstNodeVisitor(NodeVisitor):
+    def __init__(self):
+        self.symtab = SymbolTable()
+
+    def visit_IdNode(self, node):
+        print("IdNode med var_name ", node.name)
+        var_name = node.name  # TODO something and save it in the symboltable
+
+    def visit_IntegerNode(self, node):
+        print("IntegerNode med værdien ", node.value)
+        value = node.value          # TODO something and save it in the symboltable
+
+    def visit_StringNode(self, node):
+        print("StringNode med strengen", node.value)
+        string_value = node.value
+
+    def visit_BoolNode(self,node):
+        print("BoolNode med udfaldet ", node.value)
+

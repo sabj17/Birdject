@@ -1,6 +1,7 @@
 import random
 from graphviz import Digraph, nohtml
 
+from src.symbol_table import *
 
 class AST:
     def __init__(self, prog_node):
@@ -11,6 +12,9 @@ class AST:
         graph.attr(overlap='false')
         self.prog.graph(graph)
         graph.save(filename='AST.gv')
+
+    def accept(self, node_visitor):
+        node_visitor.visit(self.prog)
 
 
 class AbstractNode:
@@ -31,6 +35,17 @@ class AbstractNode:
                     # print(child, self.__class__.__name__)
                     graph.node(id2, nohtml(child))
                     graph.edge(id, id2)
+
+    def accept(self, node_visitor):
+        node_visitor.visit(self)
+
+    def visit_children(self, node_visitor):
+        for child in vars(self).values():
+            if isinstance(child, list):  # if node has more than one child, the child variable will be a list
+                for cc in child:
+                    cc.accept(node_visitor)
+            elif child is not None and not isinstance(child, str):
+                child.accept(node_visitor)
 
     def __str__(self):
         return type(self).__name__
@@ -133,7 +148,7 @@ class BinaryExpNode(ExpressionNode):
 
 
 class UnaryExpNode(ExpressionNode):
-     def __init__(self, expr):
+    def __init__(self, expr):
         super().__init__()
         self.expression = expr
 

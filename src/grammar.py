@@ -12,11 +12,10 @@ class Rule:
         self.rule_num = self.rule_count
         Rule.rule_count += 1
 
-    def __repr__(self):
-        return self.LHS.name + " -> " + self.RHS.__str__()
-
     def __str__(self):
         return self.LHS.name + " -> " + self.RHS.__str__()
+
+    __repr__ = __str__
 
     # Checks if the symbol with name 'A' is within in a rules' RHS
     def in_RHS(self, A):
@@ -38,8 +37,7 @@ class Production:
     def __str__(self):
         return " ".join([symbol.name for symbol in self.symbols])
 
-    def __repr__(self):
-        return " ".join([symbol.name for symbol in self.symbols])
+    __repr__ = __str__
 
     # Checks if all of the symbols in a production can derive empty
     def all_derive_empty(self, rules):

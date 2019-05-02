@@ -14,9 +14,7 @@ class TestGrammarBuilder(TestCase):
         cls.terminals = cls.grammar.terminals
         cls.grammar_builder = GrammarBuilder()
 
-    def setUp(self):  # Before each test
-        # Set up of manual grammar builder
-        self.grammar_builder_manual = GrammarBuilder()
+        cls.grammar_builder_manual = GrammarBuilder()
 
         prog = Nonterminal('<prog>')
         stmts = Nonterminal('<stmts>')
@@ -59,7 +57,8 @@ class TestGrammarBuilder(TestCase):
         stmt_prod_2 = [forstmt.name]
         stmt_prod_3 = [ifstmt.name]
         stmt_prod_4 = [vardcl.name]
-        ifstmt_prod = [if_terminal.name, lparen_terminal.name, expr.name, rparen_terminal.name, block.name, elseclause.name]
+        ifstmt_prod = [if_terminal.name, lparen_terminal.name, expr.name, rparen_terminal.name, block.name,
+                       elseclause.name]
         elseclause_prod_1 = [else_terminal.name, else_s.name]
         elseclause_prod_2 = [lambda_terminal.name]
         else_prod_1 = [block.name]
@@ -78,33 +77,38 @@ class TestGrammarBuilder(TestCase):
         dotref_prod = [lambda_terminal.name]
         id_prod = [id_terminal.name]
 
-        self.grammar_builder_manual.add_rule(prog.name, prog_prod)
-        self.grammar_builder_manual.add_rule(stmts.name, stmts_prod_1)
-        self.grammar_builder_manual.add_rule(stmts.name, stmts_prod_2)
-        self.grammar_builder_manual.add_rule(stmt.name, stmt_prod_1)
-        self.grammar_builder_manual.add_rule(stmt.name, stmt_prod_2)
-        self.grammar_builder_manual.add_rule(stmt.name, stmt_prod_3)
-        self.grammar_builder_manual.add_rule(stmt.name, stmt_prod_4)
-        self.grammar_builder_manual.add_rule(ifstmt.name, ifstmt_prod)
-        self.grammar_builder_manual.add_rule(elseclause.name, elseclause_prod_1)
-        self.grammar_builder_manual.add_rule(elseclause.name, elseclause_prod_2)
-        self.grammar_builder_manual.add_rule(else_s.name, else_prod_1)
-        self.grammar_builder_manual.add_rule(else_s.name, else_prod_2)
-        self.grammar_builder_manual.add_rule(forstmt.name, forstmt_prod)
-        self.grammar_builder_manual.add_rule(whenstmt.name, whenstmt_prod)
-        self.grammar_builder_manual.add_rule(block.name, block_prod)
-        self.grammar_builder_manual.add_rule(blockbody.name, blockbody_prod_1)
-        self.grammar_builder_manual.add_rule(blockbody.name, blockbody_prod_2)
-        self.grammar_builder_manual.add_rule(blockbodypart.name, blockbodypart_prod_1)
-        self.grammar_builder_manual.add_rule(blockbodypart.name, blockbodypart_prod_2)
-        self.grammar_builder_manual.add_rule(blockbodypart.name, blockbodypart_prod_3)
-        self.grammar_builder_manual.add_rule(vardcl.name, vardcl_prod)
-        self.grammar_builder_manual.add_rule(expr.name, expr_prod_1)
-        self.grammar_builder_manual.add_rule(expr.name, expr_prod_2)
-        self.grammar_builder_manual.add_rule(dotref.name, dotref_prod)
-        self.grammar_builder_manual.add_rule(id.name, id_prod)
+        cls.grammar_builder_manual.add_rule(prog.name, prog_prod)
+        cls.grammar_builder_manual.add_rule(stmts.name, stmts_prod_1)
+        cls.grammar_builder_manual.add_rule(stmts.name, stmts_prod_2)
+        cls.grammar_builder_manual.add_rule(stmt.name, stmt_prod_1)
+        cls.grammar_builder_manual.add_rule(stmt.name, stmt_prod_2)
+        cls.grammar_builder_manual.add_rule(stmt.name, stmt_prod_3)
+        cls.grammar_builder_manual.add_rule(stmt.name, stmt_prod_4)
+        cls.grammar_builder_manual.add_rule(ifstmt.name, ifstmt_prod)
+        cls.grammar_builder_manual.add_rule(elseclause.name, elseclause_prod_1)
+        cls.grammar_builder_manual.add_rule(elseclause.name, elseclause_prod_2)
+        cls.grammar_builder_manual.add_rule(else_s.name, else_prod_1)
+        cls.grammar_builder_manual.add_rule(else_s.name, else_prod_2)
+        cls.grammar_builder_manual.add_rule(forstmt.name, forstmt_prod)
+        cls.grammar_builder_manual.add_rule(whenstmt.name, whenstmt_prod)
+        cls.grammar_builder_manual.add_rule(block.name, block_prod)
+        cls.grammar_builder_manual.add_rule(blockbody.name, blockbody_prod_1)
+        cls.grammar_builder_manual.add_rule(blockbody.name, blockbody_prod_2)
+        cls.grammar_builder_manual.add_rule(blockbodypart.name, blockbodypart_prod_1)
+        cls.grammar_builder_manual.add_rule(blockbodypart.name, blockbodypart_prod_2)
+        cls.grammar_builder_manual.add_rule(blockbodypart.name, blockbodypart_prod_3)
+        cls.grammar_builder_manual.add_rule(vardcl.name, vardcl_prod)
+        cls.grammar_builder_manual.add_rule(expr.name, expr_prod_1)
+        cls.grammar_builder_manual.add_rule(expr.name, expr_prod_2)
+        cls.grammar_builder_manual.add_rule(dotref.name, dotref_prod)
+        cls.grammar_builder_manual.add_rule(id.name, id_prod)
 
-        self.builder_rules = self.grammar_builder_manual.rules
+        cls.builder_rules = cls.grammar_builder_manual.rules
+
+    def setUp(self):  # Before each test
+        # Set up of manual grammar builder
+        pass
+
 
     #################
     #     TESTS     #
@@ -255,7 +259,6 @@ class TestGrammarBuilder(TestCase):
         LHS_2, RHS_2 = self.grammar_builder_manual.rules[5]
         LHS_3, RHS_3 = self.grammar_builder_manual.rules[10]
         LHS_4, RHS_4 = self.grammar_builder_manual.rules[15]
-        print(LHS_4, RHS_4)
 
         test_production_1 = self.grammar_builder_manual._get_production(RHS_1, terminal_dict, nonterminal_dict)
         test_production_2 = self.grammar_builder_manual._get_production(RHS_2, terminal_dict, nonterminal_dict)
