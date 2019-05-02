@@ -1,4 +1,5 @@
 from src.ast import *
+from src.ast import AST
 from src.parser import Stack
 
 
@@ -9,43 +10,13 @@ class SymbolTable:
         self.scope_stack = Stack()
         self.scope_stack.push(self.scope)
         self.current_scope = self.scope_stack.top_of_stack()
-        #self.process_node(ast_root)
 
-    def process_node(self, node):
-        if isinstance(node, str):
-            if not self.is_declared_locally(node):
-                self.add_symbol(node)
-
-        elif isinstance(node, BlockNode) or isinstance(node, ClassBodyNode):
-            self.open_scope(node)
-
-        elif isinstance(node, (AssignNode, ClassBodyNode)):
-            self.add_symbol(node.id.name)
-
-        if node is not None and not isinstance(node, str):
-            self.process_all_children_nodes(node)
-
-        if isinstance(node, BlockNode):
-            self.close_scope()
-
-    def process_all_children_nodes(self, node):
-        try:
-            node_children = vars(node)
-            if node_children:
-                for child in node_children.values():
-                    if isinstance(child, list):  # if node has more than one child, child is a list
-                        for cc in child:
-                            self.process_node(cc)
-                    else:
-                        self.process_node(child)  # powerful recursjens
-        except:
-            print("EXCEPTION", type(node), "Children:", vars(node))  # TODO: use attributes from node classes, such as FunctionNode.id
-
-    def open_scope(self, block_node):
-        table_scope = SymbolTable(block_node)
+    def open_scope(self, visitor, node):
+        node.visit_children(visitor)
+        table_scope = visitor.symtab
+        #print("---------------------------SCOPE SOMETHING:", table_scope)
         self.scope[table_scope] = None  # TODO: review
         self.scope_stack.push(table_scope)
-        self.set_current_scope()
 
     def close_scope(self):
         self.scope_stack.pop()
@@ -74,13 +45,14 @@ class SymbolTable:
 class NodeVisitor(object):
 
     def visit(self, node):
+        print(node)
         method_name = 'visit_' + type(node).__name__
 
         if hasattr(self, method_name):
             visitor = getattr(self, method_name)
             return visitor(node)
-        else:
-            node.visit_children(self)
+
+        node.visit_children(self)
 
 
 class AstNodeVisitor(NodeVisitor):
@@ -89,7 +61,31 @@ class AstNodeVisitor(NodeVisitor):
 
     def visit_IdNode(self, node):
         print("IdNode med var_name ", node.name)
-        var_name = node.name  # TODO something and save it in the symboltable
+        if not self.symtab.is_declared_locally(node.name):
+            self.symtab.add_symbol(node.name)
+    # TODO: unless is already declared - then ref. Remember to do DotNode - should ref to first id(?)
+    # TODO: make sure only dcls are added to symbol table
+
+    def visit_BlockNode(self, node):
+        print("-----------------SCOPE STACK", self.symtab.scope)
+        self.symtab.open_scope(self, node)
+        print("-----------------SCOPE STACK", self.symtab.scope)
+        self.symtab.close_scope()
+
+    def visit_ClassBodyNode(self, node):
+        self.symtab.open_scope(self, node)
+        self.symtab.close_scope()
+
+    def visit_AssignNode(self, node):
+        self.symtab.add_symbol(node.id.name)
+        node.visit_children(self)
+
+    def visit_ClassNode(self, node):
+        self.symtab.add_symbol(node.id.name)
+        node.visit_children(self)
+
+    def visit_FunctionNode(self, node):
+        self.symtab.add_symbol(node.id.name)
 
     def visit_IntegerNode(self, node):
         print("IntegerNode med værdien ", node.value)
