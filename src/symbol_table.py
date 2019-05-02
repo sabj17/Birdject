@@ -65,7 +65,7 @@ class AstNodeVisitor(NodeVisitor):
             self.symtab.add_symbol(node.name)
     # TODO: unless is already declared - then ref. Remember to do DotNode - should ref to first id(?)
     # TODO: make sure only dcls are added to symbol table
-
+# suk a dik jen
     def visit_BlockNode(self, node):
         print("-----------------SCOPE STACK", self.symtab.scope)
         self.symtab.open_scope(self, node)
