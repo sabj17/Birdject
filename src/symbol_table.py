@@ -31,7 +31,6 @@ class SymbolTable:
     def add_symbol(self, node_name):
         if node_name not in self.current_scope.keys():
             self.current_scope[node_name] = None  # TODO: add types
-            #print("Node added:", self.current_scope)
 
     def get_symbol(self, node_name):
         if self.is_declared_locally(node_name):
