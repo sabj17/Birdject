@@ -16,9 +16,6 @@ class TestSymbolTable(TestCase):
         #print(self.symtable.current_scope)
         #self.assertEqual()
 
-    def test_close_scope(self):
-        self.test_open_scope()
-
     def test_set_current_scope_and_close_scope(self):
         self.symtable.scope_stack = Stack()
         self.assertEqual({}, self.symtable.current_scope)
