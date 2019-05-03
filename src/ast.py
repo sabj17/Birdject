@@ -3,6 +3,7 @@ from graphviz import Digraph, nohtml
 
 from src.symbol_table import *
 
+
 class AST:
     def __init__(self, prog_node):
         self.prog = prog_node

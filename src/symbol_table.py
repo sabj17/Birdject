@@ -12,9 +12,11 @@ class SymbolTable:
         self.current_scope = self.scope_stack.top_of_stack()
 
     def open_scope(self, visitor, node):
+        print("Global scope:", self.current_scope)
         node.visit_children(visitor)
         table_scope = visitor.symtab
-        self.scope[table_scope] = None  # TODO: review
+        print("____INNER SCOPE____:", table_scope)
+        self.scope[table_scope] = None  # TODO: review how it's saved / represented
         self.scope_stack.push(table_scope)
 
     def close_scope(self):
@@ -22,12 +24,14 @@ class SymbolTable:
         self.set_current_scope()
 
     def set_current_scope(self):    # TODO: Check if actually changes current scope
+        #old_scope = self.current_scope
         self.current_scope = self.scope_stack.top_of_stack()
+        #print('SCOPE CHANGED FROM:', old_scope, 'TO:', self.current_scope)
 
     def add_symbol(self, node_name):
         if node_name not in self.current_scope.keys():
             self.current_scope[node_name] = None  # TODO: add types
-            print("Node added:", node_name, self.current_scope[node_name])
+            #print("Node added:", self.current_scope)
 
     def get_symbol(self, node_name):
         if self.is_declared_locally(node_name):
@@ -78,4 +82,4 @@ class AstNodeVisitor(NodeVisitor):    # TODO: make sure only dcls are added to s
         self.symtab.add_symbol(node.id.name)
 
     def visit_DotNode(self, node):
-        self.symtab.add_symbol(node.ids[0].name)
+        self.symtab.get_symbol(node.ids[0].name)
