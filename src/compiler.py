@@ -6,6 +6,8 @@ from src.lexer import Lexer
 import os
 from prettytable import PrettyTable
 
+from crap_table import *
+
 wd = os.getcwd()
 grammar_file = os.path.join(wd, 'resources/grammar.txt')
 program_file = os.path.join(wd, 'resources/Example.jnr')
@@ -46,6 +48,25 @@ ast = parse_tree.to_AST()
 ast.graph()
 
 #symtable = SymbolTable(ast.prog)
+#avisitor = AstNodeVisitor()
+#avisitor.visit(ast.prog)
+#symtable = avisitor.symtab
+#print("jeg er symtable",symtable.scope)
+#print('jeg er avisotor',avisitor.symtab.scope)
+
+'''
+sym_builder = AstNodeVisitor()
+ast.accept(sym_builder)
+
+symtab = sym_builder.symtab
+print("entire scope af travesal",symtab.scope)
+'''
 
 
-ast.accept(AstNodeVisitor())
+crap_builder = AstCrapNodeVisitor()
+ast.accept(crap_builder)
+crap_tab = crap_builder.current_scope
+print(crap_tab.symbols, '   scope level     ', crap_tab.scope_level)
+#print('compiler print ', crap_tab.symbols, 'scope level ', crap_tab.scope_level)
+
+

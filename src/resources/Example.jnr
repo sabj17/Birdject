@@ -1,21 +1,45 @@
 set number1 to 4 + 2 * 3 - 4;
 set string to "Hello";
-set hello to simon;
+set bacon to number1;
+set superString to "hey" + "baby";
+set numberString to "high" + 5;
+set numberString to "high" + 5 - 7;
+
+
 
 LivingRoom{
 	set temp1 to Thermometer();
 	set constant to 5 * (10 + 4) / 4 - 3 % 2;
+	set window1 to off;
+	set constant to on;
 
 	function getTemp1(n){
+        set dab to 1234.2;
 		return temp1 * n[4];
 	}
 
-	function openWindow(){
-		run window1.turnOn();
+	function openWindow(x){
+	    set clap to 987;
+		run getTemp1(clap);
 	}
+
+	function closeWindow(window2){
+	    run openWindow(1);
+	}
+
+	AnotherRoom{
+	    set variable to somethingelse;
+
+	    function burnRoom(i){
+	        return i;
+	    }
+	}
+
 }
 
 function globalFunc(input1, input2){
+    set smil123456 to 6666666;
+
 	if (input1){
 	    return false;
 	} else if (input2) {
@@ -26,8 +50,10 @@ function globalFunc(input1, input2){
 
 }
 
-when(run LivingRoom.getTemp1() > 20){
-	run LivingRoom.window1.open();
-	run LivingRoom.openWindow();
-	run globalFunc(4, 6);
+when(run LivingRoom.getTemp1(x) > 20){
+    set hello to 2;
+	run LivingRoom.openWindow(x);
+	run LivingRoom.closeWindow(windowXX);
+	run globalFunc(x + 456, 99);
+	run LivingRoom.AnotherRoom.burnRoom(x);
 }

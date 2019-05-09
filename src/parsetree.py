@@ -266,7 +266,7 @@ class BuildASTVisitor:
                    '<if-stmt>': self.visit_IF_STMT,
                    '<run>': self.visit_RUN,
                    '<return>': self.visit_RETURN,
-                   '<var-dc>': self.visit_VAR_DCL,
+                   '<var-dcl>': self.visit_VAR_DCL,
                    '<break>': self.visit_BREAK}
         # call visit for one of these based on the body part
 
