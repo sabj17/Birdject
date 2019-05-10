@@ -11,7 +11,6 @@ LivingRoom{
 	set temp1 to Thermometer();
 	set constant to 5 * (10 + 4) / 4 - 3 % 2;
 	set window1 to off;
-	set constant to on;
 
 	function getTemp1(n){
         set dab to 1234.2;
@@ -28,7 +27,7 @@ LivingRoom{
 	}
 
 	AnotherRoom{
-	    set variable to somethingelse;
+	    set variable to Thermometer();
 
 	    function burnRoom(i){
 	        return i;

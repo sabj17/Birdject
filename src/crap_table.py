@@ -38,8 +38,6 @@ class SymbolCrapTable:
             raise Exception('Symbol not found')
 
 
-
-
 class NodeVisitor(object):
 
     def visit(self, node):
@@ -52,7 +50,7 @@ class NodeVisitor(object):
         node.visit_children(self)
 
 
-class AstCrapNodeVisitor(NodeVisitor):    # TODO: make sure only dcls are added to symbol table
+class AstCrapNodeVisitor(NodeVisitor):
     def __init__(self):
         self.current_scope = SymbolCrapTable(
             scope_name='global',
@@ -88,9 +86,9 @@ class AstCrapNodeVisitor(NodeVisitor):    # TODO: make sure only dcls are added 
         print('___________ After ', self.current_scope.symbols)
 
     def visit_AssignNode(self, node):
-        print(node.expression)
+        #print(node.expression)
         if isinstance(node.expression, BoolNode):
-            self.current_scope.symbols[node.id.name] = bool # TODO maybe just bool? But that's a native type
+            self.current_scope.symbols[node.id.name] = bool
         elif isinstance(node.expression, NewObjectNode):
             self.current_scope.symbols[node.id.name] = node.expression.id.name
         elif isinstance(node.expression, IntegerNode):
@@ -100,12 +98,27 @@ class AstCrapNodeVisitor(NodeVisitor):    # TODO: make sure only dcls are added 
         elif isinstance(node.expression, StringNode):
             self.current_scope.symbols[node.id.name] = str
         elif isinstance(node.expression, BinaryExpNode):
-            self.current_scope.symbols[node.id.name] = 'sumthing'
+            self.current_scope.symbols[node.id.name] = self.recurse_master(node.expression)
         elif isinstance(node.expression, IdNode):
-            #self.current_scope.symbols[node.id.name] = self.current_scope.lookup(node.id.name)
-            pass
+            self.current_scope.symbols[node.id.name] = self.current_scope.lookup(node.expression.name)
         else:
             self.current_scope.symbols[node.id.name] = None
+
+    def recurse_master(self, node):
+        final_type = None
+
+        for expr in vars(node).values():
+            #print('--------- ', type(expr))
+            if isinstance(expr, StringNode):
+                final_type = str
+            elif (final_type == int or final_type == None) and (isinstance(expr, FloatNode)):
+                final_type = float
+            elif (final_type == None) and (isinstance(expr, IntegerNode)):
+                final_type = int
+
+            if isinstance(expr, BinaryExpNode):
+                self.recurse_master(expr)
+        return final_type
 
     def visit_FunctionNode(self, node):
         outer_scope = self.current_scope
@@ -128,8 +141,7 @@ class AstCrapNodeVisitor(NodeVisitor):    # TODO: make sure only dcls are added 
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
 
     def visit_RunNode(self, node):
-        # finds the formal param of a dotnode
-        if isinstance(node.id, DotNode):
+        if isinstance(node.id, DotNode): # Looks for if Class.method exist
             last_id = node.id.ids[-1].name
             var = self.current_scope
             formal_param = None
