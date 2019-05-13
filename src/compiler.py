@@ -11,7 +11,7 @@ from prettytable import PrettyTable
 
 wd = os.getcwd()
 grammar_file = os.path.join(wd, 'resources/grammar.txt')
-program_file = os.path.join(wd, 'resources/Example1.jnr')
+program_file = os.path.join(wd, 'resources/Example.jnr')
 
 grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
