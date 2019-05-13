@@ -75,22 +75,35 @@ class AstCrapNodeVisitor(NodeVisitor):
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
 
     def visit_AssignNode(self, node):
-        if isinstance(node.expression, BoolNode):
-            self.current_scope.symbols[node.id.name] = bool
-        elif isinstance(node.expression, NewObjectNode):
+
+        if isinstance(node.expression, NewObjectNode):
             self.current_scope.symbols[node.id.name] = node.expression.id.name
-        elif isinstance(node.expression, IntegerNode):
-            self.current_scope.symbols[node.id.name] = int
-        elif isinstance(node.expression, FloatNode):
-            self.current_scope.symbols[node.id.name] = float
-        elif isinstance(node.expression, StringNode):
-            self.current_scope.symbols[node.id.name] = str
         elif isinstance(node.expression, BinaryExpNode):
             self.current_scope.symbols[node.id.name] = self.eval_bin_expr_type(node.expression)
         elif isinstance(node.expression, IdNode):
             self.current_scope.symbols[node.id.name] = self.current_scope.lookup(node.expression.name)
+        elif isinstance(node.expression, TermNode):
+            self.current_scope.symbols[node.id.name] = self.eval_term_node_type(node.expression)
         else:
             self.current_scope.symbols[node.id.name] = None
+
+    def eval_term_node_type(self, term_node):
+        type_of_term_node = None
+
+        print('bacon + 2', term_node)
+        if isinstance(term_node, BoolNode):
+            type_of_term_node = bool
+        elif isinstance(term_node, IntegerNode):
+            type_of_term_node = int
+        elif isinstance(term_node, FloatNode):
+            type_of_term_node = float
+        elif isinstance(term_node, StringNode):
+            type_of_term_node = str
+        elif isinstance(term_node, IdNode):
+            type_of_term_node = self.current_scope.lookup(term_node.name)
+
+        print('looooooort', type_of_term_node)
+        return type_of_term_node
 
     def eval_bin_expr_type(self, binExpNode):
         final_type = None

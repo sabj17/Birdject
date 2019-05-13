@@ -7,7 +7,7 @@ from src.codegen.codegen import CodeEmittor as CodeGen, CodeEmittor
 from src.codegen.program import Structure
 
 
-class NodeVisitor:
+class NodeVisitor2:
 
     def visit(self, node):
         method_name = 'visit_' + type(node).__name__

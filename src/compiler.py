@@ -43,4 +43,6 @@ ast = parse_tree.to_AST()
 
 ast.graph()
 visitor = AstCrapNodeVisitor()
-symtable = ast.accept(visitor)
+ast.accept(visitor)
+symtable = visitor.current_scope
+print(symtable.symbols)
