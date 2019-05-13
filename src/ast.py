@@ -1,7 +1,6 @@
 import random
-from graphviz import Digraph, nohtml
 
-from src.symbol_table import *
+from graphviz import Digraph, nohtml
 
 
 class AST:
@@ -16,7 +15,6 @@ class AST:
 
     def accept(self, node_visitor):
         node_visitor.visit(self.prog)
-
 
 
 class AbstractNode:
@@ -342,7 +340,6 @@ class IntegerNode(TermNode):
 
 
 class IdNode(TermNode):
-
     def __init__(self, name):
         super().__init__()
         self.name = name

@@ -1,13 +1,11 @@
-from src.crap_table import SymbolCrapTable, AstCrapNodeVisitor
-from src.grammar import *
-from src.symbol_table import SymbolTable
-from src.tokens import Token
-from src.parser import Parser
-from src.lexer import Lexer
-from src.ast import *
 import os
+
 from prettytable import PrettyTable
 
+from src.crap_table import AstCrapNodeVisitor
+from src.grammar import *
+from src.lexer import Lexer
+from src.parser import Parser
 
 wd = os.getcwd()
 grammar_file = os.path.join(wd, 'resources/grammar.txt')

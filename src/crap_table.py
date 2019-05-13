@@ -1,6 +1,4 @@
-from src.ast import *
-from src.ast import AST
-from src.parser import Stack
+from ast import *
 
 
 class SymbolCrapTable:
@@ -12,7 +10,7 @@ class SymbolCrapTable:
         self.enclosing_scope = enclosing_scope
 
     def new_scope(self, node, enclosing_scope):
-        scope_name = type(node)     #TODO do something else for block scopes that comes out of nowhere
+        scope_name = type(node)     # TODO do something else for block scopes that come out of nowhere
 
         scope_object = SymbolCrapTable(
             scope_name=scope_name,
@@ -22,7 +20,6 @@ class SymbolCrapTable:
         return scope_object
 
     def add_symbol(self, node_name):
-        #print('Insert: %s' % node)
         self.symbols[node_name] = 'type'
 
     def lookup(self, name):
@@ -58,36 +55,26 @@ class AstCrapNodeVisitor(NodeVisitor):
             )
 
     def visit_BlockNode(self, node):
-        #print('########### Before ', self.current_scope.symbols)
         enclosing_scope = self.current_scope
         inner_scope = self.current_scope.new_scope(node, self.current_scope)
         self.current_scope = inner_scope
         node.visit_children(self)
 
-        #print('########### After ', self.current_scope.symbols)
-
         self.current_scope = enclosing_scope
         self.current_scope.symbols[inner_scope] = 'Block_Scope'
 
-
     def visit_ClassNode(self, node):
-        print('---------------- ', node)
         self.current_scope.symbols[node.id.name] = object
 
-        print('_____________ Before ', self.current_scope.symbols)
         enclosing_scope = self.current_scope
         inner_scope = self.current_scope.new_scope(node, self.current_scope)
         self.current_scope = inner_scope
         node.body_part.visit_children(self)
 
-        print('___________ After ', self.current_scope.symbols)
-
         self.current_scope = enclosing_scope
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
-        print('___________ After ', self.current_scope.symbols)
 
     def visit_AssignNode(self, node):
-        #print(node.expression)
         if isinstance(node.expression, BoolNode):
             self.current_scope.symbols[node.id.name] = bool
         elif isinstance(node.expression, NewObjectNode):
@@ -128,7 +115,6 @@ class AstCrapNodeVisitor(NodeVisitor):
 
         return final_type
 
-
     def visit_FunctionNode(self, node):
         outer_scope = self.current_scope
         inner_scope = self.current_scope.new_scope(node, self.current_scope)
@@ -150,21 +136,12 @@ class AstCrapNodeVisitor(NodeVisitor):
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
 
     def visit_IfNode(self, node):
-        print('heeeeeey ', node.expression)
         if isinstance(node.expression, IdNode):
             if self.current_scope.lookup(node.expression.name) != bool:
                 raise Exception(TypeError, node.expression.name)
 
-
-        #node.visit_children(self)
-        else:
-            print("bacon")
-
-    #def visit_IdNode(self, node):
-        #print('-------------- ', node.name)
-
     def visit_RunNode(self, node):
-        if isinstance(node.id, DotNode): # Looks for if Class.method exist
+        if isinstance(node.id, DotNode):  # Looks for if Class.method exist
             last_id = node.id.ids[-1].name
             temp_scope = self.current_scope
             formal_param = None
@@ -175,14 +152,16 @@ class AstCrapNodeVisitor(NodeVisitor):
                     temp_scope = temp_scope.lookup(str(id.name + 'Scope'))
 
             # TODO make with real types when we get that
-            if formal_param != self.get_actual_params(node):
-                raise Exception('Type error: missing paramater or mismatch in types')
+            print("LEN:", len(formal_param), len(self.get_actual_params(node)))
+            if len(formal_param) != len(self.get_actual_params(node)):
+                raise Exception('Type error: missing parameter or mismatch in types')
 
         # What that should happen when the runNode dosen't have following dotNodes
         elif isinstance(node.id, IdNode):
             # TODO make with real types when we get that
-            if self.current_scope.lookup(node.id.name) != self.get_actual_params(node):
-                raise Exception('Type error: missing paramater or mismatch in types')
+            print("LEN:", len(self.current_scope.lookup(node.id.name)), len(self.get_actual_params(node)))
+            if len(self.current_scope.lookup(node.id.name)) != len(self.get_actual_params(node)):
+                raise Exception('Type error: missing parameter or mismatch in types')
 
     def get_formal_params(self, node):
         param_list = []
@@ -203,7 +182,6 @@ class AstCrapNodeVisitor(NodeVisitor):
         if node.params is not None:
             if isinstance(node.params.expr_list, list):
                 for param in node.params.expr_list:
-                    # print('idNode param name = ', param.name)
                     param_list.append('type' + str(i))
                     i += 1
             else:
@@ -215,5 +193,6 @@ class AstCrapNodeVisitor(NodeVisitor):
         if isinstance(node.params.id_list, list):
             for param in node.params.id_list:
                 self.current_scope.add_symbol(param.name)
+                print("ADDING", param.name)
         else:
             self.current_scope.add_symbol(node.params.id_list.name)

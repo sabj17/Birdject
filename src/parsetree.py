@@ -1,8 +1,4 @@
-from ast import IdNode, ArrayRefNode, AST, ProgNode, AssignNode, RunNode, FunctionNode, ClassBodyNode, ClassNode, \
-    WhenNode, ForNode, IfNode, BlockNode, ReturnNode, BreakNode, ActualParameterNode, FormalParameterNode, DotNode, \
-    OrNode, AndNode, EqualsNode, NotEqualNode, LessThanNode, GreaterThanNode, PlusNode, MinusNode, MultiplyNode, \
-    DivideNode, ModuloNode, ParenthesesNode, NegativeNode, NotNode, NewObjectNode, IntegerNode, BoolNode, StringNode, \
-    FloatNode
+from ast import *
 from src.grammar import *
 from graphviz import Digraph, nohtml
 import random
