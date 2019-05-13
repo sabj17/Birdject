@@ -3,18 +3,12 @@ from ast import *
 
 class SymbolCrapTable:
 
-    def __init__(self, scope_name, scope_level, enclosing_scope=None):
+    def __init__(self, enclosing_scope=None):
         self.symbols = {}
-        self.scope_name = scope_name    # TODO delete if it never gets used
-        self.scope_level = scope_level  # TODO delete if it never gets used - might be redundant because enclosing scope
         self.enclosing_scope = enclosing_scope
 
-    def new_scope(self, node, enclosing_scope):
-        scope_name = type(node)     # TODO do something else for block scopes that come out of nowhere
-
+    def new_scope(self, enclosing_scope):
         scope_object = SymbolCrapTable(
-            scope_name=scope_name,
-            scope_level=enclosing_scope.scope_level + 1,
             enclosing_scope=enclosing_scope
         )
         return scope_object
@@ -49,14 +43,11 @@ class NodeVisitor(object):
 
 class AstCrapNodeVisitor(NodeVisitor):
     def __init__(self):
-        self.current_scope = SymbolCrapTable(
-            scope_name='global',
-            scope_level=1,
-            )
+        self.current_scope = SymbolCrapTable()
 
     def visit_BlockNode(self, node):
         enclosing_scope = self.current_scope
-        inner_scope = self.current_scope.new_scope(node, self.current_scope)
+        inner_scope = self.current_scope.new_scope(self.current_scope)
         self.current_scope = inner_scope
         node.visit_children(self)
 
@@ -69,7 +60,7 @@ class AstCrapNodeVisitor(NodeVisitor):
         print('-----------', self.current_scope.symbols)
 
         enclosing_scope = self.current_scope
-        inner_scope = self.current_scope.new_scope(node, self.current_scope)
+        inner_scope = self.current_scope.new_scope(self.current_scope)
         self.current_scope = inner_scope
         node.body_part.visit_children(self)
 
@@ -131,7 +122,7 @@ class AstCrapNodeVisitor(NodeVisitor):
 
     def visit_FunctionNode(self, node):
         outer_scope = self.current_scope
-        inner_scope = self.current_scope.new_scope(node, self.current_scope)
+        inner_scope = self.current_scope.new_scope(self.current_scope)
         param_list = []
 
         ####################### Test until we get real types ####################################
