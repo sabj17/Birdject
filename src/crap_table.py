@@ -32,7 +32,7 @@ class SymbolCrapTable:
         if self.enclosing_scope is not None:
             return self.enclosing_scope.lookup(name)
         else:
-            raise Exception('Symbol not found', symbol)
+            raise Exception('Symbol not found', name)
 
 
 class NodeVisitor(object):
@@ -66,13 +66,18 @@ class AstCrapNodeVisitor(NodeVisitor):
     def visit_ClassNode(self, node):
         self.current_scope.symbols[node.id.name] = object
 
+        print('-----------', self.current_scope.symbols)
+
         enclosing_scope = self.current_scope
         inner_scope = self.current_scope.new_scope(node, self.current_scope)
         self.current_scope = inner_scope
         node.body_part.visit_children(self)
 
+        print('____________', self.current_scope.symbols)
+
         self.current_scope = enclosing_scope
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
+        print('############', self.current_scope.symbols)
 
     def visit_AssignNode(self, node):
 
@@ -84,8 +89,6 @@ class AstCrapNodeVisitor(NodeVisitor):
             self.current_scope.symbols[node.id.name] = self.current_scope.lookup(node.expression.name)
         elif isinstance(node.expression, TermNode):
             self.current_scope.symbols[node.id.name] = self.eval_term_node_type(node.expression)
-        else:
-            self.current_scope.symbols[node.id.name] = None
 
     def eval_term_node_type(self, term_node):
         type_of_term_node = None
@@ -121,7 +124,7 @@ class AstCrapNodeVisitor(NodeVisitor):
             if (not isinstance(binExpNode, PlusNode)) and (final_type == str):
                 raise Exception(TypeError, expr)
 
-            if isinstance(expr, BinaryExpNode):
+            if isinstance(expr, BinaryExpNode) or isinstance(expr, UnaryExpNode):
                 self.eval_bin_expr_type(expr)
 
         return final_type
@@ -143,6 +146,9 @@ class AstCrapNodeVisitor(NodeVisitor):
             self.add_params_to_scope(node)
 
         node.block.visit_children(self)
+
+        print('LLLLLLLLLLLLLLLLLLLL ', self.current_scope.symbols)
+
         self.current_scope = outer_scope
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
 
@@ -154,7 +160,6 @@ class AstCrapNodeVisitor(NodeVisitor):
             if self.current_scope.lookup(node.expression.name) != bool:
                 raise Exception(TypeError, node.expression.name)
         elif isinstance(node.expression, EqualsNode):
-            print("hej my nigga")
             if isinstance(node.expression.expr1, TermNode):
                 LHS_type_of_equal = self.eval_term_node_type(node.expression.expr1)
             elif isinstance(node.expression.expr1, BinaryExpNode):
@@ -165,12 +170,17 @@ class AstCrapNodeVisitor(NodeVisitor):
             elif isinstance(node.expression.expr2, BinaryExpNode):
                 RHS_type_of_equal = self.eval_bin_expr_type(node.expression.expr2)
 
-            print(LHS_type_of_equal, 'and ', RHS_type_of_equal)
             if LHS_type_of_equal != RHS_type_of_equal:
                 raise Exception(TypeError, LHS_type_of_equal, 'and', RHS_type_of_equal, 'is not the same')
-        #node.expression.visit_childen(self)
+
+        node.visit_children(self)
+
+    def visit_ReturnNode(self, node):
+        if isinstance(node.expression, IdNode):
+            self.current_scope.lookup(node.expression.name)
 
     def visit_RunNode(self, node):
+        # Gets the formal parameters if it's a dotNode
         if isinstance(node.id, DotNode):  # Looks for if Class.method exist
             last_id = node.id.ids[-1].name
             temp_scope = self.current_scope
@@ -181,24 +191,38 @@ class AstCrapNodeVisitor(NodeVisitor):
                 else:
                     temp_scope = temp_scope.lookup(str(id.name + 'Scope'))
 
-            # TODO make with real types when we get that
-            #print("LEN:", len(formal_param), len(self.get_actual_params(node)))
+            # Compares the amount of formal and actual parameters
             if len(formal_param) != len(self.get_actual_params(node)):
                 raise Exception('Type error: missing parameter or mismatch in types')
 
-        # What that should happen when the runNode dosen't have following dotNodes
+        # Get the formal parameters if the runNode just has a IdNode and not a DotNode
+        # Compares the amount of formal and actual parameters
         elif isinstance(node.id, IdNode):
-            # TODO make with real types when we get that
-            #print("LEN:", len(self.current_scope.lookup(node.id.name)), len(self.get_actual_params(node)))
             if len(self.current_scope.lookup(node.id.name)) != len(self.get_actual_params(node)):
                 raise Exception('Type error: missing parameter or mismatch in types')
 
-    def get_formal_params(self, node):
+    # Returns a list of types of the actual parameters
+    def get_actual_params(self, runNode):
+        param_list = []
+
+        if runNode.params is not None:
+            if isinstance(runNode.params.expr_list, list):
+                for param in runNode.params.expr_list:
+                    if isinstance(param, IdNode):
+                        param_list.append(self.current_scope.lookup(param.name))
+                    elif isinstance(param, TermNode):
+                        param_list.append(self.eval_term_node_type(param))
+                    elif isinstance(param, BinaryExpNode):
+                        param_list.append(self.eval_bin_expr_type(param))
+
+        return param_list
+
+    def get_formal_params(self, funcNode):
         param_list = []
         i = 1
 
-        if isinstance(node.params.id_list, list):
-            for param in node.params.id_list:
+        if isinstance(funcNode.params.id_list, list):
+            for param in funcNode.params.id_list:
                 param_list.append('type' + str(i))
                 i += 1
         else:
@@ -206,23 +230,10 @@ class AstCrapNodeVisitor(NodeVisitor):
 
         return param_list
 
-    def get_actual_params(self, node):
-        param_list = []
-        i = 1
-        if node.params is not None:
-            if isinstance(node.params.expr_list, list):
-                for param in node.params.expr_list:
-                    param_list.append('type' + str(i))
-                    i += 1
-            else:
-                param_list.append('type1')
-
-        return param_list
-
-    def add_params_to_scope(self, node):
-        if isinstance(node.params.id_list, list):
-            for param in node.params.id_list:
+    def add_params_to_scope(self, funcNode):
+        if isinstance(funcNode.params.id_list, list):
+            for param in funcNode.params.id_list:
                 self.current_scope.add_symbol(param.name)
                 #print("ADDING", param.name)
         else:
-            self.current_scope.add_symbol(node.params.id_list.name)
+            self.current_scope.add_symbol(funcNode.params.id_list.name)

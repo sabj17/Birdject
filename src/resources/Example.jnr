@@ -10,21 +10,23 @@ set input1 to false;
 
 LivingRoom{
 	set temp1 to Thermometer();
-	set constant to 5 * (10 + 4) / 4 - 3 % 2;
+	set constant to 5 * (10 + 4) / 2 % 1 - 3;
 	set window1 to off;
 
 	function getTemp1(n){
         set dab to 1234.2;
-		return temp1 * n[4];
+		return temp1;
 	}
 
 	function openWindow(x){
 	    set clap to 987;
 		run getTemp1(clap);
+		return "well done";
 	}
 
 	function closeWindow(window2){
 	    run openWindow(1);
+	    return true;
 	}
 
 	AnotherRoom{
@@ -37,29 +39,33 @@ LivingRoom{
 
 }
 
-function globalFunc(input1, input2){
+function globalFunc(input1, input2, input3){
     set smil123456 to 6666666;
     set input1 to false;
+    set input2 to 1;
+    set input3 to 2;
+    set a to "h";
+    set b to "a";
 
 	if (input1){
 
-	} else if (input2 is input1) {
-
-	} else if (a + b is 5) {
-
+	} else if (input2 is input3) {
+        return "hahaha";
+	} else if (a + b is "ha") {
+        return numberString;
 	}
 	else{
-	    return true;
+	    return a;
 	}
 
 }
 
-when(run LivingRoom.getTemp1(x) > 20){
+when(run LivingRoom.getTemp1(number1) > 20){
     set hello to 2;
     set x to 22;
     set windowXX to 55;
 	run LivingRoom.openWindow(x);
 	run LivingRoom.closeWindow(windowXX);
-	run globalFunc(x + 456, 99);
+	run globalFunc(x + hello, 99, string);
 	run LivingRoom.AnotherRoom.burnRoom(x);
 }
