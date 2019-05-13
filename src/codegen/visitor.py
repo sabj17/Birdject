@@ -14,7 +14,84 @@ class NodeVisitor:
     def visit(self, node):
         pass
 
+class TopVisitor(NodeVisitor):
 
+    def __init__(self, program):
+        #self.code_gen = CodeEmittor()
+        self.program = program
+        #self.structure = Structure(program)
+
+
+    @dispatch(ProgNode)
+    def visit(self, node):
+        statements = vars(node).get("stmts")
+        print("Program start")
+        for node in statements:
+            node.accept(self)
+        print("Program end")
+
+    @dispatch(ClassNode)
+    def visit(self, node):
+        print("Class start")
+        self.program.new_class()
+        class_atb = vars(node)
+        class_id = class_atb.get("id")
+        class_id.accept(self)
+        print("{")
+        self.accept_children(class_atb.get("body_part"))
+        self.program.end_structure()
+        print("Class end")
+
+    @dispatch(IdNode)
+    def visit(self, node):
+        field = vars(node)
+        key = field.keys()
+        for k in key:
+            self.program.emit_id(field.get(k))
+            print("id: " + field.get(k))
+
+    @dispatch(BlockNode)
+    def visit(self, node):
+        block_atb = vars(node)
+        parts = block_atb.get("parts")
+        for child in parts:
+            child.accept(self)
+
+    @dispatch(BlockBodyPartNode)
+    def visit(self, node):
+        part_atb = vars(node)
+        key = part_atb.keys()
+        for k in key:
+            print("part: " + part_atb.get(k))
+
+    @dispatch(ClassBodyNode)
+    def visit(self, node):
+        print("class body")
+        body_atb = vars(node)
+        self.accept_children(body_atb.get("body_parts"))
+
+
+
+
+    @dispatch(object)
+    def visit(self, node):
+        pass
+
+
+    def accept_children(self, children):
+        if isinstance(children, AbstractNode):
+            children.accept(self)
+        elif isinstance(children, list):
+            for child in children:
+                child.accept(self)
+
+
+
+
+
+
+
+'''
 class TopVisitor(NodeVisitor):
 
     def __init__(self, program):
@@ -238,6 +315,8 @@ class TopVisitor(NodeVisitor):
             for child in children:
                 child.accept(self)
         self.code_gen.emit_end(cnode_id)
+
+'''
 
 '''
 class CodeGenVisitor(NodeVisitor):
