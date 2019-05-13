@@ -8,7 +8,7 @@ class SymbolCrapTable:
     def __init__(self, scope_name, scope_level, enclosing_scope=None):
         self.symbols = {}
         self.scope_name = scope_name    # TODO delete if it never gets used
-        self.scope_level = scope_level  # TODO delete if it never gets used - might be redundant bcause enclosing scope
+        self.scope_level = scope_level  # TODO delete if it never gets used - might be redundant because enclosing scope
         self.enclosing_scope = enclosing_scope
 
     def new_scope(self, node, enclosing_scope):
