@@ -1,0 +1,28 @@
+digraph G {
+	graph [ranksep=1.5 ratio=fill]
+	node [style=filled]
+	overlap=false
+	7078817 [label="<prog>: None"]
+	1529864 [label="<stmts>: None"]
+	7078817 -> 1529864
+	3406513 [label="<stmt>: None"]
+	1529864 -> 3406513
+	2064486 [label="<class-dcl>: None"]
+	3406513 -> 2064486
+	9098740 [label="ID: LivingRoom"]
+	2064486 -> 9098740
+	5911060 [label="LCURLY: {"]
+	2064486 -> 5911060
+	5832691 [label="<class-body>: None"]
+	2064486 -> 5832691
+	3008157 [label="λ: None"]
+	5832691 -> 3008157
+	4415738 [label="RCURLY: }"]
+	2064486 -> 4415738
+	5428077 [label="<stmts>: None"]
+	1529864 -> 5428077
+	7234482 [label="λ: None"]
+	5428077 -> 7234482
+	2555490 [label="$: $"]
+	7078817 -> 2555490
+}

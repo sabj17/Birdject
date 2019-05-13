@@ -9,7 +9,7 @@ from prettytable import PrettyTable
 
 wd = os.getcwd()
 grammar_file = os.path.join(wd, 'resources/grammar.txt')
-program_file = os.path.join(wd, 'resources/Example.jnr')
+program_file = os.path.join(wd, 'resources/Example1.jnr')
 
 grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
@@ -40,6 +40,7 @@ parse_tree = parser.parse(tokens)
 
 parse_tree.graph()
 ast = parse_tree.to_AST()
-ast.graph()
 
-symtable = SymbolTable(ast)
+#ast.graph()
+
+#symtable = SymbolTable(ast)

@@ -2,29 +2,32 @@ set number1 to 4 + 2 * 3 - 4;
 set string to "Hello";
 set hello to simon;
 
-LivingRoom{
-	set temp1 to Thermometer();
-	set hello.there to 5 * (10 + 4) / 4 - 3 % 2;
+Thermometer{
+    set pin to pin13;
+    function temperature(){
+        return digitalRead(pin)*n[4];
+    }
+}
 
-	function getTemp1(n){
-		return temp1 * n[4];
-	}
+LivingRoom{
+	set thermo to Thermometer();
+	set hello.there to 5 * (10 + 4) / 4 - 3 % 2;
 
 	function openWindow(){
 		run window1.turnOn();
 	}
 }
 
-function globalFunc(){
-	if (true){
+function globalFunc(val, val2){
+	if (val>1){
 	    return false;
-	} else if (false) {
+	} else if (val<0) {
 	    return true;
 	} else {
 	    return dab;
 	}
 
-	if (true){
+	if (val == 2){
 	    return false;
 	} else {
 	    return dab;
@@ -32,7 +35,7 @@ function globalFunc(){
 
 }
 
-when(run LivingRoom.getTemp1() > 20){
+when(run LivingRoom.thermo.temperature() > 20){
 	run LivingRoom.window1.open();
 	run LivingRoom.openWindow();
 	run globalFunc(xd, nou);

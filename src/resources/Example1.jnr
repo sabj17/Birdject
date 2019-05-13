@@ -1,0 +1,6 @@
+
+function hello(param_1, param2){
+run window1.object1.turnOn(1, 2);
+run print(4+5);
+}
+

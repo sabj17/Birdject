@@ -2,15 +2,20 @@ import random
 from graphviz import Digraph, nohtml
 
 
+
 class AST:
     def __init__(self, prog_node):
         self.prog = prog_node
+
 
     def graph(self):
         graph = Digraph('G', node_attr={'style': 'filled'}, graph_attr={'ratio': 'fill', 'ranksep': '1.5'})
         graph.attr(overlap='false')
         self.prog.graph(graph)
         graph.save(filename='AST.gv')
+
+    def accept(self, visitor):
+        return self.prog.accept(visitor)
 
 
 class AbstractNode:
@@ -38,9 +43,39 @@ class AbstractNode:
                 return True
         return False
 
-    def accept(self, node_visitor):
-        node_visitor.dispatch(self)
 
+    def accept(self, node_visitor):
+        node_visitor.visit(self)
+
+    '''def accept(self, node_visitor):
+        node_visitor.visit(self)
+        class_vars = vars(self)
+        varz=[]
+        for value in class_vars.values():
+            varz.append(value)
+        for child in varz:
+            if isinstance(child, AbstractNode):
+                child.accept(node_visitor)
+            elif isinstance(child, list):
+                for s_child in child:
+                    s_child.accept(node_visitor)
+    '''
+
+
+    '''def accept(self, node_visitor):
+        class_vars = vars(self)
+        varz = []
+        for value in class_vars.values():
+            varz.append(value)
+        for child in reversed(varz):
+            if isinstance(child, AbstractNode):
+                child.accept(node_visitor)
+            elif isinstance(child, list):
+                for s_child in child:
+                    s_child.accept(node_visitor)
+
+        #node_visitor.visit(self)
+    '''
     def __str__(self):
         return type(self).__name__
 
@@ -81,39 +116,41 @@ class WhenNode(StatementNode):
 
 
 class ForNode(StatementNode):
-    def __init__(self, id, expression, block):
+    def __init__(self, id1, expression, block):
         super().__init__()
-        self.id = id
+        self.id = id1
         self.expression = expression
         self.block = block
 
 
 class AssignNode(StatementNode):
-    def __init__(self, id, expression):
+    def __init__(self, id1, expression):
         super().__init__()
-        self.id = id
+        self.id = id1
         self.expression = expression
 
 
 class FunctionNode(StatementNode):
-    def __init__(self, id, params, block):
+    def __init__(self, id1, params, block):
         super().__init__()
-        self.id = id
+        self.id = id1
         self.params = params
         self.block = block
 
 
 class ClassNode(StatementNode):
-    def __init__(self, id, body_part):
+    def __init__(self, id1, body_part):
         super().__init__()
-        self.id = id
+        self.id = id1
         self.body_part = body_part
+        self.end = EndNode()
 
 
 class ClassBodyNode(StatementNode):
     def __init__(self, body_parts):
         super().__init__()
         self.body_parts = body_parts
+
 
     def graph(self, graph, parent=None):
         id = str(random.randint(1, 10000000))
@@ -234,6 +271,7 @@ class BlockNode(AbstractNode):
         super().__init__()
         self.parts = parts
 
+
     def graph(self, graph, parent=None):
         id = str(random.randint(1, 10000000))
         graph.node(id, nohtml(self.__str__()))
@@ -317,7 +355,6 @@ class IntegerNode(TermNode):
 
 
 class IdNode(TermNode):
-
     def __init__(self, name):
         super().__init__()
         self.name = name
@@ -344,3 +381,8 @@ class ArrayRefNode(TermNode):
         super().__init__()
         self.id = id
         self.integer = index
+
+
+class EndNode(AbstractNode):
+    def __init__(self):
+        pass
