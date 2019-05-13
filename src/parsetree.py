@@ -1,7 +1,7 @@
+from ast import *
 from src.grammar import *
 from graphviz import Digraph, nohtml
 import random
-from src.ast import *
 
 
 class PTNode:

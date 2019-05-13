@@ -1,6 +1,5 @@
-from src.grammar import *
-from src.tokens import Token, TokenStream
 from src.parsetree import *
+from src.tokens import TokenStream
 
 
 class Stack:

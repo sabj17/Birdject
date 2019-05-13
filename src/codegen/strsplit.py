@@ -5,7 +5,8 @@ class Splitter:
     def get_classes_str(self, class_str):
         classes = []
         for word in class_str:
-            if word is "class"
+            if word is "class":
+                pass
 
     def get_methods_str(self, class_str):
         pass

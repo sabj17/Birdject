@@ -1,6 +1,4 @@
-from src.ast import *
-from src.ast import AST
-from src.parser import Stack
+from ast import *
 
 
 class SymbolCrapTable:
@@ -12,7 +10,7 @@ class SymbolCrapTable:
         self.enclosing_scope = enclosing_scope
 
     def new_scope(self, node, enclosing_scope):
-        scope_name = type(node)     #TODO do something else for block scopes that comes out of nowhere
+        scope_name = type(node)     # TODO do something else for block scopes that come out of nowhere
 
         scope_object = SymbolCrapTable(
             scope_name=scope_name,
@@ -22,7 +20,6 @@ class SymbolCrapTable:
         return scope_object
 
     def add_symbol(self, node_name):
-        #print('Insert: %s' % node)
         self.symbols[node_name] = 'type'
 
     def lookup(self, name):
@@ -58,52 +55,53 @@ class AstCrapNodeVisitor(NodeVisitor):
             )
 
     def visit_BlockNode(self, node):
-        #print('########### Before ', self.current_scope.symbols)
         enclosing_scope = self.current_scope
         inner_scope = self.current_scope.new_scope(node, self.current_scope)
         self.current_scope = inner_scope
         node.visit_children(self)
 
-        #print('########### After ', self.current_scope.symbols)
-
         self.current_scope = enclosing_scope
         self.current_scope.symbols[inner_scope] = 'Block_Scope'
 
-
     def visit_ClassNode(self, node):
-        print('---------------- ', node)
         self.current_scope.symbols[node.id.name] = object
 
-        print('_____________ Before ', self.current_scope.symbols)
         enclosing_scope = self.current_scope
         inner_scope = self.current_scope.new_scope(node, self.current_scope)
         self.current_scope = inner_scope
         node.body_part.visit_children(self)
 
-        print('___________ After ', self.current_scope.symbols)
-
         self.current_scope = enclosing_scope
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
-        print('___________ After ', self.current_scope.symbols)
 
     def visit_AssignNode(self, node):
-        #print(node.expression)
-        if isinstance(node.expression, BoolNode):
-            self.current_scope.symbols[node.id.name] = bool
-        elif isinstance(node.expression, NewObjectNode):
+
+        if isinstance(node.expression, NewObjectNode):
             self.current_scope.symbols[node.id.name] = node.expression.id.name
-        elif isinstance(node.expression, IntegerNode):
-            self.current_scope.symbols[node.id.name] = int
-        elif isinstance(node.expression, FloatNode):
-            self.current_scope.symbols[node.id.name] = float
-        elif isinstance(node.expression, StringNode):
-            self.current_scope.symbols[node.id.name] = str
         elif isinstance(node.expression, BinaryExpNode):
             self.current_scope.symbols[node.id.name] = self.eval_bin_expr_type(node.expression)
         elif isinstance(node.expression, IdNode):
             self.current_scope.symbols[node.id.name] = self.current_scope.lookup(node.expression.name)
+        elif isinstance(node.expression, TermNode):
+            self.current_scope.symbols[node.id.name] = self.eval_term_node_type(node.expression)
         else:
             self.current_scope.symbols[node.id.name] = None
+
+    def eval_term_node_type(self, term_node):
+        type_of_term_node = None
+
+        if isinstance(term_node, BoolNode):
+            type_of_term_node = bool
+        elif isinstance(term_node, IntegerNode):
+            type_of_term_node = int
+        elif isinstance(term_node, FloatNode):
+            type_of_term_node = float
+        elif isinstance(term_node, StringNode):
+            type_of_term_node = str
+        elif isinstance(term_node, IdNode):
+            type_of_term_node = self.current_scope.lookup(term_node.name)
+
+        return type_of_term_node
 
     def eval_bin_expr_type(self, binExpNode):
         final_type = None
@@ -128,7 +126,6 @@ class AstCrapNodeVisitor(NodeVisitor):
 
         return final_type
 
-
     def visit_FunctionNode(self, node):
         outer_scope = self.current_scope
         inner_scope = self.current_scope.new_scope(node, self.current_scope)
@@ -150,21 +147,31 @@ class AstCrapNodeVisitor(NodeVisitor):
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
 
     def visit_IfNode(self, node):
-        print('heeeeeey ', node.expression)
+        LHS_type_of_equal = None
+        RHS_type_of_equal = None
+
         if isinstance(node.expression, IdNode):
             if self.current_scope.lookup(node.expression.name) != bool:
                 raise Exception(TypeError, node.expression.name)
+        elif isinstance(node.expression, EqualsNode):
+            print("hej my nigga")
+            if isinstance(node.expression.expr1, TermNode):
+                LHS_type_of_equal = self.eval_term_node_type(node.expression.expr1)
+            elif isinstance(node.expression.expr1, BinaryExpNode):
+                LHS_type_of_equal = self.eval_bin_expr_type(node.expression.expr1)
 
+            if isinstance(node.expression.expr2, TermNode):
+                RHS_type_of_equal = self.eval_term_node_type(node.expression.expr2)
+            elif isinstance(node.expression.expr2, BinaryExpNode):
+                RHS_type_of_equal = self.eval_bin_expr_type(node.expression.expr2)
 
-        #node.visit_children(self)
-        else:
-            print("bacon")
-
-    #def visit_IdNode(self, node):
-        #print('-------------- ', node.name)
+            print(LHS_type_of_equal, 'and ', RHS_type_of_equal)
+            if LHS_type_of_equal != RHS_type_of_equal:
+                raise Exception(TypeError, LHS_type_of_equal, 'and', RHS_type_of_equal, 'is not the same')
+        #node.expression.visit_childen(self)
 
     def visit_RunNode(self, node):
-        if isinstance(node.id, DotNode): # Looks for if Class.method exist
+        if isinstance(node.id, DotNode):  # Looks for if Class.method exist
             last_id = node.id.ids[-1].name
             temp_scope = self.current_scope
             formal_param = None
@@ -175,14 +182,16 @@ class AstCrapNodeVisitor(NodeVisitor):
                     temp_scope = temp_scope.lookup(str(id.name + 'Scope'))
 
             # TODO make with real types when we get that
-            if formal_param != self.get_actual_params(node):
-                raise Exception('Type error: missing paramater or mismatch in types')
+            #print("LEN:", len(formal_param), len(self.get_actual_params(node)))
+            if len(formal_param) != len(self.get_actual_params(node)):
+                raise Exception('Type error: missing parameter or mismatch in types')
 
         # What that should happen when the runNode dosen't have following dotNodes
         elif isinstance(node.id, IdNode):
             # TODO make with real types when we get that
-            if self.current_scope.lookup(node.id.name) != self.get_actual_params(node):
-                raise Exception('Type error: missing paramater or mismatch in types')
+            #print("LEN:", len(self.current_scope.lookup(node.id.name)), len(self.get_actual_params(node)))
+            if len(self.current_scope.lookup(node.id.name)) != len(self.get_actual_params(node)):
+                raise Exception('Type error: missing parameter or mismatch in types')
 
     def get_formal_params(self, node):
         param_list = []
@@ -203,7 +212,6 @@ class AstCrapNodeVisitor(NodeVisitor):
         if node.params is not None:
             if isinstance(node.params.expr_list, list):
                 for param in node.params.expr_list:
-                    # print('idNode param name = ', param.name)
                     param_list.append('type' + str(i))
                     i += 1
             else:
@@ -215,5 +223,6 @@ class AstCrapNodeVisitor(NodeVisitor):
         if isinstance(node.params.id_list, list):
             for param in node.params.id_list:
                 self.current_scope.add_symbol(param.name)
+                #print("ADDING", param.name)
         else:
             self.current_scope.add_symbol(node.params.id_list.name)
