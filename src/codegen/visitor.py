@@ -1,5 +1,3 @@
-from multipledispatch import dispatch
-
 from src.ast import ProgNode, StatementNode, ExpressionNode, BlockNode, ActualParameterNode, FormalParameterNode,  TermNode, ClassNode, \
     ClassBodyNode, IdNode, IfNode, WhenNode, ForNode, AssignNode, FunctionNode, BinaryExpNode, UnaryExpNode, NotNode, \
     NegativeNode, ParenthesesNode, NewObjectNode, PlusNode, MinusNode, MultiplyNode, DivideNode, ModuloNode, EqualsNode, \
@@ -12,26 +10,29 @@ from src.codegen.program import Structure
 class NodeVisitor:
 
     def visit(self, node):
-        pass
+        method_name = 'visit_' + type(node).__name__
 
-class TopVisitor(NodeVisitor):
+        if hasattr(self, method_name):
+            visitor = getattr(self, method_name)
+            return visitor(node)
+
+        node.visit_children(self)
+
+class Visitor(NodeVisitor):
 
     def __init__(self, program):
         #self.code_gen = CodeEmittor()
         self.program = program
         #self.structure = Structure(program)
 
-
-    @dispatch(ProgNode)
-    def visit(self, node):
+    def visit_ProgNode(self, node):
         statements = vars(node).get("stmts")
         print("Program start")
         for node in statements:
             node.accept(self)
         print("Program end")
 
-    @dispatch(ClassNode)
-    def visit(self, node):
+    def visit_ClassNode(self, node):
         print("Class start")
         self.program.new_class()
         class_atb = vars(node)
@@ -42,38 +43,40 @@ class TopVisitor(NodeVisitor):
         self.program.end_structure()
         print("Class end")
 
-    @dispatch(IdNode)
-    def visit(self, node):
+    def visit_IdNode(self, node):
         field = vars(node)
         key = field.keys()
         for k in key:
             self.program.emit_id(field.get(k))
             print("id: " + field.get(k))
 
-    @dispatch(BlockNode)
-    def visit(self, node):
+    def visit_BlockNode(self, node):
         block_atb = vars(node)
         parts = block_atb.get("parts")
         for child in parts:
             child.accept(self)
 
-    @dispatch(BlockBodyPartNode)
-    def visit(self, node):
+    def visit_BlockBodyPartNode(self, node):
         part_atb = vars(node)
         key = part_atb.keys()
         for k in key:
             print("part: " + part_atb.get(k))
 
-    @dispatch(ClassBodyNode)
-    def visit(self, node):
+    def visit_ClassBodyNode(self, node):
         print("class body")
         body_atb = vars(node)
         self.accept_children(body_atb.get("body_parts"))
 
+    def visit_AssignNode(self, node):
+        string = ""
+        assign_atb = vars(node)
+        assign_id = assign_atb.get("id")
+        self.code_gen.emit_id(assign_id)
+        self.accept_children(assign_id, assign_atb.get("expression"))
+
+        return string
 
 
-
-    @dispatch(object)
     def visit(self, node):
         pass
 

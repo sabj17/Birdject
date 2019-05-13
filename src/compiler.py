@@ -1,4 +1,4 @@
-#from src.codegen.visitor import TopVisitor
+
 from src.grammar import *
 from src.symbol_table import SymbolTable
 from src.tokens import Token
@@ -44,7 +44,6 @@ parse_tree.graph()
 ast = parse_tree.to_AST()
 
 ast.graph()
-#visitor = TopVisitor()
 #ast.prog.accept(visitor)
 
 #symtable = SymbolTable(ast)
