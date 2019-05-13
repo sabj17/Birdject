@@ -1,0 +1,6 @@
+set nou to 10;
+function hello(param_1, param2){
+run turnOn(1, 2);
+run print(4+5);
+}
+
