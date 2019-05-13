@@ -17,14 +17,14 @@ class NodeVisitor:
 
 class TopVisitor(NodeVisitor):
 
-    def __init__(self):
+    def __init__(self, program):
         self.code_gen = CodeEmittor()
-       # self.program = program
-        #self.structure = Structure(program)
+        self.program = program
+        self.structure = Structure(program)
 
     @dispatch(ProgNode)
     def visit(self, node):
-#        self.structure.begin_structure()
+        self.structure.begin_structure()
         statements = vars(node).get("stmts")
         for node in statements:
             node.accept(self)
@@ -103,7 +103,6 @@ class TopVisitor(NodeVisitor):
     def visit(self, node):
         self.code_gen.emit_parameters()
         expr_list = vars(node).get("expr_list")
-        i = 0
         for child in expr_list:
             child.accept(self)
         self.code_gen.emit_end("Param")

@@ -1,6 +1,7 @@
 class Class(object):
 
 
+    def
     def build_structure(self):
         pass
 
