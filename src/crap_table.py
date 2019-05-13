@@ -35,7 +35,7 @@ class SymbolCrapTable:
         if self.enclosing_scope is not None:
             return self.enclosing_scope.lookup(name)
         else:
-            raise Exception('Symbol not found')
+            raise Exception('Symbol not found', symbol)
 
 
 class NodeVisitor(object):
@@ -71,6 +71,7 @@ class AstCrapNodeVisitor(NodeVisitor):
 
 
     def visit_ClassNode(self, node):
+        print('---------------- ', node)
         self.current_scope.symbols[node.id.name] = object
 
         print('_____________ Before ', self.current_scope.symbols)
@@ -98,27 +99,35 @@ class AstCrapNodeVisitor(NodeVisitor):
         elif isinstance(node.expression, StringNode):
             self.current_scope.symbols[node.id.name] = str
         elif isinstance(node.expression, BinaryExpNode):
-            self.current_scope.symbols[node.id.name] = self.recurse_master(node.expression)
+            self.current_scope.symbols[node.id.name] = self.eval_bin_expr_type(node.expression)
         elif isinstance(node.expression, IdNode):
             self.current_scope.symbols[node.id.name] = self.current_scope.lookup(node.expression.name)
         else:
             self.current_scope.symbols[node.id.name] = None
 
-    def recurse_master(self, node):
+    def eval_bin_expr_type(self, binExpNode):
         final_type = None
+        id_type = None
 
-        for expr in vars(node).values():
-            #print('--------- ', type(expr))
-            if isinstance(expr, StringNode):
+        for expr in vars(binExpNode).values():
+            if isinstance(expr, IdNode):    # Gets the type of the IdNode
+                id_type = self.current_scope.lookup(expr.name)
+
+            if isinstance(expr, StringNode) or id_type == str:
                 final_type = str
-            elif (final_type == int or final_type == None) and (isinstance(expr, FloatNode)):
+            elif (final_type == int or final_type == None) and (isinstance(expr, FloatNode) or id_type == float):
                 final_type = float
-            elif (final_type == None) and (isinstance(expr, IntegerNode)):
+            elif (final_type == None) and (isinstance(expr, IntegerNode) or id_type == int):
                 final_type = int
 
+            if (not isinstance(binExpNode, PlusNode)) and (final_type == str):
+                raise Exception(TypeError, expr)
+
             if isinstance(expr, BinaryExpNode):
-                self.recurse_master(expr)
+                self.eval_bin_expr_type(expr)
+
         return final_type
+
 
     def visit_FunctionNode(self, node):
         outer_scope = self.current_scope
@@ -140,16 +149,30 @@ class AstCrapNodeVisitor(NodeVisitor):
         self.current_scope = outer_scope
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
 
+    def visit_IfNode(self, node):
+        print('heeeeeey ', node.expression)
+        if isinstance(node.expression, IdNode):
+            if self.current_scope.lookup(node.expression.name) != bool:
+                raise Exception(TypeError, node.expression.name)
+
+
+        #node.visit_children(self)
+        else:
+            print("bacon")
+
+    #def visit_IdNode(self, node):
+        #print('-------------- ', node.name)
+
     def visit_RunNode(self, node):
         if isinstance(node.id, DotNode): # Looks for if Class.method exist
             last_id = node.id.ids[-1].name
-            var = self.current_scope
+            temp_scope = self.current_scope
             formal_param = None
             for id in node.id.ids:
                 if id.name == last_id:
-                    formal_param = var.lookup(id.name)
+                    formal_param = temp_scope.lookup(id.name)
                 else:
-                    var = var.lookup(str(id.name + 'Scope'))
+                    temp_scope = temp_scope.lookup(str(id.name + 'Scope'))
 
             # TODO make with real types when we get that
             if formal_param != self.get_actual_params(node):

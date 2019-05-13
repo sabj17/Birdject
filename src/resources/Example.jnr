@@ -1,10 +1,11 @@
+set list1 to List();
 set number1 to 4 + 2 * 3 - 4;
 set string to "Hello";
-set bacon to number1;
+set bacon to string;
 set superString to "hey" + "baby";
-set numberString to "high" + 5;
-set numberString to "high" + 5 - 7;
-
+set numberString to "high" + "five";
+set numberString to "high" + 5 + bacon;
+set input1 to false;
 
 
 LivingRoom{
@@ -38,12 +39,16 @@ LivingRoom{
 
 function globalFunc(input1, input2){
     set smil123456 to 6666666;
+    set input1 to false;
 
 	if (input1){
-	    return false;
-	} else if (input2) {
-	    return true;
-	} else{
+
+	} else if (input2 is input1) {
+
+	} else if (a + b is 5) {
+
+	}
+	else{
 	    return true;
 	}
 
