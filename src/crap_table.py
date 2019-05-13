@@ -198,14 +198,10 @@ class AstCrapNodeVisitor(NodeVisitor):
 
     def get_formal_params(self, funcNode):
         param_list = []
-        i = 1
 
         if isinstance(funcNode.params.id_list, list):
             for param in funcNode.params.id_list:
-                param_list.append('funcParam' + str(i))
-                i += 1
-        else:
-            param_list.append('funcParam1')
+                param_list.append(param.name)
 
         return param_list
 

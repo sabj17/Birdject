@@ -18,14 +18,14 @@ LivingRoom{
 		return temp1;
 	}
 
-	function openWindow(x){
+	function openWindow(){
 	    set clap to 987;
 		run getTemp1(clap);
 		return "well done";
 	}
 
 	function closeWindow(window2){
-	    run openWindow(1);
+	    run openWindow();
 	    return true;
 	}
 
@@ -64,7 +64,7 @@ when(run LivingRoom.getTemp1(number1) > 20){
     set hello to 2;
     set x to 22;
     set windowXX to 55;
-	run LivingRoom.openWindow(x);
+	run LivingRoom.openWindow();
 	run LivingRoom.closeWindow(windowXX);
 	run globalFunc(x + hello, 99, string);
 	run LivingRoom.AnotherRoom.burnRoom(x);
