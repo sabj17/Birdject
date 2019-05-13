@@ -13,9 +13,6 @@ class SymbolCrapTable:
         )
         return scope_object
 
-    def add_symbol(self, node_name):
-        self.symbols[node_name] = 'type'
-
     def lookup(self, name):
         # 'symbol' is either an instance of the 'type' or None
         symbol = self.symbols.get(name)
@@ -57,18 +54,13 @@ class AstCrapNodeVisitor(NodeVisitor):
     def visit_ClassNode(self, node):
         self.current_scope.symbols[node.id.name] = object
 
-        print('-----------', self.current_scope.symbols)
-
         enclosing_scope = self.current_scope
         inner_scope = self.current_scope.new_scope(self.current_scope)
         self.current_scope = inner_scope
         node.body_part.visit_children(self)
 
-        print('____________', self.current_scope.symbols)
-
         self.current_scope = enclosing_scope
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
-        print('############', self.current_scope.symbols)
 
     def visit_AssignNode(self, node):
 
@@ -125,21 +117,17 @@ class AstCrapNodeVisitor(NodeVisitor):
         inner_scope = self.current_scope.new_scope(self.current_scope)
         param_list = []
 
-        ####################### Test until we get real types ####################################
+        # Gets the formal parameters with fake type(s) 1,2,3.
         if node.params is not None:
             param_list = self.get_formal_params(node)
 
         self.current_scope.symbols[node.id.name] = param_list
-        #########################################################################################
         self.current_scope = inner_scope
 
-        if node.params is not None:
+        if node.params is not None:     # Adds the parameters to the scope
             self.add_params_to_scope(node)
 
         node.block.visit_children(self)
-
-        print('LLLLLLLLLLLLLLLLLLLL ', self.current_scope.symbols)
-
         self.current_scope = outer_scope
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
 
@@ -214,17 +202,16 @@ class AstCrapNodeVisitor(NodeVisitor):
 
         if isinstance(funcNode.params.id_list, list):
             for param in funcNode.params.id_list:
-                param_list.append('type' + str(i))
+                param_list.append('funcParam' + str(i))
                 i += 1
         else:
-            param_list.append('type1')
+            param_list.append('funcParam1')
 
         return param_list
 
     def add_params_to_scope(self, funcNode):
         if isinstance(funcNode.params.id_list, list):
             for param in funcNode.params.id_list:
-                self.current_scope.add_symbol(param.name)
-                #print("ADDING", param.name)
+                self.current_scope.symbols[param.name] = 'formalParam'
         else:
-            self.current_scope.add_symbol(funcNode.params.id_list.name)
+            self.current_scope.symbols[funcNode.params.id_list.name] = 'formalParam'

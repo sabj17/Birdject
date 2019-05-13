@@ -45,4 +45,5 @@ ast.graph()
 visitor = AstCrapNodeVisitor()
 ast.accept(visitor)
 symtable = visitor.current_scope
+print("The final symbol table")
 print(symtable.symbols)
