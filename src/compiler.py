@@ -1,9 +1,10 @@
-from src.codegen.visitor import TopVisitor
+#from src.codegen.visitor import TopVisitor
 from src.grammar import *
 from src.symbol_table import SymbolTable
 from src.tokens import Token
 from src.parser import Parser
 from src.lexer import Lexer
+from src.ast import *
 import os
 from prettytable import PrettyTable
 
@@ -20,7 +21,7 @@ program = '''
 
 #print(grammar)
 
-lexer = Lexer(file_path=program_file)
+lexer = Lexer(program_file=program_file)
 tokens = lexer.lex()
 
 #print()
@@ -43,7 +44,7 @@ parse_tree.graph()
 ast = parse_tree.to_AST()
 
 ast.graph()
-visitor = TopVisitor()
-ast.prog.accept(visitor)
+#visitor = TopVisitor()
+#ast.prog.accept(visitor)
 
 #symtable = SymbolTable(ast)

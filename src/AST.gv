@@ -2,67 +2,67 @@ digraph G {
 	graph [ranksep=1.5 ratio=fill]
 	node [style=filled]
 	overlap=false
-	2846698 [label=ProgNode]
-	8346787 [label=AssignNode]
-	2846698 -> 8346787
-	4594988 [label=IdNode]
-	8346787 -> 4594988
-	357310 [label=nou]
-	4594988 -> 357310
-	3085047 [label=IntegerNode]
-	8346787 -> 3085047
-	8508965 [label=10]
-	3085047 -> 8508965
-	4872636 [label=FunctionNode]
-	2846698 -> 4872636
-	1298972 [label=IdNode]
-	4872636 -> 1298972
-	7554266 [label=hello]
-	1298972 -> 7554266
-	5419993 [label=ParameterNode]
-	4872636 -> 5419993
-	4494642 [label=IdNode]
-	5419993 -> 4494642
-	9876403 [label=param_1]
-	4494642 -> 9876403
-	9596658 [label=IdNode]
-	5419993 -> 9596658
-	8172297 [label=param2]
-	9596658 -> 8172297
-	3886096 [label=BlockNode]
-	4872636 -> 3886096
-	877556 [label=RunNode]
-	3886096 -> 877556
-	7242773 [label=IdNode]
-	877556 -> 7242773
-	8237296 [label=turnOn]
-	7242773 -> 8237296
-	8480031 [label=ParameterNode]
-	877556 -> 8480031
-	2782280 [label=IntegerNode]
-	8480031 -> 2782280
-	9087116 [label=1]
-	2782280 -> 9087116
-	9253856 [label=IntegerNode]
-	8480031 -> 9253856
-	453194 [label=2]
-	9253856 -> 453194
-	1810624 [label=RunNode]
-	3886096 -> 1810624
-	3453624 [label=IdNode]
-	1810624 -> 3453624
-	2331877 [label=print]
-	3453624 -> 2331877
-	9602237 [label=ParameterNode]
-	1810624 -> 9602237
-	4409407 [label=PlusNode]
-	9602237 -> 4409407
-	9278765 [label=IntegerNode]
-	4409407 -> 9278765
-	9496264 [label=4]
-	9278765 -> 9496264
-	4314550 [label=IntegerNode]
-	4409407 -> 4314550
-	957054 [label=5]
-	4314550 -> 957054
+	4453226 [label=ProgNode]
+	2620814 [label=FunctionNode]
+	4453226 -> 2620814
+	1835991 [label=IdNode]
+	2620814 -> 1835991
+	1614594 [label=hello]
+	1835991 -> 1614594
+	7948539 [label=FormalParameterNode]
+	2620814 -> 7948539
+	4013415 [label=IdNode]
+	7948539 -> 4013415
+	8932300 [label=param_1]
+	4013415 -> 8932300
+	2792147 [label=IdNode]
+	7948539 -> 2792147
+	6460580 [label=param2]
+	2792147 -> 6460580
+	8778379 [label=BlockNode]
+	2620814 -> 8778379
+	4814859 [label=RunNode]
+	8778379 -> 4814859
+	9137829 [label=DotNode]
+	4814859 -> 9137829
+	7250695 [label=IdNode]
+	9137829 -> 7250695
+	7508261 [label=window1]
+	7250695 -> 7508261
+	9879068 [label=IdNode]
+	9137829 -> 9879068
+	2593318 [label=object1]
+	9879068 -> 2593318
+	1069447 [label=IdNode]
+	9137829 -> 1069447
+	4126567 [label=turnOn]
+	1069447 -> 4126567
+	5323999 [label=ActualParameterNode]
+	4814859 -> 5323999
+	766867 [label=IntegerNode]
+	5323999 -> 766867
+	9552241 [label=1]
+	766867 -> 9552241
+	9248544 [label=IntegerNode]
+	5323999 -> 9248544
+	845792 [label=2]
+	9248544 -> 845792
+	6592121 [label=RunNode]
+	8778379 -> 6592121
+	8220224 [label=IdNode]
+	6592121 -> 8220224
+	4462482 [label=print]
+	8220224 -> 4462482
+	5637851 [label=ActualParameterNode]
+	6592121 -> 5637851
+	4916158 [label=PlusNode]
+	5637851 -> 4916158
+	7307797 [label=IntegerNode]
+	4916158 -> 7307797
+	2172085 [label=4]
+	7307797 -> 2172085
+	1736962 [label=IntegerNode]
+	4916158 -> 1736962
+	7001975 [label=5]
+	1736962 -> 7001975
 }

@@ -1,5 +1,4 @@
 from src.ast import *
-from src.ast import AST
 from src.parser import Stack
 
 

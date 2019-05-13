@@ -1,10 +1,10 @@
 from multipledispatch import dispatch
 
-from src.ast import ProgNode, StatementNode, ExpressionNode, BlockNode, ParameterNode, TermNode, ClassNode, \
+from src.ast import ProgNode, StatementNode, ExpressionNode, BlockNode, ActualParameterNode, FormalParameterNode,  TermNode, ClassNode, \
     ClassBodyNode, IdNode, IfNode, WhenNode, ForNode, AssignNode, FunctionNode, BinaryExpNode, UnaryExpNode, NotNode, \
     NegativeNode, ParenthesesNode, NewObjectNode, PlusNode, MinusNode, MultiplyNode, DivideNode, ModuloNode, EqualsNode, \
     NotEqualNode, GreaterThanNode, LessThanNode, AndNode, OrNode, BlockBodyPartNode, ReturnNode, BreakNode, RunNode, \
-    BoolNode, StringNode, FloatNode, IntegerNode, DotNode, ArrayRefNode, EndNode, AbstractNode
+    BoolNode, StringNode, FloatNode, IntegerNode, DotNode, ArrayRefNode, AbstractNode
 from src.codegen.codegen import CodeEmittor as CodeGen, CodeEmittor
 from src.codegen.program import Structure
 
@@ -99,7 +99,7 @@ class TopVisitor(NodeVisitor):
     def visit(self, node):
         self.code_gen.emit_block_body()
 
-    @dispatch(ParameterNode)
+    @dispatch(ActualParameterNode) #hello
     def visit(self, node):
         self.code_gen.emit_parameters()
         expr_list = vars(node).get("expr_list")
@@ -238,7 +238,6 @@ class TopVisitor(NodeVisitor):
             for child in children:
                 child.accept(self)
         self.code_gen.emit_end(cnode_id)
-
 
 '''
 class CodeGenVisitor(NodeVisitor):
@@ -394,7 +393,7 @@ class CodeGenVisitor(NodeVisitor):
     # PARAMETER STUFF #
     ###################
 
-    @dispatch(ParameterNode)
+    @dispatch(ActualParameterNode)
     def visit(self, node):
         self.code_gen.emit_parameters()
 
@@ -437,8 +436,4 @@ class CodeGenVisitor(NodeVisitor):
     @dispatch(ArrayRefNode)
     def visit(self, node):
         self.code_gen.emit_array_ref()
-
-    @dispatch(EndNode)
-    def visit(self, node):
-        self.code_gen.emit_end()
 '''

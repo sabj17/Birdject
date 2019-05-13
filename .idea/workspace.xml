@@ -3,8 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="311eaa91-087f-4edd-b12e-d967ecc45f3e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/crap_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crap_table.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Example.jnr" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Example.jnr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AST.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/AST.gv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/codegen/program.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/codegen/program.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/codegen/visitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/codegen/visitor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parse_tree.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/parse_tree.gv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/symbol_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbol_table.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,17 +20,17 @@
     <SUITE FILE_PATH="coverage/Birdject$parser.coverage" NAME="parser Coverage Results" MODIFIED="1553512703263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$pytest_in_test.coverage" NAME="pytest in test Coverage Results" MODIFIED="1553545532014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/Birdject$pytest_in_test_parser_py.coverage" NAME="pytest in test_parser.py Coverage Results" MODIFIED="1553543330649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1554381359704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1557741414104" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1553550625262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.4641385">
+    <splitter split-orientation="horizontal" split-proportion="0.3422965">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/resources/testgrammar.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="575">
+                <state relative-caret-position="450">
                   <caret line="25" selection-start-line="25" selection-end-line="25" />
                 </state>
               </provider>
@@ -35,17 +39,17 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/resources/grammar.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2070">
+                <state relative-caret-position="1620">
                   <caret line="90" selection-start-line="90" selection-end-line="90" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/parsetree.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="6095">
-                  <caret line="268" column="28" selection-start-line="268" selection-start-column="28" selection-end-line="268" selection-end-column="28" />
+                <state relative-caret-position="54">
+                  <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
                   <folding>
                     <element signature="e#0#25#0" expanded="true" />
                   </folding>
@@ -56,20 +60,17 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="966">
-                  <caret line="44" column="46" selection-start-line="44" selection-start-column="46" selection-end-line="44" selection-end-column="46" />
-                  <folding>
-                    <element signature="e#0#21#0" expanded="true" />
-                  </folding>
+                <state>
+                  <caret column="21" selection-start-column="21" selection-end-column="21" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/ast.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="208">
-                  <caret line="74" column="10" selection-start-line="74" selection-start-column="6" selection-end-line="74" selection-end-column="10" />
+                <state relative-caret-position="331">
+                  <caret line="342" column="12" selection-start-line="342" selection-start-column="6" selection-end-line="342" selection-end-column="12" />
                   <folding>
                     <element signature="e#0#13#0" expanded="true" />
                   </folding>
@@ -80,7 +81,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/crap_table.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="4370">
+                <state relative-caret-position="3546">
                   <caret line="199" column="38" selection-start-line="199" selection-start-column="38" selection-end-line="204" selection-end-column="51" />
                   <folding>
                     <element signature="e#0#21#0" expanded="true" />
@@ -93,11 +94,11 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/crap_table.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="368">
-                  <caret line="157" column="8" selection-start-line="157" selection-start-column="8" selection-end-line="157" selection-end-column="8" />
+                <state relative-caret-position="2826">
+                  <caret line="157" selection-start-line="157" selection-end-line="157" />
                   <folding>
                     <element signature="e#0#21#0" expanded="true" />
                   </folding>
@@ -106,12 +107,45 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="417">
+                  <caret line="438" column="3" selection-start-line="438" selection-start-column="3" selection-end-line="438" selection-end-column="3" />
+                  <folding>
+                    <element signature="e#0#37#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/codegen/program.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="36">
+                  <caret line="2" selection-start-line="2" selection-end-line="2" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/compiler.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1380">
-                  <caret line="68" column="67" selection-start-line="68" selection-start-column="67" selection-end-line="68" selection-end-column="67" />
+                <state relative-caret-position="414">
+                  <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
                   <folding>
-                    <element signature="e#0#25#0" expanded="true" />
+                    <element signature="e#44#69#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/lexer.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="756">
+                  <caret line="43" column="35" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="35" />
+                  <folding>
+                    <element signature="e#0#9#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -120,7 +154,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/resources/Example.jnr">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
+                <state relative-caret-position="738">
                   <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
                 </state>
               </provider>
@@ -129,8 +163,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/AST.gv">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="841">
-                  <caret line="550" column="22" lean-forward="true" selection-start-line="550" selection-start-column="22" selection-end-line="550" selection-end-column="22" />
+                <state relative-caret-position="1224">
+                  <caret line="68" selection-start-line="68" selection-end-line="68" />
                 </state>
               </provider>
             </entry>
@@ -162,7 +196,6 @@
       <find>returnnode</find>
       <find>boolNode</find>
       <find>parameter</find>
-      <find>idnode</find>
       <find>expressionNode</find>
       <find>assign</find>
       <find>classbody</find>
@@ -172,12 +205,13 @@
       <find>params</find>
       <find>formal</find>
       <find>func</find>
-      <find>param</find>
       <find>termn</find>
       <find>expression</find>
       <find>type</find>
       <find>expre</find>
       <find>visit_Block</find>
+      <find>param</find>
+      <find>idnode</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -220,34 +254,71 @@
         <option value="$PROJECT_DIR$/src/SymbolTable.py" />
         <option value="$PROJECT_DIR$/src/parser.py" />
         <option value="$PROJECT_DIR$/src/crap.py" />
-        <option value="$PROJECT_DIR$/src/parsetree.py" />
-        <option value="$PROJECT_DIR$/src/symbol_table.py" />
-        <option value="$PROJECT_DIR$/src/compiler.py" />
         <option value="$PROJECT_DIR$/src/AST.gv" />
         <option value="$PROJECT_DIR$/src/ast.py" />
         <option value="$PROJECT_DIR$/src/resources/Example.jnr" />
         <option value="$PROJECT_DIR$/src/crap_table.py" />
+        <option value="$PROJECT_DIR$/src/codegen/program.py" />
+        <option value="$PROJECT_DIR$/src/symbol_table.py" />
+        <option value="$PROJECT_DIR$/src/parsetree.py" />
+        <option value="$PROJECT_DIR$/src/codegen/visitor.py" />
+        <option value="$PROJECT_DIR$/src/compiler.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1287" />
-    <option name="y" value="26" />
-    <option name="width" value="1261" />
-    <option name="height" value="1402" />
+    <option name="x" value="1285" />
+    <option name="y" value="23" />
+    <option name="width" value="1263" />
+    <option name="height" value="1404" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Birdject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Birdject" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Birdject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Birdject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Birdject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Birdject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="codegen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Birdject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Birdject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Birdject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Birdject" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/test" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -294,7 +365,7 @@
       <method v="2" />
     </configuration>
     <configuration name="compiler" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Birdject" />
+      <module name="P4" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -399,6 +470,15 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.ast" />
+      <item itemvalue="Python.compiler" />
+      <item itemvalue="Python.symbol_table" />
+      <item itemvalue="Python tests.pytest in /home/jens/Programming/4.semester/Birdject/test/test_parser.py" />
+      <item itemvalue="Python tests.pytest in test" />
+      <item itemvalue="Python tests.Unittests in test_nonterminal.py" />
+      <item itemvalue="Python tests.Unittests in test_tokenStream.py" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.compiler" />
@@ -444,6 +524,8 @@
       <workItem from="1557472355666" duration="10402000" />
       <workItem from="1557654179430" duration="11502000" />
       <workItem from="1557722546319" duration="1663000" />
+      <workItem from="1557738478370" duration="1212000" />
+      <workItem from="1557740919385" duration="501000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1553513025633</created>
@@ -719,18 +801,18 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="272244000" />
+    <option name="totallyTimeSpent" value="273957000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="13" width="1922" height="1068" extended-state="6" />
+    <frame x="-8" y="-8" width="1618" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="2" weight="0.11579509" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.11681643" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32780412" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4994664" visible="true" weight="0.2274678" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4994664" visible="true" weight="0.21208054" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39914164" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -740,7 +822,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053364" side_tool="true" weight="0.32832617" />
       <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32885906" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -940,16 +1022,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lexer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="85" selection-start-line="85" selection-end-line="85" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/grammar/test_grammar.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -990,80 +1062,104 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/testgrammar.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/grammar.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
+        <state relative-caret-position="1620">
           <caret line="90" selection-start-line="90" selection-end-line="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsetree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6095">
-          <caret line="268" column="28" selection-start-line="268" selection-start-column="28" selection-end-line="268" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="966">
-          <caret line="44" column="46" selection-start-line="44" selection-start-column="46" selection-end-line="44" selection-end-column="46" />
+        <state>
+          <caret column="21" selection-start-column="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/crap_table.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2826">
+          <caret line="157" selection-start-line="157" selection-end-line="157" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/compiler.py">
+    <entry file="file://$PROJECT_DIR$/src/lexer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="68" column="67" selection-start-line="68" selection-start-column="67" selection-end-line="68" selection-end-column="67" />
+        <state relative-caret-position="756">
+          <caret line="43" column="35" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="35" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AST.gv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="841">
-          <caret line="550" column="22" lean-forward="true" selection-start-line="550" selection-start-column="22" selection-end-line="550" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ast.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="74" column="10" selection-start-line="74" selection-start-column="6" selection-end-line="74" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/Example.jnr">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
+        <state relative-caret-position="738">
           <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/crap_table.py">
+    <entry file="file://$PROJECT_DIR$/src/AST.gv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="157" column="8" selection-start-line="157" selection-start-column="8" selection-end-line="157" selection-end-column="8" />
+        <state relative-caret-position="1224">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ast.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="342" column="12" selection-start-line="342" selection-start-column="6" selection-end-line="342" selection-end-column="12" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/testgrammar.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parsetree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codegen/program.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="438" column="3" selection-start-line="438" selection-start-column="3" selection-end-line="438" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/compiler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+          <folding>
+            <element signature="e#44#69#0" expanded="true" />
           </folding>
         </state>
       </provider>
