@@ -1,4 +1,4 @@
-
+from src.crap_table import SymbolCrapTable, AstCrapNodeVisitor
 from src.grammar import *
 from src.symbol_table import SymbolTable
 from src.tokens import Token
@@ -44,6 +44,5 @@ parse_tree.graph()
 ast = parse_tree.to_AST()
 
 ast.graph()
-#ast.prog.accept(visitor)
-
-#symtable = SymbolTable(ast)
+visitor = AstCrapNodeVisitor()
+symtable = ast.accept(visitor)
