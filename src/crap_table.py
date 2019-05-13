@@ -90,7 +90,6 @@ class AstCrapNodeVisitor(NodeVisitor):
     def eval_term_node_type(self, term_node):
         type_of_term_node = None
 
-        print('bacon + 2', term_node)
         if isinstance(term_node, BoolNode):
             type_of_term_node = bool
         elif isinstance(term_node, IntegerNode):
@@ -102,7 +101,6 @@ class AstCrapNodeVisitor(NodeVisitor):
         elif isinstance(term_node, IdNode):
             type_of_term_node = self.current_scope.lookup(term_node.name)
 
-        print('looooooort', type_of_term_node)
         return type_of_term_node
 
     def eval_bin_expr_type(self, binExpNode):
@@ -149,9 +147,28 @@ class AstCrapNodeVisitor(NodeVisitor):
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
 
     def visit_IfNode(self, node):
+        LHS_type_of_equal = None
+        RHS_type_of_equal = None
+
         if isinstance(node.expression, IdNode):
             if self.current_scope.lookup(node.expression.name) != bool:
                 raise Exception(TypeError, node.expression.name)
+        elif isinstance(node.expression, EqualsNode):
+            print("hej my nigga")
+            if isinstance(node.expression.expr1, TermNode):
+                LHS_type_of_equal = self.eval_term_node_type(node.expression.expr1)
+            elif isinstance(node.expression.expr1, BinaryExpNode):
+                LHS_type_of_equal = self.eval_bin_expr_type(node.expression.expr1)
+
+            if isinstance(node.expression.expr2, TermNode):
+                RHS_type_of_equal = self.eval_term_node_type(node.expression.expr2)
+            elif isinstance(node.expression.expr2, BinaryExpNode):
+                RHS_type_of_equal = self.eval_bin_expr_type(node.expression.expr2)
+
+            print(LHS_type_of_equal, 'and ', RHS_type_of_equal)
+            if LHS_type_of_equal != RHS_type_of_equal:
+                raise Exception(TypeError, LHS_type_of_equal, 'and', RHS_type_of_equal, 'is not the same')
+        #node.expression.visit_childen(self)
 
     def visit_RunNode(self, node):
         if isinstance(node.id, DotNode):  # Looks for if Class.method exist
@@ -165,14 +182,14 @@ class AstCrapNodeVisitor(NodeVisitor):
                     temp_scope = temp_scope.lookup(str(id.name + 'Scope'))
 
             # TODO make with real types when we get that
-            print("LEN:", len(formal_param), len(self.get_actual_params(node)))
+            #print("LEN:", len(formal_param), len(self.get_actual_params(node)))
             if len(formal_param) != len(self.get_actual_params(node)):
                 raise Exception('Type error: missing parameter or mismatch in types')
 
         # What that should happen when the runNode dosen't have following dotNodes
         elif isinstance(node.id, IdNode):
             # TODO make with real types when we get that
-            print("LEN:", len(self.current_scope.lookup(node.id.name)), len(self.get_actual_params(node)))
+            #print("LEN:", len(self.current_scope.lookup(node.id.name)), len(self.get_actual_params(node)))
             if len(self.current_scope.lookup(node.id.name)) != len(self.get_actual_params(node)):
                 raise Exception('Type error: missing parameter or mismatch in types')
 
@@ -206,6 +223,6 @@ class AstCrapNodeVisitor(NodeVisitor):
         if isinstance(node.params.id_list, list):
             for param in node.params.id_list:
                 self.current_scope.add_symbol(param.name)
-                print("ADDING", param.name)
+                #print("ADDING", param.name)
         else:
             self.current_scope.add_symbol(node.params.id_list.name)
