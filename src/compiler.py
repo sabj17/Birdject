@@ -50,11 +50,10 @@ ast = parse_tree.accept(BuildASTVisitor())
 
 ast.accept(GraphASTVisitor())
 
-
 visitor = AstNodeVisitor()
 ast.accept(visitor)
 symtable = visitor.current_scope
 #print(symtable.symbols)
 
-codeVisitor = Visitor(Program(), symtable)
-codeVisitor.visit(ast.prog)
+#codeVisitor = Visitor(Program(), symtable)
+#codeVisitor.visit(ast.prog)
