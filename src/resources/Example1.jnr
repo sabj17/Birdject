@@ -24,7 +24,6 @@ function tester(){
 when (5 > 4){
     set fuck to 15;
     set lightGlobal to Light(pin69);
-    set LivingRoom.x to 10;
 }
 
 set global to off;
