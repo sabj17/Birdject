@@ -17,6 +17,7 @@ class Visitor(NodeVisitor):
 
     def __init__(self, program, symtable):
         # self.code_gen = CodeEmittor()'
+        self.global_list = list()
         self.scope = 0
         self.global_string = ""
         self.setup_string = "void setup() {\n\tSerial.begin(9600);\n"
@@ -80,6 +81,7 @@ class Visitor(NodeVisitor):
         self.program.new_class()
 
         self.reset_constructor()
+        self.reset_current()
         class_atb = vars(node)
         class_id = class_atb.get("id")
         self.class_constructor += class_id.__repr__() + "Class"

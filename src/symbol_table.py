@@ -65,7 +65,6 @@ class AstNodeVisitor(NodeVisitor):
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
 
     def visit_AssignNode(self, node):
-
         if isinstance(node.expression, NewObjectNode):
             self.current_scope.symbols[node.id.name] = node.expression.id.name
         elif isinstance(node.expression, BinaryExpNode):

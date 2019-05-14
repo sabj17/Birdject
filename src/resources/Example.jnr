@@ -71,3 +71,8 @@ when(run LivingRoom.getTemp1(number1) > 20){
 	run globalFunc(x + hello, 99, string);
 	run LivingRoom.AnotherRoom.burnRoom(x);
 }
+
+    function jenerator(jebat, jabat){
+        set anus to jebat + jabat;
+        return anus;
+    }

@@ -13,17 +13,20 @@ LivingRoom {
     function jenerator(jebat, jabat){
         set jebat to 5 + 5;
         set jabat to "Anus";
+        //light.switchState();
         return jebat;
     }
 }
 
 function tester(){
     set nou to on;
+    //run LivingRoom.light.switchState();
 }
 
 when (5 > 4){
     set fuck to 15;
     set lightGlobal to Light(pin69);
+    //run LivingRoom.light.switchState();
 }
 
 set global to off;
