@@ -13,7 +13,7 @@ LivingRoom {
     function jenerator(jebat, jabat){
         set jebat to 5 + 5;
         set jabat to "Anus";
-        //light.switchState();
+        //run light.switchState();
         return jebat;
     }
 }
