@@ -103,6 +103,8 @@ class Visitor(NodeVisitor):
         self.accept_children(body_atb.get("body_parts"))
         self.global_string += self.current_string
 
+
+
     def visit_AssignNode(self, node):
         if self.scope == 0:
             self.reset_current()
