@@ -50,8 +50,10 @@ function globalFunc(input1, input2, input3){
 	if (input1){
 
 	} else if (input2 is input3) {
+	    set haha to "fuck you";
         return "hahaha";
 	} else if (a + b is "ha") {
+	    set yaya to 77;
         return numberString;
 	}
 	else{

@@ -6,6 +6,7 @@ class SymbolTable:
     def __init__(self, enclosing_scope=None):
         self.symbols = {}
         self.enclosing_scope = enclosing_scope
+        self.scope_counter = 1
 
     def new_scope(self, enclosing_scope):
         scope_object = SymbolTable(
@@ -48,8 +49,11 @@ class AstNodeVisitor(NodeVisitor):
         self.current_scope = inner_scope
         node.visit_children(self)
 
+        print('1', self.current_scope.symbols)
         self.current_scope = enclosing_scope
-        self.current_scope.symbols[inner_scope] = 'Block_Scope'
+        self.current_scope.symbols['Block_scope'+str(self.current_scope.scope_counter)] = inner_scope
+        self.current_scope.scope_counter += 1
+        print('2', self.current_scope.symbols)
 
     def visit_ClassNode(self, node):
         self.current_scope.symbols[node.id.name] = object

@@ -2,613 +2,633 @@ digraph G {
 	graph [ranksep=1.5 ratio=fill]
 	node [style=filled]
 	overlap=false
-	5108864 [label=ProgNode]
-	417128 [label=AssignNode]
-	5108864 -> 417128
-	6518310 [label=IdNode]
-	417128 -> 6518310
-	1011017 [label=list1]
-	6518310 -> 1011017
-	1975133 [label=NewObjectNode]
-	417128 -> 1975133
-	6880044 [label=IdNode]
-	1975133 -> 6880044
-	6632525 [label=List]
-	6880044 -> 6632525
-	6487161 [label=AssignNode]
-	5108864 -> 6487161
-	7790956 [label=IdNode]
-	6487161 -> 7790956
-	2620906 [label=number1]
-	7790956 -> 2620906
-	7372347 [label=PlusNode]
-	6487161 -> 7372347
-	2924369 [label=IntegerNode]
-	7372347 -> 2924369
-	4472772 [label=4]
-	2924369 -> 4472772
-	4757034 [label=MinusNode]
-	7372347 -> 4757034
-	9792447 [label=MultiplyNode]
-	4757034 -> 9792447
-	403868 [label=IntegerNode]
-	9792447 -> 403868
-	657067 [label=2]
-	403868 -> 657067
-	9458593 [label=IntegerNode]
-	9792447 -> 9458593
-	6462656 [label=3]
-	9458593 -> 6462656
-	8703670 [label=IntegerNode]
-	4757034 -> 8703670
-	4623473 [label=4]
-	8703670 -> 4623473
-	4393778 [label=AssignNode]
-	5108864 -> 4393778
-	4540879 [label=IdNode]
-	4393778 -> 4540879
-	9449515 [label=string]
-	4540879 -> 9449515
-	1093160 [label=StringNode]
-	4393778 -> 1093160
-	5480897 [label="\"Hello\""]
-	1093160 -> 5480897
-	3152349 [label=AssignNode]
-	5108864 -> 3152349
-	5973951 [label=IdNode]
-	3152349 -> 5973951
-	7579121 [label=bacon]
-	5973951 -> 7579121
-	9692642 [label=IdNode]
-	3152349 -> 9692642
-	103205 [label=string]
-	9692642 -> 103205
-	4445346 [label=AssignNode]
-	5108864 -> 4445346
-	3004321 [label=IdNode]
-	4445346 -> 3004321
-	4099777 [label=superString]
-	3004321 -> 4099777
-	4978454 [label=PlusNode]
-	4445346 -> 4978454
-	6344577 [label=StringNode]
-	4978454 -> 6344577
-	1634989 [label="\"hey\""]
-	6344577 -> 1634989
-	8010624 [label=StringNode]
-	4978454 -> 8010624
-	3535751 [label="\"baby\""]
-	8010624 -> 3535751
-	1118972 [label=AssignNode]
-	5108864 -> 1118972
-	7846931 [label=IdNode]
-	1118972 -> 7846931
-	2848235 [label=numberString]
-	7846931 -> 2848235
-	218269 [label=PlusNode]
-	1118972 -> 218269
-	6934976 [label=StringNode]
-	218269 -> 6934976
-	9602079 [label="\"high\""]
-	6934976 -> 9602079
-	9631504 [label=StringNode]
-	218269 -> 9631504
-	7618813 [label="\"five\""]
-	9631504 -> 7618813
-	9154335 [label=AssignNode]
-	5108864 -> 9154335
-	4703821 [label=IdNode]
-	9154335 -> 4703821
-	6688152 [label=numberString]
-	4703821 -> 6688152
-	4118957 [label=PlusNode]
-	9154335 -> 4118957
-	9195591 [label=StringNode]
-	4118957 -> 9195591
-	6504698 [label="\"high\""]
-	9195591 -> 6504698
-	5379871 [label=PlusNode]
-	4118957 -> 5379871
-	1325756 [label=IntegerNode]
-	5379871 -> 1325756
-	6581811 [label=5]
-	1325756 -> 6581811
-	647059 [label=IdNode]
-	5379871 -> 647059
-	5472702 [label=bacon]
-	647059 -> 5472702
-	7864459 [label=AssignNode]
-	5108864 -> 7864459
-	853352 [label=IdNode]
-	7864459 -> 853352
-	3947979 [label=input1]
-	853352 -> 3947979
-	6374549 [label=BoolNode]
-	7864459 -> 6374549
-	191270 [label=false]
-	6374549 -> 191270
-	9823867 [label=ClassNode]
-	5108864 -> 9823867
-	9878068 [label=IdNode]
-	9823867 -> 9878068
-	6432768 [label=LivingRoom]
-	9878068 -> 6432768
-	2596296 [label=ClassBodyNode]
-	9823867 -> 2596296
-	9099186 [label=AssignNode]
-	2596296 -> 9099186
-	315494 [label=IdNode]
-	9099186 -> 315494
-	3175827 [label=temp1]
-	315494 -> 3175827
-	9959735 [label=NewObjectNode]
-	9099186 -> 9959735
-	5094693 [label=IdNode]
-	9959735 -> 5094693
-	7385452 [label=Thermometer]
-	5094693 -> 7385452
-	4752613 [label=AssignNode]
-	2596296 -> 4752613
-	194653 [label=IdNode]
-	4752613 -> 194653
-	1138305 [label=constant]
-	194653 -> 1138305
-	4161801 [label=MinusNode]
-	4752613 -> 4161801
-	3831371 [label=MultiplyNode]
-	4161801 -> 3831371
-	8433819 [label=IntegerNode]
-	3831371 -> 8433819
-	6404345 [label=5]
-	8433819 -> 6404345
-	8683141 [label=DivideNode]
-	3831371 -> 8683141
-	2491828 [label=ParenthesesNode]
-	8683141 -> 2491828
-	6910833 [label=PlusNode]
-	2491828 -> 6910833
-	4442390 [label=IntegerNode]
-	6910833 -> 4442390
-	5708357 [label=10]
-	4442390 -> 5708357
-	3656766 [label=IntegerNode]
-	6910833 -> 3656766
-	7605398 [label=4]
-	3656766 -> 7605398
-	4159598 [label=ModuloNode]
-	8683141 -> 4159598
-	8078077 [label=IntegerNode]
-	4159598 -> 8078077
-	9403381 [label=2]
-	8078077 -> 9403381
-	532861 [label=IntegerNode]
-	4159598 -> 532861
-	587004 [label=1]
-	532861 -> 587004
-	5343274 [label=IntegerNode]
-	4161801 -> 5343274
-	1421800 [label=3]
-	5343274 -> 1421800
-	5290160 [label=AssignNode]
-	2596296 -> 5290160
-	5521053 [label=IdNode]
-	5290160 -> 5521053
-	3432582 [label=window1]
-	5521053 -> 3432582
-	7427228 [label=BoolNode]
-	5290160 -> 7427228
-	2954679 [label=off]
-	7427228 -> 2954679
-	4660352 [label=FunctionNode]
-	2596296 -> 4660352
-	8049961 [label=IdNode]
-	4660352 -> 8049961
-	8549524 [label=getTemp1]
-	8049961 -> 8549524
-	4100834 [label=FormalParameterNode]
-	4660352 -> 4100834
-	1313505 [label=IdNode]
-	4100834 -> 1313505
-	6203937 [label=n]
-	1313505 -> 6203937
-	4669643 [label=BlockNode]
-	4660352 -> 4669643
-	3332439 [label=AssignNode]
-	4669643 -> 3332439
-	8304452 [label=IdNode]
-	3332439 -> 8304452
-	7996941 [label=dab]
-	8304452 -> 7996941
-	2856543 [label=FloatNode]
-	3332439 -> 2856543
-	929951 [label=1234.2]
-	2856543 -> 929951
-	8611733 [label=ReturnNode]
-	4669643 -> 8611733
-	9399766 [label=IdNode]
-	8611733 -> 9399766
-	5999852 [label=temp1]
-	9399766 -> 5999852
-	7183939 [label=FunctionNode]
-	2596296 -> 7183939
-	588159 [label=IdNode]
-	7183939 -> 588159
-	9925453 [label=openWindow]
-	588159 -> 9925453
-	1267869 [label=BlockNode]
-	7183939 -> 1267869
-	5657843 [label=AssignNode]
-	1267869 -> 5657843
-	5723831 [label=IdNode]
-	5657843 -> 5723831
-	8332164 [label=clap]
-	5723831 -> 8332164
-	1146232 [label=IntegerNode]
-	5657843 -> 1146232
-	3668981 [label=987]
-	1146232 -> 3668981
-	4067417 [label=RunNode]
-	1267869 -> 4067417
-	4834924 [label=IdNode]
-	4067417 -> 4834924
-	2822025 [label=getTemp1]
-	4834924 -> 2822025
-	4368063 [label=ActualParameterNode]
-	4067417 -> 4368063
-	67525 [label=IdNode]
-	4368063 -> 67525
-	5400364 [label=clap]
-	67525 -> 5400364
-	4568901 [label=ReturnNode]
-	1267869 -> 4568901
-	6206438 [label=StringNode]
-	4568901 -> 6206438
-	5107211 [label="\"well done\""]
-	6206438 -> 5107211
-	6391102 [label=FunctionNode]
-	2596296 -> 6391102
-	7983959 [label=IdNode]
-	6391102 -> 7983959
-	3472962 [label=closeWindow]
-	7983959 -> 3472962
-	3828904 [label=FormalParameterNode]
-	6391102 -> 3828904
-	2743682 [label=IdNode]
-	3828904 -> 2743682
-	6719037 [label=window2]
-	2743682 -> 6719037
-	8181544 [label=BlockNode]
-	6391102 -> 8181544
-	180074 [label=RunNode]
-	8181544 -> 180074
-	7604427 [label=IdNode]
-	180074 -> 7604427
-	1542895 [label=openWindow]
-	7604427 -> 1542895
-	4847360 [label=ReturnNode]
-	8181544 -> 4847360
-	5455376 [label=BoolNode]
-	4847360 -> 5455376
-	3068422 [label=true]
-	5455376 -> 3068422
-	1756920 [label=ClassNode]
-	2596296 -> 1756920
-	5958486 [label=IdNode]
-	1756920 -> 5958486
-	5600626 [label=AnotherRoom]
-	5958486 -> 5600626
-	9749209 [label=ClassBodyNode]
-	1756920 -> 9749209
-	7683636 [label=AssignNode]
-	9749209 -> 7683636
-	4932061 [label=IdNode]
-	7683636 -> 4932061
-	7099642 [label=variable]
-	4932061 -> 7099642
-	9210870 [label=NewObjectNode]
-	7683636 -> 9210870
-	9123799 [label=IdNode]
-	9210870 -> 9123799
-	9642178 [label=Thermometer]
-	9123799 -> 9642178
-	2807286 [label=FunctionNode]
-	9749209 -> 2807286
-	871950 [label=IdNode]
-	2807286 -> 871950
-	5294394 [label=burnRoom]
-	871950 -> 5294394
-	7820281 [label=FormalParameterNode]
-	2807286 -> 7820281
-	1412970 [label=IdNode]
-	7820281 -> 1412970
-	6916471 [label=i]
-	1412970 -> 6916471
-	1348596 [label=BlockNode]
-	2807286 -> 1348596
-	3102956 [label=ReturnNode]
-	1348596 -> 3102956
-	1095021 [label=IdNode]
-	3102956 -> 1095021
-	1936879 [label=i]
-	1095021 -> 1936879
-	1210489 [label=FunctionNode]
-	5108864 -> 1210489
-	4193210 [label=IdNode]
-	1210489 -> 4193210
-	7912068 [label=globalFunc]
-	4193210 -> 7912068
-	903231 [label=FormalParameterNode]
-	1210489 -> 903231
-	4118152 [label=IdNode]
-	903231 -> 4118152
-	6743875 [label=input1]
-	4118152 -> 6743875
-	1333153 [label=IdNode]
-	903231 -> 1333153
-	4937495 [label=input2]
-	1333153 -> 4937495
-	5412977 [label=IdNode]
-	903231 -> 5412977
-	3945957 [label=input3]
-	5412977 -> 3945957
-	6133567 [label=BlockNode]
-	1210489 -> 6133567
-	8361593 [label=AssignNode]
-	6133567 -> 8361593
-	4472812 [label=IdNode]
-	8361593 -> 4472812
-	429840 [label=smil123456]
-	4472812 -> 429840
-	1575435 [label=IntegerNode]
-	8361593 -> 1575435
-	4949774 [label=6666666]
-	1575435 -> 4949774
-	6710307 [label=AssignNode]
-	6133567 -> 6710307
-	7367771 [label=IdNode]
-	6710307 -> 7367771
-	873648 [label=input1]
-	7367771 -> 873648
-	7213502 [label=BoolNode]
-	6710307 -> 7213502
-	2279875 [label=false]
-	7213502 -> 2279875
-	5055035 [label=AssignNode]
-	6133567 -> 5055035
-	1500970 [label=IdNode]
-	5055035 -> 1500970
-	797791 [label=input2]
-	1500970 -> 797791
-	4055462 [label=IntegerNode]
-	5055035 -> 4055462
-	6833891 [label=1]
-	4055462 -> 6833891
-	7792093 [label=AssignNode]
-	6133567 -> 7792093
-	921948 [label=IdNode]
-	7792093 -> 921948
-	1348606 [label=input3]
-	921948 -> 1348606
-	9334455 [label=IntegerNode]
-	7792093 -> 9334455
-	1876749 [label=2]
-	9334455 -> 1876749
-	7117841 [label=AssignNode]
-	6133567 -> 7117841
-	2229751 [label=IdNode]
-	7117841 -> 2229751
-	1291579 [label=a]
-	2229751 -> 1291579
-	1274435 [label=StringNode]
-	7117841 -> 1274435
-	9962679 [label="\"h\""]
-	1274435 -> 9962679
-	4057291 [label=AssignNode]
-	6133567 -> 4057291
-	4317457 [label=IdNode]
-	4057291 -> 4317457
-	2848464 [label=b]
-	4317457 -> 2848464
-	7559894 [label=StringNode]
-	4057291 -> 7559894
-	76368 [label="\"a\""]
-	7559894 -> 76368
-	9964105 [label=IfNode]
-	6133567 -> 9964105
-	500578 [label=IdNode]
-	9964105 -> 500578
-	5763684 [label=input1]
-	500578 -> 5763684
-	1856324 [label=BlockNode]
-	9964105 -> 1856324
-	6795230 [label=IfNode]
-	9964105 -> 6795230
-	7539654 [label=EqualsNode]
-	6795230 -> 7539654
-	8858277 [label=IdNode]
-	7539654 -> 8858277
-	2575665 [label=input2]
-	8858277 -> 2575665
-	7445857 [label=IdNode]
-	7539654 -> 7445857
-	1273131 [label=input3]
-	7445857 -> 1273131
-	8306829 [label=BlockNode]
-	6795230 -> 8306829
-	1159198 [label=ReturnNode]
-	8306829 -> 1159198
-	4229544 [label=StringNode]
-	1159198 -> 4229544
-	3171350 [label="\"hahaha\""]
-	4229544 -> 3171350
-	6106788 [label=IfNode]
-	6795230 -> 6106788
-	1182055 [label=EqualsNode]
-	6106788 -> 1182055
-	3854693 [label=PlusNode]
-	1182055 -> 3854693
-	5800762 [label=IdNode]
-	3854693 -> 5800762
-	6549231 [label=a]
-	5800762 -> 6549231
-	6962212 [label=IdNode]
-	3854693 -> 6962212
-	3435473 [label=b]
-	6962212 -> 3435473
-	8262952 [label=StringNode]
-	1182055 -> 8262952
-	6333408 [label="\"ha\""]
-	8262952 -> 6333408
-	7475411 [label=BlockNode]
-	6106788 -> 7475411
-	4145169 [label=ReturnNode]
-	7475411 -> 4145169
-	1070101 [label=IdNode]
-	4145169 -> 1070101
-	6816682 [label=numberString]
-	1070101 -> 6816682
-	7481240 [label=BlockNode]
-	6106788 -> 7481240
-	7417897 [label=ReturnNode]
-	7481240 -> 7417897
-	8290044 [label=IdNode]
-	7417897 -> 8290044
-	5071307 [label=a]
-	8290044 -> 5071307
-	7748381 [label=WhenNode]
-	5108864 -> 7748381
-	7788692 [label=GreaterThanNode]
-	7748381 -> 7788692
-	4612923 [label=RunNode]
-	7788692 -> 4612923
-	5754356 [label=DotNode]
-	4612923 -> 5754356
-	9840305 [label=IdNode]
-	5754356 -> 9840305
-	1512090 [label=LivingRoom]
-	9840305 -> 1512090
-	5439161 [label=IdNode]
-	5754356 -> 5439161
-	2076095 [label=getTemp1]
-	5439161 -> 2076095
-	8918523 [label=ActualParameterNode]
-	4612923 -> 8918523
-	1056685 [label=IdNode]
-	8918523 -> 1056685
-	9602675 [label=number1]
-	1056685 -> 9602675
-	2948243 [label=IntegerNode]
-	7788692 -> 2948243
-	7789546 [label=20]
-	2948243 -> 7789546
-	725782 [label=BlockNode]
-	7748381 -> 725782
-	3946815 [label=AssignNode]
-	725782 -> 3946815
-	152904 [label=IdNode]
-	3946815 -> 152904
-	5868606 [label=hello]
-	152904 -> 5868606
-	4516896 [label=IntegerNode]
-	3946815 -> 4516896
-	6266349 [label=2]
-	4516896 -> 6266349
-	792286 [label=AssignNode]
-	725782 -> 792286
-	3020425 [label=IdNode]
-	792286 -> 3020425
-	2424597 [label=x]
-	3020425 -> 2424597
-	7052565 [label=IntegerNode]
-	792286 -> 7052565
-	2029668 [label=22]
-	7052565 -> 2029668
-	1680691 [label=AssignNode]
-	725782 -> 1680691
-	3558800 [label=IdNode]
-	1680691 -> 3558800
-	1240591 [label=windowXX]
-	3558800 -> 1240591
-	5885446 [label=IntegerNode]
-	1680691 -> 5885446
-	2990179 [label=55]
-	5885446 -> 2990179
-	7282531 [label=RunNode]
-	725782 -> 7282531
-	7932644 [label=DotNode]
-	7282531 -> 7932644
-	297205 [label=IdNode]
-	7932644 -> 297205
-	4164416 [label=LivingRoom]
-	297205 -> 4164416
-	306354 [label=IdNode]
-	7932644 -> 306354
-	3903663 [label=openWindow]
-	306354 -> 3903663
-	4898749 [label=RunNode]
-	725782 -> 4898749
-	7133759 [label=DotNode]
-	4898749 -> 7133759
-	7108051 [label=IdNode]
-	7133759 -> 7108051
-	9929270 [label=LivingRoom]
-	7108051 -> 9929270
-	7529815 [label=IdNode]
-	7133759 -> 7529815
-	1008391 [label=closeWindow]
-	7529815 -> 1008391
-	7089155 [label=ActualParameterNode]
-	4898749 -> 7089155
-	8842815 [label=IdNode]
-	7089155 -> 8842815
-	9397378 [label=windowXX]
-	8842815 -> 9397378
-	2837039 [label=RunNode]
-	725782 -> 2837039
-	8161947 [label=IdNode]
-	2837039 -> 8161947
-	3003814 [label=globalFunc]
-	8161947 -> 3003814
-	5390272 [label=ActualParameterNode]
-	2837039 -> 5390272
-	3209031 [label=PlusNode]
-	5390272 -> 3209031
-	3182252 [label=IdNode]
-	3209031 -> 3182252
-	7229188 [label=x]
-	3182252 -> 7229188
-	6002384 [label=IdNode]
-	3209031 -> 6002384
-	6623653 [label=hello]
-	6002384 -> 6623653
-	9226564 [label=IntegerNode]
-	5390272 -> 9226564
-	4744192 [label=99]
-	9226564 -> 4744192
-	8762682 [label=IdNode]
-	5390272 -> 8762682
-	7765296 [label=string]
-	8762682 -> 7765296
-	9255063 [label=RunNode]
-	725782 -> 9255063
-	2887232 [label=DotNode]
-	9255063 -> 2887232
-	5893258 [label=IdNode]
-	2887232 -> 5893258
-	3584713 [label=LivingRoom]
-	5893258 -> 3584713
-	9674349 [label=IdNode]
-	2887232 -> 9674349
-	2603407 [label=AnotherRoom]
-	9674349 -> 2603407
-	7335985 [label=IdNode]
-	2887232 -> 7335985
-	9440628 [label=burnRoom]
-	7335985 -> 9440628
-	8130046 [label=ActualParameterNode]
-	9255063 -> 8130046
-	3744978 [label=IdNode]
-	8130046 -> 3744978
-	2607581 [label=x]
-	3744978 -> 2607581
+	8891038 [label=ProgNode]
+	2249806 [label=AssignNode]
+	8891038 -> 2249806
+	1111668 [label=IdNode]
+	2249806 -> 1111668
+	457737 [label=list1]
+	1111668 -> 457737
+	6846710 [label=NewObjectNode]
+	2249806 -> 6846710
+	8533228 [label=IdNode]
+	6846710 -> 8533228
+	1052365 [label=List]
+	8533228 -> 1052365
+	7979241 [label=AssignNode]
+	8891038 -> 7979241
+	1402287 [label=IdNode]
+	7979241 -> 1402287
+	4663466 [label=number1]
+	1402287 -> 4663466
+	5531584 [label=PlusNode]
+	7979241 -> 5531584
+	5125465 [label=IntegerNode]
+	5531584 -> 5125465
+	8859097 [label=4]
+	5125465 -> 8859097
+	9579899 [label=MinusNode]
+	5531584 -> 9579899
+	2134851 [label=MultiplyNode]
+	9579899 -> 2134851
+	9727957 [label=IntegerNode]
+	2134851 -> 9727957
+	9424483 [label=2]
+	9727957 -> 9424483
+	7982158 [label=IntegerNode]
+	2134851 -> 7982158
+	8745450 [label=3]
+	7982158 -> 8745450
+	7817906 [label=IntegerNode]
+	9579899 -> 7817906
+	5924126 [label=4]
+	7817906 -> 5924126
+	2532490 [label=AssignNode]
+	8891038 -> 2532490
+	9624019 [label=IdNode]
+	2532490 -> 9624019
+	8960438 [label=string]
+	9624019 -> 8960438
+	8582245 [label=StringNode]
+	2532490 -> 8582245
+	7493799 [label="\"Hello\""]
+	8582245 -> 7493799
+	1845915 [label=AssignNode]
+	8891038 -> 1845915
+	6316028 [label=IdNode]
+	1845915 -> 6316028
+	210223 [label=bacon]
+	6316028 -> 210223
+	6965567 [label=IdNode]
+	1845915 -> 6965567
+	1707399 [label=string]
+	6965567 -> 1707399
+	6930566 [label=AssignNode]
+	8891038 -> 6930566
+	8095303 [label=IdNode]
+	6930566 -> 8095303
+	6226063 [label=superString]
+	8095303 -> 6226063
+	8100650 [label=PlusNode]
+	6930566 -> 8100650
+	7730974 [label=StringNode]
+	8100650 -> 7730974
+	3371980 [label="\"hey\""]
+	7730974 -> 3371980
+	9789046 [label=StringNode]
+	8100650 -> 9789046
+	2714327 [label="\"baby\""]
+	9789046 -> 2714327
+	5803972 [label=AssignNode]
+	8891038 -> 5803972
+	8528670 [label=IdNode]
+	5803972 -> 8528670
+	7126017 [label=numberString]
+	8528670 -> 7126017
+	4369777 [label=PlusNode]
+	5803972 -> 4369777
+	3627142 [label=StringNode]
+	4369777 -> 3627142
+	8154960 [label="\"high\""]
+	3627142 -> 8154960
+	978687 [label=StringNode]
+	4369777 -> 978687
+	9858645 [label="\"five\""]
+	978687 -> 9858645
+	6538035 [label=AssignNode]
+	8891038 -> 6538035
+	2462876 [label=IdNode]
+	6538035 -> 2462876
+	1530285 [label=numberString]
+	2462876 -> 1530285
+	9717705 [label=PlusNode]
+	6538035 -> 9717705
+	3168854 [label=StringNode]
+	9717705 -> 3168854
+	5028603 [label="\"high\""]
+	3168854 -> 5028603
+	9972455 [label=PlusNode]
+	9717705 -> 9972455
+	4888522 [label=IntegerNode]
+	9972455 -> 4888522
+	2486506 [label=5]
+	4888522 -> 2486506
+	3263085 [label=IdNode]
+	9972455 -> 3263085
+	9534928 [label=bacon]
+	3263085 -> 9534928
+	2432426 [label=AssignNode]
+	8891038 -> 2432426
+	1423993 [label=IdNode]
+	2432426 -> 1423993
+	2173769 [label=input1]
+	1423993 -> 2173769
+	8219098 [label=BoolNode]
+	2432426 -> 8219098
+	1228434 [label=false]
+	8219098 -> 1228434
+	6754561 [label=ClassNode]
+	8891038 -> 6754561
+	9083047 [label=IdNode]
+	6754561 -> 9083047
+	7544150 [label=LivingRoom]
+	9083047 -> 7544150
+	6599657 [label=ClassBodyNode]
+	6754561 -> 6599657
+	2402826 [label=AssignNode]
+	6599657 -> 2402826
+	2433230 [label=IdNode]
+	2402826 -> 2433230
+	8591544 [label=temp1]
+	2433230 -> 8591544
+	2405165 [label=NewObjectNode]
+	2402826 -> 2405165
+	1890259 [label=IdNode]
+	2405165 -> 1890259
+	4801323 [label=Thermometer]
+	1890259 -> 4801323
+	6946808 [label=AssignNode]
+	6599657 -> 6946808
+	2618608 [label=IdNode]
+	6946808 -> 2618608
+	8772834 [label=constant]
+	2618608 -> 8772834
+	7137096 [label=MinusNode]
+	6946808 -> 7137096
+	5866129 [label=MultiplyNode]
+	7137096 -> 5866129
+	9018868 [label=IntegerNode]
+	5866129 -> 9018868
+	110693 [label=5]
+	9018868 -> 110693
+	6612214 [label=DivideNode]
+	5866129 -> 6612214
+	2934545 [label=ParenthesesNode]
+	6612214 -> 2934545
+	9336834 [label=PlusNode]
+	2934545 -> 9336834
+	6309692 [label=IntegerNode]
+	9336834 -> 6309692
+	3604850 [label=10]
+	6309692 -> 3604850
+	3841760 [label=IntegerNode]
+	9336834 -> 3841760
+	5116192 [label=4]
+	3841760 -> 5116192
+	8776244 [label=ModuloNode]
+	6612214 -> 8776244
+	9599623 [label=IntegerNode]
+	8776244 -> 9599623
+	8037173 [label=2]
+	9599623 -> 8037173
+	4773663 [label=IntegerNode]
+	8776244 -> 4773663
+	1613157 [label=1]
+	4773663 -> 1613157
+	5731964 [label=IntegerNode]
+	7137096 -> 5731964
+	5448412 [label=3]
+	5731964 -> 5448412
+	5628684 [label=AssignNode]
+	6599657 -> 5628684
+	7406358 [label=IdNode]
+	5628684 -> 7406358
+	2694337 [label=window1]
+	7406358 -> 2694337
+	6500821 [label=BoolNode]
+	5628684 -> 6500821
+	9852325 [label=off]
+	6500821 -> 9852325
+	9788568 [label=FunctionNode]
+	6599657 -> 9788568
+	2423242 [label=IdNode]
+	9788568 -> 2423242
+	3850369 [label=getTemp1]
+	2423242 -> 3850369
+	8468992 [label=FormalParameterNode]
+	9788568 -> 8468992
+	2718455 [label=IdNode]
+	8468992 -> 2718455
+	1744452 [label=n]
+	2718455 -> 1744452
+	16633 [label=BlockNode]
+	9788568 -> 16633
+	4093734 [label=AssignNode]
+	16633 -> 4093734
+	3193413 [label=IdNode]
+	4093734 -> 3193413
+	5856900 [label=dab]
+	3193413 -> 5856900
+	6915555 [label=FloatNode]
+	4093734 -> 6915555
+	6975723 [label=1234.2]
+	6915555 -> 6975723
+	7793907 [label=ReturnNode]
+	16633 -> 7793907
+	7012579 [label=IdNode]
+	7793907 -> 7012579
+	783769 [label=temp1]
+	7012579 -> 783769
+	5598307 [label=FunctionNode]
+	6599657 -> 5598307
+	8025625 [label=IdNode]
+	5598307 -> 8025625
+	999760 [label=openWindow]
+	8025625 -> 999760
+	2633977 [label=BlockNode]
+	5598307 -> 2633977
+	5466259 [label=AssignNode]
+	2633977 -> 5466259
+	2603325 [label=IdNode]
+	5466259 -> 2603325
+	3229099 [label=clap]
+	2603325 -> 3229099
+	3989327 [label=IntegerNode]
+	5466259 -> 3989327
+	946146 [label=987]
+	3989327 -> 946146
+	1698314 [label=RunNode]
+	2633977 -> 1698314
+	1218678 [label=IdNode]
+	1698314 -> 1218678
+	3322101 [label=getTemp1]
+	1218678 -> 3322101
+	7710438 [label=ActualParameterNode]
+	1698314 -> 7710438
+	5974409 [label=IdNode]
+	7710438 -> 5974409
+	2257337 [label=clap]
+	5974409 -> 2257337
+	6901088 [label=ReturnNode]
+	2633977 -> 6901088
+	2487878 [label=StringNode]
+	6901088 -> 2487878
+	2940636 [label="\"well done\""]
+	2487878 -> 2940636
+	2853713 [label=FunctionNode]
+	6599657 -> 2853713
+	9108727 [label=IdNode]
+	2853713 -> 9108727
+	931361 [label=closeWindow]
+	9108727 -> 931361
+	3134761 [label=FormalParameterNode]
+	2853713 -> 3134761
+	7946188 [label=IdNode]
+	3134761 -> 7946188
+	5427753 [label=window2]
+	7946188 -> 5427753
+	3840488 [label=BlockNode]
+	2853713 -> 3840488
+	8523863 [label=RunNode]
+	3840488 -> 8523863
+	2511170 [label=IdNode]
+	8523863 -> 2511170
+	8749229 [label=openWindow]
+	2511170 -> 8749229
+	8866111 [label=ReturnNode]
+	3840488 -> 8866111
+	7549958 [label=BoolNode]
+	8866111 -> 7549958
+	3742380 [label=true]
+	7549958 -> 3742380
+	8961365 [label=ClassNode]
+	6599657 -> 8961365
+	5551464 [label=IdNode]
+	8961365 -> 5551464
+	1312886 [label=AnotherRoom]
+	5551464 -> 1312886
+	6968202 [label=ClassBodyNode]
+	8961365 -> 6968202
+	7762343 [label=AssignNode]
+	6968202 -> 7762343
+	561649 [label=IdNode]
+	7762343 -> 561649
+	3797405 [label=variable]
+	561649 -> 3797405
+	9498757 [label=NewObjectNode]
+	7762343 -> 9498757
+	1124887 [label=IdNode]
+	9498757 -> 1124887
+	6444973 [label=Thermometer]
+	1124887 -> 6444973
+	9719280 [label=FunctionNode]
+	6968202 -> 9719280
+	2994807 [label=IdNode]
+	9719280 -> 2994807
+	6891138 [label=burnRoom]
+	2994807 -> 6891138
+	6045844 [label=FormalParameterNode]
+	9719280 -> 6045844
+	372874 [label=IdNode]
+	6045844 -> 372874
+	2021418 [label=i]
+	372874 -> 2021418
+	6518469 [label=BlockNode]
+	9719280 -> 6518469
+	4696419 [label=ReturnNode]
+	6518469 -> 4696419
+	7033332 [label=IdNode]
+	4696419 -> 7033332
+	8058842 [label=i]
+	7033332 -> 8058842
+	3367633 [label=FunctionNode]
+	8891038 -> 3367633
+	4925011 [label=IdNode]
+	3367633 -> 4925011
+	1456740 [label=globalFunc]
+	4925011 -> 1456740
+	128932 [label=FormalParameterNode]
+	3367633 -> 128932
+	3650204 [label=IdNode]
+	128932 -> 3650204
+	1205164 [label=input1]
+	3650204 -> 1205164
+	7876802 [label=IdNode]
+	128932 -> 7876802
+	3390093 [label=input2]
+	7876802 -> 3390093
+	5923360 [label=IdNode]
+	128932 -> 5923360
+	2574510 [label=input3]
+	5923360 -> 2574510
+	1130674 [label=BlockNode]
+	3367633 -> 1130674
+	5087604 [label=AssignNode]
+	1130674 -> 5087604
+	5500251 [label=IdNode]
+	5087604 -> 5500251
+	1028557 [label=smil123456]
+	5500251 -> 1028557
+	8494856 [label=IntegerNode]
+	5087604 -> 8494856
+	518125 [label=6666666]
+	8494856 -> 518125
+	1232193 [label=AssignNode]
+	1130674 -> 1232193
+	2023904 [label=IdNode]
+	1232193 -> 2023904
+	9823383 [label=input1]
+	2023904 -> 9823383
+	9391566 [label=BoolNode]
+	1232193 -> 9391566
+	3471615 [label=false]
+	9391566 -> 3471615
+	8274881 [label=AssignNode]
+	1130674 -> 8274881
+	6620372 [label=IdNode]
+	8274881 -> 6620372
+	8441323 [label=input2]
+	6620372 -> 8441323
+	8697329 [label=IntegerNode]
+	8274881 -> 8697329
+	8352190 [label=1]
+	8697329 -> 8352190
+	9691009 [label=AssignNode]
+	1130674 -> 9691009
+	2654613 [label=IdNode]
+	9691009 -> 2654613
+	4202675 [label=input3]
+	2654613 -> 4202675
+	2481554 [label=IntegerNode]
+	9691009 -> 2481554
+	3970097 [label=2]
+	2481554 -> 3970097
+	244093 [label=AssignNode]
+	1130674 -> 244093
+	5474535 [label=IdNode]
+	244093 -> 5474535
+	931667 [label=a]
+	5474535 -> 931667
+	9662606 [label=StringNode]
+	244093 -> 9662606
+	497693 [label="\"h\""]
+	9662606 -> 497693
+	4479515 [label=AssignNode]
+	1130674 -> 4479515
+	6336664 [label=IdNode]
+	4479515 -> 6336664
+	8019183 [label=b]
+	6336664 -> 8019183
+	5080565 [label=StringNode]
+	4479515 -> 5080565
+	172642 [label="\"a\""]
+	5080565 -> 172642
+	716371 [label=IfNode]
+	1130674 -> 716371
+	5024947 [label=IdNode]
+	716371 -> 5024947
+	4845972 [label=input1]
+	5024947 -> 4845972
+	4996495 [label=BlockNode]
+	716371 -> 4996495
+	5511798 [label=IfNode]
+	716371 -> 5511798
+	7477933 [label=EqualsNode]
+	5511798 -> 7477933
+	552990 [label=IdNode]
+	7477933 -> 552990
+	5393899 [label=input2]
+	552990 -> 5393899
+	3190409 [label=IdNode]
+	7477933 -> 3190409
+	4620525 [label=input3]
+	3190409 -> 4620525
+	4819401 [label=BlockNode]
+	5511798 -> 4819401
+	4235529 [label=AssignNode]
+	4819401 -> 4235529
+	8812663 [label=IdNode]
+	4235529 -> 8812663
+	9019990 [label=haha]
+	8812663 -> 9019990
+	3517873 [label=StringNode]
+	4235529 -> 3517873
+	9387277 [label="\"fuck you\""]
+	3517873 -> 9387277
+	7598676 [label=ReturnNode]
+	4819401 -> 7598676
+	6642010 [label=StringNode]
+	7598676 -> 6642010
+	6620137 [label="\"hahaha\""]
+	6642010 -> 6620137
+	2553909 [label=IfNode]
+	5511798 -> 2553909
+	3737872 [label=EqualsNode]
+	2553909 -> 3737872
+	1048195 [label=PlusNode]
+	3737872 -> 1048195
+	7884252 [label=IdNode]
+	1048195 -> 7884252
+	5379421 [label=a]
+	7884252 -> 5379421
+	9407741 [label=IdNode]
+	1048195 -> 9407741
+	4328656 [label=b]
+	9407741 -> 4328656
+	8337740 [label=StringNode]
+	3737872 -> 8337740
+	103537 [label="\"ha\""]
+	8337740 -> 103537
+	4019677 [label=BlockNode]
+	2553909 -> 4019677
+	1635691 [label=AssignNode]
+	4019677 -> 1635691
+	4863448 [label=IdNode]
+	1635691 -> 4863448
+	3760031 [label=yaya]
+	4863448 -> 3760031
+	6009637 [label=IntegerNode]
+	1635691 -> 6009637
+	7531811 [label=77]
+	6009637 -> 7531811
+	7390149 [label=ReturnNode]
+	4019677 -> 7390149
+	8341999 [label=IdNode]
+	7390149 -> 8341999
+	1096156 [label=numberString]
+	8341999 -> 1096156
+	2274160 [label=BlockNode]
+	2553909 -> 2274160
+	6504076 [label=ReturnNode]
+	2274160 -> 6504076
+	8378015 [label=IdNode]
+	6504076 -> 8378015
+	3248207 [label=a]
+	8378015 -> 3248207
+	6753368 [label=WhenNode]
+	8891038 -> 6753368
+	8272179 [label=GreaterThanNode]
+	6753368 -> 8272179
+	241093 [label=RunNode]
+	8272179 -> 241093
+	4049524 [label=DotNode]
+	241093 -> 4049524
+	2100615 [label=IdNode]
+	4049524 -> 2100615
+	4825993 [label=LivingRoom]
+	2100615 -> 4825993
+	3614643 [label=IdNode]
+	4049524 -> 3614643
+	2073841 [label=getTemp1]
+	3614643 -> 2073841
+	3065487 [label=ActualParameterNode]
+	241093 -> 3065487
+	6731323 [label=IdNode]
+	3065487 -> 6731323
+	8300285 [label=number1]
+	6731323 -> 8300285
+	4982482 [label=IntegerNode]
+	8272179 -> 4982482
+	7768003 [label=20]
+	4982482 -> 7768003
+	251381 [label=BlockNode]
+	6753368 -> 251381
+	3427393 [label=AssignNode]
+	251381 -> 3427393
+	4240845 [label=IdNode]
+	3427393 -> 4240845
+	5362491 [label=hello]
+	4240845 -> 5362491
+	3395075 [label=IntegerNode]
+	3427393 -> 3395075
+	4735147 [label=2]
+	3395075 -> 4735147
+	5308867 [label=AssignNode]
+	251381 -> 5308867
+	2965501 [label=IdNode]
+	5308867 -> 2965501
+	6262444 [label=x]
+	2965501 -> 6262444
+	3430796 [label=IntegerNode]
+	5308867 -> 3430796
+	6666979 [label=22]
+	3430796 -> 6666979
+	2744582 [label=AssignNode]
+	251381 -> 2744582
+	3995095 [label=IdNode]
+	2744582 -> 3995095
+	9576515 [label=windowXX]
+	3995095 -> 9576515
+	8269634 [label=IntegerNode]
+	2744582 -> 8269634
+	579364 [label=55]
+	8269634 -> 579364
+	1303427 [label=RunNode]
+	251381 -> 1303427
+	9562309 [label=DotNode]
+	1303427 -> 9562309
+	9599480 [label=IdNode]
+	9562309 -> 9599480
+	8079385 [label=LivingRoom]
+	9599480 -> 8079385
+	1345466 [label=IdNode]
+	9562309 -> 1345466
+	6825331 [label=openWindow]
+	1345466 -> 6825331
+	1745973 [label=RunNode]
+	251381 -> 1745973
+	9835645 [label=DotNode]
+	1745973 -> 9835645
+	4088792 [label=IdNode]
+	9835645 -> 4088792
+	588251 [label=LivingRoom]
+	4088792 -> 588251
+	892208 [label=IdNode]
+	9835645 -> 892208
+	3328554 [label=closeWindow]
+	892208 -> 3328554
+	3268862 [label=ActualParameterNode]
+	1745973 -> 3268862
+	8920095 [label=IdNode]
+	3268862 -> 8920095
+	7163706 [label=windowXX]
+	8920095 -> 7163706
+	2964525 [label=RunNode]
+	251381 -> 2964525
+	3143356 [label=IdNode]
+	2964525 -> 3143356
+	147279 [label=globalFunc]
+	3143356 -> 147279
+	7719475 [label=ActualParameterNode]
+	2964525 -> 7719475
+	9641679 [label=PlusNode]
+	7719475 -> 9641679
+	1403865 [label=IdNode]
+	9641679 -> 1403865
+	3914902 [label=x]
+	1403865 -> 3914902
+	3468637 [label=IdNode]
+	9641679 -> 3468637
+	7521684 [label=hello]
+	3468637 -> 7521684
+	666860 [label=IntegerNode]
+	7719475 -> 666860
+	1593550 [label=99]
+	666860 -> 1593550
+	4819552 [label=IdNode]
+	7719475 -> 4819552
+	850064 [label=string]
+	4819552 -> 850064
+	875302 [label=RunNode]
+	251381 -> 875302
+	5068936 [label=DotNode]
+	875302 -> 5068936
+	7515018 [label=IdNode]
+	5068936 -> 7515018
+	5660649 [label=LivingRoom]
+	7515018 -> 5660649
+	1196557 [label=IdNode]
+	5068936 -> 1196557
+	6961540 [label=AnotherRoom]
+	1196557 -> 6961540
+	8885326 [label=IdNode]
+	5068936 -> 8885326
+	8909370 [label=burnRoom]
+	8885326 -> 8909370
+	3445558 [label=ActualParameterNode]
+	875302 -> 3445558
+	4875154 [label=IdNode]
+	3445558 -> 4875154
+	1115136 [label=x]
+	4875154 -> 1115136
 }
