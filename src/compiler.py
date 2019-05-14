@@ -2,7 +2,7 @@ import os
 
 from prettytable import PrettyTable
 
-from src.crap_table import AstCrapNodeVisitor
+from src.symbol_table import AstNodeVisitor
 from src.grammar import *
 from src.lexer import Lexer
 from src.parser import Parser
@@ -42,7 +42,8 @@ parse_tree.graph()
 ast = parse_tree.to_AST()
 
 ast.graph()
-visitor = AstCrapNodeVisitor()
+visitor = AstNodeVisitor()
 ast.accept(visitor)
 symtable = visitor.current_scope
+print("The final symbol table")
 print(symtable.symbols)

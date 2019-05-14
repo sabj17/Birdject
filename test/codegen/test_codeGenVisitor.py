@@ -5,7 +5,7 @@ from src.codegen.visitor import TopVisitor
 from src.codegen.program import Program, Structure
 
 from src.grammar import *
-from src.symbol_table import SymbolTable
+from src.symbol_table import *
 from src.tokens import Token
 from src.parser import Parser
 from src.lexer import Lexer
