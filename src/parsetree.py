@@ -18,7 +18,7 @@ class PTNode:
         self.children.append(child)
 
     def graph(self, graph, parent=None):
-        id = str(random.randint(1, 10000000))
+        id = str(hash(self))
         graph.node(id, nohtml(self.name + ": " + str(self.value)))
         if parent is not None:
             graph.edge(parent, id)
@@ -74,10 +74,10 @@ class ParseTree:
         self.current_node.value = value
         self.find_next()
 
-    def to_AST(self):
-        visitor = BuildASTVisitor()
-        ast = self.root.accept(visitor)
-        return ast
+
+    def accept(self, visitor):
+        return self.root.accept(visitor)
+
 
     def graph(self):
         graph = Digraph('G', node_attr={'style': 'filled'}, graph_attr={'ratio': 'fill', 'ranksep': '1.5'})
@@ -89,497 +89,424 @@ class ParseTree:
         return self.root.__str__()
 
 
+
 class BuildASTVisitor:
 
-    def __init__(self):
-        self.tree = None
-
     def visit(self, node):
-        prog_node = self.visit_PROG(node)  # Call visit_PROG to get the root node
-        return AST(prog_node)  # Make AST from root node
+        ast_child_nodes = self.visit_children(node)
 
-    def visit_PROG(self, node):
-        # <prog> -> <stmts> $
-        stmt_list = self.visit_STMTS(node.children[0])  # call visit_STMTS to get a list of statements
-        return ProgNode(stmt_list)  # use the statement list to make a prog node
+        node_name = node.name.replace('<', '').replace('>', '').replace('-', '_')  # format it to a legal function name
+        method_name = 'visit_' + node_name
+        if hasattr(self, method_name):
+            visitor = getattr(self, method_name)
+            return visitor(node, ast_child_nodes)
+        else:
+            # if there is no method for the node, pass the found nodes up the tree
+            if ast_child_nodes:
+                content, = ast_child_nodes
+                return content
 
-    def visit_STMTS(self, node):
-        # <stmts> -> <stmt> <stmts> | LAMBDA
-        stmt_list = []
 
-        # if <stmts> derive lambda return an empty list of statements
-        if isinstance(node.children[0].symbol, Lambda):
-            return stmt_list
 
-        # visit stmt to get the statement, visit stmts to get a list of the rest of the statements
-        stmt = self.visit_STMT(node.children[0])
-        stmts = self.visit_STMTS(node.children[1])
+    def visit_children(self, node):
+        ast_child_nodes = []
+        for child in node.children:
+            ast_node = child.accept(self)
+            if ast_node is not None:
+                ast_child_nodes.append(ast_node)
+        return ast_child_nodes
 
-        stmt_list.append(stmt)
-        stmt_list.extend(stmts)  # append each of the elements in stmts
 
-        return stmt_list  # returns a list of statements
+    def visit_prog(self, node, ast_children):
+        # <prog> -> <stmts>, $
+        assert node.name == '<prog>'
+        stmts, = ast_children
+        prog_node = ProgNode(stmts)
+        return AST(prog_node)
 
-    def visit_STMT(self, node):
-        # <stmt> -> <when-stmt> | <for-stmt> | <if-stmt> | <run>, END | <var-dcl> | <func-dcl> | <class-dcl>
-        options = {'<var-dcl>': self.visit_VAR_DCL,
-                   '<class-dcl>': self.visit_CLASS_DCL,
-                   '<for-stmt>': self.visit_FOR_STMT,
-                   '<if-stmt>': self.visit_IF_STMT,
-                   '<func-dcl>': self.visit_FUNC_DCL,
-                   '<run>': self.visit_RUN,
-                   '<when-stmt>': self.visit_WHEN_STMT,
-                   }
-        # based on what node we are at, call the appropriate function from 'options'
-        child = node.children[0]
-        visit_func = options[child.name]
-        return visit_func(child)  # return the statement
+    def visit_stmts(self, node, ast_children):
+        # <stmts> -> <stmt>, <stmts> | LAMBDA
+        assert node.name == '<stmts>'
+        if len(ast_children) == 2:
+            stmt, stmt_list = ast_children
+            return [stmt] + stmt_list
+        elif len(ast_children) == 1:
+            stmt, = ast_children
+            return [stmt]
+        else:
+            return []
 
-    def visit_VAR_DCL(self, node):
-        # <var-dcl> -> SET <id-ref> TO <expr> END
-        id_node = self.visit_ID_REF(node.children[1])  # Call visit_ID_REF to get the id for the var dcl
-        expression_node = self.visit_EXPR(node.children[3])  # Call visit_EXPR to get the expression
-
-        return AssignNode(id_node, expression_node)  # Make an AssignNode and return it
-
-    def visit_RUN(self, node):
-        # <run> -> RUN, <id-ref>, LPAREN, <params>, RPAREN
-        id = self.visit_ID_REF(node.children[1])  # visit_ID_REF to get the id
-        params = self.visit_ACTUAL_PARAMS(node.children[3])  # visit params to get the param node
-
-        return RunNode(id, params)  # Make a RunNode and return it
-
-    def visit_FUNC_DCL(self, node):
-        # <func-dcl> -> FUNCTION, ID, LPAREN, <params>, RPAREN, <block>
-        id = self.visit_ID(node.children[1])  # visit_ID to get the IdNode
-        params = self.visit_FORMAL_PARAMS(node.children[3])  # visit_PARAMS to get the ParamNode
-        block = self.visit_BLOCK(node.children[-1])  # visit_BLOCK to get the BlockNode
-
-        return FunctionNode(id, params, block)  # Make a FunctionNode and return it
-
-    def visit_CLASS_DCL(self, node):
+    def visit_class_dcl(self, node, ast_children):
         # <class-dcl> -> ID, LCURLY, <class-body>, RCURLY
-        id = self.visit_ID(node.children[0])  # visit_ID to get the IdNode
-        body = self.visit_CLASS_BODY(node.children[2])  # visit_CLASS_BODY to get a list of body parts
-        body = ClassBodyNode(body)  # use the body parts to make a ClassBodyNode
+        assert node.name == '<class-dcl>'
+        id_node, body_parts = ast_children
+        class_body = ClassBodyNode(body_parts)
+        return ClassNode(id_node, class_body)
 
-        return ClassNode(id, body)  # Make the ClassNode and return it
+    def visit_class_body(self, node, ast_children):
+        # <class-body> -> <class-body-part>, <class-body> | <class-body> -> LAMBDA
+        assert node.name == '<class-body>'
 
-    def visit_CLASS_BODY(self, node):
-        # <class-body> -> <class-body-part>, <class-body> | LAMBDA
-        body_parts = []
+        if len(ast_children) == 2:
+            part, part_list = ast_children
+            return [part] + part_list
+        elif len(ast_children) == 1:
+            part, = ast_children
+            return [part]
+        else:
+            return []
 
-        # if <class-body> derives lambda return and empty list of body parts
-        if isinstance(node.children[0].symbol, Lambda):
-            return body_parts
+    def visit_func_dcl(self, node, ast_children):
+        # <func-dcl> -> FUNCTION, ID, LPAREN, <formal-params>, RPAREN, <block>
+        assert node.name == '<func-dcl>'
 
-        body_part = self.visit_CLASS_BODY_PART(node.children[0])  # get the first body part
-        body = self.visit_CLASS_BODY(node.children[1])  # get the rest of the body parts
+        if len(ast_children) == 3:
+            id_node, params, block = ast_children
+            return FunctionNode(id_node, params, block)
+        elif len(ast_children) == 2:
+            id_node, block = ast_children
+            return FunctionNode(id_node, None, block)
 
-        # appends the body parts to 'body_parts'
-        body_parts.append(body_part)
-        body_parts.extend(body)
 
-        return body_parts  # return the list of body parts
+    def visit_var_dcl(self, node, ast_children):
+        # <var-dcl> -> SET, <id-ref>, TO, <expr>, END
+        assert node.name == '<var-dcl>'
+        id_node, expr = ast_children
+        return AssignNode(id_node, expr)
 
-    def visit_CLASS_BODY_PART(self, node):
-        # <class-body-part> -> <var-dcl> | <func-dcl> | <class-dcl>
-        options = {'<var-dcl>': self.visit_VAR_DCL,
-                   '<class-dcl>': self.visit_CLASS_DCL,
-                   '<func-dcl>': self.visit_FUNC_DCL
-                   }
-        # visit on of these options depending on the input node
 
-        child = node.children[0]
-        visit_func = options[child.name]
-        return visit_func(child)
+    def visit_return(self, node, ast_children):
+        # <return> -> RETURN, <expr>, END
+        assert node.name == '<return>'
+        expr, = ast_children
+        return ReturnNode(expr)
 
-    def visit_WHEN_STMT(self, node):
+    def visit_break(self, node, ast_children):
+        # <break> -> BREAK, END
+        assert node.name == '<break>'
+        return BreakNode()
+
+    def visit_when_stmt(self, node, ast_children):
         # <when-stmt> -> WHEN, LPAREN, <expr>, RPAREN, <block>
-        expr = self.visit_EXPR(node.children[2])  # visit_EXPR to get the expression for the when statement
-        block = self.visit_BLOCK(node.children[4])  # visit_BLOCK to get the block for the when statement
+        assert node.name == '<when-stmt>'
 
-        return WhenNode(expr, block)  # Create a WhenNode and return it
+        expr, block = ast_children
+        return WhenNode(expr, block)
 
-    def visit_FOR_STMT(self, node):
+    def visit_for_stmt(self, node, ast_children):
         # <for-stmt> -> FOREACH, <id>, IN, <expr>, <block>
-        id = self.visit_ARRAY_REF(node.children[1])  # get the id from visit_ARRAY_REF
-        expr = self.visit_EXPR(node.children[3])  # visit_EXPR to get the expression
-        block = self.visit_BLOCK(node.children[5])  # visit_BLOCK to get the block belonging to the for-stmt
+        assert node.name == '<for-stmt>'
 
-        return ForNode(id, expr, block)  # create a ForNode and return it
+        id_node, expr, block = ast_children
+        return ForNode(id_node, expr, block)
 
-    def visit_IF_STMT(self, node):
+    def visit_if_stmt(self, node, ast_chilren):
         # <if-stmt> -> IF, LPAREN, <expr>, RPAREN, <block>, <else-clause>
-        expr = self.visit_EXPR(node.children[2])  # visit_EXPR to get the expression
-        block_true = self.visit_BLOCK(
-            node.children[4])  # visit_BLOCK to get the block which will execute if the expr is true
-        block_flase = self.visit_ELSE_CLAUSE(
-            node.children[5])  # visit_ELSE_CLAUSE block/statement that will execute if expr is false
+        assert node.name == '<if-stmt>'
 
-        return IfNode(expr, block_true, block_flase)  # Create an IfNode and return it
+        if len(ast_chilren) == 3:
+            expr, true_block, false_block = ast_chilren
+            return IfNode(expr, true_block, false_block)
+        elif len(ast_chilren) == 2:
+            expr, true_block = ast_chilren
+            return IfNode(expr, true_block, None)
 
-    def visit_ELSE_CLAUSE(self, node):
-        # <else-clause> -> ELSE, <else> | LAMBDA
+    def visit_run(self, node, ast_children):
+        # <run> -> RUN, <id-ref>, LPAREN, <actual-params>, RPAREN
+        assert node.name == '<run>'
+        if len(ast_children) == 2:
+            id_node, param_node = ast_children
+            return RunNode(id_node, param_node)
+        elif len(ast_children) == 1:
+            id_node, = ast_children
+            return RunNode(id_node, None)
 
-        # return None if there is no else (<else-clause> derives lambda)
-        if isinstance(node.children[0].symbol, Lambda):
+
+    def visit_block(self, node, ast_children):
+        # <block> -> LCURLY, <block-body>, RCURLY
+        assert node.name == '<block>'
+        block_body_parts, = ast_children
+        return BlockNode(block_body_parts)
+
+    def visit_block_body(self, node, ast_children):
+        # <block-body> -> <block-body-part>, <block-body> | LAMBDA
+        assert node.name == '<block-body>'
+        if len(ast_children) == 2:
+            body_part, body_parts = ast_children
+            return [body_part] + body_parts
+        elif len(ast_children) == 1:
+            body_part, = ast_children
+            return [body_part]
+        else:
+            return []
+
+
+    def visit_formal_params(self, node, ast_children):
+        # <formal-params> -> ID, <multi-formal-params> | <formal-params> -> LAMBDA
+        assert node.name == '<formal-params>'
+
+        if ast_children:
+            id_node, id_list = ast_children
+            parameters = [id_node] + id_list
+            return FormalParameterNode(parameters)
+        else:
             return None
 
-        return self.visit_ELSE(node.children[1])  # return visit_ELSE that finds what is in the else statement
 
-    def visit_ELSE(self, node):
-        # <else> -> <block> | <if-stmt>
-        child = node.children[0]
-
-        if child.name == '<block>':  # if the node is a block, return visit_BLOCK
-            return self.visit_BLOCK(child)
-        if child.name == '<if-stmt>':  # if the node is and if stmt, return visit_IF_STMT
-            return self.visit_IF_STMT(child)
-
-    def visit_BLOCK(self, node):
-        # <block> -> LCURLY, <block-body>, RCURLY
-
-        body = self.visit_BLOCK_BODY(node.children[1])  # visit_BLOCK_BODY to get the list of body parts
-        return BlockNode(body)  # Create a BlockNode and return it
-
-    def visit_BLOCK_BODY(self, node):
-        # <block-body> -> <block-body-part> <block-body> | LAMBDA
-        body_parts = []
-
-        # if block-body is empty return an empty list
-        if isinstance(node.children[0].symbol, Lambda):
-            return body_parts
-
-        body_part = self.visit_BLOCK_BODY_PART(node.children[0])  # get a body part
-        block_body = self.visit_BLOCK_BODY(node.children[1])  # get the rest of the body parts
-
-        # append all body parts to the list
-        body_parts.append(body_part)
-        body_parts.extend(block_body)
-
-        return body_parts  # return the list of body parts
-
-    def visit_BLOCK_BODY_PART(self, node):
-        # <block-body-part> -> <for-stmt> | <if-stmt> | <run>, END | <return> | <var-dcl> | <break>
-        options = {'<for-stmt>': self.visit_FOR_STMT,
-                   '<if-stmt>': self.visit_IF_STMT,
-                   '<run>': self.visit_RUN,
-                   '<return>': self.visit_RETURN,
-                   '<var-dcl>': self.visit_VAR_DCL,
-                   '<break>': self.visit_BREAK}
-        # call visit for one of these based on the body part
-
-        child = node.children[0]
-        visit_func = options[child.name]
-        return visit_func(child)
-
-    def visit_RETURN(self, node):
-        # <return> -> RETURN <expr> END
-        expr = self.visit_EXPR(node.children[1])  # visit_EXPR to get the expression that will be returned
-        return ReturnNode(expr)  # Create the ReturnNode and return it
-
-    def visit_BREAK(self, node):
-        return BreakNode()  # return a BreakNode
-
-    def visit_ACTUAL_PARAMS(self, node):
-        # <actual-params> -> <expr> <multi-actual-params> | <params> -> LAMBDA
-        first_child = node.children[0]
-
-        if not isinstance(first_child.symbol, Lambda):
-            expr_list = []
-            first_expr = self.visit_EXPR(first_child)  # get the expression
-            multi_params = self.visit_MULTI_ACTUAL_PARAMS(node.children[1])  # get the rest of the expressions
-
-            # append all expressions to a list
-            expr_list.append(first_expr)
-            expr_list.extend(multi_params)
-
-            return ActualParameterNode(expr_list)  # Create a ActualParameterNode using the list of expressions and return it
-
-        return None  # return None if <actual-params> derives lambda
-
-    def visit_MULTI_ACTUAL_PARAMS(self, node):
-        # <multi-actual-params> -> COMMA ID <multi-actual-params> | LAMBDA
-        expr_list = []
-        first_child = node.children[0]
-        if not isinstance(first_child.symbol, Lambda):
-            expr = self.visit_EXPR(node.children[1])  # get the expression
-            multi_params = self.visit_MULTI_ACTUAL_PARAMS(node.children[2])  # get the rest of the expressions
-
-            # append all expression to a list
-            expr_list.append(expr)
-            expr_list.extend(multi_params)
-
-        # if <multi-actual-params> derives empty return and empty list of expressions
-        # else return a list of expressions
-        return expr_list
-
-    def visit_FORMAL_PARAMS(self, node):
-        # <formal-params> -> ID <multi-formal-params> | <formal-params> -> LAMBDA
-        first_child = node.children[0]
-
-        if not isinstance(first_child.symbol, Lambda):
-            id_list = []
-            first_id = self.visit_ID(first_child)  # get the id
-            multi_params = self.visit_MULTI_FORMAL_PARAMS(node.children[1])  # get the rest of the ids
-
-            # append all expressions to a list
-            id_list.append(first_id)
-            id_list.extend(multi_params)
-
-            return FormalParameterNode(id_list)  # Create a FormalParameterNode using the list of ids and return it
-
-        return None  # return None if <formal-params> derives lambda
-
-    def visit_MULTI_FORMAL_PARAMS(self, node):
-        # <multi-formal-params> -> COMMA ID <multi-formal-params> | LAMBDA
-        id_list = []
-        first_child = node.children[0]
-        if not isinstance(first_child.symbol, Lambda):
-            id = self.visit_ID(node.children[1])  # get the id
-            multi_params = self.visit_MULTI_FORMAL_PARAMS(node.children[2])  # get the rest of the ids
-
-            # append all expression to a list
-            id_list.append(id)
-            id_list.extend(multi_params)
-
-        # if <multi-formal-params> derives empty return and empty list of ids
-        # else return a list of ids
-        return id_list
-
-    def visit_ID_REF(self, node):
-        # <id-ref> -> <id> <dot-ref>
-        first_id = self.visit_ARRAY_REF(node.children[0])  # <id>
-        dot_ref_child = node.children[1].children[0]
-
-        # if dot-ref derives lambda return the IdNode from visit_ARRAY_REF
-        # else return a DotNode that has a list of IdNodes
-        if not isinstance(dot_ref_child.symbol, Lambda):
-            id_nodes = []
-            other_ids = self.visit_DOT_REF(node.children[1])
-            id_nodes.append(first_id)
-            id_nodes.extend(other_ids)
-            return DotNode(id_nodes)
-
+    def visit_multi_formal_params(self, node, ast_children):
+        # <multi-formal-params> -> COMMA, ID, <multi-formal-params> | LAMBDA
+        assert node.name == '<multi-formal-params>'
+        if ast_children:
+            id_node, id_list = ast_children
+            return [id_node] + id_list
         else:
-            return first_id
+            return []
 
-    def visit_DOT_REF(self, node):
-        # <dot-ref> -> DOT <id> <dot-ref> | LAMBDA
-        id_list = []
 
-        # return an empty list if dot-ref derives empty
-        if isinstance(node.children[0].symbol, Lambda):
-            return id_list
+    def visit_actual_params(self, node, ast_children):
+        # <actual-params> -> <expr>, <multi-actual-params> | LAMBDA
+        assert node.name == '<actual-params>'
 
-        id = self.visit_ARRAY_REF(node.children[1])  # visit_ARRAY_REF to get the first IdNode
-        dot_ref = self.visit_DOT_REF(node.children[2])  # visit_DOT_REF to get the rest of the IdNodes
+        if ast_children:
+            expr, expr_list = ast_children
+            parameters = [expr] + expr_list
+            return ActualParameterNode(parameters)
+        else:
+            return None
 
-        # append all the IdNodes
-        id_list.append(id)
-        id_list.extend(dot_ref)
 
-        return id_list  # return a list of IdNodes
+    def visit_multi_actual_params(self, node, ast_children):
+        # <multi-actual-params> -> COMMA, <expr>, <multi-actual-params> | LAMBDA
+        assert node.name == '<multi-actual-params>'
+        if ast_children:
+            expr, expr_list = ast_children
+            return [expr] + expr_list
+        else:
+            return []
 
-    def visit_ARRAY_REF(self, node):
-        # <id> -> ID <array-subscript>
-        id_node = self.visit_ID(node.children[0])  # ID
+    def visit_expr(self, node, ast_children):
+        assert node.name == '<expr>'
 
-        # <array-subscript> -> LSQUARE, INTEGER, RSQUARE | LAMBDA
-        # if <array-subscript> does not derive lambda, return ArrayRefNode else just return the IdNode
-        array_ss_child = node.children[1].children[0]
-        if not isinstance(array_ss_child.symbol, Lambda):
-            integer_node = self.visit_INT(node.children[1].children[1])
-            return ArrayRefNode(id_node, integer_node)
+        if len(ast_children) == 1:
+            expr, = ast_children
+            return expr
+        elif len(ast_children) == 2:
+            expr, binary_expr = ast_children
+            binary_expr.expr1 = expr
+            return binary_expr
 
-        return id_node
+    def visit_or(self, node, ast_children):
+        # <or> -> OR, <expr> | LAMBDA
+        assert node.name == '<or>'
 
-    def visit_ID(self, node):
-        return IdNode(node.value)  # return the IdNode
+        if ast_children:
+            expr, = ast_children
+            return OrNode(None, expr)
 
-    def visit_EXPR(self, node):
-        # <expr> -> <logic-expr> <or>
-        expr_node = self.visit_LOGIC_EXPR(node.children[0])
 
-        or_children = node.children[1].children
-        # <or> -> OR <expr> | LAMBDA
-        # if <or> does not derive lambda return OrNode else just return the expression
-        if not isinstance(or_children[0].symbol, Lambda):
-            left_operant = expr_node  # use the expr_node as the left operant
-            right_operant = self.visit_EXPR(or_children[1])  # visit_EXPR to find the right operant
-            return OrNode(left_operant, right_operant)
+    def visit_logic_expr(self, node, ast_children):
+        assert node.name == '<logic-expr>'
 
-        return expr_node
+        if len(ast_children) == 1:
+            expr, = ast_children
+            return expr
+        elif len(ast_children) == 2:
+            expr, binary_expr = ast_children
+            binary_expr.expr1 = expr
+            return binary_expr
 
-    def visit_LOGIC_EXPR(self, node):
-        # <logic-expr> -> <compare-expr1>, <and>
-        expr_node = self.visit_COMPARE_EXPR_1(node.children[0])
+    def visit_and(self, node, ast_children):
+        # <and> -> AND, <logic-expr> | LAMBDA
+        assert node.name == '<and>'
 
-        and_children = node.children[1].children
-        # <and> -> AND <logic-expr> | LAMBDA
-        # if <and> does not derive lambda return an AndNode else just return the expression
-        if not isinstance(and_children[0].symbol, Lambda):
-            left_operant = expr_node  # use the expr_node as the left operant
-            right_operant = self.visit_LOGIC_EXPR(and_children[1])  # visit_LOGIC_EXPR to find the right operant
-            return AndNode(left_operant, right_operant)
+        if ast_children:
+            expr, = ast_children
+            return AndNode(None, expr)
 
-        return expr_node
+    def visit_compare_expr1(self, node, ast_children):
+        assert node.name == '<compare-expr1>'
 
-    def visit_COMPARE_EXPR_1(self, node):
-        # <compare-expr1> -> <compare-expr2>, <compare-op1>
-        expr_node = self.visit_COMPARE_EXPR_2(node.children[0])
+        if len(ast_children) == 1:
+            expr, = ast_children
+            return expr
+        elif len(ast_children) == 2:
+            expr, binary_expr = ast_children
+            binary_expr.expr1 = expr
+            return binary_expr
 
-        comp_op_children = node.children[1].children
-        # <compare-op1> -> EQUALS <compare-expr1> | NOTEQUALS <compare-expr1> | LAMBDA
-        # if <compare-op1> does not derive lambda return either a EqualsNode or a NotEqualNode else just return the expression
-        if not isinstance(comp_op_children[0].symbol, Lambda):
-            left_operant = expr_node  # use the expr_node as the left operant
-            right_operant = self.visit_COMPARE_EXPR_1(
-                comp_op_children[1])  # visit_COMPARE_EXPR_1 to find the right operant
+    def visit_compare_op1(self, node, ast_children):
+        # <compare-op1> -> EQUALS, <compare-expr1> | NOTEQUALS, <compare-expr1> | LAMBDA
+        assert node.name == '<compare-op1>'
+        first_child = node.children[0].name
 
-            if comp_op_children[0].name == 'EQUALS':
-                return EqualsNode(left_operant, right_operant)
-            elif comp_op_children[0].name == 'NOTEQUALS':
-                return NotEqualNode(left_operant, right_operant)
+        if first_child == 'EQUALS':
+            expr, = ast_children
+            return EqualsNode(None, expr)
+        elif first_child == 'NOTEQUALS':
+            expr, = ast_children
+            return NotEqualNode(None, expr)
 
-        return expr_node
+    def visit_compare_expr2(self, node, ast_children):
+        assert node.name == '<compare-expr2>'
 
-    def visit_COMPARE_EXPR_2(self, node):
-        # <compare-expr2> -> <arith-expr1>, <compare-op2>
-        expr_node = self.visit_ARITH_EXPR_1(node.children[0])
+        if len(ast_children) == 1:
+            expr, = ast_children
+            return expr
+        elif len(ast_children) == 2:
+            expr, binary_expr = ast_children
+            binary_expr.expr1 = expr
+            return binary_expr
 
-        comp_op2_children = node.children[
-            1].children  # <compare-op2> -> LESS <compare-expr2> | GREATER <compare-expr2> | LAMBDA
-        # if <compare-op2> does not derive lambda return either a LessThanNode or a GreaterThanNode
-        # else just return the expression
-        if not isinstance(comp_op2_children[0].symbol, Lambda):
-            left_operant = expr_node  # use the expr_node as the left operant
-            right_operant = self.visit_COMPARE_EXPR_2(
-                comp_op2_children[1])  # visit_COMPARE_EXPR_2 to find the right operant
+    def visit_compare_op2(self, node, ast_children):
+        # <compare-op2> -> LESS, <compare-expr2> | GREATER, <compare-expr2> | LAMBDA
+        assert node.name == '<compare-op2>'
+        first_child = node.children[0].name
 
-            if comp_op2_children[0].name == 'LESS':
-                return LessThanNode(left_operant, right_operant)
-            elif comp_op2_children[0].name == 'GREATER':
-                return GreaterThanNode(left_operant, right_operant)
+        if first_child == 'LESS':
+            expr, = ast_children
+            return LessThanNode(None, expr)
+        elif first_child == 'GREATER':
+            expr, = ast_children
+            return GreaterThanNode(None, expr)
 
-        return expr_node
+    def visit_arith_expr1(self, node, ast_children):
+        assert node.name == '<arith-expr1>'
 
-    def visit_ARITH_EXPR_1(self, node):
-        # <arith-expr1> -> <arith-expr2>, <arith-op1>
-        expr_node = self.visit_ARITH_EXPR_2(node.children[0])
+        if len(ast_children) == 1:
+            expr, = ast_children
+            return expr
+        elif len(ast_children) == 2:
+            expr, binary_expr = ast_children
+            binary_expr.expr1 = expr
+            return binary_expr
 
-        arith_op1_children = node.children[1].children
-        # <arith-op1> -> PLUS <arith-expr1> | MINUS <arith-expr1> | LAMBDA
-        # if <arith-op1> does not derive lambda return either a PlusNode or a MinusNode else just return the expression
+    def visit_arith_op1(self, node, ast_children):
+        # <arith-op1> -> PLUS, <arith-expr1> | MINUS, <arith-expr1> | LAMBDA
+        assert node.name == '<arith-op1>'
+        first_child = node.children[0].name
 
-        if not isinstance(arith_op1_children[0].symbol, Lambda):
-            left_operant = expr_node  # use the expr_node as the left operant
-            right_operant = self.visit_ARITH_EXPR_1(
-                arith_op1_children[1])  # visit_ARITH_EXPR_1 to find the right operant
+        if first_child == 'PLUS':
+            expr, = ast_children
+            return PlusNode(None, expr)
+        elif first_child == 'MINUS':
+            expr, = ast_children
+            return MinusNode(None, expr)
 
-            if arith_op1_children[0].name == 'PLUS':
-                return PlusNode(left_operant, right_operant)
-            elif arith_op1_children[0].name == 'MINUS':
-                return MinusNode(left_operant, right_operant)
-
-        return expr_node
-
-    def visit_ARITH_EXPR_2(self, node):
+    def visit_arith_expr2(self, node, ast_children):
         # <arith-expr2> -> <arith-expr3>, <arith-op2>
-        expr_node = self.visit_ARITH_EXPR_3(node.children[0])
+        assert node.name == '<arith-expr2>'
 
-        arith_op2_children = node.children[1].children
-        # <arith-op2> -> MULT <arith-expr2> | DIVIDE <arith-expr2> | MODULO <arith-expr2> | LAMBDA
-        # if <arith-op1> does not derive lambda return either a MultNode, DivideNode or ModuloNode
-        # else just return the expression
+        if len(ast_children) == 1:
+            expr, = ast_children
+            return expr
+        elif len(ast_children) == 2:
+            expr, binary_expr = ast_children
+            binary_expr.expr1 = expr
+            return binary_expr
 
-        if not isinstance(arith_op2_children[0].symbol, Lambda):  # if <arith-op2> does not derive lambda
-            left_operant = expr_node  # use the expr_node as the left operant
-            right_operant = self.visit_ARITH_EXPR_2(
-                arith_op2_children[1])  # visit_ARITH_EXPR_1 to find the right operant
+    def visit_arith_op2(self, node, ast_children):
+        # <arith-op2> -> MULT, <arith-expr2> | DIVIDE, <arith-expr2> | MODULO, <arith-expr2> | LAMBDA
+        assert node.name == '<arith-op2>'
+        first_child = node.children[0].name
 
-            if arith_op2_children[0].name == 'MULT':
-                return MultiplyNode(left_operant, right_operant)
-            elif arith_op2_children[0].name == 'DIVIDE':
-                return DivideNode(left_operant, right_operant)
-            elif arith_op2_children[0].name == 'MODULO':
-                return ModuloNode(left_operant, right_operant)
+        if first_child == 'MULT':
+            expr, = ast_children
+            return MultiplyNode(None, expr)
+        elif first_child == 'DIVIDE':
+            expr, = ast_children
+            return DivideNode(None, expr)
+        elif first_child == 'MODULO':
+            expr, = ast_children
+            return ModuloNode(None, expr)
 
-        return expr_node
 
-    def visit_ARITH_EXPR_3(self, node):
-        # <arith-expr3> -> <term> | LPAREN <expr> RPAREN | MINUS <arith-expr3> | NOT <arith-expr3>
+    def visit_arith_expr3(self, node, ast_children):
+        # <arith-expr3> -> <term> | LPAREN, <expr>, RPAREN | MINUS, <arith-expr3> | NOT, <arith-expr3>
+        assert node.name == '<arith-expr3>'
 
-        # call visit based on which node it is
-        first_child = node.children[0]
-        if first_child.name == '<term>':
-            return self.visit_TERM(first_child)
-        elif first_child.name == 'LPAREN':
-            in_paren = self.visit_EXPR(node.children[1])
-            return ParenthesesNode(in_paren)
-        elif first_child.name == 'MINUS':
-            expr_node = self.visit_ARITH_EXPR_3(node.children[1])
-            return NegativeNode(expr_node)
-        elif first_child.name == 'NOT':
-            expr_node = self.visit_ARITH_EXPR_3(node.children[1])
-            return NotNode(expr_node)
+        first_child = node.children[0].name  # first child of the parse tree node
+        expr, = ast_children
 
-    def visit_TERM(self, node):
-        # <term> -> <id-operation> | <boolean> | <val> | <string> | <run>
+        if first_child == '<term>':
+            return expr
+        elif first_child == 'LPAREN':
+            return ParenthesesNode(expr)
+        elif first_child == 'MINUS':
+            return NegativeNode(expr)
+        elif first_child == 'NOT':
+            return NotNode(expr)
 
-        # call visit based on which node it is
-        child = node.children[0]
-        if child.name == '<id-operation>':
-            return self.visit_ID_OP(child)
-        elif child.name == '<boolean>':
-            return self.visit_BOOL(child.children[0])
-        elif child.name == '<val>':
-            return self.visit_VAL(child)
-        elif child.name == '<string>':
-            return self.visit_STR(child.children[0])
-        elif child.name == '<run>':
-            return self.visit_RUN(child)
+    def visit_id_operation(self, node, ast_children):
+        # <id-operation> -> <id>, <id-operator>
+        assert node.name == '<id-operation>'
 
-    def visit_ID_OP(self, node):
-        # <id-operation> -> <id> <id-operator>
+        if len(ast_children) == 2:
+            id_node, id_op = ast_children
+            if isinstance(id_op, DotNode):
+                id_op.ids.insert(0, id_node)
+                return id_op
+            elif isinstance(id_op, IdNode):
+                return DotNode([id_node, id_op])
+            elif isinstance(id_op, ActualParameterNode):
+                return NewObjectNode(id_node, id_op)
 
-        id = self.visit_ARRAY_REF(node.children[0])
-        id_operator_children = node.children[1].children
-        # <id-operator> -> <dot-ref> | LPAREN <params> RPAREN
+        elif len(ast_children) == 1:
+            id_node, = ast_children
+            return id_node
 
-        if id_operator_children[0].name == '<dot-ref>':
-            if isinstance(id_operator_children[0].children[0].symbol, Lambda):
-                return id
+    def visit_id_ref(self, node, ast_children):
+        # <id-ref> -> <id>, <dot-ref>
+        assert node.name == '<id-ref>'
+        if len(ast_children) == 2:
+            id_node, dot_node = ast_children
+            dot_node.ids.insert(0, id_node)
+            return dot_node
 
-            id_list = []
-            ids = self.visit_DOT_REF(id_operator_children[0])  # find the rest of the ids
+        elif len(ast_children) == 1:
+            id_node, = ast_children
+            return id_node
 
-            # append the initial id and the rest of the id's to a list
-            id_list.append(id)
-            id_list.extend(ids)
-            return DotNode(id_list)  # create a DotNode using the list of ids
+    def visit_dot_ref(self, node, ast_children):
+        # <dot-ref> -> DOT, <id>, <dot-ref> | LAMBDA
+        assert node.name == '<dot-ref>'
+        if len(ast_children) == 2:
+            id_node, other_node = ast_children
+            if isinstance(other_node, DotNode):
+                other_node.ids.insert(0, id_node)
+                return other_node
+            elif isinstance(other_node, IdNode):
+                return DotNode([id_node, other_node])
 
-        elif id_operator_children[0].name == 'LPAREN':
-            param_node = self.visit_ACTUAL_PARAMS(id_operator_children[1])  # visit_PARAMS to get the ParamNode
-            return NewObjectNode(id, param_node)  # use the ParamNode to make a NewObejctNode and return it
+        elif len(ast_children) == 1:
+            id_node, = ast_children
+            return DotNode([id_node])
 
-    def visit_VAL(self, node):
-        # visit either float or integer depending on the node
-        child = node.children[0]
-        if child.name == 'FLOAT':
-            return self.visit_FLOAT(child)
-        elif child.name == 'INTEGER':
-            return self.visit_INT(child)
+    def visit_id(self, node, ast_children):
+        # <id> -> ID, <array-subscript>
+        assert node.name == '<id>'
+        if len(ast_children) == 2:
+            id_node, int_node = ast_children
+            return ArrayRefNode(id_node, int_node)
+        elif len(ast_children) == 1:
+            id_node, = ast_children
+            return id_node
 
-    def visit_INT(self, node):
-        return IntegerNode(node.value)  # return IntegerNode with the value from the node
+    def visit_ID(self, node, ast_children):
+        assert not ast_children
+        return IdNode(node.value)
 
-    def visit_BOOL(self, node):
-        return BoolNode(node.value)  # return BoolNode with the value from the node
+    def visit_INTEGER(self, node, ast_children):
+        assert not ast_children
+        return IntegerNode(node.value)
 
-    def visit_STR(self, node):
-        return StringNode(node.value)  # return StringNode with the value from the node
+    def visit_FLOAT(self, node, ast_children):
+        assert not ast_children
+        return FloatNode(node.value)
 
-    def visit_FLOAT(self, node):
-        return FloatNode(node.value)  # return FloatNode with the value from the node
+    def visit_BOOL(self, node, ast_children):
+        assert not ast_children
+        return FloatNode(node.value)
+
+    def visit_STRING(self, node, ast_children):
+        assert not ast_children
+        return FloatNode(node.value)

@@ -1,53 +1,29 @@
 import re
 from src.tokens import Token
+import csv
 
 
-# rewrite of code: https://docs.python.org/3/library/re.html in the bottom of the page
+
 class Lexer:
-    keywords = {'foreach', 'when', 'if', 'else', 'run', 'return', 'and', 'or', 'not', 'function', 'set', 'to'}
-    token_specification = [
-        ('COMMENT', r'//.*[\n]*'),  # Comments
 
-        # Operators
-        ('PLUS',     r'[+]'),
-        ('MINUS',    r'[\-]'),
-        ('MULT',     r'[*]'),
-        ('DIVIDE',   r'[/]'),
-        ('MODULO',   r'[%]'),
-        ('NOTEQUALS',r'is not'),
-        ('EQUALS',   r'is'),
-        ('GREATER',  r'[>]'),
-        ('LESS',     r'[<]'),
+    def __init__(self, program, keyword_file, token_spec_file):
+        # keyword_file format: keyword1 \n keyword2
+        # token_spec_file format: name1, re1 \n name2, re1
 
-        ('FLOAT',   r'\d+[.]\d*'),  # Float
-        ('INTEGER', r'\d+'),  # Integer
-        ('STRING',  r'["][^"]*["]'),  # String value: "Hello World"
-        ('BOOL',    r'true|false|on|off'),  # Boolean: true, false or on, off
-        ('ID',      r'[\w]+'),  # Identifiers
+        with open(keyword_file, 'r') as k_file:
+            self.keywords = [keyword for keyword in k_file.read().splitlines()]
 
-        # Allowed symbols
-        ('END',     r';'),
-        ('LPAREN',  r'[\(]'),
-        ('RPAREN',  r'[\)]'),
-        ('LCURLY',  r'[\{]'),
-        ('RCURLY',  r'[\}]'),
-        ('LSQUARE', r'[\[]'),
-        ('RSQUARE', r'[\]]'),
-        ('DOT',     r'[.]'),
-        ('COMMA',   r'[,]'),
+        with open(token_spec_file, 'r') as ts_file:
+            reader = csv.reader(ts_file, delimiter=':', skipinitialspace=True)
+            self.token_specification = [(x, y) for x, y in reader]
 
-        ('NEWLINE', r'\n'),  # Newline
-        ('SKIP',    r'[ \t]+'),  # Skip over spaces and tabs
-        ('MISMATCH',r'.'),  # Any other character
-    ]
-
-    def __init__(self, program_file=None, program_string=None):
-        if program_file:
-            with open(program_file, "r") as program_file:
+        # If it is a file use it's contents as the program, else use the input directly
+        try:
+            with open(program, "r") as program_file:
                 self.program = program_file.read()
+        except FileNotFoundError:
+            self.program = program
 
-        elif program_string:
-            self.program = program_string
 
     def lex(self):
         tokens = []

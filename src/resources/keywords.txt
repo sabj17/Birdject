@@ -1,0 +1,14 @@
+foreach
+when
+if
+else
+run
+return
+and
+or
+not
+function
+set
+to
+in
+break

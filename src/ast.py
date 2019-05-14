@@ -39,6 +39,7 @@ class AbstractNode:
     def accept(self, node_visitor):
         return node_visitor.visit(self)
 
+
     def visit_children(self, node_visitor):
         for child in vars(self).values():
             if isinstance(child, list):  # if node has more than one child, the child variable will be a list
@@ -308,7 +309,6 @@ class RunNode(BlockBodyPartNode):
         super().__init__()
         self.id = id
         self.params = params
-
 
 
 ###################

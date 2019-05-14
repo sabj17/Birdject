@@ -1,0 +1,27 @@
+COMMENT:    //.*[\n]*
+PLUS:       [+]
+MINUS:      [\-]
+MULT:       [*]
+DIVIDE:     [/]
+MODULO:     [%]
+NOTEQUALS:  is not
+EQUALS:     is
+GREATER:    [>]
+LESS:       [<]
+FLOAT:      \d+[.]\d*
+INTEGER:    \d+
+STRING:     ["][^"]*["]
+BOOL:       true|false|on|off
+ID:         [\w]+
+END:        ;
+LPAREN:     [\(]
+RPAREN:     [\)]
+LCURLY:     [\{]
+RCURLY:     [\}]
+LSQUARE:    [\[]
+RSQUARE:    [\]]
+DOT:        [.]
+COMMA:      [,]
+NEWLINE:    \n
+SKIP:       [ \t]+
+MISMATCH:   .
