@@ -2,6 +2,7 @@ set fuck to 10;
 
 set lightGlobal to Light(pin10);
 
+
 LivingRoom {
     set light to Light(pin9, pin10);
     set switch1 to Switch(pin11);
@@ -16,6 +17,7 @@ LivingRoom {
         //run light.switchState();
         return jebat;
     }
+
 }
 
 function tester(){
@@ -23,9 +25,25 @@ function tester(){
     //run LivingRoom.light.switchState();
 }
 
-when (5 > 4){
+
+function parameterFunction(x, y){
+    if(x is not y){
+        set x to y;
+    } else if (x is y){
+        set x to 10;
+    } else {
+        set x to 0;
+    }
+}
+
+
+run tester();
+
+when (fuck > 4){
     set fuck to 15;
     set lightGlobal to Light(pin69);
+    run tester();
+    run parameterFunction(fuck, 10);
     //run LivingRoom.light.switchState();
 }
 
