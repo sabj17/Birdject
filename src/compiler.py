@@ -7,6 +7,7 @@ from src.grammar import *
 from src.lexer import Lexer
 from src.parser import Parser
 from src.parsetree import BuildASTVisitor
+from src.ast import GraphASTVisitor
 
 wd = os.getcwd()
 grammar_file = os.path.join(wd, 'resources/grammar.txt')
@@ -45,7 +46,7 @@ ast = parse_tree.accept(BuildASTVisitor())
 
 
 
-ast.graph()
+ast.accept(GraphASTVisitor())
 
 
 #visitor = AstNodeVisitor()

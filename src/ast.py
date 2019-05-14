@@ -7,34 +7,11 @@ class AST:
     def __init__(self, prog_node):
         self.prog = prog_node
 
-    def graph(self):
-        graph = Digraph('G', node_attr={'style': 'filled'}, graph_attr={'ratio': 'fill', 'ranksep': '1.5'})
-        graph.attr(overlap='false')
-        self.prog.graph(graph)
-        graph.save(filename='AST.gv')
-
     def accept(self, node_visitor):
         node_visitor.visit(self.prog)
 
 
 class AbstractNode:
-
-    def graph(self, graph, parent=None):
-        id = str(random.randint(1, 10000000))
-        graph.node(id, nohtml(self.__str__()))
-        if parent:
-            graph.edge(parent, id)
-
-        class_vars = vars(self)
-        for child in class_vars.values():
-            if isinstance(child, AbstractNode):
-                child.graph(graph, id)
-            else:
-                if child:
-                    id2 = str(random.randint(1, 10000000))
-                    # print(child, self.__class__.__name__)
-                    graph.node(id2, nohtml(child))
-                    graph.edge(id, id2)
 
     def accept(self, node_visitor):
         return node_visitor.visit(self)
@@ -56,13 +33,6 @@ class ProgNode(AbstractNode):
     def __init__(self, stmts):
         super().__init__()
         self.stmts = stmts
-
-    def graph(self, graph, parent=None):
-        id = str(random.randint(1, 10000000))
-        graph.node(id, nohtml(self.__str__()))
-
-        for stmt in self.stmts:
-            stmt.graph(graph, id)
 
 
 ##############
@@ -122,16 +92,6 @@ class ClassBodyNode(StatementNode):
         super().__init__()
         self.body_parts = body_parts
 
-    def graph(self, graph, parent=None):
-        id = str(random.randint(1, 10000000))
-        graph.node(id, nohtml(self.__str__()))
-        if parent:
-            graph.edge(parent, id)
-
-        for child in self.body_parts:
-            if isinstance(child, AbstractNode):
-                child.graph(graph, id)
-
 
 ###############
 # EXPRESSIONS #
@@ -178,8 +138,6 @@ class NewObjectNode(AbstractNode):
 
     def __repr__(self):
         return self.id.__repr__() + "(" + self.param.__repr__() + ")"
-
-
 
 
 # BINARY EXPRESSIONS #
@@ -279,17 +237,6 @@ class BlockNode(AbstractNode):
         super().__init__()
         self.parts = parts
 
-    def graph(self, graph, parent=None):
-        id = str(random.randint(1, 10000000))
-        graph.node(id, nohtml(self.__str__()))
-        if parent:
-            graph.edge(parent, id)
-
-        for child in self.parts:
-            if isinstance(child, AbstractNode):
-                child.graph(graph, id)
-
-
 class BlockBodyPartNode(AbstractNode):
     pass
 
@@ -319,16 +266,6 @@ class ActualParameterNode(AbstractNode):
         super().__init__()
         self.expr_list = expr_list
 
-    def graph(self, graph, parent=None):
-        id = str(random.randint(1, 10000000))
-        graph.node(id, nohtml(self.__str__()))
-        if parent:
-            graph.edge(parent, id)
-
-        for child in self.expr_list:
-            if isinstance(child, AbstractNode):
-                child.graph(graph, id)
-
     def __repr__(self):
         string = ""
         i = 0
@@ -347,16 +284,6 @@ class FormalParameterNode(AbstractNode):
         super().__init__()
         self.id_list = id_list
 
-    def graph(self, graph, parent=None):
-        id = str(random.randint(1, 10000000))
-        graph.node(id, nohtml(self.__str__()))
-        if parent:
-            graph.edge(parent, id)
-
-        for child in self.id_list:
-            if isinstance(child, AbstractNode):
-                child.graph(graph, id)
-
 
 ##############
 # TERM STUFF #
@@ -369,6 +296,9 @@ class BoolNode(TermNode):
     def __init__(self, value):
         super().__init__()
         self.value = value
+
+    def __str__(self):
+        return type(self).__name__ + ": " + str(self.value)
 
     def __repr__(self):
         if(self.value == 'on'):
@@ -383,6 +313,9 @@ class StringNode(TermNode):
         super().__init__()
         self.value = value
 
+    def __str__(self):
+        return type(self).__name__ + ": " + str(self.value)
+
     def __repr__(self):
         return self.value + ""
 
@@ -391,6 +324,9 @@ class FloatNode(TermNode):
     def __init__(self, value):
         super().__init__()
         self.value = value
+
+    def __str__(self):
+        return type(self).__name__ + ": " + str(self.value)
 
     def __repr__(self):
         return self.value + ""
@@ -401,6 +337,9 @@ class IntegerNode(TermNode):
         super().__init__()
         self.value = value
 
+    def __str__(self):
+        return type(self).__name__ + ": " + str(self.value)
+
     def __repr__(self):
         return self.value + ""
 
@@ -409,6 +348,9 @@ class IdNode(TermNode):
     def __init__(self, name):
         super().__init__()
         self.name = name
+
+    def __str__(self):
+        return type(self).__name__ + ": " + str(self.name)
 
     def __repr__(self):
         return self.name
@@ -419,19 +361,53 @@ class DotNode(TermNode):
         super().__init__()
         self.ids = ids
 
-    def graph(self, graph, parent=None):
-        id = str(random.randint(1, 10000000))
-        graph.node(id, nohtml(self.__str__()))
-        if parent:
-            graph.edge(parent, id)
-
-        for child in self.ids:
-            if isinstance(child, AbstractNode):
-                child.graph(graph, id)
-
 
 class ArrayRefNode(TermNode):
     def __init__(self, id, index):
         super().__init__()
         self.id = id
         self.integer = index
+
+
+
+class GraphASTVisitor:
+
+    def __init__(self):
+        self.parent = None
+        self.graph = Digraph('G', node_attr={'style': 'filled'}, graph_attr={'ratio': 'fill', 'ranksep': '1.5'})
+
+
+    def visit_children(self, node):
+        children = vars(node).values()
+        for child in children:
+            if isinstance(child, list):
+                for cc in child:
+                    cc.accept(self)
+            elif isinstance(child, AbstractNode):
+                child.accept(self)
+
+    def visit(self, node):
+        method_name = 'visit_' + type(node).__name__
+        if hasattr(self, method_name):
+            visitor = getattr(self, method_name)
+            return visitor(node)
+
+        id = str(hash(node))
+        self.graph.node(id, nohtml(str(node)))
+        self.graph.edge(self.parent, id)
+
+        parent = self.parent
+        self.parent = id
+        self.visit_children(node)
+        self.parent = parent
+
+
+    def visit_ProgNode(self, node):
+        id = str(hash(node))
+        self.graph.node(id, nohtml(str(node)))
+        self.parent = id
+
+        self.visit_children(node)
+
+        self.graph.attr(overlap='false')
+        self.graph.save(filename='AST.gv')

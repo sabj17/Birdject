@@ -1,4 +1,4 @@
-from ast import *
+from src.ast import *
 from src.grammar import *
 from graphviz import Digraph, nohtml
 import random
