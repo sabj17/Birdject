@@ -1,5 +1,5 @@
 set list1 to List();
-set number1 to 4 + 2 * 3 - 4;
+set number1 to 4 + 2 * 3 - 2;
 set string to "Hello";
 set bacon to string;
 set superString to "hey" + "baby";

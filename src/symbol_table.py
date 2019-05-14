@@ -49,11 +49,9 @@ class AstNodeVisitor(NodeVisitor):
         self.current_scope = inner_scope
         node.visit_children(self)
 
-        print('1', self.current_scope.symbols)
         self.current_scope = enclosing_scope
         self.current_scope.symbols['Block_scope'+str(self.current_scope.scope_counter)] = inner_scope
         self.current_scope.scope_counter += 1
-        print('2', self.current_scope.symbols)
 
     def visit_ClassNode(self, node):
         self.current_scope.symbols[node.id.name] = object
@@ -108,7 +106,7 @@ class AstNodeVisitor(NodeVisitor):
             elif (final_type == None) and (isinstance(expr, IntegerNode) or id_type == int):
                 final_type = int
 
-            if (not isinstance(binExpNode, PlusNode)) and (final_type == str):
+            if ((not isinstance(binExpNode, PlusNode)) and (final_type == str)) or isinstance(expr, BoolNode):
                 raise Exception(TypeError, expr)
 
             if isinstance(expr, BinaryExpNode) or isinstance(expr, UnaryExpNode):
