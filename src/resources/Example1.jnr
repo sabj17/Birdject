@@ -1,6 +1,30 @@
+set fuck to 10;
 
-function hello(param_1, param2){
-run window1.object1.turnOn(1, 2);
-run print(4+5);
+set lightGlobal to Light(pin10);
+
+LivingRoom {
+    set light to Light(pin9, pin10);
+    set switch1 to Switch(pin11);
+    set x to 5 + 5 * 7 / 10 % 3;
+    set y to 5 + 5.5;
+    set z to on;
+    set v to "fuck mig i røven så fucking hårdt";
+
+    function jenerator(jebat, jabat){
+        set jebat to 5 + 5;
+        set jabat to "Anus";
+        return jebat;
+    }
 }
 
+function tester(){
+    set nou to on;
+}
+
+when (5 > 4){
+    set fuck to 15;
+    set lightGlobal to Light(pin69);
+    set LivingRoom.x to 10;
+}
+
+set global to off;

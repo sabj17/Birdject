@@ -37,7 +37,7 @@ class AbstractNode:
                     graph.edge(id, id2)
 
     def accept(self, node_visitor):
-        node_visitor.visit(self)
+        return node_visitor.visit(self)
 
     def visit_children(self, node_visitor):
         for child in vars(self).values():
@@ -175,61 +175,99 @@ class NewObjectNode(AbstractNode):
         self.id = id
         self.param = param
 
+    def __repr__(self):
+        return self.id.__repr__() + "(" + self.param.__repr__() + ")"
+
+
+
 
 # BINARY EXPRESSIONS #
 class PlusNode(BinaryExpNode):
     def __init__(self, expr1, expr2):
         super().__init__(expr1, expr2)
 
+    def __repr__(self):
+        return self.expr1.__repr__() + " + " + self.expr2.__repr__()
+
 
 class MinusNode(BinaryExpNode):
     def __init__(self, expr1, expr2):
         super().__init__(expr1, expr2)
+
+    def __repr__(self):
+        return self.expr1.__repr__() + " - " + self.expr2.__repr__()
 
 
 class MultiplyNode(BinaryExpNode):
     def __init__(self, expr1, expr2):
         super().__init__(expr1, expr2)
 
+    def __repr__(self):
+        return self.expr1.__repr__() + " * " + self.expr2.__repr__()
+
 
 class DivideNode(BinaryExpNode):
     def __init__(self, expr1, expr2):
         super().__init__(expr1, expr2)
+
+    def __repr__(self):
+        return self.expr1.__repr__() + " / " + self.expr2.__repr__()
 
 
 class ModuloNode(BinaryExpNode):
     def __init__(self, expr1, expr2):
         super().__init__(expr1, expr2)
 
+    def __repr__(self):
+        return self.expr1.__repr__() + " % " + self.expr2.__repr__()
+
 
 class EqualsNode(BinaryExpNode):
     def __init__(self, expr1, expr2):
         super().__init__(expr1, expr2)
+
+    def __repr__(self):
+        return self.expr1.__repr__() + " == " + self.expr2.__repr__()
 
 
 class NotEqualNode(BinaryExpNode):
     def __init__(self, expr1, expr2):
         super().__init__(expr1, expr2)
 
+    def __repr__(self):
+        return self.expr1.__repr__() + " != " + self.expr2.__repr__()
+
 
 class GreaterThanNode(BinaryExpNode):
     def __init__(self, expr1, expr2):
         super().__init__(expr1, expr2)
+
+    def __repr__(self):
+        return self.expr1.__repr__() + " > " + self.expr2.__repr__()
 
 
 class LessThanNode(BinaryExpNode):
     def __init__(self, expr1, expr2):
         super().__init__(expr1, expr2)
 
+    def __repr__(self):
+        return self.expr1.__repr__() + " < " + self.expr2.__repr__()
+
 
 class AndNode(BinaryExpNode):
     def __init__(self, expr1, expr2):
         super().__init__(expr1, expr2)
 
+    def __repr__(self):
+        return self.expr1.__repr__() + " && " + self.expr2.__repr__()
+
 
 class OrNode(BinaryExpNode):
     def __init__(self, expr1, expr2):
         super().__init__(expr1, expr2)
+
+    def __repr__(self):
+        return self.expr1.__repr__() + " || " + self.expr2.__repr__()
 
 
 ###############
@@ -291,6 +329,18 @@ class ActualParameterNode(AbstractNode):
             if isinstance(child, AbstractNode):
                 child.graph(graph, id)
 
+    def __repr__(self):
+        string = ""
+        i = 0
+        for child in self.expr_list:
+            if isinstance(child, AbstractNode):
+                if i > 0:
+                    string += ", "
+                string += child.__repr__()
+                i += 1
+        return string
+
+
 
 class FormalParameterNode(AbstractNode):
     def __init__(self, id_list):
@@ -320,11 +370,21 @@ class BoolNode(TermNode):
         super().__init__()
         self.value = value
 
+    def __repr__(self):
+        if(self.value == 'on'):
+            return "true"
+        elif(self.value == "off"):
+            return "false"
+        return self.value + ""
+
 
 class StringNode(TermNode):
     def __init__(self, value):
         super().__init__()
         self.value = value
+
+    def __repr__(self):
+        return self.value + ""
 
 
 class FloatNode(TermNode):
@@ -332,17 +392,26 @@ class FloatNode(TermNode):
         super().__init__()
         self.value = value
 
+    def __repr__(self):
+        return self.value + ""
+
 
 class IntegerNode(TermNode):
     def __init__(self, value):
         super().__init__()
         self.value = value
 
+    def __repr__(self):
+        return self.value + ""
+
 
 class IdNode(TermNode):
     def __init__(self, name):
         super().__init__()
         self.name = name
+
+    def __repr__(self):
+        return self.name
 
 
 class DotNode(TermNode):

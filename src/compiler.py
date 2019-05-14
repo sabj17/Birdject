@@ -2,6 +2,8 @@ import os
 
 from prettytable import PrettyTable
 
+from codegen.program import Program
+from codegen.visitor import Visitor
 from src.symbol_table import AstNodeVisitor
 from src.grammar import *
 from src.lexer import Lexer
@@ -9,7 +11,7 @@ from src.parser import Parser
 
 wd = os.getcwd()
 grammar_file = os.path.join(wd, 'resources/grammar.txt')
-program_file = os.path.join(wd, 'resources/Example.jnr')
+program_file = os.path.join(wd, 'resources/Example1.jnr')
 
 grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
@@ -45,5 +47,11 @@ ast.graph()
 visitor = AstNodeVisitor()
 ast.accept(visitor)
 symtable = visitor.current_scope
-print("The final symbol table")
 print(symtable.symbols)
+#table = symtable.lookup('LivingRoomScope')
+#something = table.lookup('temp1')
+#print(something)
+something = symtable.lookup('fuck')
+
+codeVisitor = Visitor(Program(), symtable)
+codeVisitor.visit(ast.prog)
