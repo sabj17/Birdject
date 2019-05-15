@@ -25,6 +25,7 @@ set lightGlobal2 to Light(pin2);
 Kitchen {
     set light2 to Light(pin8);
     set switch2 to Switch(pin9);
+    set nou to 10;
 }
 
 set lightGlobal3 to Light(pin3);
