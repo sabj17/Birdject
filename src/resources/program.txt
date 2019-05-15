@@ -94,7 +94,7 @@ LivingRoomClass() : light(pin6) , switch1(pin7) {}
 } LivingRoom;
 
 type tester (type y){
-	float y = 5.5;
+	bool y = true;
 	return y;
 }
 
@@ -119,6 +119,7 @@ void loop() {
 	}
 	if (5 < 10){
 	Serial.print("This is true");
+	Serial.print(5.5);
 	Kitchen.light2.setState(true);
 	if (10 == 4) {
 			Serial.print("Gottem");
@@ -129,4 +130,10 @@ void loop() {
 	else {
 			Kitchen.switch2.Read();
 	}
-	}}
+	}
+		if (10 == 10){
+		if (		Kitchen.switch2.Read();
+) {
+				Serial.print("Nou good one");
+		}
+		}}

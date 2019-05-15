@@ -16,7 +16,7 @@ LivingRoom {
 }
 
 function tester(y){
-    set y to 5.5;
+    set y to on;
     return y;
 }
 
@@ -39,6 +39,7 @@ set x to 10;
 
 when (5 < 10){
     run print("This is true" );
+    run tester(5.5);
     run Kitchen.light2.setState(on);
     if(10 is 4){
         run print("Gottem");
@@ -46,5 +47,11 @@ when (5 < 10){
         run Kitchen.light2.setState(off);
     } else {
         run Kitchen.switch2.Read();
+    }
+}
+
+when(10 is 10){
+    if(run Kitchen.switch2.Read()){
+        run print("Nou good one");
     }
 }
