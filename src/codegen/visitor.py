@@ -2,7 +2,7 @@ from src.ast import BinaryExpNode, PlusNode, AbstractNode, NewObjectNode, IfNode
 
 
 class NodeVisitor:
-
+    '''
     def visit(self, node):
         method_name = 'visit_' + type(node).__name__
 
@@ -11,6 +11,21 @@ class NodeVisitor:
             return visitor(node)
 
         node.visit_children(self)
+
+    '''
+    def visit(self, node):
+        if isinstance(node, BinaryExpNode):
+            method_name = 'visit_' + 'BinaryExpNode'
+        else:
+            method_name = 'visit_' + type(node).__name__
+
+        if hasattr(self, method_name):
+            visitor = getattr(self, method_name)
+            return visitor(node)
+
+        node.visit_children(self)
+
+
 
 
 class Visitor(NodeVisitor):
@@ -21,7 +36,6 @@ class Visitor(NodeVisitor):
         self.scope = 0
         self.setup_list = list()
         self.loop_list = list()
-        self.constructor_list = ["", "", "aaa", "", "", "", "", ""]
         #self.setup_string = "void setup() {\n\tSerial.begin(9600);\n"
         #self.loop_string = "void loop() {\n"
         self.current_string = ""
@@ -30,6 +44,19 @@ class Visitor(NodeVisitor):
         self.declared_vars = list()
         self.symtable = symtable
         self.program = program
+        self.operators = {
+            "PlusNode" : " + ",
+            "MinusNode" : " - ",
+            "MultiplyNode" : " * ",
+            "DivideNode" : " / ",
+            "ModuloNode" : " % ",
+            "EqualsNode" : " == ",
+            "NotEqualNode" : " != ",
+            "GreaterThanNode" : " > ",
+            "LessThanNode" : " < ",
+            "AndNode" : " && ",
+            "OrNode" : " || "
+        }
         # self.structure = Structure(program)
 
     def setTable(self, symbtable):
@@ -81,9 +108,11 @@ class Visitor(NodeVisitor):
 
     def visit_IdNode(self, node):
         field = vars(node)
+        return node.name
+        '''
         key = field.keys()
         for k in key:
-            self.program.emit_id(field.get(k))
+            self.program.emit_id(field.get(k)) '''
 
     def visit_BlockNode(self, node):
         block_atb = vars(node)
@@ -129,9 +158,30 @@ class Visitor(NodeVisitor):
     def visit_ClassBodyNode(self, node):
         body_atb = vars(node)
         self.accept_children(body_atb.get("body_parts"))
-        #self.global_string += self.current_string
+        #self.global_string += self.current_str
 
+    # Visitor method for all binary expressions
+    def visit_BinaryExpNode(self, node):
+        operator = self.operators[type(node).__name__]
+        expr1 = super().visit(node.expr1)
+        expr2 = super().visit(node.expr2)
+        return expr1 + operator + expr2
 
+    def visit_IntegerNode(self, node):
+        return "" + node.value
+
+    def visit_FloatNode(self, node):
+        return "" + node.value
+
+    def visit_StringNode(self, node):
+        return "" + node.value
+
+    def visit_BoolNode(self, node):
+        if node.value == 'on':
+            return "true"
+        elif node.value == "off":
+            return "false"
+        return node.value + ""
 
     def visit_AssignNode(self, node):
         # If global var dcl
@@ -141,18 +191,20 @@ class Visitor(NodeVisitor):
         assign_atb = vars(node)
         assign_id = assign_atb.get("id")
         expr = assign_atb.get("expression")
+        expr_string = super().visit(expr)
+        var_name = super().visit(assign_id)
 
-        if assign_id.__repr__() in self.declared_vars:
-            self.current_string += self.get_tabs() + assign_id.__repr__() + " = " + expr.__repr__() + ";\n"
+        if var_name in self.declared_vars:
+            self.current_string += self.get_tabs() + var_name + " = " + expr_string + ";\n"
         # The cases where a new var is being declared
-        elif self.symtable.lookup(assign_id.__repr__()) == int:
-            self.current_string += self.get_tabs() + "int " + assign_id.__repr__() + " = " + expr.__repr__() + ";\n"
-        elif self.symtable.lookup(assign_id.__repr__()) == float:
-            self.current_string += self.get_tabs() + "float " + assign_id.__repr__() + " = " + expr.__repr__() + ";\n"
-        elif self.symtable.lookup(assign_id.__repr__()) == bool:
-            self.current_string += self.get_tabs() + "bool " + assign_id.__repr__() + " = " + expr.__repr__() + ";\n"
-        elif self.symtable.lookup(assign_id.__repr__()) == str:
-            self.current_string += self.get_tabs() + "char " + assign_id.__repr__() + "[100] = " + expr.__repr__() + ";\n"
+        elif self.symtable.lookup(var_name) == int:
+            self.current_string += self.get_tabs() + "int " + var_name + " = " + expr_string + ";\n"
+        elif self.symtable.lookup(var_name) == float:
+            self.current_string += self.get_tabs() + "float " + var_name + " = " + expr_string + ";\n"
+        elif self.symtable.lookup(var_name) == bool:
+            self.current_string += self.get_tabs() + "bool " + var_name + " = " + expr_string + ";\n"
+        elif self.symtable.lookup(var_name) == str:
+            self.current_string += self.get_tabs() + "char " + var_name + "[100] = " + expr_string + ";\n"
         # Object assignment
 
 
@@ -162,19 +214,19 @@ class Visitor(NodeVisitor):
             obj_param = obj_atb.get("param")
             # Global variable
             if self.scope == 0:
-                self.current_string += obj_id.__repr__() + " " + assign_id.__repr__() + "(" + obj_param.__repr__() + ")\n"
+                self.current_string += obj_id.__repr__() + " " + var_name + "(" + obj_param.__repr__() + ")\n"
             else:  # Declared inside a room
-                self.current_string += self.get_tabs() + obj_id.__repr__() + " " + assign_id.__repr__() + ";\n"
+                self.current_string += self.get_tabs() + obj_id.__repr__() + " " + var_name + ";\n"
                 # Adding the object to the constructor of the room
                 string_symbol = " : "
                 if self.objects_in_constructor == 1:
                     string_symbol = " , "
-                self.class_constructor += string_symbol + assign_id.__repr__() + "(" + obj_param.__repr__() + ")"
+                self.class_constructor += string_symbol + var_name + "(" + obj_param.__repr__() + ")"
                 self.objects_in_constructor += 1
             # adds the 'setupClass()' to void setup()
             # self.setup_string += "\t" + assign_id.__repr__() + ".setupClass();\n"
-            self.setup_list.append("\t" + assign_id.__repr__() + ".setupClass();")
-        self.declared_vars.append(assign_id.__repr__())
+            self.setup_list.append("\t" + var_name + ".setupClass();")
+        self.declared_vars.append(var_name)
 
         #   self.code_gen.emit_id(assign_id)
         self.accept_children(assign_atb.get("expression"))
@@ -183,6 +235,7 @@ class Visitor(NodeVisitor):
         if self.scope == 0:
             #self.global_string += self.current_string
             self.global_list.append(self.current_string)
+
 
     def visit_FunctionNode(self, node):
         # Global function
@@ -293,6 +346,8 @@ class Visitor(NodeVisitor):
         elif false_block is not None:
             self.current_string += self.get_tabs() + "else {\n"
             self.create_if_body(false_block)
+
+
 
 
 

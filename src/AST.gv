@@ -1,284 +1,106 @@
 digraph G {
 	graph [ranksep=1.5 ratio=fill]
 	node [style=filled]
-	3106985 [label=ProgNode]
-	3106983 [label=AssignNode]
-	3106985 -> 3106983
-	3106991 [label="IdNode: fuck"]
-	3106983 -> 3106991
-	3107003 [label="IntegerNode: 10"]
-	3106983 -> 3107003
-	3106977 [label=AssignNode]
-	3106985 -> 3106977
-	3106987 [label="IdNode: lightGlobal"]
-	3106977 -> 3106987
-	3107013 [label=NewObjectNode]
-	3106977 -> 3107013
-	3107017 [label="IdNode: Light"]
-	3107013 -> 3107017
-	3107011 [label=ActualParameterNode]
-	3107013 -> 3107011
-	3107039 [label="IdNode: pin99"]
-	3107011 -> 3107039
-	3107009 [label=ClassNode]
-	3106985 -> 3107009
-	3106993 [label="IdNode: LivingRoom"]
-	3107009 -> 3106993
-	3106989 [label=ClassBodyNode]
-	3107009 -> 3106989
-	3107001 [label=AssignNode]
-	3106989 -> 3107001
-	3107007 [label="IdNode: light"]
-	3107001 -> 3107007
-	3107031 [label=NewObjectNode]
-	3107001 -> 3107031
-	3107033 [label="IdNode: Light"]
-	3107031 -> 3107033
-	3107037 [label=ActualParameterNode]
-	3107031 -> 3107037
-	3107061 [label="IdNode: pin9"]
-	3107037 -> 3107061
-	3107059 [label="IdNode: pin10"]
-	3107037 -> 3107059
-	3107005 [label=AssignNode]
-	3106989 -> 3107005
-	3107021 [label="IdNode: switch1"]
-	3107005 -> 3107021
-	3107045 [label=NewObjectNode]
-	3107005 -> 3107045
-	3107043 [label="IdNode: Switch"]
-	3107045 -> 3107043
-	3107035 [label=ActualParameterNode]
-	3107045 -> 3107035
-	3110151 [label="IdNode: pin11"]
-	3107035 -> 3110151
-	3107015 [label=AssignNode]
-	3106989 -> 3107015
-	3107041 [label="IdNode: x"]
-	3107015 -> 3107041
-	3107047 [label=PlusNode]
-	3107015 -> 3107047
-	3107063 [label="IntegerNode: 5"]
-	3107047 -> 3107063
-	3107051 [label=MultiplyNode]
-	3107047 -> 3107051
-	3107065 [label="IntegerNode: 5"]
-	3107051 -> 3107065
-	3107055 [label=DivideNode]
-	3107051 -> 3107055
-	3110153 [label="IntegerNode: 7"]
-	3107055 -> 3110153
-	3110155 [label=ModuloNode]
-	3107055 -> 3110155
-	3110157 [label="IntegerNode: 10"]
-	3110155 -> 3110157
-	3110163 [label="IntegerNode: 3"]
-	3110155 -> 3110163
-	3107023 [label=AssignNode]
-	3106989 -> 3107023
-	3107053 [label="IdNode: y"]
-	3107023 -> 3107053
-	3107067 [label=PlusNode]
-	3107023 -> 3107067
-	3110149 [label="IntegerNode: 5"]
-	3107067 -> 3110149
-	2987509 [label="FloatNode: 5.5"]
-	3107067 -> 2987509
-	3107025 [label=AssignNode]
-	3106989 -> 3107025
-	3107071 [label="IdNode: z"]
-	3107025 -> 3107071
-	3110171 [label="BoolNode: on"]
-	3107025 -> 3110171
-	3107027 [label=AssignNode]
-	3106989 -> 3107027
-	3110147 [label="IdNode: v"]
-	3107027 -> 3110147
-	3110179 [label="StringNode: \"fuck mig i rÃ¸ven sÃ¥ fucking hÃ¥rdt\""]
-	3107027 -> 3110179
-	3110161 [label=FunctionNode]
-	3106989 -> 3110161
-	3110159 [label="IdNode: jenerator"]
-	3110161 -> 3110159
-	3110169 [label=FormalParameterNode]
-	3110161 -> 3110169
-	3110173 [label="IdNode: jebat"]
-	3110169 -> 3110173
-	3110175 [label="IdNode: jabat"]
-	3110169 -> 3110175
-	3110167 [label=BlockNode]
-	3110161 -> 3110167
-	3110183 [label=AssignNode]
-	3110167 -> 3110183
-	3110189 [label="IdNode: jebat"]
-	3110183 -> 3110189
-	3110197 [label=PlusNode]
-	3110183 -> 3110197
-	3110205 [label="IntegerNode: 5"]
-	3110197 -> 3110205
-	3110211 [label="IntegerNode: 5"]
-	3110197 -> 3110211
-	3110185 [label=AssignNode]
-	3110167 -> 3110185
-	3110195 [label="IdNode: jabat"]
-	3110185 -> 3110195
-	3110215 [label="StringNode: \"Anus\""]
-	3110185 -> 3110215
-	3110187 [label=RunNode]
-	3110167 -> 3110187
-	3110213 [label=DotNode]
-	3110187 -> 3110213
-	3110201 [label="IdNode: light"]
-	3110213 -> 3110201
-	3110203 [label="IdNode: switchState"]
-	3110213 -> 3110203
-	3110191 [label=ReturnNode]
-	3110167 -> 3110191
-	3110235 [label="IdNode: jebat"]
-	3110191 -> 3110235
-	3107029 [label=FunctionNode]
-	3106985 -> 3107029
-	3107049 [label="IdNode: tester"]
-	3107029 -> 3107049
-	3107069 [label=BlockNode]
-	3107029 -> 3107069
-	3110181 [label=AssignNode]
-	3107069 -> 3110181
-	3110207 [label="IdNode: nou"]
-	3110181 -> 3110207
-	3110225 [label="BoolNode: on"]
-	3110181 -> 3110225
-	3110177 [label=RunNode]
-	3107069 -> 3110177
-	3110227 [label=DotNode]
-	3110177 -> 3110227
-	3110217 [label="IdNode: LivingRoom"]
-	3110227 -> 3110217
-	3110219 [label="IdNode: light"]
-	3110227 -> 3110219
-	3110223 [label="IdNode: turnedOn"]
-	3110227 -> 3110223
-	3110165 [label=FunctionNode]
-	3106985 -> 3110165
-	3110221 [label="IdNode: parameterFunction"]
-	3110165 -> 3110221
-	3110199 [label=FormalParameterNode]
-	3110165 -> 3110199
-	3110193 [label="IdNode: x"]
-	3110199 -> 3110193
-	3110231 [label="IdNode: y"]
-	3110199 -> 3110231
-	3110209 [label=BlockNode]
-	3110165 -> 3110209
-	3110239 [label=IfNode]
-	3110209 -> 3110239
-	3110245 [label=NotEqualNode]
-	3110239 -> 3110245
-	3110259 [label="IdNode: x"]
-	3110245 -> 3110259
-	3110265 [label="IdNode: y"]
-	3110245 -> 3110265
-	3110247 [label=BlockNode]
-	3110239 -> 3110247
-	3110243 [label=AssignNode]
-	3110247 -> 3110243
-	3110255 [label="IdNode: x"]
-	3110243 -> 3110255
-	3110275 [label="IdNode: y"]
-	3110243 -> 3110275
-	3110263 [label=IfNode]
-	3110239 -> 3110263
-	3110261 [label=EqualsNode]
-	3110263 -> 3110261
-	3110273 [label="IdNode: x"]
-	3110261 -> 3110273
-	3110285 [label="IdNode: y"]
-	3110261 -> 3110285
-	3110267 [label=BlockNode]
-	3110263 -> 3110267
-	3110253 [label=AssignNode]
-	3110267 -> 3110253
-	3110277 [label="IdNode: x"]
-	3110253 -> 3110277
-	3110293 [label="IntegerNode: 10"]
-	3110253 -> 3110293
-	3110283 [label=BlockNode]
-	3110263 -> 3110283
-	3110257 [label=AssignNode]
-	3110283 -> 3110257
-	3110289 [label="IdNode: x"]
-	3110257 -> 3110289
-	3110305 [label="IntegerNode: 0"]
-	3110257 -> 3110305
-	3110237 [label=RunNode]
-	3106985 -> 3110237
-	3110241 [label="IdNode: tester"]
-	3110237 -> 3110241
-	3110233 [label=WhenNode]
-	3106985 -> 3110233
-	3110281 [label=GreaterThanNode]
-	3110233 -> 3110281
-	3110307 [label="IdNode: fuck"]
-	3110281 -> 3110307
-	3110303 [label=RunNode]
-	3110281 -> 3110303
-	3110317 [label=DotNode]
-	3110303 -> 3110317
-	3110311 [label="IdNode: LivingRoom"]
-	3110317 -> 3110311
-	3110315 [label="IdNode: light"]
-	3110317 -> 3110315
-	3110319 [label="IdNode: turnedOn"]
-	3110317 -> 3110319
-	3110279 [label=BlockNode]
-	3110233 -> 3110279
-	3110271 [label=AssignNode]
-	3110279 -> 3110271
-	3110297 [label="IdNode: fuck"]
-	3110271 -> 3110297
-	3110325 [label="IntegerNode: 15"]
-	3110271 -> 3110325
-	3110287 [label=AssignNode]
-	3110279 -> 3110287
-	3110301 [label="IdNode: lightGlobal"]
-	3110287 -> 3110301
-	3110331 [label=NewObjectNode]
-	3110287 -> 3110331
-	3110335 [label="IdNode: Light"]
-	3110331 -> 3110335
-	3110333 [label=ActualParameterNode]
-	3110331 -> 3110333
-	3110359 [label="IdNode: pin69"]
-	3110333 -> 3110359
-	3110295 [label=RunNode]
-	3110279 -> 3110295
-	3110327 [label="IdNode: tester"]
-	3110295 -> 3110327
-	3110291 [label=RunNode]
-	3110279 -> 3110291
-	3110337 [label="IdNode: parameterFunction"]
-	3110291 -> 3110337
-	3110321 [label=ActualParameterNode]
-	3110291 -> 3110321
-	3110353 [label="IdNode: fuck"]
-	3110321 -> 3110353
-	3110363 [label="IntegerNode: 10"]
-	3110321 -> 3110363
-	3110341 [label=RunNode]
-	3110279 -> 3110341
-	3110351 [label=DotNode]
-	3110341 -> 3110351
-	3110345 [label="IdNode: LivingRoom"]
-	3110351 -> 3110345
-	3110347 [label="IdNode: light"]
-	3110351 -> 3110347
-	3110355 [label="IdNode: switchState"]
-	3110351 -> 3110355
-	3110251 [label=AssignNode]
-	3106985 -> 3110251
-	3110299 [label="IdNode: global"]
-	3110251 -> 3110299
-	3110357 [label="BoolNode: off"]
-	3110251 -> 3110357
+	3935931 [label=ProgNode]
+	3935929 [label=AssignNode]
+	3935931 -> 3935929
+	3935937 [label="IdNode: x"]
+	3935929 -> 3935937
+	3935943 [label=PlusNode]
+	3935929 -> 3935943
+	3935951 [label="IntegerNode: 5"]
+	3935943 -> 3935951
+	3935957 [label="IntegerNode: 7"]
+	3935943 -> 3935957
+	3935939 [label=ClassNode]
+	3935931 -> 3935939
+	3935935 [label="IdNode: Room"]
+	3935939 -> 3935935
+	3935923 [label=ClassBodyNode]
+	3935939 -> 3935923
+	3935945 [label=AssignNode]
+	3935923 -> 3935945
+	3935959 [label="IdNode: y"]
+	3935945 -> 3935959
+	3935955 [label=EqualsNode]
+	3935945 -> 3935955
+	3935963 [label=PlusNode]
+	3935955 -> 3935963
+	3935971 [label="IntegerNode: 9"]
+	3935963 -> 3935971
+	3935973 [label=MinusNode]
+	3935963 -> 3935973
+	3935977 [label="IntegerNode: 8"]
+	3935973 -> 3935977
+	3935969 [label=DivideNode]
+	3935973 -> 3935969
+	3935983 [label="IntegerNode: 6"]
+	3935969 -> 3935983
+	3935975 [label=MultiplyNode]
+	3935969 -> 3935975
+	3935991 [label="IntegerNode: 2"]
+	3935975 -> 3935991
+	3935981 [label=ModuloNode]
+	3935975 -> 3935981
+	3935993 [label="IntegerNode: 5"]
+	3935981 -> 3935993
+	3940611 [label="IntegerNode: 10"]
+	3935981 -> 3940611
+	3935985 [label="IntegerNode: 10"]
+	3935955 -> 3935985
+	3935953 [label=AssignNode]
+	3935923 -> 3935953
+	3935965 [label="IdNode: b"]
+	3935953 -> 3935965
+	3935949 [label=OrNode]
+	3935953 -> 3935949
+	3935967 [label=AndNode]
+	3935949 -> 3935967
+	3935979 [label=NotEqualNode]
+	3935967 -> 3935979
+	3940613 [label="IntegerNode: 1"]
+	3935979 -> 3940613
+	3935989 [label=LessThanNode]
+	3935979 -> 3935989
+	3940619 [label="IntegerNode: 1"]
+	3935989 -> 3940619
+	3935999 [label=GreaterThanNode]
+	3935989 -> 3935999
+	3940625 [label="IntegerNode: 5"]
+	3935999 -> 3940625
+	3940631 [label="IntegerNode: 3"]
+	3935999 -> 3940631
+	3940623 [label="IntegerNode: 5"]
+	3935967 -> 3940623
+	3940635 [label="IntegerNode: 4"]
+	3935949 -> 3940635
+	3935947 [label=AssignNode]
+	3935923 -> 3935947
+	3940621 [label="IdNode: f"]
+	3935947 -> 3940621
+	3940641 [label="FloatNode: 5.5"]
+	3935947 -> 3940641
+	3935987 [label=AssignNode]
+	3935923 -> 3935987
+	3940629 [label="IdNode: f"]
+	3935987 -> 3940629
+	3940633 [label=PlusNode]
+	3935987 -> 3940633
+	3940649 [label="IntegerNode: 4"]
+	3940633 -> 3940649
+	3940657 [label="IdNode: y"]
+	3940633 -> 3940657
+	3940627 [label=AssignNode]
+	3935923 -> 3940627
+	3940643 [label="IdNode: something"]
+	3940627 -> 3940643
+	3940661 [label="BoolNode: off"]
+	3940627 -> 3940661
+	3940615 [label=AssignNode]
+	3935923 -> 3940615
+	3940645 [label="IdNode: string"]
+	3940615 -> 3940645
+	3940667 [label="StringNode: \"jebatmus\""]
+	3940615 -> 3940667
 	overlap=false
 }
