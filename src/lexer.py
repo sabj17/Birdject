@@ -27,7 +27,6 @@ class Lexer:
 
     def lex(self):
         tokens = []
-
         token_re = '|'.join('(?P<%s>%s)' % pair for pair in self.token_specification)
 
         line_num = 1
