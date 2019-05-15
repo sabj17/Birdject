@@ -1,6 +1,6 @@
 set fuck to 10;
 
-set lightGlobal to Light(pin10);
+set lightGlobal to Light();
 
 
 LivingRoom {

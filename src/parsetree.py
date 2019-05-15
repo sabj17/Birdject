@@ -272,7 +272,7 @@ class BuildASTVisitor:
             parameters = [expr] + expr_list
             return ActualParameterNode(parameters)
         else:
-            return None
+            return ActualParameterNode([])
 
 
     def visit_multi_actual_params(self, node, ast_children):
@@ -448,7 +448,10 @@ class BuildASTVisitor:
             elif isinstance(id_op, IdNode):
                 return DotNode([id_node, id_op])
             elif isinstance(id_op, ActualParameterNode):
-                return NewObjectNode(id_node, id_op)
+                if id_op.expr_list:
+                    return NewObjectNode(id_node, id_op)
+                else:
+                    return NewObjectNode(id_node, None)
 
         elif len(ast_children) == 1:
             id_node, = ast_children
