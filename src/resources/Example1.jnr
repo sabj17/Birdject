@@ -14,7 +14,7 @@ LivingRoom {
     function jenerator(jebat, jabat){
         set jebat to 5 + 5;
         set jabat to "Anus";
-        run light.switchState();
+        //run light.switchState();
         return jebat;
     }
 
@@ -22,12 +22,13 @@ LivingRoom {
 
 function tester(){
     set nou to on;
-    run LivingRoom.light.turnedOn();
+    //run LivingRoom.light.turnedOn();
 }
 
 
 function parameterFunction(x, y){
     if(x is not y){
+        run tester();
         set x to y;
     } else if (x is y){
         set x to 10;
@@ -39,12 +40,11 @@ function parameterFunction(x, y){
 
 run tester();
 
-when (fuck > run LivingRoom.light.turnedOn()){
+when (fuck > 5){
     set fuck to 15;
     set lightGlobal to Light(pin69);
     run tester();
     run parameterFunction(fuck, 10);
-    run LivingRoom.light.switchState();
+    //run LivingRoom.light.switchState();
 }
-
 set global to off;

@@ -1,4 +1,4 @@
-from src.ast import BinaryExpNode, PlusNode, AbstractNode, NewObjectNode, IfNode
+from src.ast import BinaryExpNode, PlusNode, AbstractNode, NewObjectNode, IfNode, FormalParameterNode
 
 
 class NodeVisitor:
@@ -36,8 +36,6 @@ class Visitor(NodeVisitor):
         self.scope = 0
         self.setup_list = list()
         self.loop_list = list()
-        #self.setup_string = "void setup() {\n\tSerial.begin(9600);\n"
-        #self.loop_string = "void loop() {\n"
         self.current_string = ""
         self.class_constructor = ""
         self.objects_in_constructor = 0
@@ -93,9 +91,7 @@ class Visitor(NodeVisitor):
         statements = vars(node).get("stmts")
         for node in statements:
             node.accept(self)
-        #self.setup_string += "}\n\n"
         self.setup_list.append("}\n")
-       # self.loop_string += "}\n\n"
         self.loop_list.append("}")
         for string in self.global_list:
             print(string)
@@ -104,12 +100,11 @@ class Visitor(NodeVisitor):
         for string in self.loop_list:
             print(string)
 
-        #print(self.setup_string + "\n" + self.loop_string)
 
     def visit_IdNode(self, node):
-        field = vars(node)
         return node.name
         '''
+        field = vars(node)
         key = field.keys()
         for k in key:
             self.program.emit_id(field.get(k)) '''
@@ -128,37 +123,35 @@ class Visitor(NodeVisitor):
 
 
     def visit_ClassNode(self, node):
-        self.program.new_class()
+        class_name = super().visit(node.id)
         self.reset_constructor()
         if self.scope == 0:
             self.reset_current()
 
-        class_atb = vars(node)
-        class_id = class_atb.get("id")
         # Sets the scope in symbol table to be the class
         symtableOriginal = self.symtable
-        self.setTable(self.symtable.lookup(class_id.__repr__() + "Scope"))
+        self.setTable(self.symtable.lookup(class_name + "Scope"))
 
         # Creating the constructor and class assignment for the room
-        self.class_constructor += class_id.__repr__() + "Class()"
+        self.class_constructor += class_name + "Class()"
         self.add_scope()
-        self.current_string += "\n\nclass " + class_id.__repr__() + "Class {\n  public:\n"
+        self.current_string += "\n\nclass " + class_name + "Class {\n  public:\n"
         self.add_scope()
         # Adds all of the body
-        super().visit(class_atb.get("body_part"))
+        super().visit(node.body_part)
         self.remove_scope()
         # Ends the constructor and class
         self.class_constructor += " {}\n"
-        self.current_string += self.class_constructor + "\n} " + class_id.__repr__() + ";\n"
+        self.current_string += self.class_constructor + "\n} " + class_name + ";\n"
         self.remove_scope()
         if self.scope == 0:
             self.global_list.append(self.current_string)
         self.setTable(symtableOriginal)
 
+
     def visit_ClassBodyNode(self, node):
         body_atb = vars(node)
         self.accept_children(body_atb.get("body_parts"))
-        #self.global_string += self.current_str
 
     # Visitor method for all binary expressions
     def visit_BinaryExpNode(self, node):
@@ -188,17 +181,15 @@ class Visitor(NodeVisitor):
         if self.scope == 0:
             self.reset_current()
 
-        assign_atb = vars(node)
-        assign_id = assign_atb.get("id")
-        expr = assign_atb.get("expression")
-        expr_string = super().visit(expr)
-        var_name = super().visit(assign_id)
+        expr_string = super().visit(node.expression)
+        var_name = super().visit(node.id)
 
         if var_name in self.declared_vars:
             self.current_string += self.get_tabs() + var_name + " = " + expr_string + ";\n"
 
         # Object assignment
-        elif isinstance(expr, NewObjectNode):
+        elif isinstance(node.expression, NewObjectNode):
+            expr = node.expression
             object_name = super().visit(expr.id)
             params = super().visit(expr.param)
 
@@ -214,7 +205,6 @@ class Visitor(NodeVisitor):
                 self.class_constructor += string_symbol + var_name + "(" + params + ")"
                 self.objects_in_constructor += 1
             # adds the 'setupClass()' to void setup()
-            # self.setup_string += "\t" + assign_id.__repr__() + ".setupClass();\n"
             self.setup_list.append("\t" + var_name + ".setupClass();")
 
 
@@ -225,20 +215,13 @@ class Visitor(NodeVisitor):
                 self.current_string += self.get_tabs() + "char " + var_name + "[100] = " + expr_string + ";\n"
             else: self.current_string += self.get_tabs() + type1 + " " + var_name + " = " + expr_string + ";\n"
 
-
-
-
-
-
-
+        # Adds the variable to the list of declared variables
         self.declared_vars.append(var_name)
 
-        #   self.code_gen.emit_id(assign_id)
-        self.accept_children(assign_atb.get("expression"))
+        self.accept_children(node.expression)
 
         # If global var dcl
         if self.scope == 0:
-            #self.global_string += self.current_string
             self.global_list.append(self.current_string)
 
 
@@ -247,27 +230,25 @@ class Visitor(NodeVisitor):
         if self.scope == 0:
             self.reset_current()
 
-        function_atb = vars(node)
-        function_id = function_atb.get("id")
-        function_params = function_atb.get("params")
-        function_block = function_atb.get("block")
+        func_id = super().visit(node.id)
+        # Adds the parameter to a string if there is any
+        func_params = ""
+        if node.params is not None:
+            func_params = super().visit(node.params)
+
         # Finds the function scope in symbol table
         symtableOriginal = self.symtable
-        self.setTable(self.symtable.lookup(function_id.__repr__() + "Scope"))
+        self.setTable(self.symtable.lookup(func_id + "Scope"))
         # Generates the code
-        self.current_string += "\n" + self.get_tabs() + "type " + function_id.__repr__() + " ("
-        if function_params is not None:
-            super().visit(function_params)
-        self.current_string += "){\n"
+        self.current_string += "\n" + self.get_tabs() + "type " + func_id + " (" + func_params + "){\n"
         self.add_scope()
-        super().visit(function_block)
+        super().visit(node.block)
         self.remove_scope()
         self.current_string += self.get_tabs() + "}\n\n"
 
         self.setTable(symtableOriginal)
 
         if self.scope == 0:
-            #self.global_string += self.current_string
             self.global_list.append(self.current_string)
 
 
@@ -277,45 +258,42 @@ class Visitor(NodeVisitor):
         self.current_string += self.get_tabs() + "return " + return_expr.__repr__() + ";\n"
 
 
+
     def visit_FormalParameterNode(self, node):
         param_atb = vars(node)
-        i = 0
+        param_amount = 0
+        string = ""
         for param_list in param_atb.values():
             for param in param_list:
-                if i > 0: # multiple parameters, so a ',' is added between
-                    self.current_string += ", "
-                self.current_string += "type " + param.__repr__()
-                i += 1
+                if param_amount > 0:  # multiple parameters, so a ',' is added between
+                    string += ", "
+                string += "type " + super().visit(param)
+                param_amount += 1
+        return string
 
     # 'when' code is added to the loop
     def visit_WhenNode(self, node):
-        when_atb = vars(node)
-        when_expr = when_atb.get("expression")
-        when_block = when_atb.get("block")
-        #self.current_string = self.loop_string
+        expr = super().visit(node.expression)
         self.reset_current()
         self.add_scope()
-        self.current_string += self.get_tabs() + "if ("
-        self.current_string += when_expr.__repr__() + "){\n"
+        self.current_string += self.get_tabs() + "if (" + expr + "){\n"
         self.add_scope()
         self.add_scope()
-        super().visit(when_block)
+        super().visit(node.block)
         self.remove_scope()
         self.remove_scope()
         self.current_string += self.get_tabs() + "}"
         self.loop_list.append(self.current_string)
-        #self.loop_string = self.current_string
         self.reset_current()
 
     def visit_NewObjectNode(self, node):
-        object_atb = vars(node)
-        param = object_atb.get("param")
-        object_id = object_atb.get("id")
-        super().visit(param)
+        id_string = super().visit(node.id)
+        param_string = super().visit(node.param)
+        return id_string + "(" + param_string + ")"
+
 
     def visit_RunNode(self, node):
         run_atb = vars(node)
-        func_id = run_atb.get("id")
         param = run_atb.get("params")
 
         # Justs sets tabs lul
@@ -324,10 +302,12 @@ class Visitor(NodeVisitor):
             self.reset_current()
             tabs = "\t"
 
+        #TODO Check if id is dotnode
+
         # creates the function call code
-        self.current_string += tabs + func_id.__repr__() + "("
+        self.current_string += tabs + super().visit(node.id) + "("
         if param is not None:
-            self.current_string += param.__repr__()
+            self.current_string += super().visit(node.params)
         self.current_string += ");\n"
 
         # if it is a globally called function, then it is added to setup()
@@ -335,15 +315,14 @@ class Visitor(NodeVisitor):
             self.setup_list.append(self.current_string)
 
     def visit_IfNode(self, node):
-        if_atb = vars(node)
-        if_expr = if_atb.get("expression")
-        true_block = if_atb.get("statement_true")
-        false_block = if_atb.get("statement_false")
-
+        true_block = node.statement_true
+        false_block = node.statement_false
+        # Global
         if self.scope == 0:
             self.reset_current()
 
-        self.current_string += self.get_tabs() + "if (" + if_expr.__repr__() + ") {\n"
+
+        self.current_string += self.get_tabs() + "if (" + super().visit(node.expression) + ") {\n"
         self.create_if_body(true_block)
         if isinstance(false_block, IfNode):
             self.current_string += self.get_tabs() + "else "
@@ -366,7 +345,7 @@ class Visitor(NodeVisitor):
             if isinstance(child, AbstractNode):
                 if i > 0:
                     string += ", "
-                string += child.__repr__()
+                string += super().visit(child)
                 i += 1
         return string
 
