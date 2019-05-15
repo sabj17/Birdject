@@ -6,6 +6,15 @@ LivingRoom {
 
 }
 
+set lightGlobal2 to Light(pin2);
+
+Kitchen {
+    set light2 to Light(pin8);
+    set switch3 to Switch(pin9);
+}
+
+set lightGlobal3 to Light(pin3);
+
 run print("Hello World!");
 
 when (run LivingRoom.switch1.Read()){

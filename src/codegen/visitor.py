@@ -43,7 +43,6 @@ class Visitor(NodeVisitor):
         self.setup_list = list()
         self.loop_list = list()
         self.current_string = ""
-        self.current_class_name = ""
         self.current_classes = list()
         self.class_constructor = ""
         self.objects_in_constructor = 0
@@ -155,7 +154,6 @@ class Visitor(NodeVisitor):
 
     def visit_ClassNode(self, node):
         class_name = super().visit(node.id)
-        self.current_class_name = class_name
         self.current_classes.append(class_name)
         self.reset_constructor()
         if self.scope == 0:
@@ -177,6 +175,7 @@ class Visitor(NodeVisitor):
         self.class_constructor += " {}\n"
         self.current_string += self.class_constructor + "\n} " + class_name + ";\n"
         self.remove_scope()
+        self.current_classes.remove(class_name)
         if self.scope == 0:
             self.global_list.append(self.current_string)
         self.setTable(symtableOriginal)

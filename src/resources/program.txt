@@ -82,8 +82,19 @@ class LivingRoomClass {
 LivingRoomClass() : light(pin6) , switch1(pin7) {}
 
 } LivingRoom;
+Light lightGlobal2(pin2);
+
+
+class KitchenClass {
+  public:
+	Light light2;
+	Switch switch3;
+KitchenClass() : light2(pin8) , switch3(pin9) {}
+
+} Kitchen;
+Light lightGlobal3(pin3);
 void setup() {
-	Serial.begin(9600);	lightGlobal.setupClass();	LivingRoom.light.setupClass();	LivingRoom.switch1.setupClass();	Serial.print("Hello World!");
+	Serial.begin(9600);	lightGlobal.setupClass();	LivingRoom.light.setupClass();	LivingRoom.switch1.setupClass();	lightGlobal2.setupClass();	Kitchen.light2.setupClass();	Kitchen.switch3.setupClass();	lightGlobal3.setupClass();	Serial.print("Hello World!");
 }
 void loop() {	if (	LivingRoom.switch1.Read()){
 		LivingRoom.light.switchState();
