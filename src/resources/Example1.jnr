@@ -53,13 +53,14 @@ function ifFunction(x, y){
 
 run tester();
 
-when (fuck > 5){
+when (run LivingRoom.light.turnedOn() > 5){
     set fuck to 15;
     set lightGlobal to Light(pin69);
     run tester();
     run parameterFunction(fuck, 10);
     run LivingRoom.light.switchState();
     run LivingRoom.light.setState(1);
+    run LivingRoom.light.turnedOn();
 }
 
 set simon to off;

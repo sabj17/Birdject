@@ -1,0 +1,92 @@
+#define pin1 1
+#define pin2 2
+#define pin3 3
+#define pin4 4
+#define pin6 6
+#define pin7 7
+#define pin8 8
+#define pin9 9
+#define pin10 10
+#define pin11 11
+#define pin12 12
+#define pin13 13
+
+class Output {
+  public:
+    int pin;
+    int state = 0;
+
+    Output(int inputPin) {
+      pin = inputPin;
+    }
+    void setupClass() {
+      pinMode(pin, OUTPUT);
+    }
+
+
+    void setState(int newState) {
+      state = newState;
+      digitalWrite(pin, newState);
+    }
+
+    int getState(){
+      return state;
+    }
+
+    void switchState() {
+      if (state) {
+        state = 0;
+      } else {
+        state = 1;
+      }
+      digitalWrite(pin, state);
+      delay(200);
+    }
+};
+
+class Light : public Output {
+  public:
+    Light (int inputPin): Output(inputPin) {}
+};
+
+class Input {
+  public:
+    int pin;
+
+    Input (int inputPin) {
+      pin = inputPin;
+    }
+
+    void setupClass() {
+      pinMode(pin, INPUT);
+    }
+
+    int Read() {
+      return digitalRead(pin);
+    }
+};
+
+
+class Switch : public Input {
+  public:
+    Switch (int inputPin): Input(inputPin) {}
+};
+
+Light lightGlobal(pin1);
+
+
+class LivingRoomClass {
+  public:
+	Light light;
+	Switch switch1;
+LivingRoomClass() : light(pin6) , switch1(pin7) {}
+
+} LivingRoom;
+void setup() {
+	Serial.begin(9600);	lightGlobal.setupClass();	LivingRoom.light.setupClass();	LivingRoom.switch1.setupClass();	Serial.print("Hello World!");
+}
+void loop() {	if (	LivingRoom.switch1.Read()){
+		LivingRoom.light.switchState();
+	}	if (5 < 10){
+			Serial.print("This is true");
+	}}

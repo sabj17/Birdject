@@ -11,5 +11,4 @@ Room {
     set light to Light(pin67);
 
     set hello to 5;
-
 }

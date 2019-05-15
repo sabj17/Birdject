@@ -1,0 +1,17 @@
+set lightGlobal to Light(pin1);
+
+LivingRoom {
+    set light to Light(pin6);
+    set switch1 to Switch(pin7);
+
+}
+
+run print("Hello World!");
+
+when (run LivingRoom.switch1.Read()){
+    run LivingRoom.light.switchState();
+}
+
+when (5 < 10){
+    run print("This is true" );
+}

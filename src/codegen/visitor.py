@@ -1,5 +1,7 @@
+import os
 from src.ast import BinaryExpNode, PlusNode, AbstractNode, NewObjectNode, IfNode, FormalParameterNode, DotNode, \
     AssignNode, UnaryExpNode
+
 
 
 class NodeVisitor:
@@ -37,9 +39,12 @@ class Visitor(NodeVisitor):
         # self.code_gen = CodeEmittor()'
         self.global_list = list()
         self.scope = 0
+        self.inWhen = False
         self.setup_list = list()
         self.loop_list = list()
         self.current_string = ""
+        self.current_class_name = ""
+        self.current_classes = list()
         self.class_constructor = ""
         self.objects_in_constructor = 0
         self.declared_vars = list()
@@ -99,6 +104,24 @@ class Visitor(NodeVisitor):
             node.accept(self)
         self.setup_list.append("}\n")
         self.loop_list.append("}")
+
+        file_std = open("resources/standard_classes.txt", "r")
+        contents = file_std.read()
+        program_file = open("resources/program.txt", "w")
+        program_file.write(contents)
+        for string in self.global_list:
+            program_file.write(string)
+        for string in self.setup_list:
+            program_file.write(string)
+        for string in self.loop_list:
+            program_file.write(string)
+
+
+        file_std.close()
+        program_file.close()
+
+
+
         for string in self.global_list:
             print(string)
         for string in self.setup_list:
@@ -132,6 +155,8 @@ class Visitor(NodeVisitor):
 
     def visit_ClassNode(self, node):
         class_name = super().visit(node.id)
+        self.current_class_name = class_name
+        self.current_classes.append(class_name)
         self.reset_constructor()
         if self.scope == 0:
             self.reset_current()
@@ -219,7 +244,11 @@ class Visitor(NodeVisitor):
                 self.class_constructor += string_symbol + var_name + "(" + params + ")"
                 self.objects_in_constructor += 1
             # adds the 'setupClass()' to void setup()
-            self.setup_list.append("\t" + var_name + ".setupClass();")
+
+            class_name = ""
+            for name in self.current_classes:
+                class_name += name + "."
+            self.setup_list.append("\t" + class_name + var_name + ".setupClass();")
 
 
         # The cases where a new var is being declared
@@ -287,9 +316,13 @@ class Visitor(NodeVisitor):
 
     # 'when' code is added to the loop
     def visit_WhenNode(self, node):
-        expr = super().visit(node.expression)
         self.reset_current()
+        self.inWhen = True
+        expr = super().visit(node.expression)
+        expr = expr.replace(";", "")
+        expr = expr.replace("\n", "")
         self.add_scope()
+        self.reset_current()
         self.current_string += self.get_tabs() + "if (" + expr + "){\n"
         self.add_scope()
         self.add_scope()
@@ -299,6 +332,7 @@ class Visitor(NodeVisitor):
         self.current_string += self.get_tabs() + "}"
         self.loop_list.append(self.current_string)
         self.reset_current()
+        self.inWhen = False
 
     def visit_NewObjectNode(self, node):
         id_string = super().visit(node.id)
@@ -324,13 +358,17 @@ class Visitor(NodeVisitor):
             string += "("
         else:
             # creates the function call code
-            string += tabs + super().visit(node.id) + "("
+            if super().visit(node.id):
+                string += tabs + "Serial.print("
+            else:
+                string += tabs + super().visit(node.id) + "("
+
         if node.params is not None:
             string += super().visit(node.params)
         string += ");\n"
 
-        # if it is a globally called function, then it is added to setup()
-        if self.scope == 0:
+        # if it is a globally called function, then it is added to setup() if its not in a when stmt
+        if self.scope == 0 and self.inWhen is False:
             self.setup_list.append(string)
 
         self.current_string += string
