@@ -505,8 +505,8 @@ class BuildASTVisitor:
 
     def visit_BOOL(self, node, ast_children):
         assert not ast_children
-        return FloatNode(node.value)
+        return BoolNode(node.value)
 
     def visit_STRING(self, node, ast_children):
         assert not ast_children
-        return FloatNode(node.value)
+        return StringNode(node.value)
