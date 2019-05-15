@@ -1,130 +1,120 @@
 digraph G {
 	graph [ranksep=1.5 ratio=fill]
 	node [style=filled]
-	3717145 [label=ProgNode]
-	3717143 [label=AssignNode]
-	3717145 -> 3717143
-	3717151 [label="IdNode: x"]
-	3717143 -> 3717151
-	3717157 [label=PlusNode]
-	3717143 -> 3717157
-	3717165 [label="IntegerNode: 5"]
-	3717157 -> 3717165
-	3717171 [label="IntegerNode: 7"]
-	3717157 -> 3717171
-	3717137 [label=AssignNode]
-	3717145 -> 3717137
-	3717147 [label="IdNode: switch"]
-	3717137 -> 3717147
-	3717175 [label=NewObjectNode]
-	3717137 -> 3717175
-	3717179 [label="IdNode: Switch"]
-	3717175 -> 3717179
-	3717177 [label=ActualParameterNode]
-	3717175 -> 3717177
-	3717205 [label="IdNode: pin5"]
-	3717177 -> 3717205
-	3717161 [label=ClassNode]
-	3717145 -> 3717161
-	3717153 [label="IdNode: Room"]
-	3717161 -> 3717153
-	3717149 [label=ClassBodyNode]
-	3717161 -> 3717149
-	3717173 [label=AssignNode]
-	3717149 -> 3717173
-	3717167 [label="IdNode: y"]
-	3717173 -> 3717167
-	3717183 [label=EqualsNode]
-	3717173 -> 3717183
-	3717189 [label=PlusNode]
-	3717183 -> 3717189
-	3717201 [label="IntegerNode: 9"]
-	3717189 -> 3717201
-	3717197 [label=MinusNode]
-	3717189 -> 3717197
-	3717209 [label="IntegerNode: 8"]
-	3717197 -> 3717209
-	3717195 [label=DivideNode]
-	3717197 -> 3717195
-	3717211 [label="IntegerNode: 6"]
-	3717195 -> 3717211
-	3717203 [label=MultiplyNode]
-	3717195 -> 3717203
-	3717215 [label="IntegerNode: 2"]
-	3717203 -> 3717215
-	3717207 [label=ModuloNode]
-	3717203 -> 3717207
-	3717225 [label="IntegerNode: 5"]
-	3717207 -> 3717225
-	3717227 [label="IntegerNode: 10"]
-	3717207 -> 3717227
-	3717217 [label="IntegerNode: 10"]
-	3717183 -> 3717217
-	3717163 [label=AssignNode]
-	3717149 -> 3717163
-	3717193 [label="IdNode: b"]
-	3717163 -> 3717193
-	3717187 [label=OrNode]
-	3717163 -> 3717187
-	3717191 [label=AndNode]
-	3717187 -> 3717191
-	3717199 [label=NotEqualNode]
-	3717191 -> 3717199
-	3717229 [label="IntegerNode: 1"]
-	3717199 -> 3717229
-	3717219 [label=LessThanNode]
-	3717199 -> 3717219
-	3717235 [label="IntegerNode: 1"]
-	3717219 -> 3717235
-	3717223 [label=GreaterThanNode]
-	3717219 -> 3717223
-	3717243 [label="IntegerNode: 5"]
-	3717223 -> 3717243
-	3717249 [label="IntegerNode: 3"]
-	3717223 -> 3717249
-	3717241 [label="IntegerNode: 5"]
-	3717191 -> 3717241
-	3717251 [label="IntegerNode: 4"]
-	3717187 -> 3717251
-	3717181 [label=AssignNode]
-	3717149 -> 3717181
-	3717231 [label="IdNode: f"]
-	3717181 -> 3717231
-	3717259 [label="FloatNode: 5.5"]
-	3717181 -> 3717259
-	3717213 [label=AssignNode]
-	3717149 -> 3717213
-	3717247 [label="IdNode: f"]
-	3717213 -> 3717247
-	3717253 [label=PlusNode]
-	3717213 -> 3717253
-	3717267 [label="IntegerNode: 4"]
-	3717253 -> 3717267
-	3717275 [label="IdNode: y"]
-	3717253 -> 3717275
-	3717233 [label=AssignNode]
-	3717149 -> 3717233
-	3717261 [label="IdNode: something"]
-	3717233 -> 3717261
-	3717281 [label="BoolNode: off"]
-	3717233 -> 3717281
-	3717221 [label=AssignNode]
-	3717149 -> 3717221
-	3717263 [label="IdNode: string"]
-	3717221 -> 3717263
-	3717285 [label="StringNode: \"jebatmus\""]
-	3717221 -> 3717285
-	3717255 [label=AssignNode]
-	3717149 -> 3717255
-	3717273 [label="IdNode: light"]
-	3717255 -> 3717273
-	3717293 [label=NewObjectNode]
-	3717255 -> 3717293
-	3717297 [label="IdNode: Light"]
-	3717293 -> 3717297
-	3717295 [label=ActualParameterNode]
-	3717293 -> 3717295
-	3717321 [label="IdNode: pin67"]
-	3717295 -> 3717321
+	3089563 [label=ProgNode]
+	3089561 [label=AssignNode]
+	3089563 -> 3089561
+	3089569 [label="IdNode: x"]
+	3089561 -> 3089569
+	3089575 [label=PlusNode]
+	3089561 -> 3089575
+	3089583 [label="IntegerNode: 5"]
+	3089575 -> 3089583
+	3089589 [label="IntegerNode: 7"]
+	3089575 -> 3089589
+	3089555 [label=AssignNode]
+	3089563 -> 3089555
+	3089565 [label="IdNode: switch"]
+	3089555 -> 3089565
+	3089593 [label=NewObjectNode]
+	3089555 -> 3089593
+	3089597 [label="IdNode: Switch"]
+	3089593 -> 3089597
+	3089595 [label=ActualParameterNode]
+	3089593 -> 3089595
+	3089623 [label="IdNode: pin5"]
+	3089595 -> 3089623
+	3089577 [label=ClassNode]
+	3089563 -> 3089577
+	3089571 [label="IdNode: Room"]
+	3089577 -> 3089571
+	3089567 [label=ClassBodyNode]
+	3089577 -> 3089567
+	3089591 [label=AssignNode]
+	3089567 -> 3089591
+	3089585 [label="IdNode: y"]
+	3089591 -> 3089585
+	3089601 [label=EqualsNode]
+	3089591 -> 3089601
+	3089607 [label=PlusNode]
+	3089601 -> 3089607
+	3089619 [label="IntegerNode: 9"]
+	3089607 -> 3089619
+	3089613 [label=MinusNode]
+	3089607 -> 3089613
+	3089625 [label="IntegerNode: 8"]
+	3089613 -> 3089625
+	3089615 [label=DivideNode]
+	3089613 -> 3089615
+	3089629 [label="IntegerNode: 6"]
+	3089615 -> 3089629
+	3089621 [label=MultiplyNode]
+	3089615 -> 3089621
+	3089633 [label="IntegerNode: 2"]
+	3089621 -> 3089633
+	3089627 [label=ModuloNode]
+	3089621 -> 3089627
+	3089643 [label="IntegerNode: 5"]
+	3089627 -> 3089643
+	3089645 [label="IntegerNode: 10"]
+	3089627 -> 3089645
+	3089635 [label="IntegerNode: 10"]
+	3089601 -> 3089635
+	3089581 [label=AssignNode]
+	3089567 -> 3089581
+	3089611 [label="IdNode: b"]
+	3089581 -> 3089611
+	3089605 [label=OrNode]
+	3089581 -> 3089605
+	3089609 [label=AndNode]
+	3089605 -> 3089609
+	3089617 [label=NotEqualNode]
+	3089609 -> 3089617
+	3089647 [label="IntegerNode: 1"]
+	3089617 -> 3089647
+	3089639 [label=LessThanNode]
+	3089617 -> 3089639
+	3089653 [label="IntegerNode: 1"]
+	3089639 -> 3089653
+	3089641 [label=GreaterThanNode]
+	3089639 -> 3089641
+	3089663 [label="IntegerNode: 5"]
+	3089641 -> 3089663
+	3093765 [label="IntegerNode: 3"]
+	3089641 -> 3093765
+	3093767 [label="IntegerNode: 5"]
+	3089609 -> 3093767
+	3093769 [label="IntegerNode: 4"]
+	3089605 -> 3093769
+	3089599 [label=AssignNode]
+	3089567 -> 3089599
+	3089649 [label="IdNode: f"]
+	3089599 -> 3089649
+	3093775 [label="FloatNode: 5.5"]
+	3089599 -> 3093775
+	3089631 [label=AssignNode]
+	3089567 -> 3089631
+	3089659 [label="IdNode: something"]
+	3089631 -> 3089659
+	3093781 [label="BoolNode: off"]
+	3089631 -> 3093781
+	3089651 [label=AssignNode]
+	3089567 -> 3089651
+	3093777 [label="IdNode: string"]
+	3089651 -> 3093777
+	3093789 [label="StringNode: \"jebatmus\""]
+	3089651 -> 3093789
+	3093773 [label=AssignNode]
+	3089567 -> 3093773
+	3093783 [label="IdNode: light"]
+	3093773 -> 3093783
+	3093797 [label=NewObjectNode]
+	3093773 -> 3093797
+	3093801 [label="IdNode: Light"]
+	3093797 -> 3093801
+	3093799 [label=ActualParameterNode]
+	3093797 -> 3093799
+	3093825 [label="IdNode: pin67"]
+	3093799 -> 3093825
 	overlap=false
 }
