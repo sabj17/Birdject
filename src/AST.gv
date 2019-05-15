@@ -1,152 +1,294 @@
 digraph G {
 	graph [ranksep=1.5 ratio=fill]
 	node [style=filled]
-	3539781 [label=ProgNode]
-	3539779 [label=AssignNode]
-	3539781 -> 3539779
-	3539787 [label="IdNode: lightGlobal"]
-	3539779 -> 3539787
-	3539801 [label=NewObjectNode]
-	3539779 -> 3539801
-	3539803 [label="IdNode: Light"]
-	3539801 -> 3539803
-	3539799 [label=ActualParameterNode]
-	3539801 -> 3539799
-	3539827 [label="IdNode: pin1"]
-	3539799 -> 3539827
-	3539789 [label=ClassNode]
-	3539781 -> 3539789
-	3539785 [label="IdNode: LivingRoom"]
-	3539789 -> 3539785
-	3539773 [label=ClassBodyNode]
-	3539789 -> 3539773
-	3539793 [label=AssignNode]
-	3539773 -> 3539793
-	3539797 [label="IdNode: light"]
-	3539793 -> 3539797
-	3539821 [label=NewObjectNode]
-	3539793 -> 3539821
-	3539819 [label="IdNode: Light"]
-	3539821 -> 3539819
-	3539823 [label=ActualParameterNode]
-	3539821 -> 3539823
-	3539849 [label="IdNode: pin6"]
-	3539823 -> 3539849
-	3539795 [label=AssignNode]
-	3539773 -> 3539795
-	3539809 [label="IdNode: switch1"]
-	3539795 -> 3539809
-	3539825 [label=NewObjectNode]
-	3539795 -> 3539825
-	3539837 [label="IdNode: Switch"]
-	3539825 -> 3539837
-	3539831 [label=ActualParameterNode]
-	3539825 -> 3539831
-	3539865 [label="IdNode: pin7"]
-	3539831 -> 3539865
-	3539807 [label=AssignNode]
-	3539781 -> 3539807
-	3539813 [label="IdNode: lightGlobal2"]
-	3539807 -> 3539813
-	3539853 [label=NewObjectNode]
-	3539807 -> 3539853
-	3539843 [label="IdNode: Light"]
-	3539853 -> 3539843
-	3539839 [label=ActualParameterNode]
-	3539853 -> 3539839
-	3539873 [label="IdNode: pin2"]
-	3539839 -> 3539873
-	3539811 [label=ClassNode]
-	3539781 -> 3539811
-	3539805 [label="IdNode: Kitchen"]
-	3539811 -> 3539805
-	3539817 [label=ClassBodyNode]
-	3539811 -> 3539817
-	3539835 [label=AssignNode]
-	3539817 -> 3539835
-	3539833 [label="IdNode: light2"]
-	3539835 -> 3539833
-	3539867 [label=NewObjectNode]
-	3539835 -> 3539867
-	3539859 [label="IdNode: Light"]
-	3539867 -> 3539859
-	3539869 [label=ActualParameterNode]
-	3539867 -> 3539869
-	3539897 [label="IdNode: pin8"]
-	3539869 -> 3539897
-	3539841 [label=AssignNode]
-	3539817 -> 3539841
-	3539847 [label="IdNode: switch3"]
-	3539841 -> 3539847
-	3539871 [label=NewObjectNode]
-	3539841 -> 3539871
-	3539883 [label="IdNode: Switch"]
-	3539871 -> 3539883
-	3539881 [label=ActualParameterNode]
-	3539871 -> 3539881
-	3539909 [label="IdNode: pin9"]
-	3539881 -> 3539909
-	3539851 [label=AssignNode]
-	3539781 -> 3539851
-	3539861 [label="IdNode: lightGlobal3"]
-	3539851 -> 3539861
-	3539895 [label=NewObjectNode]
-	3539851 -> 3539895
-	3539893 [label="IdNode: Light"]
-	3539895 -> 3539893
-	3539887 [label=ActualParameterNode]
-	3539895 -> 3539887
-	3539919 [label="IdNode: pin3"]
-	3539887 -> 3539919
-	3539857 [label=RunNode]
-	3539781 -> 3539857
-	3539863 [label="IdNode: print"]
-	3539857 -> 3539863
-	3539845 [label=ActualParameterNode]
-	3539857 -> 3539845
-	3539899 [label="StringNode: \"Hello World!\""]
-	3539845 -> 3539899
-	3539855 [label=WhenNode]
-	3539781 -> 3539855
-	3539913 [label=RunNode]
-	3539855 -> 3539913
-	3539925 [label=DotNode]
-	3539913 -> 3539925
-	3539921 [label="IdNode: LivingRoom"]
-	3539925 -> 3539921
-	3539917 [label="IdNode: switch1"]
-	3539925 -> 3539917
-	3539927 [label="IdNode: Read"]
-	3539925 -> 3539927
-	3539905 [label=BlockNode]
-	3539855 -> 3539905
-	3539877 [label=RunNode]
-	3539905 -> 3539877
-	3539915 [label=DotNode]
-	3539877 -> 3539915
-	3539891 [label="IdNode: LivingRoom"]
-	3539915 -> 3539891
-	3539911 [label="IdNode: light"]
-	3539915 -> 3539911
-	3539923 [label="IdNode: switchState"]
-	3539915 -> 3539923
-	3539885 [label=WhenNode]
-	3539781 -> 3539885
-	3539931 [label=LessThanNode]
-	3539885 -> 3539931
-	3539941 [label="IntegerNode: 5"]
-	3539931 -> 3539941
-	3539947 [label="IntegerNode: 10"]
-	3539931 -> 3539947
-	3539929 [label=BlockNode]
-	3539885 -> 3539929
-	3539907 [label=RunNode]
-	3539929 -> 3539907
-	3539943 [label="IdNode: print"]
-	3539907 -> 3539943
-	3539933 [label=ActualParameterNode]
-	3539907 -> 3539933
-	3539957 [label="StringNode: \"This is true\""]
-	3539933 -> 3539957
+	3150497 [label=ProgNode]
+	3150495 [label=AssignNode]
+	3150497 -> 3150495
+	3150503 [label="IdNode: lightGlobal"]
+	3150495 -> 3150503
+	3150517 [label=NewObjectNode]
+	3150495 -> 3150517
+	3150521 [label="IdNode: Light"]
+	3150517 -> 3150521
+	3150515 [label=ActualParameterNode]
+	3150517 -> 3150515
+	3150545 [label="IdNode: pin1"]
+	3150515 -> 3150545
+	3150505 [label=ClassNode]
+	3150497 -> 3150505
+	3150501 [label="IdNode: LivingRoom"]
+	3150505 -> 3150501
+	3150489 [label=ClassBodyNode]
+	3150505 -> 3150489
+	3150509 [label=AssignNode]
+	3150489 -> 3150509
+	3150513 [label="IdNode: light"]
+	3150509 -> 3150513
+	3150537 [label=NewObjectNode]
+	3150509 -> 3150537
+	3150535 [label="IdNode: Light"]
+	3150537 -> 3150535
+	3150541 [label=ActualParameterNode]
+	3150537 -> 3150541
+	3150563 [label="IdNode: pin6"]
+	3150541 -> 3150563
+	3150511 [label=AssignNode]
+	3150489 -> 3150511
+	3150525 [label="IdNode: switch1"]
+	3150511 -> 3150525
+	3150539 [label=NewObjectNode]
+	3150511 -> 3150539
+	3150551 [label="IdNode: Switch"]
+	3150539 -> 3150551
+	3150547 [label=ActualParameterNode]
+	3150539 -> 3150547
+	3150579 [label="IdNode: pin7"]
+	3150547 -> 3150579
+	3150519 [label=FunctionNode]
+	3150489 -> 3150519
+	3150529 [label="IdNode: jenerator"]
+	3150519 -> 3150529
+	3150527 [label=FormalParameterNode]
+	3150519 -> 3150527
+	3150543 [label="IdNode: jebat"]
+	3150527 -> 3150543
+	3150553 [label="IdNode: jabat"]
+	3150527 -> 3150553
+	3150531 [label=BlockNode]
+	3150519 -> 3150531
+	3150569 [label=AssignNode]
+	3150531 -> 3150569
+	3150559 [label="IdNode: jebat"]
+	3150569 -> 3150559
+	3150575 [label=PlusNode]
+	3150569 -> 3150575
+	3150577 [label="IntegerNode: 5"]
+	3150575 -> 3150577
+	3150589 [label="IntegerNode: 5"]
+	3150575 -> 3150589
+	3150555 [label=AssignNode]
+	3150531 -> 3150555
+	3150573 [label="IdNode: jabat"]
+	3150555 -> 3150573
+	3154179 [label="StringNode: \"Anus\""]
+	3150555 -> 3154179
+	3150561 [label=IfNode]
+	3150531 -> 3150561
+	3150591 [label=EqualsNode]
+	3150561 -> 3150591
+	3154189 [label="IdNode: jabat"]
+	3150591 -> 3154189
+	3154193 [label="StringNode: \"Anus\""]
+	3150591 -> 3154193
+	3150583 [label=BlockNode]
+	3150561 -> 3150583
+	3150581 [label=AssignNode]
+	3150583 -> 3150581
+	3154185 [label="IdNode: jebat"]
+	3150581 -> 3154185
+	3154203 [label="IntegerNode: 2"]
+	3150581 -> 3154203
+	3150571 [label=ReturnNode]
+	3150531 -> 3150571
+	3154207 [label="IdNode: jebat"]
+	3150571 -> 3154207
+	3150523 [label=FunctionNode]
+	3150497 -> 3150523
+	3150533 [label="IdNode: tester"]
+	3150523 -> 3150533
+	3150557 [label=FormalParameterNode]
+	3150523 -> 3150557
+	3150549 [label="IdNode: y"]
+	3150557 -> 3150549
+	3150565 [label=BlockNode]
+	3150523 -> 3150565
+	3150587 [label=AssignNode]
+	3150565 -> 3150587
+	3154181 [label="IdNode: y"]
+	3150587 -> 3154181
+	3154201 [label="FloatNode: 5.5"]
+	3150587 -> 3154201
+	3154183 [label=ReturnNode]
+	3150565 -> 3154183
+	3154219 [label="IdNode: y"]
+	3154183 -> 3154219
+	3150567 [label=AssignNode]
+	3150497 -> 3150567
+	3154187 [label="IdNode: lightGlobal2"]
+	3150567 -> 3154187
+	3154211 [label=NewObjectNode]
+	3150567 -> 3154211
+	3154223 [label="IdNode: Light"]
+	3154211 -> 3154223
+	3154221 [label=ActualParameterNode]
+	3154211 -> 3154221
+	3154245 [label="IdNode: pin2"]
+	3154221 -> 3154245
+	3154191 [label=ClassNode]
+	3150497 -> 3154191
+	3154199 [label="IdNode: Kitchen"]
+	3154191 -> 3154199
+	3154195 [label=ClassBodyNode]
+	3154191 -> 3154195
+	3154213 [label=AssignNode]
+	3154195 -> 3154213
+	3154215 [label="IdNode: light2"]
+	3154213 -> 3154215
+	3154237 [label=NewObjectNode]
+	3154213 -> 3154237
+	3154239 [label="IdNode: Light"]
+	3154237 -> 3154239
+	3154241 [label=ActualParameterNode]
+	3154237 -> 3154241
+	3154267 [label="IdNode: pin8"]
+	3154241 -> 3154267
+	3154209 [label=AssignNode]
+	3154195 -> 3154209
+	3154227 [label="IdNode: switch2"]
+	3154209 -> 3154227
+	3154243 [label=NewObjectNode]
+	3154209 -> 3154243
+	3154255 [label="IdNode: Switch"]
+	3154243 -> 3154255
+	3154251 [label=ActualParameterNode]
+	3154243 -> 3154251
+	3154281 [label="IdNode: pin9"]
+	3154251 -> 3154281
+	3154225 [label=AssignNode]
+	3150497 -> 3154225
+	3154231 [label="IdNode: lightGlobal3"]
+	3154225 -> 3154231
+	3154269 [label=NewObjectNode]
+	3154225 -> 3154269
+	3154263 [label="IdNode: Light"]
+	3154269 -> 3154263
+	3154259 [label=ActualParameterNode]
+	3154269 -> 3154259
+	3154291 [label="IdNode: pin3"]
+	3154259 -> 3154291
+	3154233 [label=RunNode]
+	3150497 -> 3154233
+	3154235 [label="IdNode: print"]
+	3154233 -> 3154235
+	3154217 [label=ActualParameterNode]
+	3154233 -> 3154217
+	3154273 [label="StringNode: \"Hello World!\""]
+	3154217 -> 3154273
+	3154229 [label=WhenNode]
+	3150497 -> 3154229
+	3154285 [label=RunNode]
+	3154229 -> 3154285
+	3154297 [label=DotNode]
+	3154285 -> 3154297
+	3154293 [label="IdNode: LivingRoom"]
+	3154297 -> 3154293
+	3154289 [label="IdNode: switch1"]
+	3154297 -> 3154289
+	3154299 [label="IdNode: Read"]
+	3154297 -> 3154299
+	3154277 [label=BlockNode]
+	3154229 -> 3154277
+	3154249 [label=RunNode]
+	3154277 -> 3154249
+	3154287 [label=DotNode]
+	3154249 -> 3154287
+	3154265 [label="IdNode: LivingRoom"]
+	3154287 -> 3154265
+	3154283 [label="IdNode: light"]
+	3154287 -> 3154283
+	3154295 [label="IdNode: switchState"]
+	3154287 -> 3154295
+	3154257 [label=AssignNode]
+	3150497 -> 3154257
+	3154279 [label="IdNode: x"]
+	3154257 -> 3154279
+	3154315 [label="IntegerNode: 10"]
+	3154257 -> 3154315
+	3154275 [label=WhenNode]
+	3150497 -> 3154275
+	3154309 [label=LessThanNode]
+	3154275 -> 3154309
+	3154321 [label="IntegerNode: 5"]
+	3154309 -> 3154321
+	3154327 [label="IntegerNode: 10"]
+	3154309 -> 3154327
+	3154307 [label=BlockNode]
+	3154275 -> 3154307
+	3154305 [label=RunNode]
+	3154307 -> 3154305
+	3154323 [label="IdNode: print"]
+	3154305 -> 3154323
+	3154317 [label=ActualParameterNode]
+	3154305 -> 3154317
+	3154337 [label="StringNode: \"This is true\""]
+	3154317 -> 3154337
+	3154311 [label=RunNode]
+	3154307 -> 3154311
+	3154339 [label=DotNode]
+	3154311 -> 3154339
+	3154325 [label="IdNode: Kitchen"]
+	3154339 -> 3154325
+	3154333 [label="IdNode: light2"]
+	3154339 -> 3154333
+	3154335 [label="IdNode: setState"]
+	3154339 -> 3154335
+	3154313 [label=ActualParameterNode]
+	3154311 -> 3154313
+	3154353 [label="BoolNode: on"]
+	3154313 -> 3154353
+	3154329 [label=IfNode]
+	3154307 -> 3154329
+	3154347 [label=EqualsNode]
+	3154329 -> 3154347
+	3154361 [label="IntegerNode: 10"]
+	3154347 -> 3154361
+	3154367 [label="IntegerNode: 4"]
+	3154347 -> 3154367
+	3154349 [label=BlockNode]
+	3154329 -> 3154349
+	3154345 [label=RunNode]
+	3154349 -> 3154345
+	3154363 [label="IdNode: print"]
+	3154345 -> 3154363
+	3154355 [label=ActualParameterNode]
+	3154345 -> 3154355
+	3154377 [label="StringNode: \"Gottem\""]
+	3154355 -> 3154377
+	3154359 [label=IfNode]
+	3154329 -> 3154359
+	3154365 [label=EqualsNode]
+	3154359 -> 3154365
+	3154383 [label="IntegerNode: 10"]
+	3154365 -> 3154383
+	3154389 [label="IntegerNode: 9"]
+	3154365 -> 3154389
+	3154371 [label=BlockNode]
+	3154359 -> 3154371
+	3154369 [label=RunNode]
+	3154371 -> 3154369
+	3154381 [label=DotNode]
+	3154369 -> 3154381
+	3154385 [label="IdNode: Kitchen"]
+	3154381 -> 3154385
+	3154391 [label="IdNode: light2"]
+	3154381 -> 3154391
+	3154387 [label="IdNode: setState"]
+	3154381 -> 3154387
+	3154373 [label=ActualParameterNode]
+	3154369 -> 3154373
+	3154405 [label="BoolNode: off"]
+	3154373 -> 3154405
+	3154395 [label=BlockNode]
+	3154359 -> 3154395
+	3154393 [label=RunNode]
+	3154395 -> 3154393
+	3154409 [label=DotNode]
+	3154393 -> 3154409
+	3154401 [label="IdNode: Kitchen"]
+	3154409 -> 3154401
+	3154403 [label="IdNode: switch2"]
+	3154409 -> 3154403
+	3154411 [label="IdNode: Read"]
+	3154409 -> 3154411
 	overlap=false
 }

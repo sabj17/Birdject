@@ -4,13 +4,27 @@ LivingRoom {
     set light to Light(pin6);
     set switch1 to Switch(pin7);
 
+    function jenerator(jebat, jabat){
+        set jebat to 5 + 5;
+        set jabat to "Anus";
+        if(jabat is "Anus"){
+            set jebat to 2;
+        }
+        return jebat;
+    }
+
+}
+
+function tester(y){
+    set y to 5.5;
+    return y;
 }
 
 set lightGlobal2 to Light(pin2);
 
 Kitchen {
     set light2 to Light(pin8);
-    set switch3 to Switch(pin9);
+    set switch2 to Switch(pin9);
 }
 
 set lightGlobal3 to Light(pin3);
@@ -21,6 +35,16 @@ when (run LivingRoom.switch1.Read()){
     run LivingRoom.light.switchState();
 }
 
+set x to 10;
+
 when (5 < 10){
     run print("This is true" );
+    run Kitchen.light2.setState(on);
+    if(10 is 4){
+        run print("Gottem");
+    } else if (10 is 9){
+        run Kitchen.light2.setState(off);
+    } else {
+        run Kitchen.switch2.Read();
+    }
 }
