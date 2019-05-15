@@ -1,4 +1,4 @@
-from ast import BinaryExpNode, PlusNode, AbstractNode, NewObjectNode, IfNode
+from src.ast import BinaryExpNode, PlusNode, AbstractNode, NewObjectNode, IfNode
 
 
 class NodeVisitor:
@@ -154,6 +154,8 @@ class Visitor(NodeVisitor):
         elif self.symtable.lookup(assign_id.__repr__()) == str:
             self.current_string += self.get_tabs() + "char " + assign_id.__repr__() + "[100] = " + expr.__repr__() + ";\n"
         # Object assignment
+
+
         elif isinstance(expr, NewObjectNode):
             obj_atb = vars(expr)
             obj_id = obj_atb.get("id")
@@ -173,7 +175,6 @@ class Visitor(NodeVisitor):
             # self.setup_string += "\t" + assign_id.__repr__() + ".setupClass();\n"
             self.setup_list.append("\t" + assign_id.__repr__() + ".setupClass();")
         self.declared_vars.append(assign_id.__repr__())
-
 
         #   self.code_gen.emit_id(assign_id)
         self.accept_children(assign_atb.get("expression"))

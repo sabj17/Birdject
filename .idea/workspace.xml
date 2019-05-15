@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="311eaa91-087f-4edd-b12e-d967ecc45f3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/copy_compiler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/copy_symbol_table.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AST.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/AST.gv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/codegen/visitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/codegen/visitor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/compiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parse_tree.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/parse_tree.gv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Example.jnr" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Example.jnr" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/symbol_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbol_table.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/Example1.jnr" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Example1.jnr" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,89 +19,84 @@
     <SUITE FILE_PATH="coverage/Birdject$parser.coverage" NAME="parser Coverage Results" MODIFIED="1553512703263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$pytest_in_test.coverage" NAME="pytest in test Coverage Results" MODIFIED="1553545532014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/Birdject$pytest_in_test_parser_py.coverage" NAME="pytest in test_parser.py Coverage Results" MODIFIED="1553543330649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1557741414104" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1557906532833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1553550625262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.50948066">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/compiler.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="345">
-                  <caret line="15" column="50" lean-forward="true" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
-                  <folding>
-                    <element signature="e#0#9#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="188">
-                  <caret line="192" column="78" selection-start-line="192" selection-start-column="78" selection-end-line="192" selection-end-column="78" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/compiler.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="92">
-                  <caret line="15" column="49" lean-forward="true" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/ast.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2990">
-                  <caret line="132" column="9" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
-                  <folding>
-                    <element signature="e#0#13#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/resources/Example1.jnr">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="253">
-                  <caret line="11" column="49" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/resources/Example.jnr">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="23">
-                  <caret line="1" column="20" lean-forward="true" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/AST.gv">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="368">
-                  <caret line="236" column="44" lean-forward="true" selection-end-line="472" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/resources/Example1.jnr">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="30" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="174" column="83" selection-start-line="174" selection-start-column="83" selection-end-line="174" selection-end-column="83" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/parsetree.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="221" column="11" lean-forward="true" selection-start-line="221" selection-start-column="11" selection-end-line="221" selection-end-column="11" />
+              <folding>
+                <element signature="e#0#17#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ast.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-566">
+              <caret line="138" column="14" selection-start-line="138" selection-start-column="14" selection-end-line="138" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="24" column="62" lean-forward="true" selection-start-line="24" selection-start-column="62" selection-end-line="24" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/compiler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="720">
+              <caret line="55" column="1" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/parser.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="388">
+              <caret line="54" selection-start-line="54" selection-end-line="54" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -114,36 +107,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>parent</find>
-      <find>Node</find>
-      <find>boolnode</find>
       <find>returnnode</find>
-      <find>boolNode</find>
-      <find>parameter</find>
-      <find>expressionNode</find>
-      <find>classbody</find>
-      <find>blocknode</find>
-      <find>dotnode</find>
-      <find>function</find>
-      <find>params</find>
-      <find>formal</find>
-      <find>func</find>
-      <find>termn</find>
-      <find>expression</find>
-      <find>type</find>
-      <find>expre</find>
-      <find>visit_Block</find>
-      <find>param</find>
-      <find>assign</find>
-      <find>interg</find>
-      <find>parenthe</find>
-      <find>multi</find>
       <find>idnode</find>
-      <find>runnode</find>
-      <find>actual</find>
-      <find>equal</find>
+      <find>plusn</find>
+      <find>current_string = &quot;&quot;</find>
+      <find>actu</find>
+      <find>whenn</find>
+      <find>name</find>
+      <find>integ</find>
+      <find>param</find>
       <find>new</find>
+      <find>accept</find>
+      <find>newob</find>
+      <find>termnod</find>
+      <find>dotno</find>
       <find>print</find>
+      <find>idno</find>
+      <find>loop_lis</find>
+      <find>setu</find>
+      <find>setup</find>
+      <find>== 0</find>
+      <find>-=</find>
+      <find>self.scope +=</find>
+      <find>ifnode</find>
+      <find>assign</find>
+      <find>symtableOriginal</find>
+      <find>constr</find>
+      <find>objects_in_constructor</find>
+      <find>repr</find>
+      <find>constructor_list</find>
+      <find>lookup</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,6 +146,7 @@
         <entry key="$PROJECT_DIR$" value="test_with_our_grammar" />
       </map>
     </option>
+    <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -186,28 +180,24 @@
         <option value="$PROJECT_DIR$/src/SymbolTable.py" />
         <option value="$PROJECT_DIR$/src/parser.py" />
         <option value="$PROJECT_DIR$/src/crap.py" />
+        <option value="$PROJECT_DIR$/src/parsetree.py" />
         <option value="$PROJECT_DIR$/src/AST.gv" />
         <option value="$PROJECT_DIR$/src/codegen/program.py" />
-        <option value="$PROJECT_DIR$/src/ast.py" />
-        <option value="$PROJECT_DIR$/src/codegen/strsplit.py" />
-        <option value="$PROJECT_DIR$/src/parsetree.py" />
-        <option value="$PROJECT_DIR$/src/lalalalala.py" />
-        <option value="$PROJECT_DIR$/src/codegen/visitor.py" />
         <option value="$PROJECT_DIR$/src/crap_table.py" />
-        <option value="$PROJECT_DIR$/src/resources/Example1.jnr" />
         <option value="$PROJECT_DIR$/src/resources/Example.jnr" />
-        <option value="$PROJECT_DIR$/src/copy_symbol_table.py" />
-        <option value="$PROJECT_DIR$/src/copy_compiler.py" />
+        <option value="$PROJECT_DIR$/src/ast.py" />
         <option value="$PROJECT_DIR$/src/compiler.py" />
         <option value="$PROJECT_DIR$/src/symbol_table.py" />
+        <option value="$PROJECT_DIR$/src/resources/Example1.jnr" />
+        <option value="$PROJECT_DIR$/src/codegen/visitor.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1287" />
-    <option name="y" value="26" />
-    <option name="width" value="1261" />
-    <option name="height" value="1402" />
+    <option name="x" value="1285" />
+    <option name="y" value="23" />
+    <option name="width" value="1263" />
+    <option name="height" value="1404" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -232,7 +222,18 @@
               <item name="Birdject" type="b2602c69:ProjectViewProjectNode" />
               <item name="Birdject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="codegen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Birdject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Birdject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Birdject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Birdject" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -243,7 +244,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/test" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -268,6 +269,28 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.compiler">
+    <configuration name="ast" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Birdject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ast.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="compiler" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="P4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -275,9 +298,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="/usr/bin/python3.7" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -342,7 +365,7 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in /home/jens/Programming/4.semester/Birdject/test/test_parser.py" type="tests" factoryName="py.test" nameIsGenerated="true">
+    <configuration name="pytest in C:/Users/Radel/Desktop/Python/Birdject/test/test_parser.py" type="tests" factoryName="py.test" nameIsGenerated="true">
       <module name="Birdject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -375,9 +398,10 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.ast" />
       <item itemvalue="Python.compiler" />
       <item itemvalue="Python.symbol_table" />
-      <item itemvalue="Python tests.pytest in /home/jens/Programming/4.semester/Birdject/test/test_parser.py" />
+      <item itemvalue="Python tests.pytest in C:/Users/Radel/Desktop/Python/Birdject/test/test_parser.py" />
       <item itemvalue="Python tests.pytest in test" />
       <item itemvalue="Python tests.Unittests in test_nonterminal.py" />
       <item itemvalue="Python tests.Unittests in test_tokenStream.py" />
@@ -386,6 +410,7 @@
       <list>
         <item itemvalue="Python.compiler" />
         <item itemvalue="Python.symbol_table" />
+        <item itemvalue="Python.ast" />
         <item itemvalue="Python tests.Unittests in test_tokenStream.py" />
         <item itemvalue="Python tests.Unittests in test_nonterminal.py" />
       </list>
@@ -427,14 +452,7 @@
       <workItem from="1557654179430" duration="11502000" />
       <workItem from="1557722546319" duration="1663000" />
       <workItem from="1557738478370" duration="1212000" />
-      <workItem from="1557740919385" duration="937000" />
-      <workItem from="1557747778210" duration="2375000" />
-      <workItem from="1557750171477" duration="3144000" />
-      <workItem from="1557762879880" duration="16034000" />
-      <workItem from="1557783467805" duration="585000" />
-      <workItem from="1557818689458" duration="10838000" />
-      <workItem from="1557856748864" duration="19242000" />
-      <workItem from="1557904268049" duration="1699000" />
+      <workItem from="1557740919385" duration="50757000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1553513025633</created>
@@ -681,61 +699,61 @@
       <option name="project" value="LOCAL" />
       <updated>1557741481112</updated>
     </task>
-    <task id="LOCAL-00036" summary="fix">
-      <created>1557746163744</created>
+    <task id="LOCAL-00036" summary="Jener stuff has been extracted into simons stuff&#10;8===D&lt;===8&#10;number2">
+      <created>1557741888146</created>
       <option name="number" value="00036" />
       <option name="presentableId" value="LOCAL-00036" />
       <option name="project" value="LOCAL" />
-      <updated>1557746163744</updated>
+      <updated>1557741888146</updated>
     </task>
-    <task id="LOCAL-00037" summary="made eval_term_node_type">
-      <created>1557752055620</created>
+    <task id="LOCAL-00037" summary="Jener stuff has been extracted into simons stuff&#10;8===D&lt;===8&#10;number3">
+      <created>1557742276848</created>
       <option name="number" value="00037" />
       <option name="presentableId" value="LOCAL-00037" />
       <option name="project" value="LOCAL" />
-      <updated>1557752055620</updated>
+      <updated>1557742276848</updated>
     </task>
-    <task id="LOCAL-00038" summary="for you maddi">
-      <created>1557765352387</created>
+    <task id="LOCAL-00038" summary="Can this save the day">
+      <created>1557745920080</created>
       <option name="number" value="00038" />
       <option name="presentableId" value="LOCAL-00038" />
       <option name="project" value="LOCAL" />
-      <updated>1557765352387</updated>
+      <updated>1557745920080</updated>
     </task>
-    <task id="LOCAL-00039" summary="fixed almost everything in the symbolCrapTable">
-      <created>1557778637276</created>
+    <task id="LOCAL-00039" summary="Matti Code gen 4Head">
+      <created>1557848795405</created>
       <option name="number" value="00039" />
       <option name="presentableId" value="LOCAL-00039" />
       <option name="project" value="LOCAL" />
-      <updated>1557778637276</updated>
+      <updated>1557848795405</updated>
     </task>
-    <task id="LOCAL-00040" summary="removed irrelevant symbtable stuff that is not getting used anymore">
-      <created>1557779044662</created>
+    <task id="LOCAL-00040" summary="Matti Code gen 4Head">
+      <created>1557855756321</created>
       <option name="number" value="00040" />
       <option name="presentableId" value="LOCAL-00040" />
       <option name="project" value="LOCAL" />
-      <updated>1557779044662</updated>
+      <updated>1557855756321</updated>
     </task>
-    <task id="LOCAL-00041" summary="final version of symboltable for now">
-      <created>1557781381133</created>
+    <task id="LOCAL-00041" summary="some code for jener">
+      <created>1557858189468</created>
       <option name="number" value="00041" />
       <option name="presentableId" value="LOCAL-00041" />
       <option name="project" value="LOCAL" />
-      <updated>1557781381133</updated>
+      <updated>1557858189468</updated>
     </task>
-    <task id="LOCAL-00042" summary="another final version, where the formal parameters gets added to the functionName instead of &quot;type1, type2&quot;">
-      <created>1557784012371</created>
+    <task id="LOCAL-00042" summary="some code for jener">
+      <created>1557858211681</created>
       <option name="number" value="00042" />
       <option name="presentableId" value="LOCAL-00042" />
       <option name="project" value="LOCAL" />
-      <updated>1557784012371</updated>
+      <updated>1557858211681</updated>
     </task>
-    <task id="LOCAL-00043" summary="fixed so bool is not allowed in binary expression">
-      <created>1557827807586</created>
+    <task id="LOCAL-00043" summary="Codejen now with if statements">
+      <created>1557868808702</created>
       <option name="number" value="00043" />
       <option name="presentableId" value="LOCAL-00043" />
       <option name="project" value="LOCAL" />
-      <updated>1557827807586</updated>
+      <updated>1557868808702</updated>
     </task>
     <option name="localTasksCounter" value="44" />
     <servers />
@@ -773,26 +791,26 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="328310000" />
+    <option name="totallyTimeSpent" value="324213000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="13" width="1922" height="1068" extended-state="6" />
+    <frame x="-8" y="-8" width="1618" height="877" extended-state="6" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="2" weight="0.15955175" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.11681643" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32780412" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49876338" visible="true" weight="0.21995708" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39889416" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32751676" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4994664" visible="true" weight="0.40939596" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.23624161" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4994664" weight="0.32832617" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4994664" weight="0.32751676" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5012366" side_tool="true" weight="0.22590837" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32938388" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053364" side_tool="true" weight="0.32832617" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32885906" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -828,6 +846,8 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="GrammarBuilder tests done" />
+    <MESSAGE value="currently works" />
     <MESSAGE value="tests for stack class done" />
     <MESSAGE value="updated test_build_grammar_from_file" />
     <MESSAGE value="jen" />
@@ -845,24 +865,26 @@
     <MESSAGE value="Symboltable stuff" />
     <MESSAGE value="Symboltable fixed types with assignment" />
     <MESSAGE value="Jener stuff has been extracted into simons stuff&#10;8===D&lt;===8" />
-    <MESSAGE value="fix" />
-    <MESSAGE value="made eval_term_node_type" />
-    <MESSAGE value="for you maddi" />
-    <MESSAGE value="fixed almost everything in the symbolCrapTable" />
-    <MESSAGE value="removed irrelevant symbtable stuff that is not getting used anymore" />
-    <MESSAGE value="final version of symboltable for now" />
-    <MESSAGE value="another final version, where the formal parameters gets added to the functionName instead of &quot;type1, type2&quot;" />
-    <MESSAGE value="fixed so bool is not allowed in binary expression" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed so bool is not allowed in binary expression" />
+    <MESSAGE value="Jener stuff has been extracted into simons stuff&#10;8===D&lt;===8&#10;number2" />
+    <MESSAGE value="Jener stuff has been extracted into simons stuff&#10;8===D&lt;===8&#10;number3" />
+    <MESSAGE value="Can this save the day" />
+    <MESSAGE value="Matti Code gen 4Head" />
+    <MESSAGE value="some code for jener" />
+    <MESSAGE value="Codejen now with if statements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Codejen now with if statements" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1557906136867" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1557732709094" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$parser.coverage" NAME="parser Coverage Results" MODIFIED="1553767623223" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$Unittests_for_test_grammar_TestGrammar_test_get_rules_for.coverage" NAME="Unittests for test_grammar.TestGrammar.test_get_rules_for Coverage Results" MODIFIED="1554312997343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/Birdject$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1554665954240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$Unittests_in_test_grammar_py.coverage" NAME="Unittests in test_grammar.py Coverage Results" MODIFIED="1554372509218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/numpy/core/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/test/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/src/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/src/resources/__init__.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/prettytable.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/tokenize.py" />
     <entry file="file://$PROJECT_DIR$/src/token.py" />
@@ -1019,13 +1041,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/grammar.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1620">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/testgrammar.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -1033,9 +1048,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/codegen/control.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/grammar.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1620">
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codegen/program.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="954">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/lexer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
+        <state relative-caret-position="774">
           <caret line="43" column="35" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="35" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -1043,126 +1081,92 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codegen/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codegen/builder.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/graphviz/lang.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-517">
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="288">
+          <caret line="153" selection-start-line="153" selection-end-line="153" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/parser.py">
+    <entry file="file://$PROJECT_DIR$/src/crap_table.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codegen/strsplit.py">
+    <entry file="file://$PROJECT_DIR$/src/AST.gv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        <state relative-caret-position="3510">
+          <caret line="321" column="1" lean-forward="true" selection-end-line="322" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsetree.py">
+    <entry file="file://$PROJECT_DIR$/src/resources/Example.jnr">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="17" selection-start-column="17" selection-end-column="17" />
+        <state relative-caret-position="270">
+          <caret line="74" column="4" selection-start-line="74" selection-start-column="4" selection-end-line="77" selection-end-column="5" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lalalalala.py" />
-    <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#585#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/crap_table.py" />
-    <entry file="file://$PROJECT_DIR$/src/codegen/program.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codegen/codegen.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ast.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2990">
-          <caret line="132" column="9" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
+        <state relative-caret-position="-566">
+          <caret line="138" column="14" selection-start-line="138" selection-start-column="14" selection-end-line="138" selection-end-column="14" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/Example1.jnr">
+    <entry file="file://$PROJECT_DIR$/src/resources/keywords.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="49" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
+        <state relative-caret-position="388">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/copy_compiler.py">
+    <entry file="file://$PROJECT_DIR$/src/parsetree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1357">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
+        <state>
+          <caret line="221" column="11" lean-forward="true" selection-start-line="221" selection-start-column="11" selection-end-line="221" selection-end-column="11" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#17#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/copy_symbol_table.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4299">
-          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AST.gv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="236" column="44" lean-forward="true" selection-end-line="472" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/compiler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="15" column="50" lean-forward="true" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
+        <state relative-caret-position="720">
+          <caret line="55" column="1" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/Example.jnr">
+    <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="20" lean-forward="true" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+        <state relative-caret-position="432">
+          <caret line="24" column="62" lean-forward="true" selection-start-line="24" selection-start-column="62" selection-end-line="24" selection-end-column="62" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
+    <entry file="file://$PROJECT_DIR$/src/resources/Example1.jnr">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="192" column="78" selection-start-line="192" selection-start-column="78" selection-end-line="192" selection-end-column="78" />
+        <state relative-caret-position="36">
+          <caret line="2" column="30" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="174" column="83" selection-start-line="174" selection-start-column="83" selection-end-line="174" selection-end-column="83" />
         </state>
       </provider>
     </entry>
