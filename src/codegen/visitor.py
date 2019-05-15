@@ -1,4 +1,5 @@
-from src.ast import BinaryExpNode, PlusNode, AbstractNode, NewObjectNode, IfNode, FormalParameterNode
+from src.ast import BinaryExpNode, PlusNode, AbstractNode, NewObjectNode, IfNode, FormalParameterNode, DotNode, \
+    AssignNode
 
 
 class NodeVisitor:
@@ -111,9 +112,11 @@ class Visitor(NodeVisitor):
 
     def visit_BlockNode(self, node):
         block_atb = vars(node)
+        string = ""
         parts = block_atb.get("parts")
         for child in parts:
-            super().visit(child)
+            string += super().visit(child)
+        return string
 
     def visit_BlockBodyPartNode(self, node):
         part_atb = vars(node)
@@ -147,6 +150,7 @@ class Visitor(NodeVisitor):
         if self.scope == 0:
             self.global_list.append(self.current_string)
         self.setTable(symtableOriginal)
+
 
 
     def visit_ClassBodyNode(self, node):
@@ -195,7 +199,7 @@ class Visitor(NodeVisitor):
 
             # Global variable
             if self.scope == 0:
-                self.current_string += object_name + " " + var_name + "(" + params + ")\n"
+                self.current_string += object_name + " " + var_name + "(" + params + ");\n"
             else:  # Declared inside a room
                 self.current_string += self.get_tabs() + object_name + " " + var_name + ";\n"
                 # Adding the object to the constructor of the room
@@ -223,6 +227,7 @@ class Visitor(NodeVisitor):
         # If global var dcl
         if self.scope == 0:
             self.global_list.append(self.current_string)
+        return self.current_string
 
 
     def visit_FunctionNode(self, node):
@@ -253,9 +258,8 @@ class Visitor(NodeVisitor):
 
 
     def visit_ReturnNode(self, node):
-        return_atb = vars(node)
-        return_expr = return_atb.get("expression")
-        self.current_string += self.get_tabs() + "return " + return_expr.__repr__() + ";\n"
+        self.current_string += self.get_tabs() + "return " + super().visit(node.expression) + ";\n"
+        return self.current_string
 
 
 
@@ -293,9 +297,7 @@ class Visitor(NodeVisitor):
 
 
     def visit_RunNode(self, node):
-        run_atb = vars(node)
-        param = run_atb.get("params")
-
+        string = ""
         # Justs sets tabs lul
         tabs = self.get_tabs()
         if self.scope == 0:
@@ -303,16 +305,26 @@ class Visitor(NodeVisitor):
             tabs = "\t"
 
         #TODO Check if id is dotnode
-
-        # creates the function call code
-        self.current_string += tabs + super().visit(node.id) + "("
-        if param is not None:
-            self.current_string += super().visit(node.params)
-        self.current_string += ");\n"
+        if isinstance(node.id, DotNode):
+            string += tabs
+            for index, dot_id in enumerate(node.id.ids):
+                if index > 0:
+                    string += "."
+                string += super().visit(dot_id)
+            string += "("
+        else:
+            # creates the function call code
+            string += tabs + super().visit(node.id) + "("
+        if node.params is not None:
+            string += super().visit(node.params)
+        string += ");\n"
 
         # if it is a globally called function, then it is added to setup()
         if self.scope == 0:
-            self.setup_list.append(self.current_string)
+            self.setup_list.append(string)
+
+        self.current_string += string
+        return self.current_string
 
     def visit_IfNode(self, node):
         true_block = node.statement_true
@@ -320,7 +332,6 @@ class Visitor(NodeVisitor):
         # Global
         if self.scope == 0:
             self.reset_current()
-
 
         self.current_string += self.get_tabs() + "if (" + super().visit(node.expression) + ") {\n"
         self.create_if_body(true_block)
@@ -331,10 +342,7 @@ class Visitor(NodeVisitor):
             self.current_string += self.get_tabs() + "else {\n"
             self.create_if_body(false_block)
 
-
-
-
-
+        return self.current_string
 
 
 
@@ -378,430 +386,3 @@ class Visitor(NodeVisitor):
         self.remove_scope()
         self.remove_scope()
         self.current_string += self.get_tabs() + "}\n"
-
-
-'''
-class TopVisitor(NodeVisitor):
-
-    def __init__(self, program):
-        self.code_gen = CodeEmittor()
-        self.program = program
-        self.structure = Structure(program)
-
-    @dispatch(ProgNode)
-    def visit(self, node):
-        self.structure.begin_structure()
-        statements = vars(node).get("stmts")
-        for node in statements:
-            node.accept(self)
-
-    @dispatch(ClassNode)
-    def visit(self, node):
-        class_atb = vars(node)
-        class_id = class_atb.get("id")
-        self.code_gen.emit_class_name(class_id)
-        self.accept_children(class_id, class_atb.get("body_part"))
-
-    @dispatch(FunctionNode)
-    def visit(self, node):
-        function_atb = vars(node)
-        function_id = function_atb.get("id")
-        function_params = function_atb.get("params")
-        function_block = function_atb.get("block")
-
-        self.code_gen.emit_func()
-        function_id.accept(self)
-        function_params.accept(self)
-        self.accept_children(function_id, function_block)
-
-    @dispatch(AssignNode)
-    def visit(self, node):
-        assign_atb = vars(node)
-        assign_id = assign_atb.get("id")
-        self.code_gen.emit_id(assign_id)
-        self.accept_children(assign_id, assign_atb.get("expression"))
-
-    @dispatch(RunNode)
-    def visit(self, node):
-        self.code_gen.emit_run()
-        run_atb = vars(node)
-        run_id = run_atb.get("id")
-        run_params = run_atb.get("params")
-        run_id.accept(self)
-        if run_params is not None:
-            run_params.accept(self)
-        self.code_gen.emit_end("function_call")
-
-
-    @dispatch(IfNode)
-    def visit(self, node):
-        if_atb = vars(node)
-        if_true = if_atb.get("statement_true")
-        if_false = if_atb.get("statement_false")
-        self.code_gen.emit_if_vals(if_true, if_false)
-        self.accept_children("if", if_atb.get("expression"))
-
-    @dispatch(ForNode)
-    def visit(self, node):
-        for_atb = vars(node)
-        for_id = for_atb.get("id")
-        self.accept_children(for_id, for_atb.get("expression"))
-        self.accept_children(for_id, for_atb.get("block"))
-
-    @dispatch(WhenNode)
-    def visit(self, node):
-        when_atb = vars(node)
-        self.accept_children("When", when_atb.get("expression"))
-        self.accept_children("When", when_atb.get("block"))
-
-    @dispatch(BlockNode)
-    def visit(self, node):
-        block_atb = vars(node)
-        parts = block_atb.get("parts")
-        for child in parts:
-            child.accept(self)
-
-    @dispatch(BlockBodyPartNode)
-    def visit(self, node):
-        self.code_gen.emit_block_body()
-
-    @dispatch(ActualParameterNode) #hello
-    def visit(self, node):
-        self.code_gen.emit_parameters()
-        expr_list = vars(node).get("expr_list")
-        for child in expr_list:
-            child.accept(self)
-        self.code_gen.emit_end("Param")
-
-    @dispatch(ExpressionNode)
-    def visit(self, node):
-        self.code_gen.emit_expression()
-
-    @dispatch(BinaryExpNode)
-    def visit(self, node):
-        self.code_gen.emit_binary_exp()
-
-    @dispatch(UnaryExpNode)
-    def visit(self, node):
-        self.code_gen.emit_unary_exp()
-
-    @dispatch(NotNode)
-    def visit(self, node):
-        self.code_gen.emit_not_exp()
-
-    @dispatch(NegativeNode)
-    def visit(self, node):
-        self.code_gen.emit_negative_exp()
-
-    @dispatch(ParenthesesNode)
-    def visit(self, node):
-        self.code_gen.emit_paren_exp()
-
-    @dispatch(NewObjectNode)
-    def visit(self, node):
-        self.code_gen.emit_new_obj_exp()
-
-    @dispatch(PlusNode)
-    def visit(self, node):
-        self.code_gen.emit_plus_exp()
-        expr = vars(node)
-        for key in expr.keys():
-            expr.get(key).accept(self)
-        self.code_gen.emit_end("plus_exp")
-
-    @dispatch(MinusNode)
-    def visit(self, node):
-        self.code_gen.emit_minus_exp()
-
-    @dispatch(MultiplyNode)
-    def visit(self, node):
-        self.code_gen.emit_mult_exp()
-
-    @dispatch(DivideNode)
-    def visit(self, node):
-        self.code_gen.emit_div_exp()
-
-    @dispatch(ModuloNode)
-    def visit(self, node):
-        self.code_gen.emit_mod_exp()
-
-    @dispatch(EqualsNode)
-    def visit(self, node):
-        self.code_gen.emit_equals_exp()
-
-    @dispatch(NotEqualNode)
-    def visit(self, node):
-        self.code_gen.emit_not_equals_exp()
-
-    @dispatch(GreaterThanNode)
-    def visit(self, node):
-        self.code_gen.emit_greater_than_exp()
-
-    @dispatch(LessThanNode)
-    def visit(self, node):
-        self.code_gen.emit_less_than_exp()
-
-    @dispatch(AndNode)
-    def visit(self, node):
-        self.code_gen.emit_and_exp()
-
-    @dispatch(OrNode)
-    def visit(self, node):
-        self.code_gen.emit_or_exp()
-
-    @dispatch(IdNode)
-    def visit(self, node):
-        field = vars(node)
-        key = field.keys()
-        for k in key:
-            self.code_gen.emit_id(field.get(k))
-
-    ##############
-    # TERM STUFF #
-    ##############
-
-    @dispatch(TermNode)
-    def visit(self, node):
-        self.code_gen.emit_terminal()
-
-    @dispatch(BoolNode)
-    def visit(self, node):
-        self.code_gen.emit_bool()
-
-    @dispatch(StringNode)
-    def visit(self, node):
-        self.code_gen.emit_string()
-
-    @dispatch(FloatNode)
-    def visit(self, node):
-        self.code_gen.emit_float()
-
-    @dispatch(IntegerNode)
-    def visit(self, node):
-        field = vars(node)
-        self.code_gen.emit_integer(field.get("value"))
-
-    @dispatch(DotNode)
-    def visit(self, node):
-        self.code_gen.emit_dot()
-        ids = vars(node).get("ids")
-        for id1 in ids:
-            id1.accept(self)
-        self.code_gen.emit_end("dot")
-
-    @dispatch(ArrayRefNode)
-    def visit(self, node):
-        self.code_gen.emit_array_ref()
-
-    @dispatch(object)
-    def visit(self, node):
-        pass
-
-    def accept_children(self, cnode_id, children):
-        if isinstance(children, AbstractNode):
-            children.accept(self)
-        elif isinstance(children, list):
-            for child in children:
-                child.accept(self)
-        self.code_gen.emit_end(cnode_id)
-
-'''
-
-'''
-class CodeGenVisitor(NodeVisitor):
-
-    def __init__(self):
-        self.code_gen = CodeEmittor()
-
-    @dispatch(ProgNode)
-    def visit(self, node):
-        self.code_gen.emit_prog()
-
-    @dispatch(object)
-    def visit(self, node):
-        pass
-
-    ##############
-    # STATEMENTS #
-    ##############
-
-    @dispatch(StatementNode)
-    def visit(self, node):
-        self.code_gen.emit_statement()
-
-    @dispatch(IfNode)
-    def visit(self, node):
-        self.code_gen.emit_if()
-
-    @dispatch(WhenNode)
-    def visit(self, node):
-        self.code_gen.emit_when()
-
-    @dispatch(ForNode)
-    def visit(self, node):
-        self.code_gen.emit_for()
-
-    @dispatch(AssignNode)
-    def visit(self, node):
-        self.code_gen.emit_assign()
-
-    @dispatch(FunctionNode)
-    def visit(self, node):
-        self.code_gen.emit_func()
-
-    @dispatch(ClassNode)
-    def visit(self, node):
-        self.code_gen.emit_class()
-
-    @dispatch(ClassBodyNode)
-    def visit(self, node):
-        self.code_gen.emit_class_body()
-
-    ###############
-    # EXPRESSIONS #
-    ###############
-
-    @dispatch(ExpressionNode)
-    def visit(self, node):
-        self.code_gen.emit_expression()
-
-    @dispatch(BinaryExpNode)
-    def visit(self, node):
-        self.code_gen.emit_binary_exp()
-
-    @dispatch(UnaryExpNode)
-    def visit(self, node):
-        self.code_gen.emit_unary_exp()
-
-    @dispatch(NotNode)
-    def visit(self, node):
-        self.code_gen.emit_not_exp()
-
-    @dispatch(NegativeNode)
-    def visit(self, node):
-        self.code_gen.emit_negative_exp()
-
-    @dispatch(ParenthesesNode)
-    def visit(self, node):
-        self.code_gen.emit_paren_exp()
-
-    @dispatch(NewObjectNode)
-    def visit(self, node):
-        self.code_gen.emit_new_obj_exp()
-
-    @dispatch(PlusNode)
-    def visit(self, node):
-        self.code_gen.emit_plus_exp()
-
-    @dispatch(MinusNode)
-    def visit(self, node):
-        self.code_gen.emit_minus_exp()
-
-    @dispatch(MultiplyNode)
-    def visit(self, node):
-        self.code_gen.emit_mult_exp()
-
-    @dispatch(DivideNode)
-    def visit(self, node):
-        self.code_gen.emit_div_exp()
-
-    @dispatch(ModuloNode)
-    def visit(self, node):
-        self.code_gen.emit_mod_exp()
-
-    @dispatch(EqualsNode)
-    def visit(self, node):
-        self.code_gen.emit_equals_exp()
-
-    @dispatch(NotEqualNode)
-    def visit(self, node):
-        self.code_gen.emit_not_equals_exp()
-
-    @dispatch(GreaterThanNode)
-    def visit(self, node):
-        self.code_gen.emit_greater_than_exp()
-
-    @dispatch(LessThanNode)
-    def visit(self, node):
-        self.code_gen.emit_less_than_exp()
-
-    @dispatch(AndNode)
-    def visit(self, node):
-        self.code_gen.emit_and_exp()
-
-    @dispatch(OrNode)
-    def visit(self, node):
-        self.code_gen.emit_or_exp()
-
-    ###############
-    # BLOCK STUFF #
-    ###############
-
-    @dispatch(BlockNode)
-    def visit(self, node):
-        self.code_gen.emit_block()
-
-    @dispatch(BlockBodyPartNode)
-    def visit(self, node):
-        self.code_gen.emit_block_body()
-
-    @dispatch(ReturnNode)
-    def visit(self, node):
-        self.code_gen.emit_return()
-
-    @dispatch(BreakNode)
-    def visit(self, node):
-        self.code_gen.emit_break()
-
-    @dispatch(RunNode)
-    def visit(self, node):
-        self.code_gen.emit_run()
-
-    ###################
-    # PARAMETER STUFF #
-    ###################
-
-    @dispatch(ActualParameterNode)
-    def visit(self, node):
-        self.code_gen.emit_parameters()
-
-    ##############
-    # TERM STUFF #
-    ##############
-
-    @dispatch(TermNode)
-    def visit(self, node):
-        self.code_gen.emit_terminal()
-
-    @dispatch(BoolNode)
-    def visit(self, node):
-        self.code_gen.emit_bool()
-
-    @dispatch(StringNode)
-    def visit(self, node):
-        self.code_gen.emit_string()
-
-    @dispatch(FloatNode)
-    def visit(self, node):
-        self.code_gen.emit_float()
-
-    @dispatch(IntegerNode)
-    def visit(self, node):
-        field = vars(node)
-        self.code_gen.emit_integer(field.get("value"))
-
-    @dispatch(IdNode)
-    def visit(self, node):
-        field = vars(node)
-        key = field.keys()
-        for k in key:
-            self.code_gen.emit_id(field.get(k))
-
-    @dispatch(DotNode)
-    def visit(self, node):
-        self.code_gen.emit_dot()
-
-    @dispatch(ArrayRefNode)
-    def visit(self, node):
-        self.code_gen.emit_array_ref()
-'''

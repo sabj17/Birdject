@@ -32,8 +32,16 @@ function parameterFunction(x, y){
         set x to y;
     } else if (x is y){
         set x to 10;
+        run tester();
     } else {
         set x to 0;
+        run tester();
+    }
+}
+
+function ifFunction(x, y){
+    if(x is y){
+        set x to y;
     }
 }
 
@@ -45,6 +53,12 @@ when (fuck > 5){
     set lightGlobal to Light(pin69);
     run tester();
     run parameterFunction(fuck, 10);
-    //run LivingRoom.light.switchState();
+    run LivingRoom.light.switchState();
+    run LivingRoom.light.setState(1);
+}
+
+set simon to off;
+when (5 is 5){
+    set simon to on;
 }
 set global to off;
