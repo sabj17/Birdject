@@ -216,7 +216,10 @@ class BuildASTVisitor:
         assert node.name == '<run>'
         if len(ast_children) == 2:
             id_node, param_node = ast_children
-            return RunNode(id_node, param_node)
+            if param_node.expr_list:
+                return RunNode(id_node, param_node)
+            else:
+                return RunNode(id_node, None)
         elif len(ast_children) == 1:
             id_node, = ast_children
             return RunNode(id_node, None)
