@@ -1,4 +1,4 @@
-from src.ast import *
+from ast import *
 
 
 class SymbolTable:
@@ -185,11 +185,10 @@ class AstNodeVisitor(NodeVisitor):
 
     def dotNode_in_runNode(self, dotNode):
         formal_param = None
-        last_id = dotNode.ids[-1].name # Is the last name of a dot sequence like LivingRoom.light.setState
+        last_id = dotNode.ids[-1].name
         temp_scope = self.current_scope
 
         for id in dotNode.ids:
-            # Checks if the last id in the dot sequence is a built in function
             if self.current_scope.predefined_functions.get(last_id) is not None:
                 if id.name == last_id:
                     formal_param = self.current_scope.predefined_functions.get(last_id)

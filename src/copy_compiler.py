@@ -8,14 +8,10 @@ from src.symbol_table import AstNodeVisitor
 from src.grammar import *
 from src.lexer import Lexer
 from src.parser import Parser
-from src.parsetree import BuildASTVisitor
-from src.ast import GraphASTVisitor
 
 wd = os.getcwd()
 grammar_file = os.path.join(wd, 'resources/grammar.txt')
 program_file = os.path.join(wd, 'resources/Example.jnr')
-keyword_file = os.path.join(wd, 'resources/keywords.txt')
-token_spec_file = os.path.join(wd, 'resources/token_spec.txt')
 
 grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
@@ -25,10 +21,11 @@ program = '''
 
 #print(grammar)
 
-lexer = Lexer(program_file, keyword_file, token_spec_file)
+lexer = Lexer(program_file=program_file)
 tokens = lexer.lex()
 
-# print("\n".join([str(x) for x in tokens]))
+#print()
+#print(",".join([str(x) for x in tokens]))
 
 parser = Parser(grammar)
 
@@ -44,12 +41,9 @@ for val in parser.parse_table:
 parse_tree = parser.parse(tokens)
 
 parse_tree.graph()
-ast = parse_tree.accept(BuildASTVisitor())
+ast = parse_tree.to_AST()
 
-
-
-ast.accept(GraphASTVisitor())
-
+ast.graph()
 visitor = AstNodeVisitor()
 ast.accept(visitor)
 symtable = visitor.current_scope
