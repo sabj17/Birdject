@@ -196,18 +196,8 @@ class Visitor(NodeVisitor):
 
         if var_name in self.declared_vars:
             self.current_string += self.get_tabs() + var_name + " = " + expr_string + ";\n"
-        # The cases where a new var is being declared
-        elif self.symtable.lookup(var_name) == int:
-            self.current_string += self.get_tabs() + "int " + var_name + " = " + expr_string + ";\n"
-        elif self.symtable.lookup(var_name) == float:
-            self.current_string += self.get_tabs() + "float " + var_name + " = " + expr_string + ";\n"
-        elif self.symtable.lookup(var_name) == bool:
-            self.current_string += self.get_tabs() + "bool " + var_name + " = " + expr_string + ";\n"
-        elif self.symtable.lookup(var_name) == str:
-            self.current_string += self.get_tabs() + "char " + var_name + "[100] = " + expr_string + ";\n"
+
         # Object assignment
-
-
         elif isinstance(expr, NewObjectNode):
             object_name = super().visit(expr.id)
             params = super().visit(expr.param)
@@ -226,6 +216,21 @@ class Visitor(NodeVisitor):
             # adds the 'setupClass()' to void setup()
             # self.setup_string += "\t" + assign_id.__repr__() + ".setupClass();\n"
             self.setup_list.append("\t" + var_name + ".setupClass();")
+
+
+        # The cases where a new var is being declared
+        else:
+            type1 = self.symtable.lookup(var_name).__name__
+            if type1 == 'str':
+                self.current_string += self.get_tabs() + "char " + var_name + "[100] = " + expr_string + ";\n"
+            else: self.current_string += self.get_tabs() + type1 + " " + var_name + " = " + expr_string + ";\n"
+
+
+
+
+
+
+
         self.declared_vars.append(var_name)
 
         #   self.code_gen.emit_id(assign_id)
