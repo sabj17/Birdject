@@ -5,7 +5,6 @@ MULT:       [*]
 DIVIDE:     [/]
 MODULO:     [%]
 NOTEQUALS:  is not
-EQUALS:     is
 GREATER:    [>]
 LESS:       [<]
 FLOAT:      \d+[.]\d*

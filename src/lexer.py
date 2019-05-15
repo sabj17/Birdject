@@ -42,6 +42,8 @@ class Lexer:
             if kind == 'ID':
                 if value in self.keywords:  # if the kind was ID where it should have been a keyword
                     kind = value.upper()  # set kind to value/keyword
+                    if value == 'is':
+                        kind = 'EQUALS'
 
             elif kind == 'NEWLINE' or kind == 'COMMENT':
                 line_start = match.end()  # set the new starting point, to the end of the newline/comment

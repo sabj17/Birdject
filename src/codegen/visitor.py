@@ -141,7 +141,6 @@ class Visitor(NodeVisitor):
         assign_atb = vars(node)
         assign_id = assign_atb.get("id")
         expr = assign_atb.get("expression")
-
         if assign_id.__repr__() in self.declared_vars:
             self.current_string += self.get_tabs() + assign_id.__repr__() + " = " + expr.__repr__() + ";\n"
         # The cases where a new var is being declared

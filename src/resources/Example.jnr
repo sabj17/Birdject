@@ -47,7 +47,7 @@ function globalFunc(input1, input2, input3){
     set smil123456 to 6666666;
     set input1 to false;
     set input2 to 1;
-    set input3 to 2;
+    set input3 to 2 + input2;
     set a to "h";
     set b to "a";
 

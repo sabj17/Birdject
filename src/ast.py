@@ -356,13 +356,13 @@ class IdNode(TermNode):
         return self.name
 
 
-class DotNode(TermNode):
+class DotNode(AbstractNode):
     def __init__(self, ids):
         super().__init__()
         self.ids = ids
 
 
-class ArrayRefNode(TermNode):
+class ArrayRefNode(AbstractNode):
     def __init__(self, id, index):
         super().__init__()
         self.id = id
