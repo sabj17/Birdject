@@ -10,7 +10,7 @@ class SymbolTable:
         self.predefined_types = ['Light', 'Switch', 'Thermometer']
         self.predefined_functions = {'print' : 'void',
                                      'Read' : [], # no input parameters
-                                     'getState' : [], # no input parameters
+                                     'turnedOn' : [], # no input parameters
                                      'setState' : ['void'], # 1 int some input parameter
                                      'Write' : [], # no input parameters
                                      'switchState' : []} # no input parameters

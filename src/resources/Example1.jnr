@@ -1,5 +1,4 @@
 set fuck to 10;
-set isgay to 5;
 
 set lightGlobal to Light(pin99);
 
@@ -9,12 +8,17 @@ LivingRoom {
     set switch1 to Switch(pin11);
     set x to 5 + 5 * 7 / 10 % 3;
     set y to 5 + 5.5;
-    set z to x + y;
+    set z to on;
     set v to "fuck mig i røven så fucking hårdt";
+
 
     function jenerator(jebat, jabat){
         set jebat to 5 + 5;
         set jabat to "Anus";
+        if(jabat is "Anus"){
+            set jebat to 2;
+        }
+
         //run light.switchState();
         return jebat;
     }
@@ -23,29 +27,43 @@ LivingRoom {
 
 function tester(){
     set nou to on;
-    //run LivingRoom.light.switchState();
+    //run LivingRoom.light.turnedOn();
 }
 
 
 function parameterFunction(x, y){
     if(x is not y){
+        run tester();
         set x to y;
     } else if (x is y){
         set x to 10;
+        run tester();
     } else {
         set x to 0;
+        run tester();
+    }
+}
+
+function ifFunction(x, y){
+    if(x is y){
+        set x to y;
     }
 }
 
 
 run tester();
 
-when (fuck > 4){
+when (fuck > 5){
     set fuck to 15;
     set lightGlobal to Light(pin69);
     run tester();
     run parameterFunction(fuck, 10);
     run LivingRoom.light.switchState();
+    run LivingRoom.light.setState(1);
 }
 
+set simon to off;
+when (5 is 5){
+    set simon to on;
+}
 set global to off;
