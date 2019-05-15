@@ -1,5 +1,5 @@
 from src.ast import BinaryExpNode, PlusNode, AbstractNode, NewObjectNode, IfNode, FormalParameterNode, DotNode, \
-    AssignNode
+    AssignNode, UnaryExpNode
 
 
 class NodeVisitor:
@@ -17,6 +17,8 @@ class NodeVisitor:
     def visit(self, node):
         if isinstance(node, BinaryExpNode):
             method_name = 'visit_' + 'BinaryExpNode'
+        elif isinstance(node, UnaryExpNode):
+            method_name = 'visit_' + 'UnaryExpNode'
         else:
             method_name = 'visit_' + type(node).__name__
 
@@ -54,7 +56,10 @@ class Visitor(NodeVisitor):
             "GreaterThanNode" : " > ",
             "LessThanNode" : " < ",
             "AndNode" : " && ",
-            "OrNode" : " || "
+            "OrNode" : " || ",
+            "NotNode": " !",
+            "NegativeNode": " -",
+            "ParenthesesNode": ""
         }
         # self.structure = Structure(program)
 
@@ -163,6 +168,11 @@ class Visitor(NodeVisitor):
         expr1 = super().visit(node.expr1)
         expr2 = super().visit(node.expr2)
         return expr1 + operator + expr2
+
+    def visit_UnaryExpNode(self, node):
+        operator = self.operators[type(node).__name__]
+        expr = super().visit(node.expression)
+        return operator + "(" + expr + ")"
 
     def visit_IntegerNode(self, node):
         return "" + node.value

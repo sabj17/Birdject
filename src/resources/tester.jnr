@@ -10,4 +10,6 @@ Room {
     set string to "jebatmus";
     set light to Light(pin67);
 
+    set hello to 5;
+
 }

@@ -11,9 +11,14 @@ LivingRoom {
     set z to on;
     set v to "fuck mig i røven så fucking hårdt";
 
+
     function jenerator(jebat, jabat){
         set jebat to 5 + 5;
         set jabat to "Anus";
+        if(jabat is "Anus"){
+            set jebat to 2;
+        }
+
         //run light.switchState();
         return jebat;
     }
