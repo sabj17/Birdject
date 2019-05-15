@@ -28,7 +28,7 @@ LivingRoom{
 		return "well done";
 	}
 
-	function closeWindow(window2){
+	function closeWindow(window2, sumthing){
 	    run openWindow();
 	    return true;
 	}
@@ -69,11 +69,15 @@ function globalFunc(input1, input2, input3){
 when(run LivingRoom.getTemp1(number1) > 20){
     set hello to 2;
     set x to 22;
+    set lorteString to "lortestring";
+    set pikString to "JenMedDeStoreSten";
     set windowXX to 55;
+    set boolman to true;
 	run LivingRoom.openWindow();
-	run LivingRoom.closeWindow(windowXX);
+	run LivingRoom.closeWindow(windowXX, lorteString);
+	run LivingRoom.closeWindow(windowXX, pikString);
 	run globalFunc(x + hello, 99, string);
 	run LivingRoom.AnotherRoom.burnRoom(x);
-	run switch1.setState(12);
+	run switch1.setState(boolman);
 	run LivingRoom.light.switchState();
 }

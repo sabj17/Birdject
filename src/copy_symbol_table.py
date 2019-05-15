@@ -1,4 +1,4 @@
-from ast import *
+from src.ast import *
 
 
 class SymbolTable:
@@ -11,7 +11,7 @@ class SymbolTable:
         self.predefined_functions = {'print' : 'void',
                                      'Read' : [], # no input parameters
                                      'getState' : [], # no input parameters
-                                     'setState' : ['void'], # 1 int some input parameter
+                                     'setState' : [bool], # 1 int some input parameter
                                      'Write' : [], # no input parameters
                                      'switchState' : []} # no input parameters
 
@@ -32,6 +32,13 @@ class SymbolTable:
             return self.enclosing_scope.lookup(name)
         else:
             raise NameError(name, 'was not found')
+
+    def get_outer_scope_of_variable(self, name):
+        if self.symbols.get(name) is None:
+            return self
+            pass
+        else:
+            return self.symbols
 
 
 class NodeVisitor(object):
@@ -167,43 +174,83 @@ class AstNodeVisitor(NodeVisitor):
             self.current_scope.lookup(node.expression.name)
 
     def visit_RunNode(self, node):
+        list_of_types = [str, bool, int, float]
         # Gets the formal parameters if it's a dotNode
         if isinstance(node.id, DotNode):  # Looks for if Class.method exist
-            formal_param = self.dotNode_in_runNode(node.id)
-            # Compares the amount of formal and actual parameters
-            if len(formal_param) != len(self.get_actual_params(node)):
-                raise TypeError(node.id.ids[-1].name, 'takes', len(formal_param), 'parameter(s) and', len(self.get_actual_params(node)), 'was given.')
+            self.dotNode_in_runNode(node)
 
         # Get the formal parameters if the runNode just has a IdNode and not a DotNode
         # Compares the amount of formal and actual parameters
+
+        #TODO make it take all the type parameters
         elif isinstance(node.id, IdNode):
+            print("kommer jeg nogensinde hertil?")
+            print(node.id)
+            '''
             if node.id.name == 'print':
                 pass
             elif len(self.current_scope.lookup(node.id.name)) != len(self.get_actual_params(node)):
                 raise TypeError(node.id.name, 'takes', len(self.current_scope.lookup(node.id.name)), 'parameter(s) and', len(self.get_actual_params(node)), 'was given')
+            '''
+
+            if node.id.name == 'print':
+                pass
+            elif len(self.current_scope.lookup(node.id.name)) == len(self.get_actual_params(node)):
+                formal_param = self.current_scope.lookup(node.id.name)
+                actual_param = self.get_actual_params(node)
+                print('before --- formal ', formal_param, 'actual ', actual_param)
+                if actual_param != []:
+                    assert all([xparam in list_of_types for xparam in actual_param])  # Checks all actual parameters has type
+                    if formal_param[0] not in list_of_types:  # Checks the first formal parameter is not a type
+                        assert all([yparam not in list_of_types for yparam in formal_param])  # Checks none of the formal parameters has a type
+                        print('#########', self.current_scope.symbols)
+                        self.current_scope.symbols[node.id.name] = actual_param
+                        print('@@@@@@@@@', self.current_scope.symbols)
+
+                    elif formal_param != actual_param:
+                        raise TypeError(formal_param, 'is not equal to', actual_param)
+                print('after --- formal ', formal_param, 'actual ', actual_param)
+
+            else:
+                raise TypeError(node.id.name, 'takes', len(self.current_scope.lookup(node.id.name)), 'parameter(s) and', len(self.get_actual_params(node)), 'was given.')
 
 
-    def dotNode_in_runNode(self, dotNode):
-        formal_param = None
-        last_id = dotNode.ids[-1].name
+    def dotNode_in_runNode(self, runNode):
+        list_of_types = [str, bool, int, float]
+        last_id = runNode.id.ids[-1].name # Is the last name of a dot sequence like LivingRoom.light.setState
         temp_scope = self.current_scope
 
-        for id in dotNode.ids:
+        for id in runNode.id.ids:
+            # Checks if the last id in the dot sequence is a built in function
             if self.current_scope.predefined_functions.get(last_id) is not None:
                 if id.name == last_id:
                     formal_param = self.current_scope.predefined_functions.get(last_id)
-                elif id.name == dotNode.ids[-2].name:
+                    actual_param = self.get_actual_params(runNode)
+
+                    if (formal_param) != (actual_param):
+                        raise TypeError(formal_param, 'is not equal to', actual_param)
+
+                elif id.name == runNode.id.ids[-2].name:
                     if temp_scope.lookup(id.name) not in self.current_scope.predefined_types:
                         raise TypeError(id.name, 'is not one of the pre-defined object types: ', self.current_scope.predefined_types)
                 else:
                     temp_scope = temp_scope.lookup(str(id.name + 'Scope'))
-
             elif id.name == last_id:
                 formal_param = temp_scope.lookup(id.name)
+                actual_param = self.get_actual_params(runNode)
+
+                if len(formal_param) == len(actual_param):
+                    if actual_param != []:
+                        assert all([xparam in list_of_types for xparam in actual_param])  # Checks all actual parameters has type
+                        if formal_param[0] not in list_of_types: # Checks the first formal parameter is not a type
+                            assert all([yparam not in list_of_types for yparam in formal_param]) # Checks none of the formal parameters has a type
+                            temp_scope.symbols[id.name] = actual_param
+                        elif formal_param != actual_param:
+                            raise TypeError(formal_param, 'is not equal to', actual_param)
+                else:
+                    raise TypeError(id.name, 'takes', len(formal_param), 'parameter(s) and', len(actual_param), 'was given.')
             else:
                 temp_scope = temp_scope.lookup(str(id.name + 'Scope'))
-
-        return formal_param
 
     # Returns a list of types of the actual parameters
     def get_actual_params(self, runNode):
