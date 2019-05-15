@@ -72,68 +72,35 @@ class Switch : public Input {
     Switch (int inputPin): Input(inputPin) {}
 };
 
-Light lightGlobal(pin1);
 
 
 class LivingRoomClass {
   public:
-	Light light;
+	Light light1;
 	Switch switch1;
-
-	type jenerator (type jebat, type jabat){
-		int jebat = 5 + 5;
-		char jabat[100] = "Anus";
-		if (jabat == "Anus") {
-				jebat = 2;
-		}
-		return jebat;
-	}
-
-LivingRoomClass() : light(pin6) , switch1(pin7) {}
+LivingRoomClass() : light1(pin6) , switch1(pin7) {}
 
 } LivingRoom;
 
-type tester (type y){
-	bool y = true;
-	return y;
-}
+bool x = false;
 
-Light lightGlobal2(pin2);
-
-
-class KitchenClass {
-  public:
-	Light light2;
-	Switch switch2;
-KitchenClass() : light2(pin8) , switch2(pin9) {}
-
-} Kitchen;
-Light lightGlobal3(pin3);
-	int x = 10;
 void setup() {
-	Serial.begin(9600);	lightGlobal.setupClass();	LivingRoom.light.setupClass();	LivingRoom.switch1.setupClass();	lightGlobal2.setupClass();	Kitchen.light2.setupClass();	Kitchen.switch2.setupClass();	lightGlobal3.setupClass();	Serial.print("Hello World!");
+	Serial.begin(9600);
+	LivingRoom.light1.setupClass();
+	LivingRoom.switch1.setupClass();
 }
+
 void loop() {
+
 	if (	LivingRoom.switch1.Read()){
-	LivingRoom.light.switchState();
-	}
-	if (5 < 10){
-	Serial.print("This is true");
-	Serial.print(5.5);
-	Kitchen.light2.setState(true);
-	if (10 == 4) {
-			Serial.print("Gottem");
-	}
-	else 	if (10 == 9) {
-			Kitchen.light2.setState(false);
+	LivingRoom.light1.switchState();
+	x = 	LivingRoom.light1.getState();
+
+	if (x == true) {
+		Serial.print("Light is on");
 	}
 	else {
-			Kitchen.switch2.Read();
+		Serial.print("Light is off");
 	}
 	}
-		if (10 == 10){
-		if (		Kitchen.switch2.Read();
-) {
-				Serial.print("Nou good one");
-		}
-		}}
+}

@@ -2,8 +2,7 @@ import os
 
 from src.parser import Stack
 from src.ast import BinaryExpNode, PlusNode, AbstractNode, NewObjectNode, IfNode, FormalParameterNode, DotNode, \
-    AssignNode, UnaryExpNode
-
+    AssignNode, UnaryExpNode, RunNode
 
 
 class NodeVisitor:
@@ -115,11 +114,11 @@ class Visitor(NodeVisitor):
 
 
         for string in self.global_list:
-            program_file.write(string)
+            program_file.write(string + "\n")
         for string in self.setup_list:
-            program_file.write(string)
+            program_file.write(string + "\n")
         for string in self.loop_list:
-            program_file.write(string)
+            program_file.write(string + "\n")
 
 
         file_std.close()
@@ -233,7 +232,11 @@ class Visitor(NodeVisitor):
         var_name = super().visit(node.id)
 
         if var_name in self.declared_vars:
-            string += self.get_tabs() + var_name + " = " + expr_string + ";\n"
+            string += self.get_tabs() + var_name + " = " + expr_string
+            # No semi colon added if a run node, since it is added in runnode visitor
+            if not isinstance(node.expression, RunNode):
+                string += ";"
+            string += "\n"
 
         # Object assignment
         elif isinstance(node.expression, NewObjectNode):
@@ -340,6 +343,7 @@ class Visitor(NodeVisitor):
         self.add_scope()
         self.reset_current()
         string += "\n" + self.get_tabs() + "if (" + expr + "){\n"
+        print("NOUUUUUUUUUUUUUUUUUUUUUUUU")
         #self.add_scope()
         #self.add_scope()
         string += super().visit(node.block)
@@ -400,8 +404,12 @@ class Visitor(NodeVisitor):
         if self.stack.top_of_stack() == "Global":
             self.reset_current()
 
+        print("------------------")
+
         string += self.get_tabs() + "if (" + super().visit(node.expression) + ") {\n"
         string += self.create_if_body(true_block)
+        print(string)
+
 
         # If elseif
         if isinstance(false_block, IfNode):
