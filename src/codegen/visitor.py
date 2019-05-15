@@ -44,7 +44,6 @@ class Visitor(NodeVisitor):
         self.inWhen = False
         self.setup_list = list()
         self.loop_list = list()
-        self.current_string = ""
         self.current_classes = list()
         self.class_constructor = ""
         self.objects_in_constructor = 0
@@ -88,10 +87,6 @@ class Visitor(NodeVisitor):
             self.scope -= 1
         else:
             self.scope = 0
-
-
-    def reset_current(self):
-        self.current_string = ""
 
     def reset_constructor(self):
         self.class_constructor = ""
@@ -158,8 +153,6 @@ class Visitor(NodeVisitor):
         self.current_classes.append(class_name)
         self.stack.push(class_name)
         self.reset_constructor()
-        if self.scope == 0:
-            self.reset_current()
         string = ""
         # Sets the scope in symbol table to be the class
         symtableOriginal = self.symtable
@@ -222,10 +215,6 @@ class Visitor(NodeVisitor):
         return node.value + ""
 
     def visit_AssignNode(self, node):
-        # If global var dcl
-        if self.stack.top_of_stack() == "Global":
-            self.reset_current()
-
         string = ""
 
         expr_string = super().visit(node.expression)
@@ -287,7 +276,6 @@ class Visitor(NodeVisitor):
         # Global function
         if self.stack.top_of_stack() == "Global":
             self.stack.push("GlobalFunction")
-            self.reset_current()
 
         func_id = super().visit(node.id)
         # Adds the parameter to a string if there is any
@@ -314,9 +302,8 @@ class Visitor(NodeVisitor):
 
 
     def visit_ReturnNode(self, node):
-        self.current_string += self.get_tabs() + "return " + super().visit(node.expression) + ";\n"
-        return self.current_string
-
+        #self.current_string += self.get_tabs() + "return " + super().visit(node.expression) + ";\n"
+        return self.get_tabs() + "return " + super().visit(node.expression) + ";\n"
 
 
     def visit_FormalParameterNode(self, node):
@@ -335,15 +322,12 @@ class Visitor(NodeVisitor):
     def visit_WhenNode(self, node):
         string = ""
         self.stack.push("When")
-        self.reset_current()
         self.inWhen = True
         expr = super().visit(node.expression)
         expr = expr.replace(";", "")
         expr = expr.replace("\n", "")
         self.add_scope()
-        self.reset_current()
         string += "\n" + self.get_tabs() + "if (" + expr + "){\n"
-        print("NOUUUUUUUUUUUUUUUUUUUUUUUU")
         #self.add_scope()
         #self.add_scope()
         string += super().visit(node.block)
@@ -351,7 +335,6 @@ class Visitor(NodeVisitor):
         #self.remove_scope()
         string += self.get_tabs() + "}"
         self.loop_list.append(string)
-        self.reset_current()
         self.inWhen = False
         #print("When: " + self.stack.top_of_stack())
         self.stack.pop()
@@ -367,7 +350,6 @@ class Visitor(NodeVisitor):
         # Justs sets tabs lul
         tabs = self.get_tabs()
         if self.scope == 0:
-            self.reset_current()
             tabs = "\t"
 
         # Dot node case
@@ -400,16 +382,12 @@ class Visitor(NodeVisitor):
         string = ""
         true_block = node.statement_true
         false_block = node.statement_false
-        # Global
-        if self.stack.top_of_stack() == "Global":
-            self.reset_current()
+        expr = super().visit(node.expression)
+        expr = expr.replace(";", "")
+        expr = expr.replace("\n", "")
 
-        print("------------------")
-
-        string += self.get_tabs() + "if (" + super().visit(node.expression) + ") {\n"
+        string += self.get_tabs() + "if (" + expr + ") {\n"
         string += self.create_if_body(true_block)
-        print(string)
-
 
         # If elseif
         if isinstance(false_block, IfNode):
