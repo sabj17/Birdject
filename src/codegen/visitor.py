@@ -209,19 +209,19 @@ class Visitor(NodeVisitor):
 
 
         elif isinstance(expr, NewObjectNode):
-            obj_atb = vars(expr)
-            obj_id = obj_atb.get("id")
-            obj_param = obj_atb.get("param")
+            object_name = super().visit(expr.id)
+            params = super().visit(expr.param)
+
             # Global variable
             if self.scope == 0:
-                self.current_string += obj_id.__repr__() + " " + var_name + "(" + obj_param.__repr__() + ")\n"
+                self.current_string += object_name + " " + var_name + "(" + params + ")\n"
             else:  # Declared inside a room
-                self.current_string += self.get_tabs() + obj_id.__repr__() + " " + var_name + ";\n"
+                self.current_string += self.get_tabs() + object_name + " " + var_name + ";\n"
                 # Adding the object to the constructor of the room
                 string_symbol = " : "
                 if self.objects_in_constructor == 1:
                     string_symbol = " , "
-                self.class_constructor += string_symbol + var_name + "(" + obj_param.__repr__() + ")"
+                self.class_constructor += string_symbol + var_name + "(" + params + ")"
                 self.objects_in_constructor += 1
             # adds the 'setupClass()' to void setup()
             # self.setup_string += "\t" + assign_id.__repr__() + ".setupClass();\n"
@@ -355,7 +355,15 @@ class Visitor(NodeVisitor):
 
 
     def visit_ActualParameterNode(self, node):
-        param_atb = vars(node)
+        string = ""
+        i = 0
+        for child in node.expr_list:
+            if isinstance(child, AbstractNode):
+                if i > 0:
+                    string += ", "
+                string += child.__repr__()
+                i += 1
+        return string
 
         '''
         i = 0

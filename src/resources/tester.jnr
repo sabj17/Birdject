@@ -1,5 +1,7 @@
 set x to 5 + 7;
 
+set switch to Switch(pin5);
+
 Room {
     set y to 9 + 8 - 6 / 2 * 5 % 10 is 10;
     set b to 1 is not 1 < 5 > 3 and 5 or 4;
@@ -7,5 +9,6 @@ Room {
     set f to 4 + y;
     set something to off;
     set string to "jebatmus";
+    set light to Light(pin67);
 
 }
