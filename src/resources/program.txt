@@ -131,11 +131,16 @@ bool y = false;
 	}
 
 
-void setup() {
-	Serial.begin(9600);
+void setupObjects(){
 	LivingRoom.light1.setupClass();
 	Kitchen.light2.setupClass();
 	mainSwitch.setupClass();
+}
+
+void setup() {
+	Serial.begin(9600);
+	setupObjects();
+
 }
 
 void loop() {

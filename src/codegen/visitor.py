@@ -37,12 +37,12 @@ class NodeVisitor:
 class Visitor(NodeVisitor):
 
     def __init__(self, program, symtable):
-        # self.code_gen = CodeEmittor()'
         self.global_list = list()
         self.stack = Stack()
         self.constructors = {}
         self.constructors_objects = {}
         self.setup_list = list()
+        self.setup_objects = list()
         self.loop_list = list()
         self.current_classes = list()
         self.current_class = ""
@@ -90,6 +90,7 @@ class Visitor(NodeVisitor):
         self.stack.push("Global")
         for node in node.stmts:
             node.accept(self)
+        self.create_object_setup_func()
         self.setup_list.append("}\n")
         self.loop_list.append("}")
 
@@ -119,6 +120,14 @@ class Visitor(NodeVisitor):
             print(string)
         '''
 
+    def create_object_setup_func(self):
+        string = "void setupObjects(){\n"
+        for s in self.setup_objects:
+            string += s
+        string += "}\n"
+        self.global_list.append(string)
+        self.setup_list.append("\tsetupObjects();\n")
+
 
     def visit_IdNode(self, node):
         return node.name
@@ -128,7 +137,6 @@ class Visitor(NodeVisitor):
         string = ""
         for child in node.parts:
             string += child.accept(self)
-            #string += super().visit(child)
         return string
 
     # Dont seem to need this
@@ -141,7 +149,6 @@ class Visitor(NodeVisitor):
 
     def visit_ClassNode(self, node):
         class_name = node.id.accept(self)
-       # class_name = super().visit(node.id)
         self.current_classes.append(class_name)
         self.stack.push(class_name)
         old = self.current_class
@@ -157,7 +164,6 @@ class Visitor(NodeVisitor):
         string += "\n\nclass " + class_name + "Class {\n  public:\n"
         # Adds all of the body
         string += node.body_part.accept(self)
-        #string += super().visit(node.body_part)
         # Ends the constructor and class
         self.constructors[class_name] += " {}\n"
         string += self.constructors[class_name] + "\n} " + class_name + ";\n"
@@ -176,7 +182,6 @@ class Visitor(NodeVisitor):
         string = ""
         for part in node.body_parts:
             string += part.accept(self)
-            #string += super().visit(part)
         return string
         #self.accept_children(body_atb.get("body_parts"))
 
@@ -185,8 +190,6 @@ class Visitor(NodeVisitor):
         operator = self.operators[type(node).__name__]
         expr1 = node.expr1.accept(self)
         expr2 = node.expr2.accept(self)
-        #expr1 = super().visit(node.expr1)
-        #expr2 = super().visit(node.expr2)
         return expr1 + operator + expr2
 
     def visit_UnaryExpNode(self, node):
@@ -241,11 +244,11 @@ class Visitor(NodeVisitor):
                 self.constructors[self.current_class] += string_symbol + var_name + "(" + params + ")"
                 self.constructors_objects[self.current_class] += 1
 
-            # adds the 'setupClass()' to void setup()
+            # adds the 'setupClass()' to the setupObjects func and calls that func in void setup()
             class_name = ""
             for name in self.current_classes:
                 class_name += name + "."
-            self.setup_list.append("\t" + class_name + var_name + ".setupClass();")
+            self.setup_objects.append("\t" + class_name + var_name + ".setupClass();\n")
 
 
         # The cases where a new var is being declared
