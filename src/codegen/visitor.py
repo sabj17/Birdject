@@ -39,6 +39,7 @@ class Visitor(NodeVisitor):
     def __init__(self, program, symtable):
         self.global_list = list()
         self.stack = Stack()
+        self.block_node_scopes = 1
         self.constructors = {}
         self.constructors_objects = {}
         self.setup_list = list()
@@ -317,6 +318,9 @@ class Visitor(NodeVisitor):
     def visit_WhenNode(self, node):
         string = ""
         self.stack.push("When")
+        original_symtable = self.symtable
+        self.setTable(self.symtable.lookup("Block_scope" + str(self.block_node_scopes)))
+        self.block_node_scopes += 1
         expr = node.expression.accept(self)
         expr = expr.replace(";", "")
         expr = expr.replace("\n", "")
@@ -325,6 +329,7 @@ class Visitor(NodeVisitor):
         string += node.block.accept(self)
         string += self.get_tabs() + "}"
         self.loop_list.append(string)
+        self.setTable(original_symtable)
         #print("When: " + self.stack.top_of_stack())
         self.stack.pop()
 
@@ -402,7 +407,11 @@ class Visitor(NodeVisitor):
             if isinstance(child, AbstractNode):
                 if i > 0:
                     string += ", "
-                string += child.accept(self)
+                temp_string = child.accept(self)
+                if isinstance(child, RunNode):
+                    temp_string = temp_string.replace(";", "")
+                    temp_string = temp_string.replace("\n", "")
+                string += temp_string
                 i += 1
         return string
 

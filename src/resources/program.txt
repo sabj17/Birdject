@@ -101,8 +101,9 @@ class Thermometer : public Input {
 class LivingRoomClass {
   public:
 	Light light1;
+	Thermometer temp1;
 
-	LivingRoomClass() : light1(pin8) {}
+	LivingRoomClass() : light1(pin8) , temp1(pinA0) {}
 
 } LivingRoom;
 
@@ -116,25 +117,23 @@ class KitchenClass {
 
 } Kitchen;
 
-Switch mainSwitch(pin2);
-
 bool x = false;
 
 bool y = false;
 
 
-	void updateLights (){
-	x = 	LivingRoom.light1.switchState();
-
-	y = 	Kitchen.light2.switchState();
-
+	void shit (){
+	if (true == true) {
+		}
 	}
 
 
+int var = 11;
+
 void setupObjects(){
 	LivingRoom.light1.setupClass();
+	LivingRoom.temp1.setupClass();
 	Kitchen.light2.setupClass();
-	mainSwitch.setupClass();
 }
 
 void setup() {
@@ -145,21 +144,11 @@ void setup() {
 
 void loop() {
 
-	if (mainSwitch.Read()){
-	updateLights();
-	if (x == true) {
-		Serial.println(String("LivingRoom Light is on"));
+	if (LivingRoom.temp1.Read() > 22){
+	var = 10;
+	Serial.println(	LivingRoom.light1.switchState());
 	}
-	else {
-		Serial.println(String("LivingRoom Light is off"));
-	}
-	if (y == true) {
-		Serial.println(String("Kitchen Light is on"));
-	}
-	else {
-		Serial.println(String("Kitchen Light is off"));
-	}
-	x = false;
-	y = false;
+
+	if (5 == 5){
 	}
 }
