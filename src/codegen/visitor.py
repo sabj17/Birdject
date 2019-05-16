@@ -40,11 +40,12 @@ class Visitor(NodeVisitor):
         # self.code_gen = CodeEmittor()'
         self.global_list = list()
         self.stack = Stack()
+        self.constructors = {}
+        self.constructors_objects = {}
         self.setup_list = list()
         self.loop_list = list()
         self.current_classes = list()
-        self.class_constructor = ""
-        self.objects_in_constructor = 0
+        self.current_class = ""
         self.declared_vars = list()
         self.symtable = symtable
         self.program = program
@@ -82,9 +83,6 @@ class Visitor(NodeVisitor):
 
         return "" + tabs * "\t"
 
-    def reset_constructor(self):
-        self.class_constructor = ""
-        self.objects_in_constructor = 0
 
     def visit_ProgNode(self, node):
         self.setup_list.append("void setup() {\n\tSerial.begin(9600);")
@@ -144,26 +142,30 @@ class Visitor(NodeVisitor):
         class_name = super().visit(node.id)
         self.current_classes.append(class_name)
         self.stack.push(class_name)
-        self.reset_constructor()
+        old = self.current_class
+        self.current_class = class_name
         string = ""
         # Sets the scope in symbol table to be the class
         symtable_original = self.symtable
         self.setTable(self.symtable.lookup(class_name + "Scope"))
 
         # Creating the constructor and class assignment for the room
-        self.class_constructor += self.get_tabs() + class_name + "Class()"
+        self.constructors[class_name] = "\n" + self.get_tabs() + class_name + "Class()"
+        self.constructors_objects[class_name] = 0
         string += "\n\nclass " + class_name + "Class {\n  public:\n"
         # Adds all of the body
         string += super().visit(node.body_part)
         # Ends the constructor and class
-        self.class_constructor += " {}\n"
-        string += self.class_constructor + "\n} " + class_name + ";\n"
+        self.constructors[class_name] += " {}\n"
+        string += self.constructors[class_name] + "\n} " + class_name + ";\n"
         self.current_classes.remove(class_name)
         self.stack.pop()
+        self.current_class = old
         if self.stack.top_of_stack() == "Global":
             self.global_list.append(string)
         self.setTable(symtable_original)
         #print("Class: " + self.stack.top_of_stack())
+        return string
 
 
 
@@ -228,10 +230,10 @@ class Visitor(NodeVisitor):
                 string += self.get_tabs() + object_name + " " + var_name + ";\n"
                 # Adding the object to the constructor of the room
                 string_symbol = " : "
-                if self.objects_in_constructor == 1:
+                if self.constructors_objects[self.current_class] == 1:
                     string_symbol = " , "
-                self.class_constructor += string_symbol + var_name + "(" + params + ")"
-                self.objects_in_constructor += 1
+                self.constructors[self.current_class] += string_symbol + var_name + "(" + params + ")"
+                self.constructors_objects[self.current_class] += 1
 
             # adds the 'setupClass()' to void setup()
             class_name = ""
@@ -393,6 +395,9 @@ class Visitor(NodeVisitor):
                 string += super().visit(child)
                 i += 1
         return string
+
+    def visit_BreakNode(self, node):
+        return self.get_tabs() + "break;\n"
 
 
     def visit(self, node):

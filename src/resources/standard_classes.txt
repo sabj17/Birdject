@@ -42,7 +42,7 @@ class Output {
       return state;
     }
 
-    void switchState() {
+    int switchState() {
       if (state) {
         state = 0;
       } else {
@@ -50,6 +50,7 @@ class Output {
       }
       digitalWrite(pin, state);
       delay(200);
+      return state;
     }
 };
 

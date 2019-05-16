@@ -2,6 +2,7 @@
 #define pin2 2
 #define pin3 3
 #define pin4 4
+#define pin5 5
 #define pin6 6
 #define pin7 7
 #define pin8 8
@@ -41,7 +42,7 @@ class Output {
       return state;
     }
 
-    void switchState() {
+    int switchState() {
       if (state) {
         state = 0;
       } else {
@@ -49,6 +50,7 @@ class Output {
       }
       digitalWrite(pin, state);
       delay(200);
+      return state;
     }
 };
 
@@ -86,8 +88,8 @@ class LivingRoomClass {
   public:
 	Light light1;
 	Switch switch1;
-	int y = 10;
-	LivingRoomClass() : light1(pin7) , switch1(pin2) {}
+
+	LivingRoomClass() : light1(pin8) , switch1(pin2) {}
 
 } LivingRoom;
 
@@ -97,7 +99,8 @@ class KitchenClass {
   public:
 	Light light2;
 	Switch switch2;
-	KitchenClass() : light2(pin8) , switch2(pin3) {}
+
+	KitchenClass() : light2(pin9) , switch2(pin3) {}
 
 } Kitchen;
 
@@ -114,8 +117,7 @@ void setup() {
 void loop() {
 
 	if (LivingRoom.switch1.Read()){
-	LivingRoom.light1.switchState();
-	x = 	LivingRoom.light1.getState();
+	x = 	LivingRoom.light1.switchState();
 
 	if (x == true) {
 		Serial.println(String("LivingRoom Light is on"));
@@ -127,8 +129,7 @@ void loop() {
 	}
 
 	if (Kitchen.switch2.Read()){
-	Kitchen.light2.switchState();
-	x = 	Kitchen.light2.getState();
+	x = 	Kitchen.light2.switchState();
 
 	if (x == true) {
 		Serial.println(String("Kitchen Light is on"));
