@@ -93,6 +93,12 @@ class LivingRoomClass {
 
 bool x = false;
 
+
+	void tester (){
+	LivingRoom.light1.switchState();
+	}
+
+
 void setup() {
 	Serial.begin(9600);
 	LivingRoom.light1.setupClass();
@@ -102,14 +108,14 @@ void setup() {
 void loop() {
 
 	if (LivingRoom.switch1.Read()){
-	LivingRoom.light1.switchState();
+	tester();
 	x = 	LivingRoom.light1.getState();
 
 	if (x == true) {
-		Serial.print("Light is on\n");
+		Serial.println(String("Light is on"));
 	}
 	else {
-		Serial.print("Light is off\n");
+		Serial.println(String("Light is off"));
 	}
 	}
 }

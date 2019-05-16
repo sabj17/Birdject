@@ -6,10 +6,13 @@ LivingRoom {
 
 set x to off;
 
+function tester(){
+    run LivingRoom.light1.switchState();
+}
 
 
 when (run LivingRoom.switch1.Read()){
-    run LivingRoom.light1.switchState();
+    run tester();
     set x to run LivingRoom.light1.getState();
 
     if(x is on){

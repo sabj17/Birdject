@@ -193,7 +193,7 @@ class Visitor(NodeVisitor):
         return "" + node.value
 
     def visit_StringNode(self, node):
-        return "" + node.value
+        return "String(" + node.value + ")"
 
     def visit_BoolNode(self, node):
         if node.value == 'on':
@@ -244,7 +244,7 @@ class Visitor(NodeVisitor):
         else:
             type1 = self.symtable.lookup(var_name).__name__
             if type1 == 'str':
-                string += self.get_tabs() + "char " + var_name + "[100] = " + expr_string + ";\n"
+                string += self.get_tabs() + "String " + var_name + " = " + expr_string + ";\n"
             else: string += self.get_tabs() + type1 + " " + var_name + " = " + expr_string + ";\n"
 
         # Adds the variable to the list of declared variables
@@ -275,7 +275,7 @@ class Visitor(NodeVisitor):
         symtable_original = self.symtable
         self.setTable(self.symtable.lookup(func_id + "Scope"))
         # Generates the code
-        string += "\n" + self.get_tabs() + "type " + func_id + " (" + func_params + "){\n"
+        string += "\n" + self.get_tabs() + "void " + func_id + " (" + func_params + "){\n"
         string += super().visit(node.block)
         string += self.get_tabs() + "}\n\n"
 
@@ -341,8 +341,8 @@ class Visitor(NodeVisitor):
             string += "("
         else:
             # creates the function call code
-            if super().visit(node.id):
-                string += tabs + "Serial.print("
+            if super().visit(node.id) == "print":
+                string += tabs + "Serial.println("
             else:
                 string += tabs + super().visit(node.id) + "("
 
