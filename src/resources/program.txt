@@ -117,19 +117,6 @@ class KitchenClass {
 
 } Kitchen;
 
-bool x = false;
-
-bool y = false;
-
-
-	void shit (){
-	if (true == true) {
-		}
-	}
-
-
-int var = 11;
-
 void setupObjects(){
 	LivingRoom.light1.setupClass();
 	LivingRoom.temp1.setupClass();
@@ -145,10 +132,6 @@ void setup() {
 void loop() {
 
 	if (LivingRoom.temp1.Read() > 22){
-	var = 10;
 	Serial.println(	LivingRoom.light1.switchState());
-	}
-
-	if (5 == 5){
 	}
 }

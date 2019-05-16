@@ -7,23 +7,6 @@ Kitchen {
     set light2 to Light(pin9);
 }
 
-
-set x to off;
-set y to off;
-
-function shit(){
-    if(on is on){
-
-    }
-}
-
-set var to 11;
-
 when (run LivingRoom.temp1.Read() > 22){
-    set var to 10;
     run print(run LivingRoom.light1.switchState());
-}
-
-when(5 is 5){
-
 }
