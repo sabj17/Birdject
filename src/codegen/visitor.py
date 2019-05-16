@@ -127,7 +127,8 @@ class Visitor(NodeVisitor):
     def visit_BlockNode(self, node):
         string = ""
         for child in node.parts:
-            string += super().visit(child)
+            string += child.accept(self)
+            #string += super().visit(child)
         return string
 
     # Dont seem to need this
@@ -139,7 +140,8 @@ class Visitor(NodeVisitor):
 
 
     def visit_ClassNode(self, node):
-        class_name = super().visit(node.id)
+        class_name = node.id.accept(self)
+       # class_name = super().visit(node.id)
         self.current_classes.append(class_name)
         self.stack.push(class_name)
         old = self.current_class
@@ -154,7 +156,8 @@ class Visitor(NodeVisitor):
         self.constructors_objects[class_name] = 0
         string += "\n\nclass " + class_name + "Class {\n  public:\n"
         # Adds all of the body
-        string += super().visit(node.body_part)
+        string += node.body_part.accept(self)
+        #string += super().visit(node.body_part)
         # Ends the constructor and class
         self.constructors[class_name] += " {}\n"
         string += self.constructors[class_name] + "\n} " + class_name + ";\n"
@@ -172,20 +175,23 @@ class Visitor(NodeVisitor):
     def visit_ClassBodyNode(self, node):
         string = ""
         for part in node.body_parts:
-            string += super().visit(part)
+            string += part.accept(self)
+            #string += super().visit(part)
         return string
         #self.accept_children(body_atb.get("body_parts"))
 
     # Visitor method for all binary expressions
     def visit_BinaryExpNode(self, node):
         operator = self.operators[type(node).__name__]
-        expr1 = super().visit(node.expr1)
-        expr2 = super().visit(node.expr2)
+        expr1 = node.expr1.accept(self)
+        expr2 = node.expr2.accept(self)
+        #expr1 = super().visit(node.expr1)
+        #expr2 = super().visit(node.expr2)
         return expr1 + operator + expr2
 
     def visit_UnaryExpNode(self, node):
         operator = self.operators[type(node).__name__]
-        expr = super().visit(node.expression)
+        expr = node.expression.accept(self)
         return operator + "(" + expr + ")"
 
     def visit_IntegerNode(self, node):
@@ -207,8 +213,8 @@ class Visitor(NodeVisitor):
     def visit_AssignNode(self, node):
         string = ""
 
-        expr_string = super().visit(node.expression)
-        var_name = super().visit(node.id)
+        expr_string = node.expression.accept(self)
+        var_name = node.id.accept(self)
 
         if var_name in self.declared_vars:
             string += self.get_tabs() + var_name + " = " + expr_string
@@ -220,8 +226,8 @@ class Visitor(NodeVisitor):
         # Object assignment
         elif isinstance(node.expression, NewObjectNode):
             expr = node.expression
-            object_name = super().visit(expr.id)
-            params = super().visit(expr.param)
+            object_name = expr.id.accept(self)
+            params = expr.param.accept(self)
 
             # Global variable
             if self.stack.top_of_stack() == "Global":
@@ -267,18 +273,18 @@ class Visitor(NodeVisitor):
         if self.stack.top_of_stack() == "Global":
             self.stack.push("GlobalFunction")
 
-        func_id = super().visit(node.id)
+        func_id = node.id.accept(self)
         # Adds the parameter to a string if there is any
         func_params = ""
         if node.params is not None:
-            func_params = super().visit(node.params)
+            func_params = node.params.accept(self)
 
         # Finds the function scope in symbol table
         symtable_original = self.symtable
         self.setTable(self.symtable.lookup(func_id + "Scope"))
         # Generates the code
         string += "\n" + self.get_tabs() + "void " + func_id + " (" + func_params + "){\n"
-        string += super().visit(node.block)
+        string += node.block.accept(self)
         string += self.get_tabs() + "}\n\n"
 
         self.setTable(symtable_original)
@@ -290,8 +296,7 @@ class Visitor(NodeVisitor):
 
 
     def visit_ReturnNode(self, node):
-        return self.get_tabs() + "return " + super().visit(node.expression) + ";\n"
-
+        return self.get_tabs() + "return " + node.expression.accept(self) + ";\n"
 
     def visit_FormalParameterNode(self, node):
         param_atb = vars(node)
@@ -301,7 +306,7 @@ class Visitor(NodeVisitor):
             for param in param_list:
                 if param_amount > 0:  # multiple parameters, so a ',' is added between
                     string += ", "
-                string += "type " + super().visit(param)
+                string += "type " + param.accept(self)
                 param_amount += 1
         return string
 
@@ -309,20 +314,20 @@ class Visitor(NodeVisitor):
     def visit_WhenNode(self, node):
         string = ""
         self.stack.push("When")
-        expr = super().visit(node.expression)
+        expr = node.expression.accept(self)
         expr = expr.replace(";", "")
         expr = expr.replace("\n", "")
         expr = expr.replace("\t", "")
         string += "\n" + self.get_tabs() + "if (" + expr + "){\n"
-        string += super().visit(node.block)
+        string += node.block.accept(self)
         string += self.get_tabs() + "}"
         self.loop_list.append(string)
         #print("When: " + self.stack.top_of_stack())
         self.stack.pop()
 
     def visit_NewObjectNode(self, node):
-        id_string = super().visit(node.id)
-        param_string = super().visit(node.param)
+        id_string = node.id.accept(self)
+        param_string = node.param.accept(self)
         return id_string + "(" + param_string + ")"
 
 
@@ -339,17 +344,19 @@ class Visitor(NodeVisitor):
             for index, dot_id in enumerate(node.id.ids):
                 if index > 0:
                     string += "."
-                string += super().visit(dot_id)
+                string += dot_id.accept(self)
             string += "("
         else:
             # creates the function call code
-            if super().visit(node.id) == "print":
+            if node.id.accept(self) == "print":
                 string += tabs + "Serial.println("
+            elif node.id.accept(self) == "await":
+                string += tabs + "delay("
             else:
-                string += tabs + super().visit(node.id) + "("
+                string += tabs + node.id.accept(self) + "("
 
         if node.params is not None:
-            string += super().visit(node.params)
+            string += node.params.accept(self)
         string += ");\n"
 
         # if it is a globally called function, then it is added to setup() if its not in a when stmt
@@ -362,7 +369,7 @@ class Visitor(NodeVisitor):
         string = ""
         true_block = node.statement_true
         false_block = node.statement_false
-        expr = super().visit(node.expression)
+        expr = node.expression.accept(self)
         expr = expr.replace(";", "")
         expr = expr.replace("\n", "")
         expr = expr.replace("\t", "")
@@ -374,7 +381,7 @@ class Visitor(NodeVisitor):
         # If elseif
         if isinstance(false_block, IfNode):
             string += self.get_tabs() + "else "
-            string += super().visit(false_block)
+            string += false_block.accept(self)
 
         # if else
         elif false_block is not None:
@@ -392,7 +399,7 @@ class Visitor(NodeVisitor):
             if isinstance(child, AbstractNode):
                 if i > 0:
                     string += ", "
-                string += super().visit(child)
+                string += child.accept(self)
                 i += 1
         return string
 
@@ -401,18 +408,17 @@ class Visitor(NodeVisitor):
 
 
     def visit(self, node):
-        super().visit(node)
+        #node.accept(self)
+        return super().visit(node)
 
     def accept_children(self, children):
         if isinstance(children, AbstractNode):
-            super().visit(children)
-            # children.accept(self)
+            children.accept(self)
         elif isinstance(children, list):
             for child in children:
-                super().visit(child)
-                # child.accept(self)
+                child.accept(self)
 
     def create_if_body(self, block):
-        string = super().visit(block)
+        string = block.accept(self)
         string = self.get_tabs() + string + self.get_tabs() + "}\n"
         return string

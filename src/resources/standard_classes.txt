@@ -1,3 +1,7 @@
+#include <dht.h>
+
+dht DHT;
+
 #define pin1 1
 #define pin2 2
 #define pin3 3
@@ -49,7 +53,7 @@ class Output {
         state = 1;
       }
       digitalWrite(pin, state);
-      delay(200);
+      delay(100);
       return state;
     }
 };
@@ -80,5 +84,15 @@ class Input {
 class Switch : public Input {
   public:
     Switch (int inputPin): Input(inputPin) {}
+};
+
+class Thermometer : public Input {
+  public:
+    Thermometer (int inputPin): Input(inputPin) {}
+
+    float Read() {
+        DHT.read11(pin);
+        return DHT.temperature;
+    }
 };
 

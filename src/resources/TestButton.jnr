@@ -1,15 +1,13 @@
 LivingRoom {
-    set light1 to Light(pin6);
-    set switch1 to Switch(pin7);
-    set y to 10;
+    set light1 to Light(pin8);
+    set switch1 to Switch(pin2);
 }
 
 set x to off;
 
 
 when (run LivingRoom.switch1.Read()){
-    run LivingRoom.light1.switchState();
-    set x to run LivingRoom.light1.getState();
+    set x to run LivingRoom.light1.switchState();
 
     if(x is on){
         run print("Light is on");

@@ -1,0 +1,45 @@
+LivingRoom {
+    set light1 to Light(pin8);
+    set temp1 to Thermometer(pinA0);
+}
+
+Kitchen {
+    set light2 to Light(pin9);
+
+}
+
+set mainSwitch to Switch(pin2);
+
+
+set x to off;
+set y to off;
+set z to 0.0;
+
+function updateLights(){
+    set x to run LivingRoom.light1.switchState();
+    set y to run Kitchen.light2.switchState();
+}
+
+when (run mainSwitch.Read()){
+    run updateLights();
+    if(x is on){
+        run print("LivingRoom Light is on");
+    } else {
+        run print("LivingRoom Light is off");
+    }
+    if(y is on){
+        run print("Kitchen Light is on");
+    } else {
+        run print("Kitchen Light is off");
+    }
+    set x to off;
+    set y to off;
+    set z to run LivingRoom.temp1.Read();
+    run print(z);
+    run await(1000);
+}
+
+when (run LivingRoom.temp1.Read() > 20){
+    run print("nou");
+}
+

@@ -1,3 +1,7 @@
+#include <dht.h>
+
+dht DHT;
+
 #define pin1 1
 #define pin2 2
 #define pin3 3
@@ -49,7 +53,7 @@ class Output {
         state = 1;
       }
       digitalWrite(pin, state);
-      delay(200);
+      delay(100);
       return state;
     }
 };
@@ -82,14 +86,24 @@ class Switch : public Input {
     Switch (int inputPin): Input(inputPin) {}
 };
 
+class Thermometer : public Input {
+  public:
+    Thermometer (int inputPin): Input(inputPin) {}
+
+    float Read() {
+        DHT.read11(pin);
+        return DHT.temperature;
+    }
+};
+
 
 
 class LivingRoomClass {
   public:
 	Light light1;
-	Switch switch1;
+	Thermometer temp1;
 
-	LivingRoomClass() : light1(pin8) , switch1(pin2) {}
+	LivingRoomClass() : light1(pin8) , temp1(pinA0) {}
 
 } LivingRoom;
 
@@ -98,45 +112,61 @@ class LivingRoomClass {
 class KitchenClass {
   public:
 	Light light2;
-	Switch switch2;
 
-	KitchenClass() : light2(pin9) , switch2(pin3) {}
+	KitchenClass() : light2(pin9) {}
 
 } Kitchen;
 
+Switch mainSwitch(pin2);
+
 bool x = false;
+
+bool y = false;
+
+float z = 0.0;
+
+
+	void updateLights (){
+	x = 	LivingRoom.light1.switchState();
+
+	y = 	Kitchen.light2.switchState();
+
+	}
+
 
 void setup() {
 	Serial.begin(9600);
 	LivingRoom.light1.setupClass();
-	LivingRoom.switch1.setupClass();
+	LivingRoom.temp1.setupClass();
 	Kitchen.light2.setupClass();
-	Kitchen.switch2.setupClass();
+	mainSwitch.setupClass();
 }
 
 void loop() {
 
-	if (LivingRoom.switch1.Read()){
-	x = 	LivingRoom.light1.switchState();
-
+	if (mainSwitch.Read()){
+	updateLights();
 	if (x == true) {
 		Serial.println(String("LivingRoom Light is on"));
 	}
 	else {
 		Serial.println(String("LivingRoom Light is off"));
 	}
-	x = false;
-	}
-
-	if (Kitchen.switch2.Read()){
-	x = 	Kitchen.light2.switchState();
-
-	if (x == true) {
+	if (y == true) {
 		Serial.println(String("Kitchen Light is on"));
 	}
 	else {
 		Serial.println(String("Kitchen Light is off"));
 	}
 	x = false;
+	y = false;
+	z = 	LivingRoom.temp1.Read();
+
+	Serial.println(z);
+	delay(1000);
+	}
+
+	if (LivingRoom.temp1.Read() > 20){
+	Serial.println(String("nou"));
 	}
 }
