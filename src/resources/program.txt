@@ -101,9 +101,8 @@ class Thermometer : public Input {
 class LivingRoomClass {
   public:
 	Light light1;
-	Thermometer temp1;
 
-	LivingRoomClass() : light1(pin8) , temp1(pinA0) {}
+	LivingRoomClass() : light1(pin8) {}
 
 } LivingRoom;
 
@@ -123,8 +122,6 @@ bool x = false;
 
 bool y = false;
 
-float z = 0.0;
-
 
 	void updateLights (){
 	x = 	LivingRoom.light1.switchState();
@@ -137,7 +134,6 @@ float z = 0.0;
 void setup() {
 	Serial.begin(9600);
 	LivingRoom.light1.setupClass();
-	LivingRoom.temp1.setupClass();
 	Kitchen.light2.setupClass();
 	mainSwitch.setupClass();
 }
@@ -160,13 +156,5 @@ void loop() {
 	}
 	x = false;
 	y = false;
-	z = 	LivingRoom.temp1.Read();
-
-	Serial.println(z);
-	delay(1000);
-	}
-
-	if (LivingRoom.temp1.Read() > 20){
-	Serial.println(String("nou"));
 	}
 }
