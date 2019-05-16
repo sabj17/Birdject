@@ -6,6 +6,8 @@ LivingRoom {
 
 set x to off;
 
+
+
 when (run LivingRoom.switch1.Read()){
     run LivingRoom.light1.switchState();
     set x to run LivingRoom.light1.getState();

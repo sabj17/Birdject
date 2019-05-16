@@ -10,6 +10,14 @@
 #define pin11 11
 #define pin12 12
 #define pin13 13
+#define pinA0 A0
+#define pinA1 A1
+#define pinA2 A2
+#define pinA3 A3
+#define pinA4 A4
+#define pinA5 A5
+
+
 
 class Output {
   public:

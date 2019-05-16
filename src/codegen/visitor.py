@@ -310,6 +310,7 @@ class Visitor(NodeVisitor):
         expr = super().visit(node.expression)
         expr = expr.replace(";", "")
         expr = expr.replace("\n", "")
+        expr = expr.replace("\t", "")
         string += "\n" + self.get_tabs() + "if (" + expr + "){\n"
         string += super().visit(node.block)
         string += self.get_tabs() + "}"
@@ -362,6 +363,8 @@ class Visitor(NodeVisitor):
         expr = super().visit(node.expression)
         expr = expr.replace(";", "")
         expr = expr.replace("\n", "")
+        expr = expr.replace("\t", "")
+
 
         string += self.get_tabs() + "if (" + expr + ") {\n"
         string += self.create_if_body(true_block)

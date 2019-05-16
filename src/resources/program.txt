@@ -10,6 +10,14 @@
 #define pin11 11
 #define pin12 12
 #define pin13 13
+#define pinA0 A0
+#define pinA1 A1
+#define pinA2 A2
+#define pinA3 A3
+#define pinA4 A4
+#define pinA5 A5
+
+
 
 class Output {
   public:
@@ -93,15 +101,15 @@ void setup() {
 
 void loop() {
 
-	if (	LivingRoom.switch1.Read()){
+	if (LivingRoom.switch1.Read()){
 	LivingRoom.light1.switchState();
 	x = 	LivingRoom.light1.getState();
 
 	if (x == true) {
-		Serial.print("Light is on");
+		Serial.print("Light is on\n");
 	}
 	else {
-		Serial.print("Light is off");
+		Serial.print("Light is off\n");
 	}
 	}
 }
