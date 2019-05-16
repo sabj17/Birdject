@@ -87,35 +87,55 @@ class LivingRoomClass {
 	Light light1;
 	Switch switch1;
 	int y = 10;
-	LivingRoomClass() : light1(pin6) , switch1(pin7) {}
+	LivingRoomClass() : light1(pin7) , switch1(pin2) {}
 
 } LivingRoom;
 
+
+
+class KitchenClass {
+  public:
+	Light light2;
+	Switch switch2;
+	KitchenClass() : light2(pin8) , switch2(pin3) {}
+
+} Kitchen;
+
 bool x = false;
-
-
-	void tester (){
-	LivingRoom.light1.switchState();
-	}
-
 
 void setup() {
 	Serial.begin(9600);
 	LivingRoom.light1.setupClass();
 	LivingRoom.switch1.setupClass();
+	Kitchen.light2.setupClass();
+	Kitchen.switch2.setupClass();
 }
 
 void loop() {
 
 	if (LivingRoom.switch1.Read()){
-	tester();
+	LivingRoom.light1.switchState();
 	x = 	LivingRoom.light1.getState();
 
 	if (x == true) {
-		Serial.println(String("Light is on"));
+		Serial.println(String("LivingRoom Light is on"));
 	}
 	else {
-		Serial.println(String("Light is off"));
+		Serial.println(String("LivingRoom Light is off"));
 	}
+	x = false;
+	}
+
+	if (Kitchen.switch2.Read()){
+	Kitchen.light2.switchState();
+	x = 	Kitchen.light2.getState();
+
+	if (x == true) {
+		Serial.println(String("Kitchen Light is on"));
+	}
+	else {
+		Serial.println(String("Kitchen Light is off"));
+	}
+	x = false;
 	}
 }

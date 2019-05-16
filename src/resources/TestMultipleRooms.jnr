@@ -1,0 +1,38 @@
+LivingRoom {
+    set light1 to Light(pin7);
+    set switch1 to Switch(pin2);
+    set y to 10;
+}
+
+Kitchen {
+    set light2 to Light(pin8);
+    set switch2 to Switch(pin3);
+}
+
+set x to off;
+
+
+when (run LivingRoom.switch1.Read()){
+    run LivingRoom.light1.switchState();
+    set x to run LivingRoom.light1.getState();
+
+    if(x is on){
+        run print("LivingRoom Light is on");
+    } else {
+        run print("LivingRoom Light is off");
+    }
+    set x to off;
+}
+
+when (run Kitchen.switch2.Read()){
+    run Kitchen.light2.switchState();
+    set x to run Kitchen.light2.getState();
+
+    if(x is on){
+        run print("Kitchen Light is on");
+    } else {
+        run print("Kitchen Light is off");
+    }
+    set x to off;
+
+}
