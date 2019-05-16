@@ -3,9 +3,11 @@ LivingRoom {
     set temp1 to Thermometer(pinA0);
 }
 
+
 Kitchen {
     set light2 to Light(pin9);
 }
+
 
 when (run LivingRoom.temp1.Read() > 22){
     run print(run LivingRoom.light1.switchState());

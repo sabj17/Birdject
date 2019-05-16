@@ -101,26 +101,24 @@ class Thermometer : public Input {
 class LivingRoomClass {
   public:
 	Light light1;
-	Thermometer temp1;
+	Light light2;
 
-	LivingRoomClass() : light1(pin8) , temp1(pinA0) {}
+	void switch_all_lights (){
+	light1.switchState();
+	light2.switchState();
+	}
+
+
+	LivingRoomClass() : light1(pin8) , light2(pin9) {}
 
 } LivingRoom;
 
-
-
-class KitchenClass {
-  public:
-	Light light2;
-
-	KitchenClass() : light2(pin9) {}
-
-} Kitchen;
+Switch switch1(pin2);
 
 void setupObjects(){
 	LivingRoom.light1.setupClass();
-	LivingRoom.temp1.setupClass();
-	Kitchen.light2.setupClass();
+	LivingRoom.light2.setupClass();
+	switch1.setupClass();
 }
 
 void setup() {
@@ -131,7 +129,7 @@ void setup() {
 
 void loop() {
 
-	if (LivingRoom.temp1.Read() > 22){
-	Serial.println(	LivingRoom.light1.switchState());
+	if (switch1.Read()){
+	LivingRoom.switch_all_lights();
 	}
 }

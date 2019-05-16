@@ -1,0 +1,16 @@
+LivingRoom {
+    set light1 to Light(pin8);
+    set light2 to Light(pin9);
+
+    function switch_all_lights(){
+        run light1.switchState();
+        run light2.switchState();
+    }
+}
+
+
+set switch1 to Switch(pin2);
+
+when (run switch1.Read()){
+    run LivingRoom.switch_all_lights();
+}
