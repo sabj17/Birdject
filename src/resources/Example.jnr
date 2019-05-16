@@ -25,6 +25,7 @@ LivingRoom{
 	function openWindow(){
 	    set clap to 987;
 		run getTemp1(clap);
+
 		return "well done";
 	}
 
@@ -37,6 +38,8 @@ LivingRoom{
 	    set variable to Thermometer();
 
 	    function burnRoom(i){
+       		run await(1337);
+
 	        return i;
 	    }
 	}
@@ -45,18 +48,16 @@ LivingRoom{
 
 function globalFunc(input1, input2, input3){
     set smil123456 to 6666666;
-    set input1 to false;
-    set input2 to 1;
-    set input3 to 2 + input2;
     set a to "h";
     set b to "a";
+    set varBoll to true;
 
-	if (input1){
+	if (varBoll){
 
-	} else if (input2 is input3) {
+	} else if (a is b) {
 	    set haha to "fuck you";
         return "hahaha";
-	} else if (a + b is "ha") {
+	} else if (a + b is not "ha") {
 	    set yaya to 77;
         return numberString;
 	}
