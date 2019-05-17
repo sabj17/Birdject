@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="311eaa91-087f-4edd-b12e-d967ecc45f3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/resources/TestTempOneLight.jnr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/TestUsingAnd.jnr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AST.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/AST.gv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/codegen/visitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/codegen/visitor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/compiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parse_tree.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/parse_tree.gv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/OneSwitchTwoRooms.jnr" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/TestOneSwitchTwoRooms.jnr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/TestTempOneLight.jnr" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/TestTempOneLight.jnr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/program.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/program.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/standard_classes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/standard_classes.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,16 +22,16 @@
     <SUITE FILE_PATH="coverage/Birdject$parser.coverage" NAME="parser Coverage Results" MODIFIED="1553512703263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$pytest_in_test.coverage" NAME="pytest in test Coverage Results" MODIFIED="1553545532014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/Birdject$pytest_in_test_parser_py.coverage" NAME="pytest in test_parser.py Coverage Results" MODIFIED="1553543330649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1558030297612" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1558083561200" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1553550625262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="320" column="25" selection-start-line="320" selection-start-column="17" selection-end-line="320" selection-end-column="25" />
+            <state relative-caret-position="123">
+              <caret line="192" selection-start-line="192" selection-end-line="192" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -38,19 +40,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/resources/TestButton.jnr">
+        <entry file="file://$PROJECT_DIR$/src/resources/TestTempOneLight.jnr">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+            <state relative-caret-position="234">
+              <caret line="13" column="6" selection-end-line="25" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/resources/TestTempOneLight.jnr">
+        <entry file="file://$PROJECT_DIR$/src/resources/TestUsingAnd.jnr">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+            <state relative-caret-position="234">
+              <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/resources/TestClassFunctions.jnr">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -67,20 +78,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/compiler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="15" column="59" selection-start-line="15" selection-start-column="59" selection-end-line="15" selection-end-column="59" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
+            <state>
+              <caret column="9" lean-forward="true" selection-start-column="9" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/resources/program.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
+            <state relative-caret-position="178">
+              <caret line="118" column="28" selection-end-line="143" />
             </state>
           </provider>
         </entry>
@@ -88,8 +96,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/resources/standard_classes.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="679">
-              <caret line="92" column="9" selection-start-line="92" selection-start-column="9" selection-end-line="92" selection-end-column="9" />
+            <state relative-caret-position="353">
+              <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -105,23 +113,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>function</find>
-      <find>functionno</find>
-      <find>serial</find>
-      <find>char</find>
-      <find>stringno</find>
-      <find>constru</find>
-      <find>classn</find>
-      <find>classno</find>
-      <find>class_cons</find>
-      <find>s</find>
-      <find>objects_in_constructor</find>
-      <find>y</find>
-      <find>visit(</find>
-      <find>break</find>
-      <find>super().v</find>
-      <find>print(</find>
-      <find>functionn</find>
       <find>print</find>
       <find>actua</find>
       <find>expr =</find>
@@ -130,11 +121,28 @@
       <find>symtab</find>
       <find>when</find>
       <find>origina</find>
-      <find>if</find>
       <find>decla</find>
       <find>declared_vars</find>
       <find>symtabl</find>
       <find>symtable</find>
+      <find>stack</find>
+      <find>form</find>
+      <find>functionnod</find>
+      <find>assignnod</find>
+      <find>formal</find>
+      <find>formalpa</find>
+      <find>replace</find>
+      <find>accept_</find>
+      <find>&quot;&quot; +</find>
+      <find>i = 0</find>
+      <find>print(</find>
+      <find>string</find>
+      <find>setup_ob</find>
+      <find>assignno</find>
+      <find>&quot;, &quot;</find>
+      <find>functionn</find>
+      <find>classno</find>
+      <find>if</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -191,12 +199,14 @@
         <option value="$PROJECT_DIR$/src/resources/ArdujenoProgram.jnr" />
         <option value="$PROJECT_DIR$/src/resources/TestMultipleRooms.jnr" />
         <option value="$PROJECT_DIR$/src/resources/TestButton.jnr" />
-        <option value="$PROJECT_DIR$/src/resources/standard_classes.txt" />
         <option value="$PROJECT_DIR$/src/resources/OneSwitchTwoRooms.jnr" />
-        <option value="$PROJECT_DIR$/src/compiler.py" />
         <option value="$PROJECT_DIR$/src/resources/program.txt" />
+        <option value="$PROJECT_DIR$/src/resources/TestClassFunctions.jnr" />
         <option value="$PROJECT_DIR$/src/resources/TestTempOneLight.jnr" />
+        <option value="$PROJECT_DIR$/src/compiler.py" />
         <option value="$PROJECT_DIR$/src/codegen/visitor.py" />
+        <option value="$PROJECT_DIR$/src/resources/standard_classes.txt" />
+        <option value="$PROJECT_DIR$/src/resources/TestUsingAnd.jnr" />
       </list>
     </option>
   </component>
@@ -459,28 +469,7 @@
       <workItem from="1557654179430" duration="11502000" />
       <workItem from="1557722546319" duration="1663000" />
       <workItem from="1557738478370" duration="1212000" />
-      <workItem from="1557740919385" duration="99019000" />
-    </task>
-    <task id="LOCAL-00016" summary="GrammarBuilder tests done">
-      <created>1554716524962</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1554716524962</updated>
-    </task>
-    <task id="LOCAL-00017" summary="currently works">
-      <created>1554720664822</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1554720664822</updated>
-    </task>
-    <task id="LOCAL-00018" summary="tests for stack class done">
-      <created>1554724014081</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1554724014081</updated>
+      <workItem from="1557740919385" duration="107428000" />
     </task>
     <task id="LOCAL-00019" summary="updated test_build_grammar_from_file">
       <created>1554797259074</created>
@@ -804,7 +793,28 @@
       <option name="project" value="LOCAL" />
       <updated>1558027955115</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Var dcl works in when">
+      <created>1558030267353</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1558030267353</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Var dcl works in when">
+      <created>1558030318318</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1558030318318</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Codegen very much cleaned">
+      <created>1558035315311</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1558035315311</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -840,7 +850,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="372475000" />
+    <option name="totallyTimeSpent" value="380884000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1618" height="877" extended-state="6" />
@@ -848,10 +858,10 @@
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.11681643" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.14762516" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3261745" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4994664" visible="true" weight="0.36241612" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4994664" visible="true" weight="0.25100672" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.23624161" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -896,8 +906,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Symboltable fixed types with assignment" />
-    <MESSAGE value="Jener stuff has been extracted into simons stuff&#10;8===D&lt;===8" />
     <MESSAGE value="Jener stuff has been extracted into simons stuff&#10;8===D&lt;===8&#10;number2" />
     <MESSAGE value="Jener stuff has been extracted into simons stuff&#10;8===D&lt;===8&#10;number3" />
     <MESSAGE value="Can this save the day" />
@@ -921,7 +929,9 @@
     <MESSAGE value="Working two rooms" />
     <MESSAGE value="Code gen now with thermometer" />
     <MESSAGE value="setupclass are called in a function now" />
-    <option name="LAST_COMMIT_MESSAGE" value="setupclass are called in a function now" />
+    <MESSAGE value="Var dcl works in when" />
+    <MESSAGE value="Codegen very much cleaned" />
+    <option name="LAST_COMMIT_MESSAGE" value="Codegen very much cleaned" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1557732709094" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
@@ -931,7 +941,6 @@
     <SUITE FILE_PATH="coverage/Birdject$Unittests_in_test_grammar_py.coverage" NAME="Unittests in test_grammar.py Coverage Results" MODIFIED="1554372509218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/test_lambda.py" />
     <entry file="file://$PROJECT_DIR$/test/test_grammar.py" />
     <entry file="file://$PROJECT_DIR$/test/test_grammarBuilder.py" />
     <entry file="file://$PROJECT_DIR$/test/test_parser.py" />
@@ -1164,13 +1173,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/tester.jnr">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/parser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1189,37 +1191,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="64" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/standard_classes.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="679">
-          <caret line="92" column="9" selection-start-line="92" selection-start-column="9" selection-end-line="92" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/TestMultipleRooms.jnr">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/compiler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="59" selection-start-line="15" selection-start-column="59" selection-end-line="15" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1247,27 +1218,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/TestTempOneLight.jnr">
+    <entry file="file://$PROJECT_DIR$/src/resources/TestMultipleRooms.jnr">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+        <state relative-caret-position="36">
+          <caret line="2" column="32" lean-forward="true" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/program.txt">
+    <entry file="file://$PROJECT_DIR$/src/resources/TestClassFunctions.jnr">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
+        <state relative-caret-position="198">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/compiler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="9" lean-forward="true" selection-start-column="9" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="64" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="64" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="320" column="25" selection-start-line="320" selection-start-column="17" selection-end-line="320" selection-end-column="25" />
+        <state relative-caret-position="123">
+          <caret line="192" selection-start-line="192" selection-end-line="192" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/TestTempOneLight.jnr">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="6" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/standard_classes.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/TestUsingAnd.jnr">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/program.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="118" column="28" selection-end-line="143" />
         </state>
       </provider>
     </entry>

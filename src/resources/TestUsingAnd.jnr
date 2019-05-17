@@ -1,0 +1,19 @@
+LivingRoom {
+    set light1 to Light(pin8);
+    set temp1 to Thermometer(pinA0);
+    set switch1 to Switch(pin2);
+    set switch2 to Switch(pin3);
+}
+
+set x to 0;
+set y to 0;
+
+when (run LivingRoom.switch2.Read() or run LivingRoom.switch1.Read()){
+    set x to run LivingRoom.switch2.Read();
+    set y to run LivingRoom.switch1.Read();
+    if(x > y){
+        run print("Both pressed");
+    } else {
+        run LivingRoom.light1.switchState();
+    }
+}

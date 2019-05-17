@@ -190,7 +190,7 @@ class Visitor(NodeVisitor):
                 string += self.get_tabs() + object_name + " " + var_name + ";\n"
                 # Adding the object to the constructor of the room
                 string_symbol = " : "
-                if self.constructors_objects[self.current_class] == 1:
+                if self.constructors_objects[self.current_class] > 0:
                     string_symbol = " , "
                 self.constructors[self.current_class] += string_symbol + var_name + "(" + params + ")"
                 self.constructors_objects[self.current_class] += 1

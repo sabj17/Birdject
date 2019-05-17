@@ -53,7 +53,7 @@ class Output {
         state = 1;
       }
       digitalWrite(pin, state);
-      delay(100);
+      delay(200);
       return state;
     }
 };

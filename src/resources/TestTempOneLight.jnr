@@ -8,7 +8,18 @@ Kitchen {
     set light2 to Light(pin9);
 }
 
+function test(y, z){
+    set x to 10 + 10 + 10 + 10 / 5 % 1;
+    //set x to y;
+    //set x to y + z;
+}
+
+
+when (run LivingRoom.temp1.Read() < 22){
+    run LivingRoom.light1.setState(on);
+    run test(5, 5);
+}
 
 when (run LivingRoom.temp1.Read() > 22){
-    run print(run LivingRoom.light1.switchState());
+    run LivingRoom.light1.setState(off);
 }

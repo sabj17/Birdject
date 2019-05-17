@@ -53,7 +53,7 @@ class Output {
         state = 1;
       }
       digitalWrite(pin, state);
-      delay(100);
+      delay(200);
       return state;
     }
 };
@@ -101,24 +101,23 @@ class Thermometer : public Input {
 class LivingRoomClass {
   public:
 	Light light1;
-	Light light2;
+	Thermometer temp1;
+	Switch switch1;
+	Switch switch2;
 
-	void switch_all_lights (){
-	light1.switchState();
-	light2.switchState();
-	}
-
-
-	LivingRoomClass() : light1(pin8) , light2(pin9) {}
+	LivingRoomClass() : light1(pin8) , temp1(pinA0) , switch1(pin2) , switch2(pin3) {}
 
 } LivingRoom;
 
-Switch switch1(pin2);
+int x = 0;
+
+int y = 0;
 
 void setupObjects(){
 	LivingRoom.light1.setupClass();
-	LivingRoom.light2.setupClass();
-	switch1.setupClass();
+	LivingRoom.temp1.setupClass();
+	LivingRoom.switch1.setupClass();
+	LivingRoom.switch2.setupClass();
 }
 
 void setup() {
@@ -129,7 +128,16 @@ void setup() {
 
 void loop() {
 
-	if (switch1.Read()){
-	LivingRoom.switch_all_lights();
+	if (LivingRoom.switch2.Read() || LivingRoom.switch1.Read()){
+	x = 	LivingRoom.switch2.Read();
+
+	y = 	LivingRoom.switch1.Read();
+
+	if (x > y) {
+		Serial.println(String("Both pressed"));
+	}
+	else {
+		LivingRoom.light1.switchState();
+	}
 	}
 }
