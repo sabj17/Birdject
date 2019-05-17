@@ -8,13 +8,12 @@ class SymbolTable:
         self.enclosing_scope = enclosing_scope
         self.blockscope_counter = 1
         self.whenscope_counter = 1
-        self.predefined_types = ['Light', 'Switch', 'Thermometer']
-        self.predef_func_not_on_objects = ['print', 'await']
-        self.predefined_functions = {'Read' : [], # no input parameters
-                                     'getState' : [], # no input parameters
-                                     'setState' : [bool], # 1 int some input parameter
-                                     'Write' : [], # no input parameters
-                                     'switchState' : []} # no input parameters
+        self.predefined_types = ['Light', 'Switch', 'Thermometer', 'Window', 'Radiator', 'List']
+        self.predef_func_not_on_objects = ['print', 'wait']
+        self.predefined_functions = {'isTurnedOn' : [], # no input parameters
+                                     'setMode' : [bool], # 1 int some input parameter
+                                     'getTemp' : [], # no input parameters
+                                     'changeMode' : []} # no input parameters
 
     def new_scope(self, enclosing_scope):
         scope_object = SymbolTable(
@@ -209,7 +208,6 @@ class AstNodeVisitor(NodeVisitor):
 
 
     def visit_RunNode(self, node):
-        print("I am runNode: ", node.id)
         list_of_types = [str, bool, int, float]
         cur_scope = self.current_scope
         # Gets the formal parameters if it's a dotNode

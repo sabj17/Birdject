@@ -25,6 +25,7 @@ class Visitor(NodeVisitor):
     def __init__(self, program, symtable):
         self.global_list = list()
         self.stack = Stack()
+        self.table_stack = Stack()
         self.func_used = True
         self.block_node_scopes = 1
         self.constructors = {}
@@ -76,6 +77,7 @@ class Visitor(NodeVisitor):
         self.setup_list.append("void setup() {\n\tSerial.begin(9600);")
         self.loop_list.append("void loop() {")
         self.stack.push("Global")
+        self.table_stack.push(self.symtable)
         # Stars visiting all nodes in the AST
         for node in node.stmts:
             node.accept(self)
@@ -110,12 +112,12 @@ class Visitor(NodeVisitor):
         '''
 
     def create_object_setup_func(self):
-        string = "void setupObjects(){\n"
+        string = "void initializeObjects(){\n"
         for s in self.setup_objects:
             string += s
         string += "}\n"
         self.global_list.append(string)
-        self.setup_list.append("\tsetupObjects();\n")
+        self.setup_list.append("\tinitializeObjects();\n")
 
     def visit_ClassNode(self, node):
         class_name = node.id.accept(self)
@@ -128,6 +130,8 @@ class Visitor(NodeVisitor):
         # Sets the scope in symbol table to be the class
         symtable_original = self.symtable
         self.setTable(self.symtable.lookup(class_name + "Scope"))
+        self.table_stack.push(self.table_stack.top_of_stack().lookup(class_name + "Scope"))
+
 
         # Creating the constructor and class assignment for the room
         self.constructors[class_name] = "\n" + self.get_tabs() + class_name + "Class()"
@@ -148,6 +152,7 @@ class Visitor(NodeVisitor):
         if self.stack.top_of_stack() == "Global":
             self.global_list.append(string)
         self.setTable(symtable_original)
+        self.table_stack.pop()
         return string
 
     def visit_ClassBodyNode(self, node):
@@ -195,15 +200,16 @@ class Visitor(NodeVisitor):
                 self.constructors[self.current_class] += string_symbol + var_name + "(" + params + ")"
                 self.constructors_objects[self.current_class] += 1
 
-            # creates and adds the setupClass() func to the setupObjects func and calls that func in void setup()
+            # creates and adds the initialize() func to the initializeObjects func and calls that func in void setup()
             class_name = ""
             for name in self.current_classes:  # dot notation if needed
                 class_name += name + "."
-            self.setup_objects.append("\t" + class_name + var_name + ".setupClass();\n")
+            self.setup_objects.append("\t" + class_name + var_name + ".initialize();\n")
 
         # The cases where a new var with basic type is being declared
         else:
-            var_type = self.symtable.lookup(var_name).__name__
+            #var_type = self.symtable.lookup(var_name).__name__
+            var_type = self.table_stack.top_of_stack().lookup(var_name).__name__
             if var_type == 'str':
                 string += self.get_tabs() + "String " + var_name + " = " + expr_string + ";\n"
             else: string += self.get_tabs() + var_type + " " + var_name + " = " + expr_string + ";\n"
@@ -226,6 +232,7 @@ class Visitor(NodeVisitor):
         # Setting the symbol table to be the block of 'when'
         original_symtable = self.symtable
         self.setTable(self.symtable.lookup("Block_scope" + str(self.block_node_scopes)))
+        self.table_stack.push(self.table_stack.top_of_stack().lookup("Block_scope" + str(self.block_node_scopes)))
         self.block_node_scopes += 1
 
         # Creates all the when stmt code
@@ -238,6 +245,8 @@ class Visitor(NodeVisitor):
         # The code is added to the Arduino loop and symbol table is reset
         self.loop_list.append(string)
         self.setTable(original_symtable)
+        self.table_stack.pop()
+
         self.stack.pop()
 
     def visit_NewObjectNode(self, node):
@@ -257,6 +266,7 @@ class Visitor(NodeVisitor):
         # Finds the function scope in symbol table
         symtable_original = self.symtable
         self.setTable(self.symtable.lookup(func_name + "Scope"))
+        self.table_stack.push(self.table_stack.top_of_stack().lookup(func_name + "Scope"))
 
         # Adds the parameters, if there is any
         func_params = ""
@@ -268,6 +278,8 @@ class Visitor(NodeVisitor):
         string += node.block.accept(self)
         string += self.get_tabs() + "}\n\n"
         self.setTable(symtable_original)
+        self.table_stack.pop()
+
 
         # If func is called, the code for it is generated, otherwise not since the formal params have no type
         if self.func_used:
@@ -292,11 +304,13 @@ class Visitor(NodeVisitor):
                 string += ", "
             param_name = param.accept(self)
             # If the type of the param is 'formalParam' then the function is never called, so 'func_used' is updated
-            if self.symtable.lookup(param_name) == "formalParam":
+            #if self.symtable.lookup(param_name) == "formalParam":
+            if self.table_stack.top_of_stack().lookup(param_name) == "formalParam":
                 self.func_used = False
                 return string
             # creates the string with the param type and name
-            param_type = self.symtable.lookup(param_name).__name__
+            #param_type = self.symtable.lookup(param_name).__name__
+            param_type = self.table_stack.top_of_stack().lookup(param_name).__name__
             if param_type == 'str':
                 string += "String " + param_name
             else:

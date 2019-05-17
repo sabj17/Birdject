@@ -32,21 +32,21 @@ class Output {
     Output(int inputPin) {
       pin = inputPin;
     }
-    void setupClass() {
+    void initialize() {
       pinMode(pin, OUTPUT);
     }
 
 
-    void setState(int newState) {
+    void setMode(int newState) {
       state = newState;
       digitalWrite(pin, newState);
     }
 
-    int getState(){
+    int isTurnedOn(){
       return state;
     }
 
-    int switchState() {
+    int changeMode() {
       if (state) {
         state = 0;
       } else {
@@ -63,6 +63,18 @@ class Light : public Output {
     Light (int inputPin): Output(inputPin) {}
 };
 
+class Window : public Output {
+  public:
+    Window (int inputPin): Output(inputPin) {}
+};
+
+class Radiator : public Output {
+  public:
+    Radiator (int inputPin): Output(inputPin) {}
+};
+
+
+
 class Input {
   public:
     int pin;
@@ -71,11 +83,11 @@ class Input {
       pin = inputPin;
     }
 
-    void setupClass() {
+    void initialize() {
       pinMode(pin, INPUT);
     }
 
-    int Read() {
+    int isTurnedOn() {
       return digitalRead(pin);
     }
 };
@@ -90,7 +102,12 @@ class Thermometer : public Input {
   public:
     Thermometer (int inputPin): Input(inputPin) {}
 
-    float Read() {
+    float isTurnedOn() {
+        DHT.read11(pin);
+        return DHT.temperature;
+    }
+
+    float getTemp(){
         DHT.read11(pin);
         return DHT.temperature;
     }

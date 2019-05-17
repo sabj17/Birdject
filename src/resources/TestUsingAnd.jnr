@@ -1,3 +1,4 @@
+
 LivingRoom {
     set light1 to Light(pin8);
     set temp1 to Thermometer(pinA0);
@@ -5,15 +6,15 @@ LivingRoom {
     set switch2 to Switch(pin3);
 }
 
-set x to 0;
-set y to 0;
 
-when (run LivingRoom.switch2.Read() or run LivingRoom.switch1.Read()){
-    set x to run LivingRoom.switch2.Read();
-    set y to run LivingRoom.switch1.Read();
-    if(x > y){
+when (run LivingRoom.switch2.isTurnedOn() or run LivingRoom.switch1.isTurnedOn()){
+    if(run LivingRoom.switch2.isTurnedOn() and run LivingRoom.switch1.isTurnedOn()){
         run print("Both pressed");
     } else {
-        run LivingRoom.light1.switchState();
+        run LivingRoom.light1.changeMode();
     }
+}
+
+when (run LivingRoom.temp1.getTemp() < 20){
+    run LivingRoom.light1.changeMode();
 }
