@@ -12,12 +12,14 @@ set mainSwitch to Switch(pin2);
 set x to off;
 set y to off;
 
+
 function updateLights(){
-    set x to run LivingRoom.light1.switchState();
-    set y to run Kitchen.light2.switchState();
+    run LivingRoom.light1.changeMode();
+    run Kitchen.light2.changeMode();
 }
 
-when (run mainSwitch.Read()){
+
+when (run mainSwitch.isTurnedOn()){
     run updateLights();
     if(x is on){
         run print("LivingRoom Light is on");

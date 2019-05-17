@@ -1,7 +1,5 @@
-
 LivingRoom {
     set light1 to Light(pin8);
-    set temp1 to Thermometer(pinA0);
     set switch1 to Switch(pin2);
     set switch2 to Switch(pin3);
 }
@@ -13,8 +11,4 @@ when (run LivingRoom.switch2.isTurnedOn() or run LivingRoom.switch1.isTurnedOn()
     } else {
         run LivingRoom.light1.changeMode();
     }
-}
-
-when (run LivingRoom.temp1.getTemp() < 20){
-    run LivingRoom.light1.changeMode();
 }

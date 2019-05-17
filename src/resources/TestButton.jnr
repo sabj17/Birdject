@@ -6,8 +6,8 @@ LivingRoom {
 set x to off;
 
 
-when (run LivingRoom.switch1.Read()){
-    set x to run LivingRoom.light1.switchState();
+when (run LivingRoom.switch1.isTurnedOn()){
+    set x to run LivingRoom.light1.changeMode();
 
     if(x is on){
         run print("Light is on");

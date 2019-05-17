@@ -90,7 +90,6 @@ class AstNodeVisitor(NodeVisitor):
         elif isinstance(node.expression, RunNode):
             self.visit_RunNode(node.expression)
             #func_scope = self.current_scope.lookup(node.expression.id + 'Scope')
-            print("Assign runNode:  ", self.current_scope.symbols)
 
     def eval_term_node_type(self, term_node):
         type_of_term_node = None

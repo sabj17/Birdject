@@ -1,25 +1,12 @@
 LivingRoom {
-    set light1 to Light(pin8);
+    set window1 to Window(pin8);
     set temp1 to Thermometer(pinA0);
 }
 
-
-Kitchen {
-    set light2 to Light(pin9);
+when (run LivingRoom.temp1.getTemp() < 22){
+    run LivingRoom.window1.setMode(on);
 }
 
-function test(y, z){
-    set x to 10 + 10 + 10 + 10 / 5 % 1;
-    //set x to y;
-    //set x to y + z;
-}
-
-
-when (run LivingRoom.temp1.Read() < 22){
-    run LivingRoom.light1.setState(on);
-    run test(5, 5);
-}
-
-when (run LivingRoom.temp1.Read() > 22){
-    run LivingRoom.light1.setState(off);
+when (run LivingRoom.temp1.getTemp() > 22){
+    run LivingRoom.window1.setMode(off);
 }

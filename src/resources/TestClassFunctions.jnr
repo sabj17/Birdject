@@ -3,14 +3,13 @@ LivingRoom {
     set light2 to Light(pin9);
 
     function switch_all_lights(){
-        run light1.switchState();
-        run light2.switchState();
+        run light1.changeMode();
+        run light2.changeMode();
     }
 }
 
-
 set switch1 to Switch(pin2);
 
-when (run switch1.Read()){
+when (run switch1.isTurnedOn()){
     run LivingRoom.switch_all_lights();
 }
