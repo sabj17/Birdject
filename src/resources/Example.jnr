@@ -1,6 +1,6 @@
 set temp1 to 10;
 set switch1 to Switch(pin11);
-set list1 to List();
+set list1 to List(5);
 set number1 to -4 + 2 * 3 - 2;
 set string to "Hello";
 set bacon to string;
@@ -36,7 +36,7 @@ LivingRoom{
 	}
 
 	AnotherRoom{
-	    set variable to Thermometer();
+	    set variable to Thermometer(pin6);
 
 	    function burnRoom(i){
        		run wait(1337);

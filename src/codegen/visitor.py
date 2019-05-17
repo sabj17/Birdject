@@ -54,10 +54,6 @@ class Visitor(NodeVisitor):
             "NegativeNode": " -",
             "ParenthesesNode": ""
         }
-        # self.structure = Structure(program)
-
-    def setTable(self, symbtable):
-        self.symtable = symbtable
 
     def get_tabs(self):
         tabs = 0
@@ -128,8 +124,6 @@ class Visitor(NodeVisitor):
         string = ""
 
         # Sets the scope in symbol table to be the class
-        symtable_original = self.symtable
-        self.setTable(self.symtable.lookup(class_name + "Scope"))
         self.table_stack.push(self.table_stack.top_of_stack().lookup(class_name + "Scope"))
 
 
@@ -151,7 +145,6 @@ class Visitor(NodeVisitor):
         # If not a sub class it is added to be global
         if self.stack.top_of_stack() == "Global":
             self.global_list.append(string)
-        self.setTable(symtable_original)
         self.table_stack.pop()
         return string
 
@@ -208,7 +201,6 @@ class Visitor(NodeVisitor):
 
         # The cases where a new var with basic type is being declared
         else:
-            #var_type = self.symtable.lookup(var_name).__name__
             var_type = self.table_stack.top_of_stack().lookup(var_name).__name__
             if var_type == 'str':
                 string += self.get_tabs() + "String " + var_name + " = " + expr_string + ";\n"
@@ -230,8 +222,6 @@ class Visitor(NodeVisitor):
         self.stack.push("When")
 
         # Setting the symbol table to be the block of 'when'
-        original_symtable = self.symtable
-        self.setTable(self.symtable.lookup("Block_scope" + str(self.block_node_scopes)))
         self.table_stack.push(self.table_stack.top_of_stack().lookup("Block_scope" + str(self.block_node_scopes)))
         self.block_node_scopes += 1
 
@@ -244,7 +234,6 @@ class Visitor(NodeVisitor):
 
         # The code is added to the Arduino loop and symbol table is reset
         self.loop_list.append(string)
-        self.setTable(original_symtable)
         self.table_stack.pop()
 
         self.stack.pop()
@@ -264,9 +253,18 @@ class Visitor(NodeVisitor):
             self.stack.push("GlobalFunction")
 
         # Finds the function scope in symbol table
-        symtable_original = self.symtable
-        self.setTable(self.symtable.lookup(func_name + "Scope"))
-        self.table_stack.push(self.table_stack.top_of_stack().lookup(func_name + "Scope"))
+        try:
+            self.table_stack.push(self.table_stack.top_of_stack().lookup(func_name + "Scope"))
+        except NameError:
+            return ""
+
+        # Gets the return type of the function
+        return_type = self.table_stack.top_of_stack().lookup("returnType")
+        if not isinstance(return_type, str):
+            return_type = self.table_stack.top_of_stack().lookup("returnType").__name__
+        if return_type == 'str':
+            return_type = "String"
+
 
         # Adds the parameters, if there is any
         func_params = ""
@@ -274,10 +272,9 @@ class Visitor(NodeVisitor):
             func_params = node.params.accept(self)
 
         # Generates the function code
-        string += "\n" + self.get_tabs() + "void " + func_name + " (" + func_params + "){\n"
+        string += "\n" + self.get_tabs() + return_type + " " + func_name + " (" + func_params + "){\n"
         string += node.block.accept(self)
         string += self.get_tabs() + "}\n\n"
-        self.setTable(symtable_original)
         self.table_stack.pop()
 
 
@@ -304,12 +301,10 @@ class Visitor(NodeVisitor):
                 string += ", "
             param_name = param.accept(self)
             # If the type of the param is 'formalParam' then the function is never called, so 'func_used' is updated
-            #if self.symtable.lookup(param_name) == "formalParam":
             if self.table_stack.top_of_stack().lookup(param_name) == "formalParam":
                 self.func_used = False
                 return string
             # creates the string with the param type and name
-            #param_type = self.symtable.lookup(param_name).__name__
             param_type = self.table_stack.top_of_stack().lookup(param_name).__name__
             if param_type == 'str':
                 string += "String " + param_name
