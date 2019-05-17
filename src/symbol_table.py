@@ -89,6 +89,9 @@ class AstNodeVisitor(NodeVisitor):
             self.current_scope.symbols[node.id.name] = self.eval_term_node_type(node.expression)
         elif isinstance(node.expression, RunNode):
             self.visit_RunNode(node.expression)
+            print("Assign runNode:  ", self.current_scope.symbols)
+            print("")
+
             #func_scope = self.current_scope.lookup(node.expression.id + 'Scope')
 
     def eval_term_node_type(self, term_node):
@@ -147,6 +150,9 @@ class AstNodeVisitor(NodeVisitor):
 
         if node.params is not None:  # Adds the parameters to the scope
             self.add_params_to_scope(node, actual_param)
+
+
+        self.current_scope.symbols['returnType'] = 'void'
 
         node.block.visit_children(self)
         self.current_scope = outer_scope
