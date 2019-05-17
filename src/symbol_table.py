@@ -90,9 +90,10 @@ class AstNodeVisitor(NodeVisitor):
         elif isinstance(node.expression, RunNode):
             self.visit_RunNode(node.expression)
             print("Assign runNode:  ", self.current_scope.symbols)
-            print("")
-
-            #func_scope = self.current_scope.lookup(node.expression.id + 'Scope')
+            print('lal: ', node.expression.id.name)
+            func_scope = self.current_scope.lookup(str(node.expression.id.name + 'Scope'))
+            self.current_scope.symbols[node.id.name] = func_scope.lookup('returnType')
+            print("Finale: ", self.current_scope.symbols)
 
     def eval_term_node_type(self, term_node):
         type_of_term_node = None
@@ -147,12 +148,10 @@ class AstNodeVisitor(NodeVisitor):
         outer_scope = scope
         inner_scope = scope.new_scope(scope)
         self.current_scope = inner_scope
+        self.current_scope.symbols['returnType'] = 'void' # Puts in a return type "void" as default
 
         if node.params is not None:  # Adds the parameters to the scope
             self.add_params_to_scope(node, actual_param)
-
-
-        self.current_scope.symbols['returnType'] = 'void'
 
         node.block.visit_children(self)
         self.current_scope = outer_scope
