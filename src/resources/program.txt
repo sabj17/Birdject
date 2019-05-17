@@ -124,15 +124,20 @@ class LivingRoomClass {
 
 } LivingRoom;
 
+
+	void hello (){
+	Switch switch3(pin2);
+	}
+
 void initializeObjects(){
 	LivingRoom.light1.initialize();
 	LivingRoom.switch1.initialize();
+	switch3.initialize();
 }
 
 void setup() {
 	Serial.begin(9600);
 	initializeObjects();
-
 }
 
 void loop() {
@@ -140,6 +145,7 @@ void loop() {
 	if (LivingRoom.switch1.isTurnedOn()){
 	bool x = true;
 	LivingRoom.light1.changeMode();
+	hello();
 	if (x == true) {
 		Serial.println(String("Light is on"));
 	x = false;

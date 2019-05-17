@@ -1,7 +1,9 @@
+
 LivingRoom {
     set light1 to Light(pin8);
     set switch1 to Switch(pin2);
 }
+
 
 when (run LivingRoom.switch1.isTurnedOn()){
     set x to on;
