@@ -10,10 +10,10 @@ class SymbolTable:
         self.whenscope_counter = 1
         self.predefined_types = ['Light', 'Switch', 'Thermometer', 'Window', 'Radiator', 'List']
         self.predef_func_not_on_objects = ['print', 'wait']
-        self.predefined_functions = {'isTurnedOn' : [], # no input parameters
-                                     'setMode' : [bool], # 1 int some input parameter
-                                     'getTemp' : [], # no input parameters
-                                     'changeMode' : []} # no input parameters
+        self.predefined_functions = {'isTurnedOn': [],  # no input parameters
+                                     'setMode': [bool],  # 1 int some input parameter
+                                     'getTemp': [],  # no input parameters
+                                     'changeMode': []}  # no input parameters
 
     def new_scope(self, enclosing_scope):
         scope_object = SymbolTable(
@@ -58,8 +58,6 @@ class AstNodeVisitor(NodeVisitor):
         self.current_scope = SymbolTable()
 
     def visit_BlockNode(self, node):
-        for part in node.parts:
-            print(part)
         enclosing_scope = self.current_scope
         inner_scope = self.current_scope.new_scope(self.current_scope)
         self.current_scope = inner_scope
@@ -89,6 +87,10 @@ class AstNodeVisitor(NodeVisitor):
             self.current_scope.symbols[node.id.name] = self.current_scope.lookup(node.expression.name)
         elif isinstance(node.expression, TermNode):
             self.current_scope.symbols[node.id.name] = self.eval_term_node_type(node.expression)
+        elif isinstance(node.expression, RunNode):
+            self.visit_RunNode(node.expression)
+            #func_scope = self.current_scope.lookup(node.expression.id + 'Scope')
+            print("Assign runNode:  ", self.current_scope.symbols)
 
     def eval_term_node_type(self, term_node):
         type_of_term_node = None
@@ -195,19 +197,20 @@ class AstNodeVisitor(NodeVisitor):
         node.visit_children(self)
 
     def visit_ReturnNode(self, node):
-        return_type = None
-        print('------ ', node)
-        print('------ scope1 ', self.current_scope.symbols)
+        return_type = 'Void'
+        #print('------ ', node)
+        #print('------ scope1 ', self.current_scope.symbols)
         if isinstance(node.expression, TermNode):
             return_type = self.eval_term_node_type(node.expression)
         elif isinstance(node.expression, BinaryExpNode):
             return_type = self.eval_bin_expr_type(node.expression)
 
         self.current_scope.symbols['returnType'] = return_type
-        print('------ scope2 ', self.current_scope.symbols)
+        #print('------ scope2 ', self.current_scope.symbols)
 
 
     def visit_RunNode(self, node):
+        #print("I am runNode: ", node.id)
         list_of_types = [str, bool, int, float]
         cur_scope = self.current_scope
         # Gets the formal parameters if it's a dotNode
@@ -241,6 +244,8 @@ class AstNodeVisitor(NodeVisitor):
                     elif formal_param != actual_param:
                         raise TypeError(formal_param, 'is not equal to', actual_param)
                 else:  # Populate functions without input parameter
+                    self.current_scope = self.current_scope.get_outer_scope_of_variable(node.id.name)
+                    self.current_scope.symbols[node.id.name] = actual_param
                     self.populate_funcNode(self.current_scope.lookup(node.id.name + 'Node'), self.current_scope, actual_param)
                     self.current_scope = cur_scope
 

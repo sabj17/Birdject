@@ -1,3 +1,4 @@
+set temp1 to 10;
 set switch1 to Switch(pin11);
 set list1 to List();
 set number1 to -4 + 2 * 3 - 2;
@@ -38,7 +39,7 @@ LivingRoom{
 	    set variable to Thermometer();
 
 	    function burnRoom(i){
-       		run await(1337);
+       		run wait(1337);
 	        return run getTemp1(bacon) + 2 ;
 
 	    }
@@ -46,7 +47,7 @@ LivingRoom{
 
 }
 
-function globalFunc(input1, input2, input3){
+function globalFunc(){
     set smil123456 to 6666666;
     set a to "h";
     set b to "a";
@@ -65,25 +66,31 @@ function globalFunc(input1, input2, input3){
 	    set maddidaddi to 69;
 	}
 	else{
-	    return a;
+	    set xyz to 1234;
 	}
+
+	return varBoll;
 
 }
 
+//set varFunc to run globalFunc(1, 2, "sup my nig... daddy");
+
 when(run LivingRoom.getTemp1(superString) > 20){
+    run globalFunc();
+
     set hello to 2;
     set x to 22;
     set lorteString to "lortestring";
     set pikString to "JenMedDeStoreSten";
     set windowXX to 55;
     set boolman to true;
-    set funkydunky to run globalFunc(hello, x, windowXX);
+    //set funkydunky to run globalFunc(hello, x, windowXX);
 
 	run LivingRoom.openWindow();
 	run LivingRoom.closeWindow(windowXX, lorteString);
 	run LivingRoom.closeWindow(windowXX, pikString);
-	run globalFunc(x + hello, 99, string);
+	//run globalFunc(x + hello, 99, string);
 	run LivingRoom.AnotherRoom.burnRoom(hello);
-	run switch1.setState(boolman);
-	run LivingRoom.light.switchState();
+	run switch1.setMode(boolman);
+	run LivingRoom.light.changeMode();
 }
