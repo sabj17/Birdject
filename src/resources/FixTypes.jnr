@@ -1,12 +1,13 @@
 set switch1 to Switch(pin11);
 set list1 to List();
-set number1 to -4 + 2 * 3 - 2;
+set number1 to 4 + 2 * 3 - 2;
 set string to "Hello";
 set bacon to string;
 set superString to "hey" + "baby";
 set numberString to "high" + "five";
 set numberString to "high" + 5 + bacon;
 set input1 to false;
+
 
 LivingRoom{
     set light to Light(pin9, pin10);
@@ -18,20 +19,19 @@ LivingRoom{
 	function getTemp1(n){
         set dab to 1234.2;
         run print("hello");
-		return n;
+		return temp1;
 	}
 
 	function openWindow(){
 	    set clap to 987;
+		run getTemp1(clap);
 
 		return "well done";
 	}
 
 	function closeWindow(window2, sumthing){
-	    set baby to 123;
-	    set a to window2;
 	    run openWindow();
-	    return window2;
+	    return true;
 	}
 
 	AnotherRoom{
@@ -39,8 +39,8 @@ LivingRoom{
 
 	    function burnRoom(i){
        		run await(1337);
-	        return run getTemp1(bacon) + 2 ;
 
+	        return i;
 	    }
 	}
 
@@ -56,13 +56,10 @@ function globalFunc(input1, input2, input3){
 
 	} else if (a is b) {
 	    set haha to "fuck you";
-        return a + b;
+        return "hahaha";
 	} else if (a + b is not "ha") {
 	    set yaya to 77;
         return numberString;
-	}
-	else if(true and false) {
-	    set maddidaddi to 69;
 	}
 	else{
 	    return a;
@@ -70,20 +67,13 @@ function globalFunc(input1, input2, input3){
 
 }
 
-when(run LivingRoom.getTemp1(superString) > 20){
+when(globalFunc(1, 2, 3) < 4){
     set hello to 2;
     set x to 22;
     set lorteString to "lortestring";
     set pikString to "JenMedDeStoreSten";
     set windowXX to 55;
     set boolman to true;
-    set funkydunky to run globalFunc(hello, x, windowXX);
 
-	run LivingRoom.openWindow();
-	run LivingRoom.closeWindow(windowXX, lorteString);
-	run LivingRoom.closeWindow(windowXX, pikString);
-	run globalFunc(x + hello, 99, string);
-	run LivingRoom.AnotherRoom.burnRoom(hello);
-	run switch1.setState(boolman);
-	run LivingRoom.light.switchState();
+
 }
