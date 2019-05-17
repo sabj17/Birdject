@@ -20,14 +20,16 @@ class NodeVisitor:
 
         node.visit_children(self)
 
+
 class Visitor(NodeVisitor):
 
     def __init__(self, program, symtable):
         self.global_list = list()
-        self.stack = Stack()
+        self.tab_stack = Stack()
         self.table_stack = Stack()
-        self.func_used = True
+        self.var_stack = Stack()
         self.block_node_scopes = 1
+        self.if_node_scopes = 1
         self.constructors = {}
         self.constructors_objects = {}
         self.setup_list = list()
@@ -35,7 +37,7 @@ class Visitor(NodeVisitor):
         self.loop_list = list()
         self.current_classes = list()
         self.current_class = ""
-        self.declared_vars = list()
+        self.declared_vars = set()
         self.symtable = symtable
         self.program = program
         self.operators = {
@@ -57,22 +59,37 @@ class Visitor(NodeVisitor):
 
     def get_tabs(self):
         tabs = 0
-        if self.stack.top_of_stack() is "Global":
+        if self.tab_stack.top_of_stack() is "Global":
             tabs = 0
-        elif self.stack.top_of_stack() is "When":
+        elif self.tab_stack.top_of_stack() is "When":
             tabs = 1
-        elif self.stack.top_of_stack() is "GlobalFunction":
+        elif self.tab_stack.top_of_stack() is "GlobalFunction":
             tabs = 1
         else:
             tabs = 1
+        #tabs = self.table_stack.size() - 1
 
         return "" + tabs * "\t"
+
+    def push_scope(self, string):
+        self.table_stack.push(self.lookup(string))
+        self.var_stack.push(self.declared_vars)
+        self.declared_vars.clear()
+
+    def lookup(self, string):
+        return self.table_stack.top_of_stack().lookup(string)
+
+    def pop_scope(self):
+        self.table_stack.pop()
+        self.var_stack.pop()
+
 
 
     def visit_ProgNode(self, node):
         self.setup_list.append("void setup() {\n\tSerial.begin(9600);")
         self.loop_list.append("void loop() {")
-        self.stack.push("Global")
+        self.tab_stack.push("Global")
+        self.var_stack.push(self.declared_vars)
         self.table_stack.push(self.symtable)
         # Stars visiting all nodes in the AST
         for node in node.stmts:
@@ -117,15 +134,14 @@ class Visitor(NodeVisitor):
 
     def visit_ClassNode(self, node):
         class_name = node.id.accept(self)
-        self.stack.push(class_name)
+        self.tab_stack.push(class_name)
         old = self.current_class
         self.current_class = class_name
         self.current_classes.append(class_name)
         string = ""
 
         # Sets the scope in symbol table to be the class
-        self.table_stack.push(self.table_stack.top_of_stack().lookup(class_name + "Scope"))
-
+        self.push_scope(class_name + "Scope")
 
         # Creating the constructor and class assignment for the room
         self.constructors[class_name] = "\n" + self.get_tabs() + class_name + "Class()"
@@ -139,13 +155,13 @@ class Visitor(NodeVisitor):
         self.constructors[class_name] += " {}\n"
         string += self.constructors[class_name] + "\n} " + class_name + ";\n"
         self.current_classes.remove(class_name)
-        self.stack.pop()
+        self.tab_stack.pop()
         self.current_class = old
 
         # If not a sub class it is added to be global
-        if self.stack.top_of_stack() == "Global":
+        if self.tab_stack.top_of_stack() == "Global":
             self.global_list.append(string)
-        self.table_stack.pop()
+        self.pop_scope()
         return string
 
     def visit_ClassBodyNode(self, node):
@@ -165,9 +181,8 @@ class Visitor(NodeVisitor):
         string = ""
         expr_string = node.expression.accept(self)
         var_name = node.id.accept(self)
-
-        # var is already declared, so no type added
-        if var_name in self.declared_vars:
+        # var is already declared in current scope, so no type added
+        if var_name in self.var_stack.top_of_stack():
             string += self.get_tabs() + var_name + " = " + expr_string
             # No semi colon added if expr is a runnode, since it is added in runnode visitor
             if not isinstance(node.expression, RunNode):
@@ -181,7 +196,7 @@ class Visitor(NodeVisitor):
             params = expr.param.accept(self)
 
             # Global variable
-            if self.stack.top_of_stack() == "Global":
+            if self.tab_stack.top_of_stack() == "Global":
                 string += self.get_tabs() + object_name + " " + var_name + "(" + params + ");\n"
             # Declared inside a class
             else:
@@ -201,17 +216,17 @@ class Visitor(NodeVisitor):
 
         # The cases where a new var with basic type is being declared
         else:
-            var_type = self.table_stack.top_of_stack().lookup(var_name).__name__
+            var_type = self.lookup(var_name).__name__
             if var_type == 'str':
                 string += self.get_tabs() + "String " + var_name + " = " + expr_string + ";\n"
             else: string += self.get_tabs() + var_type + " " + var_name + " = " + expr_string + ";\n"
 
         # Adds the variable to the list of declared variables
-        self.declared_vars.append(var_name)
+        self.declared_vars.add(var_name)
         node.expression.accept(self)
 
         # If global var dcl
-        if self.stack.top_of_stack() == "Global":
+        if self.tab_stack.top_of_stack() == "Global":
             self.global_list.append(string)
         return string
 
@@ -219,10 +234,10 @@ class Visitor(NodeVisitor):
 
     def visit_WhenNode(self, node):
         string = ""
-        self.stack.push("When")
+        self.tab_stack.push("When")
 
         # Setting the symbol table to be the block of 'when'
-        self.table_stack.push(self.table_stack.top_of_stack().lookup("Block_scope" + str(self.block_node_scopes)))
+        self.push_scope("Block_scope" + str(self.block_node_scopes))
         self.block_node_scopes += 1
 
         # Creates all the when stmt code
@@ -232,11 +247,10 @@ class Visitor(NodeVisitor):
         string += node.block.accept(self)
         string += self.get_tabs() + "}"
 
-        # The code is added to the Arduino loop and symbol table is reset
+        # The code is added to the Arduino loop and symbol table is popped from the stack
         self.loop_list.append(string)
-        self.table_stack.pop()
-
-        self.stack.pop()
+        self.pop_scope()
+        self.tab_stack.pop()
 
     def visit_NewObjectNode(self, node):
         id_string = node.id.accept(self)
@@ -249,22 +263,21 @@ class Visitor(NodeVisitor):
         func_name = node.id.accept(self)
 
         # Global function
-        if self.stack.top_of_stack() == "Global":
-            self.stack.push("GlobalFunction")
+        if self.tab_stack.top_of_stack() == "Global":
+            self.tab_stack.push("GlobalFunction")
 
-        # Finds the function scope in symbol table
+        # Finds the func scope in symbol table, if it doesnt exist, then it is never called and therefor not generated
         try:
-            self.table_stack.push(self.table_stack.top_of_stack().lookup(func_name + "Scope"))
+            self.push_scope(func_name + "Scope")
         except NameError:
             return ""
 
         # Gets the return type of the function
-        return_type = self.table_stack.top_of_stack().lookup("returnType")
+        return_type = self.lookup("returnType")
         if not isinstance(return_type, str):
-            return_type = self.table_stack.top_of_stack().lookup("returnType").__name__
+            return_type = self.lookup("returnType").__name__
         if return_type == 'str':
             return_type = "String"
-
 
         # Adds the parameters, if there is any
         func_params = ""
@@ -275,18 +288,13 @@ class Visitor(NodeVisitor):
         string += "\n" + self.get_tabs() + return_type + " " + func_name + " (" + func_params + "){\n"
         string += node.block.accept(self)
         string += self.get_tabs() + "}\n\n"
-        self.table_stack.pop()
-
+        self.pop_scope()
 
         # If func is called, the code for it is generated, otherwise not since the formal params have no type
-        if self.func_used:
-            if self.stack.top_of_stack() == "GlobalFunction":
-                self.stack.pop()
-                self.global_list.append(string)
-            return string
-        # Resets the func_used since the func was never used
-        self.func_used = True
-        return ""
+        if self.tab_stack.top_of_stack() == "GlobalFunction":
+            self.tab_stack.pop()
+            self.global_list.append(string)
+        return string
 
     def visit_ReturnNode(self, node):
         return self.get_tabs() + "return " + node.expression.accept(self) + ";\n"
@@ -300,12 +308,9 @@ class Visitor(NodeVisitor):
             if param_amount > 0:
                 string += ", "
             param_name = param.accept(self)
-            # If the type of the param is 'formalParam' then the function is never called, so 'func_used' is updated
-            if self.table_stack.top_of_stack().lookup(param_name) == "formalParam":
-                self.func_used = False
-                return string
+
             # creates the string with the param type and name
-            param_type = self.table_stack.top_of_stack().lookup(param_name).__name__
+            param_type = self.lookup(param_name).__name__
             if param_type == 'str':
                 string += "String " + param_name
             else:
@@ -317,10 +322,10 @@ class Visitor(NodeVisitor):
         string = ""
         # Justs sets tabs lul
         tabs = self.get_tabs()
-        if self.stack.top_of_stack() == "Global":
+        if self.tab_stack.top_of_stack() == "Global":
             tabs = "\t"
 
-        # Run is used via dot notation
+        # Function called through dot notation
         if isinstance(node.id, DotNode):
             string += tabs
             # iterates all the id's in the dot notation and adds a dot in between
@@ -344,7 +349,7 @@ class Visitor(NodeVisitor):
         string += ");\n"
 
         # if it is a globally called function, then it is added to setup() if its not in a when stmt
-        if self.stack.top_of_stack() == "Global":
+        if self.tab_stack.top_of_stack() == "Global":
             self.setup_list.append(string)
 
         return string
@@ -364,6 +369,10 @@ class Visitor(NodeVisitor):
         return string
 
     def visit_IfNode(self, node):
+        # Finds the scope in symbol table
+        self.table_stack.push(self.lookup("Block_scope" + str(self.if_node_scopes)))
+        self.if_node_scopes += 1
+
         string = ""
         true_block = node.statement_true
         false_block = node.statement_false
@@ -382,9 +391,16 @@ class Visitor(NodeVisitor):
 
         # Creates the 'else' stmt if needed
         elif false_block is not None:
+            # Finds the scope for the else block
+            self.table_stack.push(self.lookup("Block_scope" + str(self.if_node_scopes)))
+            self.if_node_scopes += 1
+
             string += self.get_tabs() + "else {\n"
             string += self.create_if_body(false_block)
+            self.table_stack.pop()
 
+        self.table_stack.pop()
+        self.if_node_scopes = 1
         return string
 
     def create_if_body(self, block):

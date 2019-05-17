@@ -1,42 +1,15 @@
 LivingRoom {
-    set hellothere to 5 + 5 * 5 / 5 % 5 - 5;
     set light1 to Light(pin8);
     set switch1 to Switch(pin2);
 }
 
-set x to off;
-
-function hellojener(){
-    set y to x;
-}
-
-function intfunc(){
-    return 5;
-}
-
-function floatfunc(){
-    return 5.5;
-}
-
-function stringFunc(){
-    return "String";
-}
-
-function boolfunc(){
-    return on;
-}
-
-
 when (run LivingRoom.switch1.isTurnedOn()){
-    run hellojener();
-    run intfunc();
-    run floatfunc();
-    run stringFunc();
-    //run boolfunc();
+    set x to on;
     run LivingRoom.light1.changeMode();
 
     if(x is on){
         run print("Light is on");
+        set x to off;
     } else {
         run print("Light is off");
     }

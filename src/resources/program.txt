@@ -117,39 +117,12 @@ class Thermometer : public Input {
 
 class LivingRoomClass {
   public:
-	int hellothere = 5 + 5 * 5 / 5 % 5 - 5;
 	Light light1;
 	Switch switch1;
 
 	LivingRoomClass() : light1(pin8) , switch1(pin2) {}
 
 } LivingRoom;
-
-bool x = false;
-
-
-	void hellojener (){
-	bool y = x;
-	}
-
-
-
-	int intfunc (){
-	return 5;
-	}
-
-
-
-	float floatfunc (){
-	return 5.5;
-	}
-
-
-
-	String stringFunc (){
-	return String("String");
-	}
-
 
 void initializeObjects(){
 	LivingRoom.light1.initialize();
@@ -165,13 +138,11 @@ void setup() {
 void loop() {
 
 	if (LivingRoom.switch1.isTurnedOn()){
-	hellojener();
-	intfunc();
-	floatfunc();
-	stringFunc();
+	bool x = true;
 	LivingRoom.light1.changeMode();
 	if (x == true) {
 		Serial.println(String("Light is on"));
+	x = false;
 	}
 	else {
 		Serial.println(String("Light is off"));
