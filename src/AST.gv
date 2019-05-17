@@ -1,122 +1,100 @@
 digraph G {
 	graph [ranksep=1.5 ratio=fill]
 	node [style=filled]
-	3201901 [label=ProgNode]
-	3201905 [label=ClassNode]
-	3201901 -> 3201905
-	3201893 [label="IdNode: LivingRoom"]
-	3201905 -> 3201893
-	3201899 [label=ClassBodyNode]
-	3201905 -> 3201899
-	3201909 [label=AssignNode]
-	3201899 -> 3201909
-	3201913 [label="IdNode: light1"]
-	3201909 -> 3201913
-	3201929 [label=NewObjectNode]
-	3201909 -> 3201929
-	3201933 [label="IdNode: Light"]
-	3201929 -> 3201933
-	3201927 [label=ActualParameterNode]
-	3201929 -> 3201927
-	3201957 [label="IdNode: pin8"]
-	3201927 -> 3201957
-	3201911 [label=AssignNode]
-	3201899 -> 3201911
-	3201919 [label="IdNode: switch1"]
-	3201911 -> 3201919
-	3201937 [label=NewObjectNode]
-	3201911 -> 3201937
-	3201945 [label="IdNode: Switch"]
-	3201937 -> 3201945
-	3201939 [label=ActualParameterNode]
-	3201937 -> 3201939
-	3201969 [label="IdNode: pin2"]
-	3201939 -> 3201969
-	3201917 [label=FunctionNode]
-	3201901 -> 3201917
-	3201925 [label="IdNode: hello"]
-	3201917 -> 3201925
-	3201903 [label=BlockNode]
-	3201917 -> 3201903
-	3201931 [label=AssignNode]
-	3201903 -> 3201931
-	3201943 [label="IdNode: switch3"]
-	3201931 -> 3201943
-	3201951 [label=NewObjectNode]
-	3201931 -> 3201951
-	3201965 [label="IdNode: Switch"]
-	3201951 -> 3201965
-	3201959 [label=ActualParameterNode]
-	3201951 -> 3201959
-	3201987 [label="IdNode: pin2"]
-	3201959 -> 3201987
-	3201921 [label=WhenNode]
-	3201901 -> 3201921
-	3201961 [label=RunNode]
-	3201921 -> 3201961
-	3201981 [label=DotNode]
-	3201961 -> 3201981
-	3201973 [label="IdNode: LivingRoom"]
-	3201981 -> 3201973
-	3201977 [label="IdNode: switch1"]
-	3201981 -> 3201977
-	3201979 [label="IdNode: isTurnedOn"]
-	3201981 -> 3201979
-	3201935 [label=BlockNode]
-	3201921 -> 3201935
-	3201941 [label=AssignNode]
-	3201935 -> 3201941
-	3201949 [label="IdNode: x"]
-	3201941 -> 3201949
-	3201991 [label="BoolNode: on"]
-	3201941 -> 3201991
-	3201947 [label=RunNode]
-	3201935 -> 3201947
-	3201993 [label=DotNode]
-	3201947 -> 3201993
-	3201975 [label="IdNode: LivingRoom"]
-	3201993 -> 3201975
-	3201983 [label="IdNode: light1"]
-	3201993 -> 3201983
-	3201985 [label="IdNode: changeMode"]
-	3201993 -> 3201985
-	3201953 [label=RunNode]
-	3201935 -> 3201953
-	3201995 [label="IdNode: hello"]
-	3201953 -> 3201995
-	3201967 [label=IfNode]
-	3201935 -> 3201967
-	3202005 [label=EqualsNode]
-	3201967 -> 3202005
-	3202017 [label="IdNode: x"]
-	3202005 -> 3202017
-	3202021 [label="BoolNode: on"]
-	3202005 -> 3202021
-	3202003 [label=BlockNode]
-	3201967 -> 3202003
-	3202001 [label=RunNode]
-	3202003 -> 3202001
-	3202011 [label="IdNode: print"]
-	3202001 -> 3202011
-	3202009 [label=ActualParameterNode]
-	3202001 -> 3202009
-	3202031 [label="StringNode: \"Light is on\""]
-	3202009 -> 3202031
-	3202007 [label=AssignNode]
-	3202003 -> 3202007
-	3202023 [label="IdNode: x"]
-	3202007 -> 3202023
-	3202039 [label="BoolNode: off"]
-	3202007 -> 3202039
-	3202019 [label=BlockNode]
-	3201967 -> 3202019
-	3202015 [label=RunNode]
-	3202019 -> 3202015
-	3202029 [label="IdNode: print"]
-	3202015 -> 3202029
-	3202025 [label=ActualParameterNode]
-	3202015 -> 3202025
-	3206149 [label="StringNode: \"Light is off\""]
-	3202025 -> 3206149
+	3975007 [label=ProgNode]
+	3975011 [label=ClassNode]
+	3975007 -> 3975011
+	3974999 [label="IdNode: LivingRoom"]
+	3975011 -> 3974999
+	3975005 [label=ClassBodyNode]
+	3975011 -> 3975005
+	3975015 [label=AssignNode]
+	3975005 -> 3975015
+	3975019 [label="IdNode: light1"]
+	3975015 -> 3975019
+	3975033 [label=NewObjectNode]
+	3975015 -> 3975033
+	3975037 [label="IdNode: Light"]
+	3975033 -> 3975037
+	3975035 [label=ActualParameterNode]
+	3975033 -> 3975035
+	3975063 [label="IdNode: pin8"]
+	3975035 -> 3975063
+	3975017 [label=AssignNode]
+	3975005 -> 3975017
+	3975027 [label="IdNode: switch1"]
+	3975017 -> 3975027
+	3975041 [label=NewObjectNode]
+	3975017 -> 3975041
+	3975049 [label="IdNode: Switch"]
+	3975041 -> 3975049
+	3975047 [label=ActualParameterNode]
+	3975041 -> 3975047
+	3975075 [label="IdNode: pin2"]
+	3975047 -> 3975075
+	3975023 [label=WhenNode]
+	3975007 -> 3975023
+	3975043 [label=RunNode]
+	3975023 -> 3975043
+	3975057 [label=DotNode]
+	3975043 -> 3975057
+	3975059 [label="IdNode: LivingRoom"]
+	3975057 -> 3975059
+	3975065 [label="IdNode: switch1"]
+	3975057 -> 3975065
+	3975067 [label="IdNode: isTurnedOn"]
+	3975057 -> 3975067
+	3975025 [label=BlockNode]
+	3975023 -> 3975025
+	3975021 [label=AssignNode]
+	3975025 -> 3975021
+	3975045 [label="IdNode: x"]
+	3975021 -> 3975045
+	3975077 [label="BoolNode: on"]
+	3975021 -> 3975077
+	3975039 [label=RunNode]
+	3975025 -> 3975039
+	3975079 [label=DotNode]
+	3975039 -> 3975079
+	3975061 [label="IdNode: LivingRoom"]
+	3975079 -> 3975061
+	3975069 [label="IdNode: light1"]
+	3975079 -> 3975069
+	3975071 [label="IdNode: changeMode"]
+	3975079 -> 3975071
+	3975029 [label=IfNode]
+	3975025 -> 3975029
+	3975083 [label=EqualsNode]
+	3975029 -> 3975083
+	3975097 [label="IdNode: x"]
+	3975083 -> 3975097
+	3975101 [label="BoolNode: on"]
+	3975083 -> 3975101
+	3975085 [label=BlockNode]
+	3975029 -> 3975085
+	3975081 [label=RunNode]
+	3975085 -> 3975081
+	3975093 [label="IdNode: print"]
+	3975081 -> 3975093
+	3975087 [label=ActualParameterNode]
+	3975081 -> 3975087
+	3975109 [label="StringNode: \"Light is on\""]
+	3975087 -> 3975109
+	3975089 [label=AssignNode]
+	3975085 -> 3975089
+	3975103 [label="IdNode: x"]
+	3975089 -> 3975103
+	3975119 [label="BoolNode: off"]
+	3975089 -> 3975119
+	3975099 [label=BlockNode]
+	3975029 -> 3975099
+	3975095 [label=RunNode]
+	3975099 -> 3975095
+	3975111 [label="IdNode: print"]
+	3975095 -> 3975111
+	3975105 [label=ActualParameterNode]
+	3975095 -> 3975105
+	3975131 [label="StringNode: \"Light is off\""]
+	3975105 -> 3975131
 	overlap=false
 }
