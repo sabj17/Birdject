@@ -103,7 +103,8 @@ class Thermometer : public Input {
     Thermometer (int inputPin): Input(inputPin) {}
 
     float isTurnedOn() {
-      return analogRead(pin);
+        DHT.read11(pin);
+        return DHT.temperature;
     }
 
     float getTemp(){
@@ -143,7 +144,13 @@ void loop() {
 	LivingRoom.light1.changeMode();
 	if (x == true) {
 		Serial.println(String("Light is on"));
-	x = false;
+	bool k = false;
+	}
+	else 	if (x == true) {
+		String you = String("nou");
+	}
+	else 	if (2 == 2) {
+		int hour = 1;
 	}
 	else {
 		Serial.println(String("Light is off"));

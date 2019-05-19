@@ -103,8 +103,7 @@ class Thermometer : public Input {
     Thermometer (int inputPin): Input(inputPin) {}
 
     float isTurnedOn() {
-        DHT.read11(pin);
-        return DHT.temperature;
+      return analogRead(pin);
     }
 
     float getTemp(){

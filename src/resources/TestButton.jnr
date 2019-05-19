@@ -11,8 +11,22 @@ when (run LivingRoom.switch1.isTurnedOn()){
 
     if(x is on){
         run print("Light is on");
-        set x to off;
-    } else {
+        set k to off;
+        if(x is on){
+            set hu to 5;
+        }
+    } else if (x is on){
+        set you to "nou";
+        if(5 is 5){
+            set nu to 1;
+            if(1 is 1){
+                set th to 1;
+            }
+        }
+
+    } else if(2 is 2){
+        set hour to 1;
+    }else {
         run print("Light is off");
     }
 }
