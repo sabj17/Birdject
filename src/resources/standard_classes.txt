@@ -37,9 +37,9 @@ class Output {
     }
 
 
-    void setMode(int newState) {
-      state = newState;
-      digitalWrite(pin, newState);
+    void setMode(bool newMode) {
+      state = newMode;
+      digitalWrite(pin, newMode);
     }
 
     int isTurnedOn(){
