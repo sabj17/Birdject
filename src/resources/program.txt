@@ -37,9 +37,9 @@ class Output {
     }
 
 
-    void setMode(int newState) {
-      state = newState;
-      digitalWrite(pin, newState);
+    void setMode(bool newMode) {
+      state = newMode;
+      digitalWrite(pin, newMode);
     }
 
     int isTurnedOn(){
@@ -71,6 +71,21 @@ class Window : public Output {
 class Radiator : public Output {
   public:
     Radiator (int inputPin): Output(inputPin) {}
+
+    int increase(){
+      if(state < 5){
+        state++;
+      }
+      return state;
+    }
+
+    int decrease(){
+      if(state > 0){
+        state--;
+      }
+      return state;
+    }
+
 };
 
 
@@ -103,8 +118,7 @@ class Thermometer : public Input {
     Thermometer (int inputPin): Input(inputPin) {}
 
     float isTurnedOn() {
-        DHT.read11(pin);
-        return DHT.temperature;
+      return analogRead(pin);
     }
 
     float getTemp(){
@@ -121,15 +135,23 @@ class Thermometer : public Input {
 class LivingRoomClass {
   public:
 	Light light1;
-	Switch switch1;
+	Light light2;
 
-	LivingRoomClass() : light1(pin8) , switch1(pin2) {}
+	void switch_all_lights (){
+	light1.changeMode();
+	light2.changeMode();
+	}
+
+	LivingRoomClass() : light1(pin8) , light2(pin9) {}
 
 } LivingRoom;
 
+Switch switch1(pin2);
+
 void initializeObjects(){
 	LivingRoom.light1.initialize();
-	LivingRoom.switch1.initialize();
+	LivingRoom.light2.initialize();
+	switch1.initialize();
 }
 
 void setup() {
@@ -139,21 +161,7 @@ void setup() {
 
 void loop() {
 
-	if (LivingRoom.switch1.isTurnedOn()){
-	bool x = true;
-	LivingRoom.light1.changeMode();
-	if (x == true) {
-		Serial.println(String("Light is on"));
-	bool k = false;
-	}
-	else 	if (x == true) {
-		String you = String("nou");
-	}
-	else 	if (2 == 2) {
-		int hour = 1;
-	}
-	else {
-		Serial.println(String("Light is off"));
-	}
+	if (switch1.isTurnedOn()){
+	LivingRoom.switch_all_lights();
 	}
 }

@@ -71,6 +71,21 @@ class Window : public Output {
 class Radiator : public Output {
   public:
     Radiator (int inputPin): Output(inputPin) {}
+
+    int increase(){
+      if(state < 5){
+        state++;
+      }
+      return state;
+    }
+
+    int decrease(){
+      if(state > 0){
+        state--;
+      }
+      return state;
+    }
+
 };
 
 
