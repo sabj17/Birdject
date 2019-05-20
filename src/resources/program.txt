@@ -66,11 +66,33 @@ class Light : public Output {
 class Window : public Output {
   public:
     Window (int inputPin): Output(inputPin) {}
+
+    int open_to(int degree){
+        if(state != degree){
+            state = degree;
+        }
+        return state;
+    }
+
+    int close(){
+        if(state > 0){
+            state = 0;
+        }
+        return state;
+    }
 };
 
 class Radiator : public Output {
   public:
     Radiator (int inputPin): Output(inputPin) {}
+
+    void setMode(int newMode) {
+      if (0 <= newMode && newMode <= 5){
+        state = newMode;
+        digitalWrite(pin, newMode);
+      }
+    }
+
 
     int increase(){
       if(state < 5){

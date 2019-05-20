@@ -86,6 +86,14 @@ class Radiator : public Output {
   public:
     Radiator (int inputPin): Output(inputPin) {}
 
+    void setMode(int newMode) {
+      if (0 <= newMode && newMode =< 5){
+        state = newMode;
+        digitalWrite(pin, newMode);
+      }
+    }
+
+
     int increase(){
       if(state < 5){
         state++;
