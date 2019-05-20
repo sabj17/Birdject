@@ -22,7 +22,12 @@ dht DHT;
 #define pinA4 A4
 #define pinA5 A5
 
+// Not implemented
+class List{
+  public:
 
+
+};
 
 class Output {
   public:
@@ -78,7 +83,7 @@ class Window : public Output {
         if(state > 0){
             state = 0;
         }
-        return state
+        return state;
     }
 };
 
@@ -87,7 +92,7 @@ class Radiator : public Output {
     Radiator (int inputPin): Output(inputPin) {}
 
     void setMode(int newMode) {
-      if (0 <= newMode && newMode =< 5){
+      if (0 <= newMode && newMode <= 5){
         state = newMode;
         digitalWrite(pin, newMode);
       }

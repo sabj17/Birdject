@@ -22,7 +22,12 @@ dht DHT;
 #define pinA4 A4
 #define pinA5 A5
 
+// Not implemented
+class List{
+  public:
 
+
+};
 
 class Output {
   public:
