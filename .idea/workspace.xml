@@ -4,7 +4,11 @@
     <list default="true" id="311eaa91-087f-4edd-b12e-d967ecc45f3e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AST.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/AST.gv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/codegen/visitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/codegen/visitor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parse_tree.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/parse_tree.gv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/TestMultipleRooms.jnr" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/TestMultipleRooms.jnr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/program.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/program.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +20,7 @@
     <SUITE FILE_PATH="coverage/Birdject$parser.coverage" NAME="parser Coverage Results" MODIFIED="1553512703263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$pytest_in_test.coverage" NAME="pytest in test Coverage Results" MODIFIED="1553545532014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/Birdject$pytest_in_test_parser_py.coverage" NAME="pytest in test_parser.py Coverage Results" MODIFIED="1553543330649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1558342840677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1558355025260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1553550625262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
   <component name="FileEditorManager">
@@ -24,8 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="111" column="31" selection-start-line="111" selection-start-column="31" selection-end-line="111" selection-end-column="31" />
+            <state relative-caret-position="107">
+              <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -33,10 +37,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/resources/standard_classes.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1259">
+            <state relative-caret-position="935">
               <caret line="94" column="36" selection-start-line="94" selection-start-column="36" selection-end-line="94" selection-end-column="36" />
             </state>
           </provider>
@@ -46,7 +50,7 @@
         <entry file="file://$PROJECT_DIR$/src/compiler.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="209">
-              <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
+              <caret line="15" column="60" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="60" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -76,7 +80,7 @@
         <entry file="file://$PROJECT_DIR$/src/AST.gv">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="313">
-              <caret line="90" lean-forward="true" selection-end-line="90" />
+              <caret line="210" lean-forward="true" selection-end-line="210" />
             </state>
           </provider>
         </entry>
@@ -90,20 +94,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/resources/TestButton.jnr">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-181">
-              <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/resources/program.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1853">
-              <caret line="162" column="9" lean-forward="true" selection-start-line="162" selection-start-column="9" selection-end-line="162" selection-end-column="9" />
+            <state relative-caret-position="89">
+              <caret line="155" lean-forward="true" selection-end-line="245" />
             </state>
           </provider>
         </entry>
@@ -111,8 +106,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/resources/TestMultipleRooms.jnr">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="13" />
+            <state relative-caret-position="72">
+              <caret line="4" selection-start-line="4" selection-end-line="17" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -128,9 +123,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>clear</find>
       <find>declared_var</find>
-      <find>declared_vars</find>
       <find>declar</find>
       <find>declared_</find>
       <find>var_s</find>
@@ -158,6 +151,8 @@
       <find>if_node_scopes</find>
       <find>setupcl</find>
       <find>initia</find>
+      <find>declared_vars</find>
+      <find>current_classes</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -217,12 +212,12 @@
         <option value="$PROJECT_DIR$/src/parser.py" />
         <option value="$PROJECT_DIR$/src/resources/Example.jnr" />
         <option value="$PROJECT_DIR$/src/symbol_table.py" />
-        <option value="$PROJECT_DIR$/src/codegen/visitor.py" />
         <option value="$PROJECT_DIR$/src/resources/TestButton.jnr" />
         <option value="$PROJECT_DIR$/src/resources/program.txt" />
         <option value="$PROJECT_DIR$/src/resources/standard_classes.txt" />
-        <option value="$PROJECT_DIR$/src/resources/TestMultipleRooms.jnr" />
         <option value="$PROJECT_DIR$/src/compiler.py" />
+        <option value="$PROJECT_DIR$/src/codegen/visitor.py" />
+        <option value="$PROJECT_DIR$/src/resources/TestMultipleRooms.jnr" />
       </list>
     </option>
   </component>
@@ -485,14 +480,7 @@
       <workItem from="1557654179430" duration="11502000" />
       <workItem from="1557722546319" duration="1663000" />
       <workItem from="1557738478370" duration="1212000" />
-      <workItem from="1557740919385" duration="143314000" />
-    </task>
-    <task id="LOCAL-00032" summary="AST visitor done">
-      <created>1556783494581</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1556783494581</updated>
+      <workItem from="1557740919385" duration="146100000" />
     </task>
     <task id="LOCAL-00033" summary="Symboltable stuff">
       <created>1557401558028</created>
@@ -830,7 +818,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558342691776</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="added radiator methods">
+      <created>1558343280238</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1558343280239</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -866,7 +861,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="416770000" />
+    <option name="totallyTimeSpent" value="419556000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1618" height="877" extended-state="6" />
@@ -1223,7 +1218,7 @@
     <entry file="file://$PROJECT_DIR$/src/AST.gv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="313">
-          <caret line="90" lean-forward="true" selection-end-line="90" />
+          <caret line="210" lean-forward="true" selection-end-line="210" />
         </state>
       </provider>
     </entry>
@@ -1248,16 +1243,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="111" column="31" selection-start-line="111" selection-start-column="31" selection-end-line="111" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/Example.jnr">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -1265,41 +1250,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/TestButton.jnr">
+    <entry file="file://$PROJECT_DIR$/src/resources/standard_classes.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-181">
-          <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+        <state relative-caret-position="935">
+          <caret line="94" column="36" selection-start-line="94" selection-start-column="36" selection-end-line="94" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/TestMultipleRooms.jnr">
+    <entry file="file://$PROJECT_DIR$/src/resources/TestButton.jnr">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="13" />
+        <state relative-caret-position="-1">
+          <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/compiler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
-          <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
+          <caret line="15" column="60" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="60" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/program.txt">
+    <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1853">
-          <caret line="162" column="9" lean-forward="true" selection-start-line="162" selection-start-column="9" selection-end-line="162" selection-end-column="9" />
+        <state relative-caret-position="107">
+          <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/standard_classes.txt">
+    <entry file="file://$PROJECT_DIR$/src/resources/TestMultipleRooms.jnr">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1259">
-          <caret line="94" column="36" selection-start-line="94" selection-start-column="36" selection-end-line="94" selection-end-column="36" />
+        <state relative-caret-position="72">
+          <caret line="4" selection-start-line="4" selection-end-line="17" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/program.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="155" lean-forward="true" selection-end-line="245" />
         </state>
       </provider>
     </entry>

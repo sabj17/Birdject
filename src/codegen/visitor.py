@@ -27,6 +27,7 @@ class Visitor(NodeVisitor):
         self.global_list = list()
         self.table_stack = Stack()
         self.var_stack = Stack()
+        self.class_stack = Stack()
         self.block_node_scopes = 1
         self.if_node_scopes = 1
         self.constructors = {}
@@ -34,7 +35,6 @@ class Visitor(NodeVisitor):
         self.setup_list = list()
         self.setup_objects = list()
         self.loop_list = list()
-        self.current_classes = list()
         self.current_class = ""
         self.declared_vars = set()
         self.symtable = symtable
@@ -119,7 +119,7 @@ class Visitor(NodeVisitor):
         class_name = node.id.accept(self)
         old = self.current_class
         self.current_class = class_name
-        self.current_classes.append(class_name)
+        self.class_stack.push(class_name)
         string = ""
 
         # Sets the scope in symbol table to be the class
@@ -136,7 +136,7 @@ class Visitor(NodeVisitor):
         # Ends the constructor and class
         self.constructors[class_name] += " {}\n"
         string += self.constructors[class_name] + "\n} " + class_name + ";\n"
-        self.current_classes.remove(class_name)
+        self.class_stack.pop()
         self.current_class = old
         self.pop_scope()
 
@@ -192,7 +192,7 @@ class Visitor(NodeVisitor):
 
             # creates and adds the initialize() func to the initializeObjects func and calls that func in void setup()
             class_name = ""
-            for name in self.current_classes:  # dot notation if needed
+            for name in self.class_stack.items: # dot notation if needed
                 class_name += name + "."
             self.setup_objects.append("\t" + class_name + var_name + ".initialize();\n")
 
