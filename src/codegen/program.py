@@ -2,7 +2,7 @@ class Structure:
     def __init__(self):
         self.id = None
         self.structures = list()
-        self.otherstuff = list()
+        self.vars = list()
 
     def add_id(self, id1):
         self.id = id1
@@ -11,13 +11,13 @@ class Structure:
         self.structures.append(structure)
 
     def add_vars(self, var):
-        self.otherstuff.append(var)
+        self.vars.append(var)
 
     def get_id(self):
         return self.id
 
     def get_vars(self):
-        return self.otherstuff
+        return self.vars
 
     def get_structures(self):
         return self.structures
@@ -35,10 +35,27 @@ class Structure:
 
 
 class Class(Structure):
+    def __init__(self):
+        super().__init__()
+        self.constructor = list()
+
     def get_self(self):
-        dcl = "class " + self.get_id() + "{\n"
+        dcl = "class " + self.get_id() + "Class" + " {\n"
         body = self.get_body()
-        return dcl + body + "\n};"
+        constructor = self.get_constructor()
+        return dcl + body + "\n}" + self.get_id()+";"
+
+
+    def add_to_constructor(self, to_constructor):
+        if len(self.constructor) > 0:
+            to_constructor = f",{to_constructor}"
+        self.constructor.append(to_constructor)
+
+    def get_constructor(self):
+        constructor = ""
+        for part in self.constructor:
+            constructor += f"{part}"
+        constructor += "{}"
 
 
 class Function(Structure):
@@ -84,7 +101,9 @@ class Program:
         self.class_dcl = list()
         self.function_dcl = list()
         self.global_var_dcl = list()
-
+        self.setup = list()
+        self.loop = list()
+        self.setup_objects = list()
         self.struct_stack = Stack()
         self.builder = Builder()
 
@@ -125,15 +144,51 @@ class Program:
         else:
             self.struct_stack.top_of_stack().add_vars(non_struct)
 
+    def emit_assigment(self, type1, id1, value):
+        if id1 is self.declared(id1):
+            assigment = f"{id1} = {value};\n"
+        else:
+            assigment = f"{type1} {id1} = {value};\n"
+        self.emit_non_structure(assigment)
+
+    def emit_object(self, class_name, object_name, params):
+        if not self.struct_stack.is_empty():
+            structure = self.struct_stack.top_of_stack()
+            if isinstance(structure, Class):
+                structure.add_vars(f"{class_name} {object_name};\n")
+                structure.add_to_constructor(f"{object_name}({params})")
+
+                # Add to setup_objects()
+                classes = ""
+                for class1 in reversed(self.get_nested_classes()):
+                    classes += f"{class1.get_id()}."
+                    self.struct_stack.push(class1)
+                self.setup_objects.append(f"{classes}{object_name}.setupClass();\n")
+            else:
+                structure.add_vars(f"{class_name} {object_name}({params});\n")
+        else:
+            self.global_var_dcl.append(f"{class_name} {object_name}({params});\n")
+
+    def get_nested_classes(self):
+        structure = self.struct_stack.pop()
+        classes = list()
+        classes.append(structure)
+        if not self.struct_stack.is_empty() and isinstance(self.struct_stack.top_of_stack(), Class):
+            next_structure = self.get_nested_classes()
+            classes.append(next_structure)
+        else:
+            return classes
+
+
 
     def get_scope(self, symboltable):
         if self.struct_stack.is_empty():
             return None
         else:
-            hello = symboltable
+            scope = symboltable
             for structure in self.struct_stack.items:
-                hello = hello.lookup(structure.get_id()+"Scope")
-            return hello
+                scope = scope.lookup(structure.get_id()+"Scope")
+            return scope
 
 
     def append_toplvl(self, structure):
@@ -150,6 +205,25 @@ class Program:
             print(func)
         for class1 in self.class_dcl:
             print(class1.get_self())
+
+    def declared(self, id1):
+        if self.struct_stack.is_empty():
+            if self.global_var_dcl.__contains__(id1):
+                return True
+        else:
+            struct = self.struct_stack.top_of_stack()
+            if not self.check_for_var(struct, id1) and isinstance(struct, Function):
+                function = self.struct_stack.pop()
+                is_declared = self.declared(id1)
+                self.struct_stack.push(function)
+                return is_declared
+        return True
+
+    def check_for_var(self, struct, id1):
+        for var in struct.get_vars():
+            if var.__contains__(id1):
+                return True
+        return False
 
 '''
 class Structure:
