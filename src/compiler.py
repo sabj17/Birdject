@@ -55,4 +55,5 @@ ast.accept(visitor)
 symtable = visitor.current_scope
 
 codeVisitor = Visitor(Program(), symtable)
-codeVisitor.visit(ast.prog)
+#codeVisitor.visit(ast.prog)
+codeVisitor.code_gen(ast.prog)

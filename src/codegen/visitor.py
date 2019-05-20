@@ -24,7 +24,6 @@ class NodeVisitor:
 class Visitor(NodeVisitor):
 
     def __init__(self, program, symtable):
-        self.global_list = list()
         self.table_stack = Stack()
         self.var_stack = Stack()
         self.class_stack = Stack()
@@ -32,6 +31,7 @@ class Visitor(NodeVisitor):
         self.if_node_scopes = 1
         self.constructors = {}
         self.constructors_objects = {}
+        self.global_list = list()
         self.setup_list = list()
         self.setup_objects = list()
         self.loop_list = list()
@@ -75,20 +75,30 @@ class Visitor(NodeVisitor):
         self.table_stack.pop()
         self.var_stack.pop()
 
-
-    def visit_ProgNode(self, node):
+    def setup(self):
         self.setup_list.append("void setup() {\n\tSerial.begin(9600);")
         self.loop_list.append("void loop() {")
         self.var_stack.push(self.declared_vars)
         self.table_stack.push(self.symtable)
 
-        # Stars visiting all nodes in the AST
-        for node in node.stmts:
-            node.accept(self)
+    def end_code(self):
         self.create_object_setup_func()
         self.setup_list.append("}\n")
         self.loop_list.append("}")
 
+    def code_gen(self, node):
+        self.setup()
+
+        # Starts visiting all nodes in the AST
+        node.accept(self)
+
+        self.end_code()
+
+        # Writes the code to program.txt
+        self.write_to_file()
+
+
+    def write_to_file(self):
         # Opens the two txt files and reads from standard_classes
         file_std = open("resources/standard_classes.txt", "r")
         contents = file_std.read()
@@ -105,6 +115,11 @@ class Visitor(NodeVisitor):
 
         file_std.close()
         program_file.close()
+
+
+    def visit_ProgNode(self, node):
+        for node in node.stmts:
+            node.accept(self)
 
 
     def create_object_setup_func(self):

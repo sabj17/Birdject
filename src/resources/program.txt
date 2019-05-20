@@ -164,37 +164,6 @@ class LivingRoomClass {
 	Light light1;
 	Switch switch1;
 
-
-class SecondRoomClass {
-  public:
-	int second = 5;
-	Switch switch2;
-
-
-class ThirdRoomClass {
-  public:
-	int third = 1;
-	Switch switch3;
-
-	ThirdRoomClass() : switch3(pin2) {}
-
-} ThirdRoom;
-
-	SecondRoomClass() : switch2(pin2) {}
-
-} SecondRoom;
-
-
-class OtherSecondRoomClass {
-  public:
-	int other = 1;
-	Switch switch4;
-
-	OtherSecondRoomClass() : switch4(pin2) {}
-
-} OtherSecondRoom;
-	int last = 1;
-
 	LivingRoomClass() : light1(pin8) , switch1(pin2) {}
 
 } LivingRoom;
@@ -215,9 +184,6 @@ bool x = false;
 void initializeObjects(){
 	LivingRoom.light1.initialize();
 	LivingRoom.switch1.initialize();
-	LivingRoom.SecondRoom.switch2.initialize();
-	LivingRoom.SecondRoom.ThirdRoom.switch3.initialize();
-	LivingRoom.OtherSecondRoom.switch4.initialize();
 	Kitchen.light2.initialize();
 	Kitchen.switch2.initialize();
 }
@@ -230,6 +196,7 @@ void setup() {
 void loop() {
 
 	if (LivingRoom.switch1.isTurnedOn()){
+	LivingRoom.light1.changeMode();
 	if (x == true) {
 		Serial.println(String("LivingRoom Light is on"));
 	}
@@ -240,6 +207,7 @@ void loop() {
 	}
 
 	if (Kitchen.switch2.isTurnedOn()){
+	Kitchen.light2.changeMode();
 	if (x == true) {
 		Serial.println(String("Kitchen Light is on"));
 	}
