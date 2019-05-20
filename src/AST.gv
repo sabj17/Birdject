@@ -1,90 +1,90 @@
 digraph G {
 	graph [ranksep=1.5 ratio=fill]
 	node [style=filled]
-	4092585 [label=ProgNode]
-	4092589 [label=ClassNode]
-	4092585 -> 4092589
-	4092577 [label="IdNode: LivingRoom"]
-	4092589 -> 4092577
-	4092583 [label=ClassBodyNode]
-	4092589 -> 4092583
-	4092593 [label=AssignNode]
-	4092583 -> 4092593
-	4092597 [label="IdNode: light1"]
-	4092593 -> 4092597
-	4092613 [label=NewObjectNode]
-	4092593 -> 4092613
-	4092615 [label="IdNode: Light"]
-	4092613 -> 4092615
-	4092611 [label=ActualParameterNode]
-	4092613 -> 4092611
-	4092639 [label="IdNode: pin8"]
-	4092611 -> 4092639
-	4092595 [label=AssignNode]
-	4092583 -> 4092595
-	4092603 [label="IdNode: light2"]
-	4092595 -> 4092603
-	4092619 [label=NewObjectNode]
-	4092595 -> 4092619
-	4092627 [label="IdNode: Light"]
-	4092619 -> 4092627
-	4092625 [label=ActualParameterNode]
-	4092619 -> 4092625
-	4092651 [label="IdNode: pin9"]
-	4092625 -> 4092651
-	4092587 [label=FunctionNode]
-	4092583 -> 4092587
-	4092599 [label="IdNode: switch_all_lights"]
-	4092587 -> 4092599
-	4092605 [label=BlockNode]
-	4092587 -> 4092605
-	4092623 [label=RunNode]
-	4092605 -> 4092623
-	4092633 [label=DotNode]
-	4092623 -> 4092633
-	4092641 [label="IdNode: light1"]
-	4092633 -> 4092641
-	4092637 [label="IdNode: changeMode"]
-	4092633 -> 4092637
-	4092629 [label=RunNode]
-	4092605 -> 4092629
-	4092643 [label=DotNode]
-	4092629 -> 4092643
-	4092635 [label="IdNode: light2"]
-	4092643 -> 4092635
-	4092647 [label="IdNode: changeMode"]
-	4092643 -> 4092647
-	4092601 [label=AssignNode]
-	4092585 -> 4092601
-	4092609 [label="IdNode: switch1"]
-	4092601 -> 4092609
-	4092653 [label=NewObjectNode]
-	4092601 -> 4092653
-	4092661 [label="IdNode: Switch"]
-	4092653 -> 4092661
-	4092659 [label=ActualParameterNode]
-	4092653 -> 4092659
-	4096527 [label="IdNode: pin2"]
-	4092659 -> 4096527
-	4092607 [label=WhenNode]
-	4092585 -> 4092607
-	4092663 [label=RunNode]
-	4092607 -> 4092663
-	4092669 [label=DotNode]
-	4092663 -> 4092669
-	4096515 [label="IdNode: switch1"]
-	4092669 -> 4096515
-	4096519 [label="IdNode: isTurnedOn"]
-	4092669 -> 4096519
-	4092649 [label=BlockNode]
-	4092607 -> 4092649
-	4092631 [label=RunNode]
-	4092649 -> 4092631
-	4092667 [label=DotNode]
-	4092631 -> 4092667
-	4092655 [label="IdNode: LivingRoom"]
-	4092667 -> 4092655
-	4092671 [label="IdNode: switch_all_lights"]
-	4092667 -> 4092671
+	3793833 [label=ProgNode]
+	3793837 [label=ClassNode]
+	3793833 -> 3793837
+	3793825 [label="IdNode: LivingRoom"]
+	3793837 -> 3793825
+	3793831 [label=ClassBodyNode]
+	3793837 -> 3793831
+	3793841 [label=AssignNode]
+	3793831 -> 3793841
+	3793845 [label="IdNode: light1"]
+	3793841 -> 3793845
+	3793861 [label=NewObjectNode]
+	3793841 -> 3793861
+	3793863 [label="IdNode: Light"]
+	3793861 -> 3793863
+	3793859 [label=ActualParameterNode]
+	3793861 -> 3793859
+	3793887 [label="IdNode: pin8"]
+	3793859 -> 3793887
+	3793843 [label=AssignNode]
+	3793831 -> 3793843
+	3793851 [label="IdNode: light2"]
+	3793843 -> 3793851
+	3793867 [label=NewObjectNode]
+	3793843 -> 3793867
+	3793875 [label="IdNode: Light"]
+	3793867 -> 3793875
+	3793873 [label=ActualParameterNode]
+	3793867 -> 3793873
+	3793899 [label="IdNode: pin9"]
+	3793873 -> 3793899
+	3793835 [label=FunctionNode]
+	3793831 -> 3793835
+	3793847 [label="IdNode: switch_all_lights"]
+	3793835 -> 3793847
+	3793853 [label=BlockNode]
+	3793835 -> 3793853
+	3793871 [label=RunNode]
+	3793853 -> 3793871
+	3793881 [label=DotNode]
+	3793871 -> 3793881
+	3793889 [label="IdNode: light1"]
+	3793881 -> 3793889
+	3793885 [label="IdNode: changeMode"]
+	3793881 -> 3793885
+	3793877 [label=RunNode]
+	3793853 -> 3793877
+	3793891 [label=DotNode]
+	3793877 -> 3793891
+	3793883 [label="IdNode: light2"]
+	3793891 -> 3793883
+	3793895 [label="IdNode: changeMode"]
+	3793891 -> 3793895
+	3793849 [label=AssignNode]
+	3793833 -> 3793849
+	3793857 [label="IdNode: switch1"]
+	3793849 -> 3793857
+	3793901 [label=NewObjectNode]
+	3793849 -> 3793901
+	3793909 [label="IdNode: Switch"]
+	3793901 -> 3793909
+	3793907 [label=ActualParameterNode]
+	3793901 -> 3793907
+	3797775 [label="IdNode: pin2"]
+	3793907 -> 3797775
+	3793855 [label=WhenNode]
+	3793833 -> 3793855
+	3793911 [label=RunNode]
+	3793855 -> 3793911
+	3793917 [label=DotNode]
+	3793911 -> 3793917
+	3797763 [label="IdNode: switch1"]
+	3793917 -> 3797763
+	3797767 [label="IdNode: isTurnedOn"]
+	3793917 -> 3797767
+	3793897 [label=BlockNode]
+	3793855 -> 3793897
+	3793879 [label=RunNode]
+	3793897 -> 3793879
+	3793915 [label=DotNode]
+	3793879 -> 3793915
+	3793903 [label="IdNode: LivingRoom"]
+	3793915 -> 3793903
+	3793919 [label="IdNode: switch_all_lights"]
+	3793915 -> 3793919
 	overlap=false
 }
