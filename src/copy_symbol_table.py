@@ -6,14 +6,14 @@ class SymbolTable:
     def __init__(self, enclosing_scope=None):
         self.symbols = {}
         self.enclosing_scope = enclosing_scope
-        self.scope_counter = 1
-        self.predefined_types = ['Light', 'Switch', 'Thermometer']
-        self.predefined_functions = {'print' : 'void',
-                                     'Read' : [], # no input parameters
-                                     'getState' : [], # no input parameters
-                                     'setState' : [bool], # 1 int some input parameter
-                                     'Write' : [], # no input parameters
-                                     'switchState' : []} # no input parameters
+        self.blockscope_counter = 1
+        self.whenscope_counter = 1
+        self.predefined_types = ['Light', 'Switch', 'Thermometer', 'Window', 'Radiator', 'List']
+        self.predef_func_not_on_objects = ['print', 'wait']
+        self.predefined_functions = {'isTurnedOn': [],  # no input parameters
+                                     'setMode': [bool],  # 1 int some input parameter
+                                     'getTemp': [],  # no input parameters
+                                     'changeMode': []}  # no input parameters
 
     def new_scope(self, enclosing_scope):
         scope_object = SymbolTable(
@@ -35,10 +35,9 @@ class SymbolTable:
 
     def get_outer_scope_of_variable(self, name):
         if self.symbols.get(name) is None:
-            return self
-            pass
+            return self.enclosing_scope.get_outer_scope_of_variable(name)
         else:
-            return self.symbols
+            return self
 
 
 class NodeVisitor(object):
@@ -64,8 +63,8 @@ class AstNodeVisitor(NodeVisitor):
         node.visit_children(self)
 
         self.current_scope = enclosing_scope
-        self.current_scope.symbols['Block_scope'+str(self.current_scope.scope_counter)] = inner_scope
-        self.current_scope.scope_counter += 1
+        self.current_scope.symbols['Block_scope'+str(self.current_scope.blockscope_counter)] = inner_scope
+        self.current_scope.blockscope_counter += 1
 
     def visit_ClassNode(self, node):
         self.current_scope.symbols[node.id.name] = 'classType'
@@ -87,6 +86,56 @@ class AstNodeVisitor(NodeVisitor):
             self.current_scope.symbols[node.id.name] = self.current_scope.lookup(node.expression.name)
         elif isinstance(node.expression, TermNode):
             self.current_scope.symbols[node.id.name] = self.eval_term_node_type(node.expression)
+        elif isinstance(node.expression, UnaryExpNode):
+            self.current_scope.symbols[node.id.name] = self.ignore_unary_symbols(node.expression.expression)
+        elif isinstance(node.expression, RunNode):
+            self.current_scope.symbols[node.id.name] = self.get_returnType_from_func(node.expression)
+
+    def ignore_unary_symbols(self, unaryNode):
+        if isinstance(unaryNode, UnaryExpNode):
+            return self.ignore_unary_symbols(unaryNode.expression)
+        elif isinstance(unaryNode, BinaryExpNode):
+            return self.eval_bin_expr_type(unaryNode)
+        else:
+            return self.eval_term_node_type(unaryNode)
+
+
+    def get_returnType_from_func(self, runNode):
+        self.visit_RunNode(runNode) # Populate the node before it can get the return type
+
+        if isinstance(runNode.id, DotNode):
+            return_type = self.get_returnType_dotnode(runNode)
+        else:
+            return_type = self.get_returnType_not_dotnode(runNode)
+
+        return return_type
+
+    def get_returnType_not_dotnode(self, runNode):
+        func_scope = self.current_scope.lookup(str(runNode.id.name + 'Scope'))
+        return_type = func_scope.lookup('returnType')
+        return return_type
+
+    def get_returnType_dotnode(self, runNode):
+        last_id = runNode.id.ids[-1].name  # Is the last name of a dot sequence like LivingRoom.light.setState
+        temp_scope = self.current_scope
+        return_type = None
+
+        for id in runNode.id.ids:
+            # Checks if the last id in the dot sequence is a built in function
+            if self.current_scope.predefined_functions.get(last_id) is not None:
+                if self.current_scope.predefined_functions.get(last_id) == bool:
+                    return_type = bool
+                else:
+                    return_type = 'void'
+
+            # Gets the parameters of the function which matches the last id instead of entering it's scope
+            elif id.name == last_id:
+                temp_scope = temp_scope.lookup(id.name + 'Scope')
+                return_type = temp_scope.lookup('returnType')
+            else:
+                temp_scope = temp_scope.lookup(str(id.name + 'Scope'))
+
+        return return_type
 
     def eval_term_node_type(self, term_node):
         type_of_term_node = None
@@ -105,111 +154,174 @@ class AstNodeVisitor(NodeVisitor):
         return type_of_term_node
 
     def eval_bin_expr_type(self, binExpNode):
-        final_type = None
-        id_type = None
+        left_child = None
+        right_child = None
 
-        for expr in vars(binExpNode).values():
-            if isinstance(expr, IdNode):    # Gets the type of the IdNode
-                id_type = self.current_scope.lookup(expr.name)
+        if isinstance(binExpNode.expr1, TermNode):
+            left_child = self.eval_term_node_type(binExpNode.expr1)
+        elif isinstance(binExpNode.expr1, UnaryExpNode):
+            left_child = self.ignore_unary_symbols(binExpNode.expr1)
+        elif isinstance(binExpNode.expr1, BinaryExpNode):
+            left_child = self.eval_bin_expr_type(binExpNode.expr1)
 
-            if isinstance(expr, StringNode) or id_type == str:
-                final_type = str
-            elif (final_type == int or final_type == None) and (isinstance(expr, FloatNode) or id_type == float):
-                final_type = float
-            elif (final_type == None) and (isinstance(expr, IntegerNode) or id_type == int):
-                final_type = int
+        if isinstance(binExpNode.expr2, TermNode):
+            right_child = self.eval_term_node_type(binExpNode.expr2)
+        elif isinstance(binExpNode.expr2, UnaryExpNode):
+            right_child = self.ignore_unary_symbols(binExpNode.expr2)
+        elif isinstance(binExpNode.expr2, BinaryExpNode):
+            right_child = self.eval_bin_expr_type(binExpNode.expr2)
 
-            if ((not isinstance(binExpNode, PlusNode)) and (final_type == str)) or isinstance(expr, BoolNode):
-                raise Exception(TypeError, expr)
+        self.check_binExpr_exceptions(binExpNode, left_child, right_child)
+        final_type = self.type_w_higest_precedence(right_child, left_child)
+        return final_type
 
-            if isinstance(expr, BinaryExpNode) or isinstance(expr, UnaryExpNode):
-                self.eval_bin_expr_type(expr)
+    def type_w_higest_precedence(self, type_of_node, current_type=None):
+        final_type = current_type
+
+        if type_of_node == int and final_type is None:
+            final_type = int
+        elif type_of_node == float and final_type == int:
+            final_type = float
+        elif type_of_node == str and final_type != bool:
+            final_type = str
+        elif type_of_node == bool and final_type is None:
+            final_type = bool
 
         return final_type
 
-    def visit_FunctionNode(self, node):
-        outer_scope = self.current_scope
-        inner_scope = self.current_scope.new_scope(self.current_scope)
-        param_list = []
+    def check_binExpr_exceptions(self, parent, lchild, rchild):
 
-        # Gets the formal parameters with fake type(s) 1,2,3.
+        if lchild == bool or rchild == bool:
+            raise TypeError('using booleans in binary expression assignment is illegal')
+        elif not isinstance(parent, PlusNode):
+            if lchild == str or rchild == str:
+                raise TypeError('only plus with strings is allowed')
+
+    def visit_FunctionNode(self, node):
+        param_list = []
+        self.current_scope.symbols[str(node.id.name + 'Node')] = node
+
+        # Gets the formal parameters which is just the name of the formal input parameter.
         if node.params is not None:
             param_list = self.get_formal_params(node)
 
         self.current_scope.symbols[node.id.name] = param_list
-        self.current_scope = inner_scope
 
-        if node.params is not None:     # Adds the parameters to the scope
-            self.add_params_to_scope(node)
+    def populate_funcNode(self, node, scope, actual_param):
+        outer_scope = scope
+        inner_scope = scope.new_scope(scope)
+        self.current_scope = inner_scope
+        self.current_scope.symbols['returnType'] = 'void' # Puts in a return type "void" as default
+
+        if node.params is not None:  # Adds the parameters to the scope
+            self.add_params_to_scope(node, actual_param)
 
         node.block.visit_children(self)
         self.current_scope = outer_scope
         self.current_scope.symbols[str(node.id.name + 'Scope')] = inner_scope
 
+
+    def get_formal_params(self, funcNode):
+        param_list = []
+
+        if isinstance(funcNode.params.id_list, list):
+            for param in funcNode.params.id_list:
+                param_list.append(param.name)
+
+        return param_list
+
+    def add_params_to_scope(self, funcNode, actual_param):
+        if isinstance(funcNode.params.id_list, list):
+            for (fparam, aparam) in zip(funcNode.params.id_list, actual_param):
+                self.current_scope.symbols[fparam.name] = aparam
+
+    def visit_WhenNode(self, node):
+        self.visit_IfNode(node)
+
     def visit_IfNode(self, node):
+        compare_operators = [EqualsNode, NotEqualNode, LessThanNode, GreaterThanNode, AndNode, OrNode]
         LHS_type_of_equal = None
         RHS_type_of_equal = None
 
-        if isinstance(node.expression, IdNode):
+        if isinstance(node.expression, BoolNode):
+            pass
+        elif isinstance(node.expression, IdNode):
             if self.current_scope.lookup(node.expression.name) != bool:
                 raise Exception(TypeError, node.expression.name)
-        elif isinstance(node.expression, EqualsNode):
+        elif type(node.expression) in compare_operators:
+            # Evaluates the LHS of the compare operator
             if isinstance(node.expression.expr1, TermNode):
                 LHS_type_of_equal = self.eval_term_node_type(node.expression.expr1)
             elif isinstance(node.expression.expr1, BinaryExpNode):
                 LHS_type_of_equal = self.eval_bin_expr_type(node.expression.expr1)
+            elif isinstance(node.expression.expr1, RunNode):
+                LHS_type_of_equal = self.get_returnType_from_func(node.expression.expr1)
 
+            # Evaluates the RHS of the compare operator
             if isinstance(node.expression.expr2, TermNode):
                 RHS_type_of_equal = self.eval_term_node_type(node.expression.expr2)
             elif isinstance(node.expression.expr2, BinaryExpNode):
                 RHS_type_of_equal = self.eval_bin_expr_type(node.expression.expr2)
+            elif isinstance(node.expression.expr2, RunNode):
+                RHS_type_of_equal = self.get_returnType_from_func(node.expression.expr2)
 
             if LHS_type_of_equal != RHS_type_of_equal:
-                raise Exception(TypeError, LHS_type_of_equal, 'and', RHS_type_of_equal, 'is not the same')
+                raise TypeError(LHS_type_of_equal, 'and', RHS_type_of_equal, 'is not the same and cannot be compared')
+        else:
+            raise TypeError(type(node.expression), 'is not a legal compare operator in an if-statement')
 
         node.visit_children(self)
 
     def visit_ReturnNode(self, node):
-        if isinstance(node.expression, IdNode):
-            self.current_scope.lookup(node.expression.name)
+        return_type = 'Void'
+
+        if isinstance(node.expression, TermNode):
+            return_type = self.eval_term_node_type(node.expression)
+        elif isinstance(node.expression, BinaryExpNode):
+            return_type = self.eval_bin_expr_type(node.expression)
+        elif isinstance(node.expression, RunNode):
+            return_type = self.get_returnType_from_func(node.expression)
+
+        self.current_scope.symbols['returnType'] = return_type
 
     def visit_RunNode(self, node):
         list_of_types = [str, bool, int, float]
+        cur_scope = self.current_scope
         # Gets the formal parameters if it's a dotNode
         if isinstance(node.id, DotNode):  # Looks for if Class.method exist
             self.dotNode_in_runNode(node)
 
         # Get the formal parameters if the runNode just has a IdNode and not a DotNode
-        # Compares the amount of formal and actual parameters
-
-        #TODO make it take all the type parameters
+        # Compares formal and actual params. If formal has no type it gets set to type of actual first time called
         elif isinstance(node.id, IdNode):
-            print("kommer jeg nogensinde hertil?")
-            print(node.id)
-            '''
-            if node.id.name == 'print':
-                pass
-            elif len(self.current_scope.lookup(node.id.name)) != len(self.get_actual_params(node)):
-                raise TypeError(node.id.name, 'takes', len(self.current_scope.lookup(node.id.name)), 'parameter(s) and', len(self.get_actual_params(node)), 'was given')
-            '''
 
-            if node.id.name == 'print':
+            if node.id.name in self.current_scope.predef_func_not_on_objects:
                 pass
             elif len(self.current_scope.lookup(node.id.name)) == len(self.get_actual_params(node)):
                 formal_param = self.current_scope.lookup(node.id.name)
                 actual_param = self.get_actual_params(node)
-                print('before --- formal ', formal_param, 'actual ', actual_param)
+
                 if actual_param != []:
                     assert all([xparam in list_of_types for xparam in actual_param])  # Checks all actual parameters has type
                     if formal_param[0] not in list_of_types:  # Checks the first formal parameter is not a type
                         assert all([yparam not in list_of_types for yparam in formal_param])  # Checks none of the formal parameters has a type
-                        print('#########', self.current_scope.symbols)
+
+                        self.current_scope = self.current_scope.get_outer_scope_of_variable(node.id.name)
                         self.current_scope.symbols[node.id.name] = actual_param
-                        print('@@@@@@@@@', self.current_scope.symbols)
+                        self.populate_funcNode(self.current_scope.lookup(node.id.name + 'Node'), self.current_scope, actual_param)
+                        self.current_scope = cur_scope
+                        scope_w_param = self.current_scope.lookup(node.id.name + 'Scope')
+
+                        for (fparam, aparam) in zip(formal_param, actual_param):
+                            scope_w_param.symbols[fparam] = aparam
 
                     elif formal_param != actual_param:
-                        raise TypeError(formal_param, 'is not equal to', actual_param)
-                print('after --- formal ', formal_param, 'actual ', actual_param)
+                        raise TypeError(node.id.name, 'takes input', formal_param, 'and you gave it', actual_param)
+                else:  # Populate functions without input parameter
+                    self.current_scope = self.current_scope.get_outer_scope_of_variable(node.id.name)
+                    self.current_scope.symbols[node.id.name] = actual_param
+                    self.populate_funcNode(self.current_scope.lookup(node.id.name + 'Node'), self.current_scope, actual_param)
+                    self.current_scope = cur_scope
 
             else:
                 raise TypeError(node.id.name, 'takes', len(self.current_scope.lookup(node.id.name)), 'parameter(s) and', len(self.get_actual_params(node)), 'was given.')
@@ -218,6 +330,7 @@ class AstNodeVisitor(NodeVisitor):
     def dotNode_in_runNode(self, runNode):
         list_of_types = [str, bool, int, float]
         last_id = runNode.id.ids[-1].name # Is the last name of a dot sequence like LivingRoom.light.setState
+        cur_scope = self.current_scope
         temp_scope = self.current_scope
 
         for id in runNode.id.ids:
@@ -228,25 +341,37 @@ class AstNodeVisitor(NodeVisitor):
                     actual_param = self.get_actual_params(runNode)
 
                     if (formal_param) != (actual_param):
-                        raise TypeError(formal_param, 'is not equal to', actual_param)
-
+                        raise TypeError(id.name, 'takes input', formal_param, 'and you gave it', actual_param)
+                # Breaks the recursion at the second last id because
+                # built in functions can't be looked up in the regular scopes
                 elif id.name == runNode.id.ids[-2].name:
-                    if temp_scope.lookup(id.name) not in self.current_scope.predefined_types:
+                    if temp_scope.lookup(id.name) not in self.current_scope.predefined_types: # Makes sure that the object is of predefined types
                         raise TypeError(id.name, 'is not one of the pre-defined object types: ', self.current_scope.predefined_types)
                 else:
                     temp_scope = temp_scope.lookup(str(id.name + 'Scope'))
+
+            # Gets the parameters of the function which matches the last id instead of entering it's scope
             elif id.name == last_id:
                 formal_param = temp_scope.lookup(id.name)
                 actual_param = self.get_actual_params(runNode)
 
+                # Throws exceptions if the formal and actual parameters dosen't match in type or lenght.
+                # If formal parameters has no type, they get set to the types of actual param first time it's called
                 if len(formal_param) == len(actual_param):
                     if actual_param != []:
-                        assert all([xparam in list_of_types for xparam in actual_param])  # Checks all actual parameters has type
+                        assert all([param in list_of_types for param in actual_param])  # Makes sure all actual parameters has type
                         if formal_param[0] not in list_of_types: # Checks the first formal parameter is not a type
-                            assert all([yparam not in list_of_types for yparam in formal_param]) # Checks none of the formal parameters has a type
-                            temp_scope.symbols[id.name] = actual_param
+                            assert all([param not in list_of_types for param in formal_param]) # Makes sure none of the formal parameters has a type
+
+                            temp_scope.symbols[id.name] = actual_param # Sets the formal params to the type of actual params
+                            self.populate_funcNode(temp_scope.lookup(id.name + 'Node'), temp_scope, actual_param)
+                            self.current_scope = cur_scope
+
                         elif formal_param != actual_param:
-                            raise TypeError(formal_param, 'is not equal to', actual_param)
+                            raise TypeError(id.name, 'takes input', formal_param, 'and you gave it', actual_param)
+                    else: # Ellers bliver funktioner som open window ikke "bygget" fordi den ikke har input parameter
+                        self.populate_funcNode(temp_scope.lookup(id.name + 'Node'), temp_scope, actual_param)
+                        self.current_scope = cur_scope
                 else:
                     raise TypeError(id.name, 'takes', len(formal_param), 'parameter(s) and', len(actual_param), 'was given.')
             else:
@@ -268,18 +393,3 @@ class AstNodeVisitor(NodeVisitor):
 
         return param_list
 
-    def get_formal_params(self, funcNode):
-        param_list = []
-
-        if isinstance(funcNode.params.id_list, list):
-            for param in funcNode.params.id_list:
-                param_list.append(param.name)
-
-        return param_list
-
-    def add_params_to_scope(self, funcNode):
-        if isinstance(funcNode.params.id_list, list):
-            for param in funcNode.params.id_list:
-                self.current_scope.symbols[param.name] = 'formalParam'
-        else:
-            self.current_scope.symbols[funcNode.params.id_list.name] = 'formalParam'

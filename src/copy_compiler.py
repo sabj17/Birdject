@@ -53,13 +53,12 @@ ast.accept(GraphASTVisitor())
 visitor = AstNodeVisitor()
 ast.accept(visitor)
 symtable = visitor.current_scope
-print('The entire table:')
-print(symtable.symbols)
-#table = symtable.lookup('LivingRoomScope')
-#something = table.lookup('temp1')
-#print(something)
 
-#something = symtable.lookup('fuck')
+liv = symtable.lookup("LivingRoomScope")
+aRoom = liv.lookup("AnotherRoomScope")
+burnRoom = aRoom.lookup('burnRoomScope')
+#print('----------------- ', burnRoom.symbols)
+print(symtable.symbols)
 
 #codeVisitor = Visitor(Program(), symtable)
 #codeVisitor.visit(ast.prog)
