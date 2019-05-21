@@ -56,13 +56,6 @@ class Visitor(NodeVisitor):
             "ParenthesesNode": ""
         }
 
-    def get_tabs(self):
-        if self.table_stack.size() == 1:
-            tabs = 0
-        else:
-            tabs = 1
-        return "" + tabs * "\t"
-
     def push_scope(self, string):
         self.table_stack.push(self.lookup(string))
         self.var_stack.push(self.declared_vars)
@@ -76,7 +69,7 @@ class Visitor(NodeVisitor):
         self.var_stack.pop()
 
     def setup(self):
-        self.setup_list.append("void setup() {\n\tSerial.begin(9600);")
+        self.setup_list.append("void setup() {\nSerial.begin(9600);")
         self.loop_list.append("void loop() {")
         self.var_stack.push(self.declared_vars)
         self.table_stack.push(self.symtable)
@@ -128,7 +121,7 @@ class Visitor(NodeVisitor):
             string += s
         string += "}\n"
         self.global_list.append(string)
-        self.setup_list.append("\tinitializeObjects();")
+        self.setup_list.append("initializeObjects();")
 
     def visit_ClassNode(self, node):
         class_name = node.id.accept(self)
@@ -141,7 +134,7 @@ class Visitor(NodeVisitor):
         self.push_scope(class_name + "Scope")
 
         # Creating the constructor and class assignment for the room
-        self.constructors[class_name] = "\n" + self.get_tabs() + class_name + "Class()"
+        self.constructors[class_name] = "\n" + class_name + "Class()"
         self.constructors_objects[class_name] = 0
         string += "\n\nclass " + class_name + "Class {\n  public:\n"
 
@@ -173,6 +166,54 @@ class Visitor(NodeVisitor):
         return string
 
 
+    def create_var_assignment(self, var_name, expr_string, node):
+        string = ""
+        string += var_name + " = " + expr_string
+        # No semi colon added if expr is a runnode, since it is added in runnode visitor
+        if not isinstance(node.expression, RunNode):
+            string += ";"
+        string += "\n"
+        return string
+
+    def object_assignment(self, node, var_name):
+        string = ""
+        expr = node.expression
+        object_name = expr.id.accept(self)
+        params = expr.param.accept(self)
+
+        # Object var declared outside a class has different syntax
+        if self.table_stack.size() == 1 or self.current_class == "":
+            string += object_name + " " + var_name + "(" + params + ");\n"
+        # Declared inside a class
+        else:
+            string += object_name + " " + var_name + ";\n"
+            # Adding the object to the constructor of the room
+            string_symbol = " : "
+            if self.constructors_objects[self.current_class] > 0:
+                string_symbol = " , "
+            self.constructors[self.current_class] += string_symbol + var_name + "(" + params + ")"
+            self.constructors_objects[self.current_class] += 1
+
+        # creates and adds the initialize() func to the initializeObjects func and calls that func in void setup()
+        class_name = ""
+        for name in self.class_stack.items:  # dot notation if needed
+            class_name += name + "."
+        self.setup_objects.append(class_name + var_name + ".initialize();\n")
+        return string
+
+    def var_declaration(self, node, var_name, expr_string):
+        string = ""
+        var_type = self.lookup(var_name).__name__
+        if var_type == 'str':
+            string += "String " + var_name + " = " + expr_string + ";\n"
+        else:
+            string += var_type + " " + var_name + " = " + expr_string + ";\n"
+        # Removes an extra semi colon, which would have been added if the expression is a RunNode
+        if isinstance(node.expression, RunNode):
+            string = self.replace_symbols(string)
+            string += ";\n"
+        return string
+
     def visit_AssignNode(self, node):
         string = ""
         expr_string = node.expression.accept(self)
@@ -180,52 +221,17 @@ class Visitor(NodeVisitor):
 
         # var is already declared in current scope, so no type added
         if var_name in self.var_stack.top_of_stack():
-            string += self.get_tabs() + var_name + " = " + expr_string
-            # No semi colon added if expr is a runnode, since it is added in runnode visitor
-            if not isinstance(node.expression, RunNode):
-                string += ";"
-            string += "\n"
+            string += self.create_var_assignment(var_name, expr_string, node)
 
-        # Object assignment
+        # Object assignment or declaration
         elif isinstance(node.expression, NewObjectNode):
-            expr = node.expression
-            object_name = expr.id.accept(self)
-            params = expr.param.accept(self)
-
-            # Object var declared outside a class has different syntax
-            if self.table_stack.size() == 1 or self.current_class == "":
-                string += self.get_tabs() + object_name + " " + var_name + "(" + params + ");\n"
-            # Declared inside a class
-            else:
-                string += self.get_tabs() + object_name + " " + var_name + ";\n"
-                # Adding the object to the constructor of the room
-                string_symbol = " : "
-                if self.constructors_objects[self.current_class] > 0:
-                    string_symbol = " , "
-                self.constructors[self.current_class] += string_symbol + var_name + "(" + params + ")"
-                self.constructors_objects[self.current_class] += 1
-
-            # creates and adds the initialize() func to the initializeObjects func and calls that func in void setup()
-            class_name = ""
-            for name in self.class_stack.items: # dot notation if needed
-                class_name += name + "."
-            self.setup_objects.append("\t" + class_name + var_name + ".initialize();\n")
+            string += self.object_assignment(node, var_name)
 
         # The cases where a new var with basic type is being declared
         else:
-            var_type = self.lookup(var_name).__name__
-            if var_type == 'str':
-                string += self.get_tabs() + "String " + var_name + " = " + expr_string + ";\n"
-            else: string += self.get_tabs() + var_type + " " + var_name + " = " + expr_string + ";\n"
-            # Removes an extra semi colon, which would have been added if the expression is a RunNode
-            if isinstance(node.expression, RunNode):
-                string = self.replace_symbols(string)
-                string += ";\n"
-
-
-        # Adds the variable to the list of declared variables
-        self.declared_vars.add(var_name)
-        node.expression.accept(self)
+            string += self.var_declaration(node, var_name, expr_string)
+            # Adds the variable to the list of declared variables
+            self.declared_vars.add(var_name)
 
         # Globally declared variable
         if self.table_stack.size() == 1:
@@ -244,9 +250,9 @@ class Visitor(NodeVisitor):
         # Creates all the 'when' stmt code
         expr = node.expression.accept(self)
         expr = self.replace_symbols(expr)
-        string += "\n" + self.get_tabs() + "if (" + expr + "){\n"
+        string += "\n" + "if (" + expr + "){\n"
         string += node.block.accept(self)
-        string += self.get_tabs() + "}"
+        string += "}"
 
         # The code is added to the Arduino loop and symbol table is popped from the stack
         self.loop_list.append(string)
@@ -281,9 +287,9 @@ class Visitor(NodeVisitor):
             func_params = node.params.accept(self)
 
         # Generates the function code
-        string += "\n" + self.get_tabs() + return_type + " " + func_name + " (" + func_params + "){\n"
+        string += "\n" + return_type + " " + func_name + " (" + func_params + "){\n"
         string += node.block.accept(self)
-        string += self.get_tabs() + "}\n"
+        string += "}\n"
         self.pop_scope()
 
         # Global function
@@ -293,7 +299,7 @@ class Visitor(NodeVisitor):
         return string
 
     def visit_ReturnNode(self, node):
-        return self.get_tabs() + "return " + node.expression.accept(self) + ";\n"
+        return "return " + node.expression.accept(self) + ";\n"
 
     def visit_FormalParameterNode(self, node):
         params = node.id_list
@@ -314,14 +320,9 @@ class Visitor(NodeVisitor):
 
     def visit_RunNode(self, node):
         string = ""
-        # Justs sets tabs :-)
-        tabs = self.get_tabs()
-        if self.table_stack.size() == 1:
-            tabs = "\t"
 
         # Function called through dot notation
         if isinstance(node.id, DotNode):
-            string += tabs
             # iterates all the id's in the dot notation and adds a dot in between
             for index, dot_id in enumerate(node.id.ids):
                 if index > 0:
@@ -332,11 +333,11 @@ class Visitor(NodeVisitor):
         # 'Normal' or standard function is called
         else:
             if node.id.accept(self) == "print":
-                string += tabs + "Serial.println("
+                string += "Serial.println("
             elif node.id.accept(self) == "await":
-                string += tabs + "delay("
+                string += "delay("
             else:
-                string += tabs + node.id.accept(self) + "("
+                string += node.id.accept(self) + "("
 
         # Adds params if there is any
         if node.params is not None:
@@ -376,12 +377,12 @@ class Visitor(NodeVisitor):
         expr = self.replace_symbols(expr)
 
         # Creates the 'if' stmt
-        string += self.get_tabs() + "if (" + expr + ") {\n"
+        string += "if (" + expr + ") {\n"
         string += self.create_if_body(true_block)
 
         # Creates the 'else if' stmt if needed
         if isinstance(false_block, IfNode):
-            string += self.get_tabs() + "else "
+            string += "else "
             string += false_block.accept(self)
 
         # Creates the 'else' stmt if needed
@@ -389,7 +390,7 @@ class Visitor(NodeVisitor):
             # Finds the scope for the else block
             self.table_stack.push(self.lookup("Block_scope" + str(self.if_node_scopes)))
             self.if_node_scopes += 1
-            string += self.get_tabs() + "else {\n"
+            string += "else {\n"
             string += self.create_if_body(false_block)
             self.table_stack.pop()
 
@@ -400,11 +401,11 @@ class Visitor(NodeVisitor):
 
     def create_if_body(self, block):
         string = block.accept(self)
-        string = self.get_tabs() + string + self.get_tabs() + "}\n"
+        string = string + "}\n"
         return string
 
     def visit_BreakNode(self, node):
-        return self.get_tabs() + "break;\n"
+        return "break;\n"
 
 
     # Visitor method for all binary expressions
@@ -444,5 +445,5 @@ class Visitor(NodeVisitor):
     def replace_symbols(self, string):
         string = string.replace(";", "")
         string = string.replace("\n", "")
-        string = string.replace("\t", "")
+        #string = string.replace("\t", "")
         return string

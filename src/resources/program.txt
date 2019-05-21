@@ -161,10 +161,10 @@ class Thermometer : public Input {
 
 class LivingRoomClass {
   public:
-	Light light1;
-	Switch switch1;
+Light light1;
+Switch switch1;
 
-	LivingRoomClass() : light1(pin8) , switch1(pin2) {}
+LivingRoomClass() : light1(pin8) , switch1(pin2) {}
 
 } LivingRoom;
 
@@ -172,49 +172,49 @@ class LivingRoomClass {
 
 class KitchenClass {
   public:
-	Light light2;
-	Switch switch2;
+Light light2;
+Switch switch2;
 
-	KitchenClass() : light2(pin9) , switch2(pin3) {}
+KitchenClass() : light2(pin9) , switch2(pin3) {}
 
 } Kitchen;
 
 bool x = false;
 
 void initializeObjects(){
-	LivingRoom.light1.initialize();
-	LivingRoom.switch1.initialize();
-	Kitchen.light2.initialize();
-	Kitchen.switch2.initialize();
+LivingRoom.light1.initialize();
+LivingRoom.switch1.initialize();
+Kitchen.light2.initialize();
+Kitchen.switch2.initialize();
 }
 
 void setup() {
-	Serial.begin(9600);
-	initializeObjects();
+Serial.begin(9600);
+initializeObjects();
 }
 
 void loop() {
 
-	if (LivingRoom.switch1.isTurnedOn()){
+if (LivingRoom.switch1.isTurnedOn()){
 bool x = LivingRoom.light1.changeMode();
-	int shitty = 5;
-	if (x == true) {
-		Serial.println(String("LivingRoom Light is on"));
-	}
-	else {
-		Serial.println(String("LivingRoom Light is off"));
-	}
-	x = false;
-	}
+int shitty = 5;
+if (x == true) {
+Serial.println(String("LivingRoom Light is on"));
+}
+else {
+Serial.println(String("LivingRoom Light is off"));
+}
+x = false;
+}
 
-	if (Kitchen.switch2.isTurnedOn() == true){
+if (Kitchen.switch2.isTurnedOn() == true){
 bool x = Kitchen.light2.changeMode();
-	if (x == true) {
-		Serial.println(String("Kitchen Light is on"));
-	}
-	else {
-		Serial.println(String("Kitchen Light is off"));
-	}
-	x = false;
-	}
+if (x == true) {
+Serial.println(String("Kitchen Light is on"));
+}
+else {
+Serial.println(String("Kitchen Light is off"));
+}
+x = false;
+}
 }
