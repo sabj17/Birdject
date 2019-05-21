@@ -4,9 +4,6 @@
     <list default="true" id="311eaa91-087f-4edd-b12e-d967ecc45f3e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AST.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/AST.gv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/copy_compiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/copy_compiler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/copy_symbol_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/copy_symbol_table.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parse_tree.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/parse_tree.gv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/Example.jnr" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Example.jnr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/symbol_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbol_table.py" afterDir="false" />
@@ -32,7 +29,7 @@
             <entry file="file://$PROJECT_DIR$/src/compiler.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="276">
-                  <caret line="23" column="3" lean-forward="true" selection-end-line="63" selection-end-column="28" />
+                  <caret line="23" column="3" selection-end-line="63" selection-end-column="28" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -43,8 +40,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="200">
-                  <caret line="261" column="83" lean-forward="true" selection-start-line="261" selection-start-column="83" selection-end-line="261" selection-end-column="83" />
+                <state relative-caret-position="194">
+                  <caret line="11" column="49" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="49" />
                 </state>
               </provider>
             </entry>
@@ -52,7 +49,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/copy_symbol_table.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="567">
+                <state relative-caret-position="9085">
                   <caret line="395" selection-start-line="395" selection-end-line="395" />
                 </state>
               </provider>
@@ -61,7 +58,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/copy_compiler.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="567">
+                <state relative-caret-position="1196">
                   <caret line="63" column="28" selection-start-line="63" selection-start-column="28" selection-end-line="63" selection-end-column="28" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
@@ -77,8 +74,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="566">
-                  <caret line="370" column="53" selection-start-line="370" selection-start-column="53" selection-end-line="370" selection-end-column="53" />
+                <state relative-caret-position="240">
+                  <caret line="253" column="73" selection-start-line="253" selection-start-column="73" selection-end-line="253" selection-end-column="73" />
                 </state>
               </provider>
             </entry>
@@ -86,7 +83,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/compiler.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="429">
+                <state relative-caret-position="1380">
                   <caret line="60" column="22" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
@@ -98,7 +95,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/ast.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="194">
+                <state relative-caret-position="2760">
                   <caret line="122" column="13" selection-start-line="122" selection-start-column="6" selection-end-line="122" selection-end-column="13" />
                   <folding>
                     <element signature="e#0#13#0" expanded="true" />
@@ -110,8 +107,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/resources/Example.jnr">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="66" column="20" selection-start-line="66" selection-start-column="20" selection-end-line="66" selection-end-column="20" />
+                <state relative-caret-position="434">
+                  <caret line="86" column="1" lean-forward="true" selection-start-line="86" selection-start-column="1" selection-end-line="86" selection-end-column="1" />
                 </state>
               </provider>
             </entry>
@@ -138,7 +135,7 @@
             <entry file="file://$PROJECT_DIR$/src/AST.gv">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="346">
-                  <caret line="540" column="41" lean-forward="true" selection-end-line="720" />
+                  <caret line="540" column="34" lean-forward="true" selection-end-line="730" />
                 </state>
               </provider>
             </entry>
@@ -156,7 +153,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>function</find>
       <find>returnNode</find>
       <find>visit_ifnode</find>
       <find>blocknode</find>
@@ -182,10 +178,11 @@
       <find>bool</find>
       <find>minus</find>
       <find>minu</find>
-      <find>print</find>
       <find>negativ</find>
-      <find>visit_if</find>
       <find>he</find>
+      <find>func</find>
+      <find>visit_if</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -238,11 +235,11 @@
         <option value="$PROJECT_DIR$/src/crap_table.py" />
         <option value="$PROJECT_DIR$/src/resources/Example1.jnr" />
         <option value="$PROJECT_DIR$/src/resources/FixTypes.jnr" />
-        <option value="$PROJECT_DIR$/src/symbol_table.py" />
         <option value="$PROJECT_DIR$/src/compiler.py" />
-        <option value="$PROJECT_DIR$/src/resources/Example.jnr" />
         <option value="$PROJECT_DIR$/src/copy_symbol_table.py" />
         <option value="$PROJECT_DIR$/src/copy_compiler.py" />
+        <option value="$PROJECT_DIR$/src/resources/Example.jnr" />
+        <option value="$PROJECT_DIR$/src/symbol_table.py" />
       </list>
     </option>
   </component>
@@ -258,7 +255,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -281,6 +277,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -479,14 +476,8 @@
       <workItem from="1557856748864" duration="19242000" />
       <workItem from="1557904268049" duration="65965000" />
       <workItem from="1558290770960" duration="10306000" />
-      <workItem from="1558324946284" duration="27418000" />
-    </task>
-    <task id="LOCAL-00002" summary="small changes in lexer and parser, added test folder">
-      <created>1553551617312</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1553551617313</updated>
+      <workItem from="1558324946284" duration="27653000" />
+      <workItem from="1558423787322" duration="1603000" />
     </task>
     <task id="LOCAL-00003" summary="added the ability to make grammar from file">
       <created>1553596756093</created>
@@ -824,7 +815,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558095802382</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="all functions, input paremeter has types.&#10;Added so you can use run LivingRoom.Something in assignment.&#10;run LivingRoom.Something bliver nu også tjekket i alle if og when statements">
+      <created>1558391266473</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1558391266473</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -860,7 +858,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="430300000" />
+    <option name="totallyTimeSpent" value="432138000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="13" width="1922" height="1068" extended-state="6" />
@@ -915,7 +913,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test_grammar updated" />
     <MESSAGE value="all tests updated with new testgrammar" />
     <MESSAGE value="skeleton for symbol_table" />
     <MESSAGE value="symbol table update with to-dos" />
@@ -940,10 +937,11 @@
     <MESSAGE value="functions without parameters gets &quot;populated&quot; and placed in the right scope" />
     <MESSAGE value="return void" />
     <MESSAGE value="you can now do assignments with functions calls as long as they are in current or outer scopes" />
-    <option name="LAST_COMMIT_MESSAGE" value="you can now do assignments with functions calls as long as they are in current or outer scopes" />
+    <MESSAGE value="all functions, input paremeter has types.&#10;Added so you can use run LivingRoom.Something in assignment.&#10;run LivingRoom.Something bliver nu også tjekket i alle if og when statements" />
+    <option name="LAST_COMMIT_MESSAGE" value="all functions, input paremeter has types.&#10;Added so you can use run LivingRoom.Something in assignment.&#10;run LivingRoom.Something bliver nu også tjekket i alle if og when statements" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1558391141990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1558425345481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$parser.coverage" NAME="parser Coverage Results" MODIFIED="1553767623223" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$Unittests_for_test_grammar_TestGrammar_test_get_rules_for.coverage" NAME="Unittests for test_grammar.TestGrammar.test_get_rules_for Coverage Results" MODIFIED="1554312997343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/Birdject$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1554665954240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
@@ -1187,10 +1185,40 @@
     <entry file="file://$PROJECT_DIR$/src/codegen/codegen.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/FixTypes.jnr">
+    <entry file="file://$PROJECT_DIR$/src/copy_symbol_table.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1748">
-          <caret line="76" selection-start-line="76" selection-end-line="76" />
+        <state relative-caret-position="9085">
+          <caret line="395" selection-start-line="395" selection-end-line="395" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/copy_compiler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1196">
+          <caret line="63" column="28" selection-start-line="63" selection-start-column="28" selection-end-line="63" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/compiler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1380">
+          <caret line="60" column="22" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ast.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2760">
+          <caret line="122" column="13" selection-start-line="122" selection-start-column="6" selection-end-line="122" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1201,61 +1229,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/FixTypes.jnr">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1748">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AST.gv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="346">
-          <caret line="540" column="41" lean-forward="true" selection-end-line="720" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ast.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="122" column="13" selection-start-line="122" selection-start-column="6" selection-end-line="122" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/Example.jnr">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="66" column="20" selection-start-line="66" selection-start-column="20" selection-end-line="66" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/copy_symbol_table.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="395" selection-start-line="395" selection-end-line="395" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/compiler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="23" column="3" lean-forward="true" selection-end-line="63" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/copy_compiler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="63" column="28" selection-start-line="63" selection-start-column="28" selection-end-line="63" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+          <caret line="540" column="34" lean-forward="true" selection-end-line="730" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="261" column="83" lean-forward="true" selection-start-line="261" selection-start-column="83" selection-end-line="261" selection-end-column="83" />
+        <state relative-caret-position="240">
+          <caret line="253" column="73" selection-start-line="253" selection-start-column="73" selection-end-line="253" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/Example.jnr">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="86" column="1" lean-forward="true" selection-start-line="86" selection-start-column="1" selection-end-line="86" selection-end-column="1" />
         </state>
       </provider>
     </entry>

@@ -116,6 +116,10 @@ class AstNodeVisitor(NodeVisitor):
         return return_type
 
     def get_returnType_dotnode(self, runNode):
+        return_types_of_predef_functions = {'isTurnedOn' : bool,
+                                            'setMode' : int,
+                                            'getTemp' : float,
+                                            'changeMode' : int}
         last_id = runNode.id.ids[-1].name  # Is the last name of a dot sequence like LivingRoom.light.setState
         temp_scope = self.current_scope
         return_type = None
@@ -123,10 +127,7 @@ class AstNodeVisitor(NodeVisitor):
         for id in runNode.id.ids:
             # Checks if the last id in the dot sequence is a built in function
             if self.current_scope.predefined_functions.get(last_id) is not None:
-                if self.current_scope.predefined_functions.get(last_id) == bool:
-                    return_type = bool
-                else:
-                    return_type = 'void'
+                return_type = return_types_of_predef_functions.get(last_id)
 
             # Gets the parameters of the function which matches the last id instead of entering it's scope
             elif id.name == last_id:
@@ -247,7 +248,10 @@ class AstNodeVisitor(NodeVisitor):
             pass
         elif isinstance(node.expression, IdNode):
             if self.current_scope.lookup(node.expression.name) != bool:
-                raise Exception(TypeError, node.expression.name)
+                raise TypeError(node.expression.name, 'is a not a boolean')
+        elif isinstance(node.expression, RunNode):
+            if self.get_returnType_from_func(node.expression) != bool:
+                raise TypeError(node.expression, 'do not return a boolean')
         elif type(node.expression) in compare_operators:
             # Evaluates the LHS of the compare operator
             if isinstance(node.expression.expr1, TermNode):
@@ -268,7 +272,7 @@ class AstNodeVisitor(NodeVisitor):
             if LHS_type_of_equal != RHS_type_of_equal:
                 raise TypeError(LHS_type_of_equal, 'and', RHS_type_of_equal, 'is not the same and cannot be compared')
         else:
-            raise TypeError(type(node.expression), 'is not a legal compare operator in an if-statement')
+            raise TypeError(type(node.expression), 'is not a legal compare operator in an if- or when-statement')
 
         node.visit_children(self)
 

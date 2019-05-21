@@ -82,8 +82,11 @@ function globalFunc(input1, input2, input3){
 set varFunc to run globalFunc(1, 2, "sup my nig... daddy");
 set batmand to run LivingRoom.AnotherRoom.burnRoom(number1);
 
+when (run LivingRoom.light.getTemp()){
 
-when(run LivingRoom.getTemp1(temp1) > 20 < 10){
+}
+
+when(run LivingRoom.getTemp1(temp1) > 20){
     set hello to 2;
     set x to 22;
     set y to "hej";
