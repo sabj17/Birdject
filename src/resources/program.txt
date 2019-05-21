@@ -164,20 +164,6 @@ class LivingRoomClass {
 Light light1;
 Switch switch1;
 
-
-class SubClassClass {
-  public:
-Light light1;
-
-SubClassClass() : light1(pin9) {}
-
-} SubClass;
-
-void turn_on_lights (){
-light1.setMode(true);
-SubClass.light1.setMode(true);
-}
-
 LivingRoomClass() : light1(pin8) , switch1(pin2) {}
 
 } LivingRoom;
@@ -196,7 +182,6 @@ KitchenClass() : light2(pin9) , switch2(pin3) {}
 void initializeObjects(){
 LivingRoom.light1.initialize();
 LivingRoom.switch1.initialize();
-LivingRoom.SubClass.light1.initialize();
 Kitchen.light2.initialize();
 Kitchen.switch2.initialize();
 }
@@ -209,17 +194,22 @@ initializeObjects();
 void loop() {
 
 if (LivingRoom.switch1.isTurnedOn()){
-LivingRoom.turn_on_lights();
+LivingRoom.light1.changeMode();
+if (LivingRoom.light1.isTurnedOn()) {
+Serial.println(String("LivingRoom Light is on"));
+}
+else {
+Serial.println(String("LivingRoom Light is off"));
+}
 }
 
-if (Kitchen.switch2.isTurnedOn() == true){
-bool x = Kitchen.light2.changeMode();
-if (x == true) {
+if (Kitchen.switch2.isTurnedOn()){
+Kitchen.light2.changeMode();
+if (Kitchen.light2.isTurnedOn()) {
 Serial.println(String("Kitchen Light is on"));
 }
 else {
 Serial.println(String("Kitchen Light is off"));
 }
-x = false;
 }
 }
