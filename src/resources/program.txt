@@ -196,24 +196,25 @@ void setup() {
 void loop() {
 
 	if (LivingRoom.switch1.isTurnedOn()){
-	LivingRoom.light1.changeMode();
+bool x = LivingRoom.light1.changeMode();
+	int shitty = 5;
 	if (x == true) {
 		Serial.println(String("LivingRoom Light is on"));
 	}
 	else {
 		Serial.println(String("LivingRoom Light is off"));
 	}
-	bool x = false;
+	x = false;
 	}
 
-	if (Kitchen.switch2.isTurnedOn()){
-	Kitchen.light2.changeMode();
+	if (Kitchen.switch2.isTurnedOn() == true){
+bool x = Kitchen.light2.changeMode();
 	if (x == true) {
 		Serial.println(String("Kitchen Light is on"));
 	}
 	else {
 		Serial.println(String("Kitchen Light is off"));
 	}
-	bool x = false;
+	x = false;
 	}
 }

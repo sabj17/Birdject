@@ -217,6 +217,11 @@ class Visitor(NodeVisitor):
             if var_type == 'str':
                 string += self.get_tabs() + "String " + var_name + " = " + expr_string + ";\n"
             else: string += self.get_tabs() + var_type + " " + var_name + " = " + expr_string + ";\n"
+            # Removes an extra semi colon, which would have been added if the expression is a RunNode
+            if isinstance(node.expression, RunNode):
+                string = self.replace_symbols(string)
+                string += ";\n"
+
 
         # Adds the variable to the list of declared variables
         self.declared_vars.add(var_name)

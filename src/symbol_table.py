@@ -117,9 +117,9 @@ class AstNodeVisitor(NodeVisitor):
 
     def get_returnType_dotnode(self, runNode):
         return_types_of_predef_functions = {'isTurnedOn' : bool,
-                                            'setMode' : int,
+                                            'setMode' : bool,
                                             'getTemp' : float,
-                                            'changeMode' : int}
+                                            'changeMode' : bool}
         last_id = runNode.id.ids[-1].name  # Is the last name of a dot sequence like LivingRoom.light.setState
         temp_scope = self.current_scope
         return_type = None

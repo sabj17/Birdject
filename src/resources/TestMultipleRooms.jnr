@@ -9,10 +9,13 @@ Kitchen {
 
 }
 
+
+
 set x to off;
 
 when (run LivingRoom.switch1.isTurnedOn()){
-run LivingRoom.light1.changeMode();
+    set x to run LivingRoom.light1.changeMode();
+    set shitty to 5;
 
     if(x is on){
         run print("LivingRoom Light is on");
@@ -22,8 +25,8 @@ run LivingRoom.light1.changeMode();
     set x to off;
 }
 
-when (run Kitchen.switch2.isTurnedOn()){
-run Kitchen.light2.changeMode();
+when (run Kitchen.switch2.isTurnedOn() is true){
+    set x to run Kitchen.light2.changeMode();
 
     if(x is on){
         run print("Kitchen Light is on");

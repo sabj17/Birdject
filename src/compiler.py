@@ -13,7 +13,7 @@ from src.ast import GraphASTVisitor
 
 wd = os.getcwd()
 grammar_file = os.path.join(wd, 'resources/grammar.txt')
-program_file = os.path.join(wd, 'resources/Example.jnr')
+program_file = os.path.join(wd, 'resources/TestMultipleRooms.jnr')
 keyword_file = os.path.join(wd, 'resources/keywords.txt')
 token_spec_file = os.path.join(wd, 'resources/token_spec.txt')
 
@@ -54,11 +54,6 @@ visitor = AstNodeVisitor()
 ast.accept(visitor)
 symtable = visitor.current_scope
 
-liv = symtable.lookup("LivingRoomScope")
-aRoom = liv.lookup("AnotherRoomScope")
-burnRoom = aRoom.lookup('burnRoomScope')
-#print('----------------- ', burnRoom.symbols)
-print(symtable.symbols)
-
-#codeVisitor = Visitor(Program(), symtable)
+codeVisitor = Visitor(Program(), symtable)
 #codeVisitor.visit(ast.prog)
+codeVisitor.code_gen(ast.prog)
