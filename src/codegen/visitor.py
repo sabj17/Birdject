@@ -28,6 +28,7 @@ class Visitor(NodeVisitor):
         self.var_stack = Stack()
         self.class_stack = Stack()
         self.block_node_scopes = 1
+        self.current_params = list()
         self.if_node_scopes = 1
         self.constructors = {}
         self.constructors_objects = {}
@@ -125,7 +126,6 @@ class Visitor(NodeVisitor):
 
     def visit_ClassNode(self, node):
         class_name = node.id.accept(self)
-        old = self.current_class
         self.current_class = class_name
         self.class_stack.push(class_name)
         string = ""
@@ -145,7 +145,6 @@ class Visitor(NodeVisitor):
         self.constructors[class_name] += " {}\n"
         string += self.constructors[class_name] + "\n} " + class_name + ";\n"
         self.class_stack.pop()
-        self.current_class = old
         self.pop_scope()
 
         # If not a sub class it is added to be global
@@ -165,6 +164,29 @@ class Visitor(NodeVisitor):
             string += child.accept(self)
         return string
 
+    def visit_AssignNode(self, node):
+        string = ""
+        expr_string = node.expression.accept(self)
+        var_name = node.id.accept(self)
+
+        # var is already declared in current scope, so no type added
+        if var_name in self.var_stack.top_of_stack() or var_name in self.current_params:
+            string += self.create_var_assignment(var_name, expr_string, node)
+
+        # Object declaration
+        elif isinstance(node.expression, NewObjectNode):
+            string += self.object_declaration(node, var_name)
+
+        # The cases where a new var with basic type is being declared
+        else:
+            string += self.var_declaration(node, var_name, expr_string)
+            # Adds the variable to the list of declared variables
+            self.declared_vars.add(var_name)
+
+        # Globally declared variable
+        if self.table_stack.size() == 1:
+            self.global_list.append(string)
+        return string
 
     def create_var_assignment(self, var_name, expr_string, node):
         string = ""
@@ -215,31 +237,6 @@ class Visitor(NodeVisitor):
             string += ";\n"
         return string
 
-    def visit_AssignNode(self, node):
-        string = ""
-        expr_string = node.expression.accept(self)
-        var_name = node.id.accept(self)
-
-        # var is already declared in current scope, so no type added
-        if var_name in self.var_stack.top_of_stack():
-            string += self.create_var_assignment(var_name, expr_string, node)
-
-        # Object declaration
-        elif isinstance(node.expression, NewObjectNode):
-            string += self.object_declaration(node, var_name)
-
-        # The cases where a new var with basic type is being declared
-        else:
-            string += self.var_declaration(node, var_name, expr_string)
-            # Adds the variable to the list of declared variables
-            self.declared_vars.add(var_name)
-
-        # Globally declared variable
-        if self.table_stack.size() == 1:
-            self.global_list.append(string)
-        return string
-
-
     def visit_WhenNode(self, node):
         string = ""
 
@@ -269,24 +266,16 @@ class Visitor(NodeVisitor):
         func_name = node.id.accept(self)
 
         # Finds the func scope in symbol table, if it doesnt exist, then it is never called and therefor not generated
-        try:
-            self.push_scope(func_name + "Scope")
-        except NameError:
+        if not self.func_scope_exist(func_name):
             return ""
 
         # Gets the return type of the function
-        return_type = self.lookup("returnType")
-        if not isinstance(return_type, str):
-            return_type = self.lookup("returnType").__name__
-        if return_type == 'str':
-            return_type = "String"
+        return_type = self.get_return_type()
 
         # Adds the parameters, if there is any
-        func_params = ""
-        if node.params is not None:
-            func_params = node.params.accept(self)
+        func_params = self.get_func_params(node)
 
-        # Generates the function code
+        # Generates the function code and pops the function scope
         string += "\n" + return_type + " " + func_name + " (" + func_params + "){\n"
         string += node.block.accept(self)
         string += "}\n"
@@ -295,8 +284,36 @@ class Visitor(NodeVisitor):
         # Global function
         if self.table_stack.size() == 1:
             self.global_list.append(string)
+        self.current_params.clear()
 
         return string
+
+    def get_func_params(self, node):
+        func_params = ""
+        if node.params is not None:
+            func_params = node.params.accept(self)
+        temp = func_params.replace("float", "")
+        temp = temp.replace("int", "")
+        temp = temp.replace("String", "")
+        temp = temp.replace("bool", "")
+        temp = temp.replace(" ", "")
+        self.current_params = temp.split(",")
+        return func_params
+
+    def func_scope_exist(self, func_name):
+        try:
+            self.push_scope(func_name + "Scope")
+            return True
+        except NameError:
+            return False
+
+    def get_return_type(self):
+        return_type = self.lookup("returnType")
+        if not isinstance(return_type, str):
+            return_type = self.lookup("returnType").__name__
+        if return_type == 'str':
+            return_type = "String"
+        return return_type
 
     def visit_ReturnNode(self, node):
         return "return " + node.expression.accept(self) + ";\n"
