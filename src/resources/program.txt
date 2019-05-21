@@ -179,8 +179,6 @@ KitchenClass() : light2(pin9) , switch2(pin3) {}
 
 } Kitchen;
 
-bool x = false;
-
 void initializeObjects(){
 LivingRoom.light1.initialize();
 LivingRoom.switch1.initialize();
@@ -197,7 +195,6 @@ void loop() {
 
 if (LivingRoom.switch1.isTurnedOn()){
 bool x = LivingRoom.light1.changeMode();
-int shitty = 5;
 if (x == true) {
 Serial.println(String("LivingRoom Light is on"));
 }

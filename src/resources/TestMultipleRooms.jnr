@@ -1,3 +1,4 @@
+
 LivingRoom {
     set light1 to Light(pin8);
     set switch1 to Switch(pin2);
@@ -6,16 +7,12 @@ LivingRoom {
 Kitchen {
     set light2 to Light(pin9);
     set switch2 to Switch(pin3);
-
 }
 
 
 
-set x to off;
-
 when (run LivingRoom.switch1.isTurnedOn()){
     set x to run LivingRoom.light1.changeMode();
-    set shitty to 5;
 
     if(x is on){
         run print("LivingRoom Light is on");

@@ -175,14 +175,14 @@ class Visitor(NodeVisitor):
         string += "\n"
         return string
 
-    def object_assignment(self, node, var_name):
+    def object_declaration(self, node, var_name):
         string = ""
         expr = node.expression
         object_name = expr.id.accept(self)
         params = expr.param.accept(self)
 
         # Object var declared outside a class has different syntax
-        if self.table_stack.size() == 1 or self.current_class == "":
+        if self.table_stack.size() == 1:
             string += object_name + " " + var_name + "(" + params + ");\n"
         # Declared inside a class
         else:
@@ -198,6 +198,7 @@ class Visitor(NodeVisitor):
         class_name = ""
         for name in self.class_stack.items:  # dot notation if needed
             class_name += name + "."
+        self.declared_vars.add(var_name)
         self.setup_objects.append(class_name + var_name + ".initialize();\n")
         return string
 
@@ -223,9 +224,9 @@ class Visitor(NodeVisitor):
         if var_name in self.var_stack.top_of_stack():
             string += self.create_var_assignment(var_name, expr_string, node)
 
-        # Object assignment or declaration
+        # Object declaration
         elif isinstance(node.expression, NewObjectNode):
-            string += self.object_assignment(node, var_name)
+            string += self.object_declaration(node, var_name)
 
         # The cases where a new var with basic type is being declared
         else:
@@ -237,7 +238,6 @@ class Visitor(NodeVisitor):
         if self.table_stack.size() == 1:
             self.global_list.append(string)
         return string
-
 
 
     def visit_WhenNode(self, node):
