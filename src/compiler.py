@@ -13,21 +13,19 @@ from src.ast import GraphASTVisitor
 
 wd = os.getcwd()
 grammar_file = os.path.join(wd, 'resources/grammar.txt')
-program_file = os.path.join(wd, 'resources/Example.jnr')
+program_file = os.path.join(wd, 'resources/tester.jnr')
 keyword_file = os.path.join(wd, 'resources/keywords.txt')
 token_spec_file = os.path.join(wd, 'resources/token_spec.txt')
 
 grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
 program = '''
-    function jener(x, y){
-        return true;
-    }
+    set dab to Thermometer();
 '''
 
 #print(grammar)
 
-lexer = Lexer(program, keyword_file, token_spec_file)
+lexer = Lexer(program_file, keyword_file, token_spec_file)
 tokens = lexer.lex()
 
 # print("\n".join([str(x) for x in tokens]))
@@ -49,11 +47,12 @@ parse_tree.graph()
 ast = parse_tree.accept(BuildASTVisitor())
 
 
+
 ast.accept(GraphASTVisitor())
 
 visitor = BuildSymbolTableVisitor()
 ast.accept(visitor)
 symtable = visitor.current_scope
 
-codeVisitor = Visitor(Program(), symtable)
+codeVisitor = Visitor(symtable)
 codeVisitor.code_gen(ast.prog)

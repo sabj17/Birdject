@@ -23,7 +23,7 @@ class NodeVisitor:
 
 class Visitor(NodeVisitor):
 
-    def __init__(self, program, symtable):
+    def __init__(self, symtable):
         self.table_stack = Stack()
         self.var_stack = Stack()
         self.class_stack = Stack()
@@ -39,7 +39,6 @@ class Visitor(NodeVisitor):
         self.current_class = ""
         self.declared_vars = set()
         self.symtable = symtable
-        self.program = program
         self.operators = {
             "PlusNode" : " + ",
             "MinusNode" : " - ",

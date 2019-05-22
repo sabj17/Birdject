@@ -42,9 +42,10 @@ class Output {
     }
 
 
-    void setMode(bool newMode) {
+    bool setMode(bool newMode) {
       state = newMode;
       digitalWrite(pin, newMode);
+      return newMode;
     }
 
     int isTurnedOn(){
@@ -91,11 +92,12 @@ class Radiator : public Output {
   public:
     Radiator (int inputPin): Output(inputPin) {}
 
-    void setMode(int newMode) {
+    bool setMode(int newMode) {
       if (0 <= newMode && newMode <= 5){
         state = newMode;
         digitalWrite(pin, newMode);
       }
+      return newMode;
     }
 
 
