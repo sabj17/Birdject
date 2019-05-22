@@ -7,13 +7,16 @@ class SymbolTable:
         self.symbols = {}
         self.enclosing_scope = enclosing_scope
         self.blockscope_counter = 1
-        self.whenscope_counter = 1
         self.predefined_types = ['Light', 'Switch', 'Thermometer', 'Window', 'Radiator', 'List']
         self.predef_func_not_on_objects = ['print', 'wait']
         self.predefined_functions = {'isTurnedOn': [],  # no input parameters
-                                     'setMode': [bool],  # 1 int some input parameter
-                                     'getTemp': [],  # no input parameters
-                                     'changeMode': []}  # no input parameters
+                                     'setMode': [bool], # one bool as input parameter
+                                     'getTemp': [],     # no input parameters
+                                     'changeMode': [],  # no input parameters
+                                     'close' : [],      # no input parameters
+                                     'open_to' : [int], # int as input parameter
+                                     'increase' : [],   # no input parameters
+                                     'decrease' : []}   # no input parameters
 
     def new_scope(self, enclosing_scope):
         scope_object = SymbolTable(
@@ -96,6 +99,8 @@ class AstNodeVisitor(NodeVisitor):
             return self.ignore_unary_symbols(unaryNode.expression)
         elif isinstance(unaryNode, BinaryExpNode):
             return self.eval_bin_expr_type(unaryNode)
+        elif isinstance(unaryNode, RunNode):
+            return self.get_returnType_from_func(unaryNode)
         else:
             return self.eval_term_node_type(unaryNode)
 
@@ -119,7 +124,11 @@ class AstNodeVisitor(NodeVisitor):
         return_types_of_predef_functions = {'isTurnedOn' : bool,
                                             'setMode' : bool,
                                             'getTemp' : float,
-                                            'changeMode' : bool}
+                                            'changeMode' : bool,
+                                            'close' : int,
+                                            'open_to' : int,
+                                            'increase' : int,
+                                            'decrease' : int}
         last_id = runNode.id.ids[-1].name  # Is the last name of a dot sequence like LivingRoom.light.setState
         temp_scope = self.current_scope
         return_type = None
@@ -164,6 +173,8 @@ class AstNodeVisitor(NodeVisitor):
             left_child = self.ignore_unary_symbols(binExpNode.expr1)
         elif isinstance(binExpNode.expr1, BinaryExpNode):
             left_child = self.eval_bin_expr_type(binExpNode.expr1)
+        elif isinstance(binExpNode.expr1, RunNode):
+            left_child = self.get_returnType_from_func(binExpNode.expr1)
 
         if isinstance(binExpNode.expr2, TermNode):
             right_child = self.eval_term_node_type(binExpNode.expr2)
@@ -171,6 +182,8 @@ class AstNodeVisitor(NodeVisitor):
             right_child = self.ignore_unary_symbols(binExpNode.expr2)
         elif isinstance(binExpNode.expr2, BinaryExpNode):
             right_child = self.eval_bin_expr_type(binExpNode.expr2)
+        elif isinstance(binExpNode.expr2, RunNode):
+            right_child = self.get_returnType_from_func(binExpNode.expr2)
 
         self.check_binExpr_exceptions(binExpNode, left_child, right_child)
         final_type = self.type_w_higest_precedence(right_child, left_child)
@@ -260,6 +273,9 @@ class AstNodeVisitor(NodeVisitor):
                 LHS_type_of_equal = self.eval_bin_expr_type(node.expression.expr1)
             elif isinstance(node.expression.expr1, RunNode):
                 LHS_type_of_equal = self.get_returnType_from_func(node.expression.expr1)
+            elif isinstance(node.expression.expr1, UnaryExpNode):
+                LHS_type_of_equal = self.ignore_unary_symbols(node.expression.expr1)
+
 
             # Evaluates the RHS of the compare operator
             if isinstance(node.expression.expr2, TermNode):
@@ -268,6 +284,8 @@ class AstNodeVisitor(NodeVisitor):
                 RHS_type_of_equal = self.eval_bin_expr_type(node.expression.expr2)
             elif isinstance(node.expression.expr2, RunNode):
                 RHS_type_of_equal = self.get_returnType_from_func(node.expression.expr2)
+            elif isinstance(node.expression.expr2, UnaryExpNode):
+                RHS_type_of_equal = self.ignore_unary_symbols(node.expression.expr2)
 
             if LHS_type_of_equal != RHS_type_of_equal:
                 raise TypeError(LHS_type_of_equal, 'and', RHS_type_of_equal, 'is not the same and cannot be compared')

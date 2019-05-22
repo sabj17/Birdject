@@ -11,6 +11,7 @@ set bacon to string;
 set numberString to "high" + "five";
 set numberString to "high" + 5 + bacon;
 set input1 to false;
+set skumbanan to 1 / 0;
 
 LivingRoom{
     set light to Light(pin9, pin10);
@@ -82,21 +83,21 @@ function globalFunc(input1, input2, input3){
 set varFunc to run globalFunc(1, 2, "sup my nig... daddy");
 set batmand to run LivingRoom.AnotherRoom.burnRoom(number1);
 
-when (run LivingRoom.light.getTemp()){
+when (run LivingRoom.light.isTurnedOn()){
 
 }
 
-when(run LivingRoom.getTemp1(temp1) > 20){
+when(run LivingRoom.getTemp1(temp1)> 20){
     set hello to 2;
-    set x to 22;
+    set x to not 22;
     set y to "hej";
     set lorteString to "lortestring";
     set pikString to "JenMedDeStoreSten";
     set windowXX to 55;
     set boolman to true;
     set klamme to run LivingRoom.closeWindow(123, "hej");
-    set batmand to run LivingRoom.AnotherRoom.burnRoom(x);
-    set batmand to run LivingRoom.AnotherRoom.burnRoom(x);
+    set batmand to (run LivingRoom.AnotherRoom.burnRoom(x)) + 2.2;
+    //set batmand to not run LivingRoom.AnotherRoom.burnRoom(x);
 
     //set funkydunky to run globalFunc(hello, x, windowXX);
 
