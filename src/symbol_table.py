@@ -55,7 +55,7 @@ class NodeVisitor(object):
         node.visit_children(self)
 
 
-class AstNodeVisitor(NodeVisitor):
+class BuildSymbolTableVisitor(NodeVisitor):
     def __init__(self):
         self.current_scope = SymbolTable()
 

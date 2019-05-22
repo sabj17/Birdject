@@ -4,7 +4,7 @@ from prettytable import PrettyTable
 
 from codegen.program import Program
 from codegen.visitor import Visitor
-from src.symbol_table import AstNodeVisitor
+from src.symbol_table import BuildSymbolTableVisitor
 from src.grammar import *
 from src.lexer import Lexer
 from src.parser import Parser
@@ -50,7 +50,7 @@ ast = parse_tree.accept(BuildASTVisitor())
 
 ast.accept(GraphASTVisitor())
 
-visitor = AstNodeVisitor()
+visitor = BuildSymbolTableVisitor()
 ast.accept(visitor)
 symtable = visitor.current_scope
 

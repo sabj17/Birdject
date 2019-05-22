@@ -5,7 +5,7 @@ from src.symbol_table import *
 class TestSymbolTable(TestCase):
     def setUp(self):
         self.symtable = SymbolTable()
-        self.visitor = AstNodeVisitor()
+        self.visitor = BuildSymbolTableVisitor()
 
     def test_open_scope(self):  # TODO: assert something when open_scope has been fixed for keys/values
         self.symtable.add_symbol('simon')

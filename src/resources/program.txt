@@ -157,33 +157,7 @@ class Thermometer : public Input {
 
 
 // ///////////////// Generated Code Below ///////////////// //
-
-
-class LivingRoomClass {
-  public:
-Light light1;
-Switch switch1;
-
-LivingRoomClass() : light1(pin8) , switch1(pin2) {}
-
-} LivingRoom;
-
-
-
-class KitchenClass {
-  public:
-Light light2;
-Switch switch2;
-
-KitchenClass() : light2(pin9) , switch2(pin3) {}
-
-} Kitchen;
-
 void initializeObjects(){
-LivingRoom.light1.initialize();
-LivingRoom.switch1.initialize();
-Kitchen.light2.initialize();
-Kitchen.switch2.initialize();
 }
 
 void setup() {
@@ -192,24 +166,4 @@ initializeObjects();
 }
 
 void loop() {
-
-if (LivingRoom.switch1.isTurnedOn()){
-LivingRoom.light1.changeMode();
-if (LivingRoom.light1.isTurnedOn()) {
-Serial.println(String("LivingRoom Light is on"));
-}
-else {
-Serial.println(String("LivingRoom Light is off"));
-}
-}
-
-if (Kitchen.switch2.isTurnedOn()){
-Kitchen.light2.changeMode();
-if (Kitchen.light2.isTurnedOn()) {
-Serial.println(String("Kitchen Light is on"));
-}
-else {
-Serial.println(String("Kitchen Light is off"));
-}
-}
 }
