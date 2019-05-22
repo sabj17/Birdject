@@ -1,5 +1,4 @@
 #include <dht.h>
-
 dht DHT;
 
 #define pin1 1
@@ -25,8 +24,6 @@ dht DHT;
 // Not implemented
 class List{
   public:
-
-
 };
 
 class Output {
@@ -40,7 +37,6 @@ class Output {
     void initialize() {
       pinMode(pin, OUTPUT);
     }
-
 
     bool setMode(bool newMode) {
       state = newMode;
@@ -100,7 +96,6 @@ class Radiator : public Output {
       return newMode;
     }
 
-
     int increase(){
       if(state < 5){
         state++;
@@ -114,10 +109,7 @@ class Radiator : public Output {
       }
       return state;
     }
-
 };
-
-
 
 class Input {
   public:
@@ -135,7 +127,6 @@ class Input {
       return digitalRead(pin);
     }
 };
-
 
 class Switch : public Input {
   public:
@@ -155,7 +146,5 @@ class Thermometer : public Input {
         return DHT.temperature;
     }
 };
-
-
 
 // ///////////////// Generated Code Below ///////////////// //
