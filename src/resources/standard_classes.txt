@@ -96,10 +96,15 @@ class Radiator : public Output {
       return newMode;
     }
 
+    int getHeatLevel(){
+        return Output::isTurnedOn();
+    }
+
     int increase(){
       if(state < 5){
         state++;
       }
+      delay(200);
       return state;
     }
 
@@ -107,6 +112,7 @@ class Radiator : public Output {
       if(state > 0){
         state--;
       }
+      delay(200);
       return state;
     }
 };

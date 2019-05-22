@@ -96,10 +96,15 @@ class Radiator : public Output {
       return newMode;
     }
 
+    int getHeatLevel(){
+        return Output::isTurnedOn();
+    }
+
     int increase(){
       if(state < 5){
         state++;
       }
+      delay(200);
       return state;
     }
 
@@ -107,6 +112,7 @@ class Radiator : public Output {
       if(state > 0){
         state--;
       }
+      delay(200);
       return state;
     }
 };
@@ -148,78 +154,40 @@ class Thermometer : public Input {
 };
 
 // ///////////////// Generated Code Below ///////////////// //
-bool global_var =  !(false);
-
-Light global_light(pin1);
 
 
-
-class HomeClass {
+class LivingRoomClass {
   public:
-int int_var = 1 + 2 - 3 * (4 / 5);
-float float_var = 10 + 10.5;
-String string_var = String("This is a string") + int_var;
-Light light;
-Switch switch1;
+Radiator radiator;
+Switch upSwitch;
+Switch downSwitch;
 
-float home_func (int param1, float param2){
-return param1 * param2;
-}
+LivingRoomClass() : radiator(pin8) , upSwitch(pin2) , downSwitch(pin3) {}
 
-
-class RoomClass {
-  public:
-int int_var = 1;
-Light light;
-
-void room_func (bool mode){
-light.setMode(mode);
-}
-
-RoomClass() : light(pin9) {}
-
-} Room;
-
-HomeClass() : light(pin8) , switch1(pin2) {}
-
-} Home;
-
-float res = Home.home_func(5, 5.5);
+} LivingRoom;
 
 void initializeObjects(){
-global_light.initialize();
-Home.light.initialize();
-Home.switch1.initialize();
-Home.Room.light.initialize();
+LivingRoom.radiator.initialize();
+LivingRoom.upSwitch.initialize();
+LivingRoom.downSwitch.initialize();
 }
 
 void setup() {
 Serial.begin(9600);
-Home.home_func(5, 5.5);
-
-Serial.println(String("Result: ") + res);
-
 initializeObjects();
 }
 
 void loop() {
 
-if (Home.switch1.isTurnedOn()){
-int res = 1;
-if (Home.light.isTurnedOn() && Home.Room.light.isTurnedOn()) {
-Home.light.setMode(false);
-Home.Room.room_func(false);
-}
-else if (Home.light.isTurnedOn() || Home.Room.light.isTurnedOn()) {
-Serial.println(String("One light is turned on!"));
-}
-else {
-Home.light.setMode(true);
-Home.Room.room_func(true);
-}
+if (true){
+Serial.println(LivingRoom.radiator.getHeatLevel());
 }
 
-if (Home.switch1.isTurnedOn() == false){
-Serial.println(String("Home switch is turned off"));
+if (LivingRoom.upSwitch.isTurnedOn()){
+LivingRoom.radiator.increase();
+}
+
+if (LivingRoom.downSwitch.isTurnedOn()){
+LivingRoom.radiator.decrease();
 }
 }

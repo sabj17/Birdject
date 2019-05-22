@@ -1,0 +1,17 @@
+LivingRoom {
+    set radiator to Radiator(pin8);
+    set upSwitch to Switch(pin2);
+    set downSwitch to Switch(pin3);
+}
+
+when(on){
+    run print(run LivingRoom.radiator.getHeatLevel());
+}
+
+when (run LivingRoom.upSwitch.isTurnedOn()){
+    run LivingRoom.radiator.increase();
+}
+
+when (run LivingRoom.downSwitch.isTurnedOn()){
+    run LivingRoom.radiator.decrease();
+}
