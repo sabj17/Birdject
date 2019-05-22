@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="311eaa91-087f-4edd-b12e-d967ecc45f3e" name="Default Changelist" comment="added some methods to the code gen visitor">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AST.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/AST.gv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/codegen/visitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/codegen/visitor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parse_tree.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/parse_tree.gv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/program.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/program.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/standard_classes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/standard_classes.txt" afterDir="false" />
-    </list>
+    <list default="true" id="311eaa91-087f-4edd-b12e-d967ecc45f3e" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,16 +12,16 @@
     <SUITE FILE_PATH="coverage/Birdject$parser.coverage" NAME="parser Coverage Results" MODIFIED="1553512703263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$pytest_in_test.coverage" NAME="pytest in test Coverage Results" MODIFIED="1553545532014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/Birdject$pytest_in_test_parser_py.coverage" NAME="pytest in test_parser.py Coverage Results" MODIFIED="1553543330649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1558525204037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1557741414104" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1553550625262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
+        <entry file="file://$PROJECT_DIR$/src/compiler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="40" column="32" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
+            <state relative-caret-position="465">
+              <caret line="57" column="21" selection-start-line="57" selection-start-column="14" selection-end-line="57" selection-end-column="21" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -37,29 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/resources/tester.jnr">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/resources/standard_classes.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="99" column="21" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/compiler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-478">
-              <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+            <state relative-caret-position="75">
+              <caret line="30" column="36" lean-forward="true" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -67,53 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="36" column="27" lean-forward="true" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/parser.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AST.gv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="364" lean-forward="true" selection-end-line="364" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/resources/Example.jnr">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/resources/program.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1111">
-              <caret line="206" column="14" lean-forward="true" selection-end-line="236" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/resources/TestMultipleRooms.jnr">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+            <state relative-caret-position="182">
+              <caret line="57" column="43" lean-forward="true" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -129,36 +58,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pop_sc</find>
-      <find>&quot;;</find>
-      <find>assignno</find>
-      <find>repla</find>
-      <find>replace_</find>
-      <find>tabs</find>
-      <find>\</find>
-      <find>\t</find>
+      <find>formal</find>
+      <find>termn</find>
+      <find>expression</find>
+      <find>type</find>
+      <find>expre</find>
+      <find>visit_Block</find>
+      <find>param</find>
+      <find>idnode</find>
+      <find>raise</find>
+      <find>arra</find>
+      <find>dotn</find>
+      <find>id-re</find>
+      <find>act</find>
+      <find>prin</find>
+      <find>actu</find>
       <find>func</find>
-      <find>curren</find>
-      <find>declared_vars</find>
-      <find>para</find>
+      <find>bl</find>
+      <find>forma</find>
       <find>print</find>
-      <find>run global_function(1, 1.1);</find>
-      <find>classnod</find>
-      <find>current_class</find>
-      <find>current_cl</find>
-      <find>when</find>
-      <find>ifn</find>
-      <find>find_</find>
-      <find>assignn</find>
-      <find>find_sc</find>
-      <find>find_ss</find>
-      <find>ifnod</find>
       <find>if</find>
-      <find>ifnode</find>
-      <find>switch</find>
-      <find>get_ret</find>
-      <find>functionN</find>
-      <find>setMode</find>
+      <find>dot-ref</find>
+      <find>classN</find>
+      <find>for_s</find>
+      <find>newb</find>
+      <find>actualpa</find>
+      <find>run</find>
+      <find>va</find>
+      <find>fuc</find>
+      <find>actual</find>
+      <find>newob</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -168,7 +97,6 @@
         <entry key="$PROJECT_DIR$" value="test_with_our_grammar" />
       </map>
     </option>
-    <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -179,12 +107,10 @@
         <option value="$PROJECT_DIR$/test/test_parser.py" />
         <option value="$PROJECT_DIR$/src/tokens.py" />
         <option value="$PROJECT_DIR$/ArdujenoCode/Example.jnr" />
-        <option value="$PROJECT_DIR$/src/lexer.py" />
         <option value="$PROJECT_DIR$/test/test_grammar.py" />
         <option value="$PROJECT_DIR$/test/test_stack.py" />
         <option value="$PROJECT_DIR$/src/resources/testgrammar_example" />
         <option value="$PROJECT_DIR$/src/test_tokenStream.py" />
-        <option value="$PROJECT_DIR$/src/resources/grammar.txt" />
         <option value="$PROJECT_DIR$/src/resources/oldtestgrammar" />
         <option value="$PROJECT_DIR$/src/resources/testgrammar.txt" />
         <option value="$PROJECT_DIR$/test/grammar/test_grammar.py" />
@@ -201,37 +127,27 @@
         <option value="$PROJECT_DIR$/test/grammar/test_grammarBuilder.py" />
         <option value="$PROJECT_DIR$/src/SymbolTable.py" />
         <option value="$PROJECT_DIR$/src/crap.py" />
-        <option value="$PROJECT_DIR$/src/parsetree.py" />
-        <option value="$PROJECT_DIR$/src/AST.gv" />
         <option value="$PROJECT_DIR$/src/codegen/program.py" />
         <option value="$PROJECT_DIR$/src/crap_table.py" />
+        <option value="$PROJECT_DIR$/src/resources/grammar.txt" />
+        <option value="$PROJECT_DIR$/src/AST.gv" />
+        <option value="$PROJECT_DIR$/src/parsetree.py" />
+        <option value="$PROJECT_DIR$/src/resources/Example.jnr" />
         <option value="$PROJECT_DIR$/src/ast.py" />
         <option value="$PROJECT_DIR$/src/resources/token_spec.txt" />
+        <option value="$PROJECT_DIR$/src/resources/keywords.txt" />
         <option value="$PROJECT_DIR$/src/resources/Example1.jnr" />
-        <option value="$PROJECT_DIR$/src/resources/ArdujenoProgram.jnr" />
-        <option value="$PROJECT_DIR$/src/resources/OneSwitchTwoRooms.jnr" />
-        <option value="$PROJECT_DIR$/src/resources/TestUsingAnd.jnr" />
-        <option value="$PROJECT_DIR$/src/resources/TestTempOneLight.jnr" />
-        <option value="$PROJECT_DIR$/src/resources/TestClassFunctions.jnr" />
-        <option value="$PROJECT_DIR$/src/resources/TestOneSwitchTwoRooms.jnr" />
+        <option value="$PROJECT_DIR$/src/lexer.py" />
         <option value="$PROJECT_DIR$/src/parser.py" />
-        <option value="$PROJECT_DIR$/src/resources/Example.jnr" />
-        <option value="$PROJECT_DIR$/src/resources/TestButton.jnr" />
-        <option value="$PROJECT_DIR$/src/symbol_table.py" />
-        <option value="$PROJECT_DIR$/src/resources/program.txt" />
-        <option value="$PROJECT_DIR$/src/resources/TestMultipleRooms.jnr" />
-        <option value="$PROJECT_DIR$/src/resources/tester.jnr" />
-        <option value="$PROJECT_DIR$/src/codegen/visitor.py" />
         <option value="$PROJECT_DIR$/src/compiler.py" />
-        <option value="$PROJECT_DIR$/src/resources/standard_classes.txt" />
+        <option value="$PROJECT_DIR$/src/symbol_table.py" />
+        <option value="$PROJECT_DIR$/src/codegen/visitor.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1285" />
-    <option name="y" value="23" />
-    <option name="width" value="1263" />
-    <option name="height" value="1404" />
+    <option name="width" value="1920" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -239,47 +155,42 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="Birdject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Birdject" type="462c0819:PsiDirectoryNode" />
+              <item name="Birdjectworking" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Birdjectworking" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Birdject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Birdject" type="462c0819:PsiDirectoryNode" />
+              <item name="Birdjectworking" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Birdjectworking" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Birdject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Birdject" type="462c0819:PsiDirectoryNode" />
+              <item name="Birdjectworking" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Birdjectworking" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="codegen" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Birdject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Birdject" type="462c0819:PsiDirectoryNode" />
+              <item name="Birdjectworking" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Birdjectworking" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Birdject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Birdject" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/test" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -399,7 +310,7 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in C:/Users/Radel/Desktop/Python/Birdject/test/test_parser.py" type="tests" factoryName="py.test" nameIsGenerated="true">
+    <configuration name="pytest in /home/rasmus/PycharmProjects/Birdjectworking/test/test_parser.py" type="tests" factoryName="py.test" nameIsGenerated="true">
       <module name="Birdject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -435,7 +346,7 @@
       <item itemvalue="Python.ast" />
       <item itemvalue="Python.compiler" />
       <item itemvalue="Python.symbol_table" />
-      <item itemvalue="Python tests.pytest in C:/Users/Radel/Desktop/Python/Birdject/test/test_parser.py" />
+      <item itemvalue="Python tests.pytest in /home/rasmus/PycharmProjects/Birdjectworking/test/test_parser.py" />
       <item itemvalue="Python tests.pytest in test" />
       <item itemvalue="Python tests.Unittests in test_nonterminal.py" />
       <item itemvalue="Python tests.Unittests in test_tokenStream.py" />
@@ -486,352 +397,335 @@
       <workItem from="1557654179430" duration="11502000" />
       <workItem from="1557722546319" duration="1663000" />
       <workItem from="1557738478370" duration="1212000" />
-      <workItem from="1557740919385" duration="184319000" />
+      <workItem from="1557740919385" duration="937000" />
+      <workItem from="1557742626541" duration="22467000" />
+      <workItem from="1557820498711" duration="34462000" />
+      <workItem from="1558007924697" duration="2732000" />
+      <workItem from="1558338350465" duration="3107000" />
     </task>
-    <task id="LOCAL-00040" summary="Matti Code gen 4Head">
-      <created>1557855756321</created>
+    <task id="LOCAL-00001" summary="fixed">
+      <created>1553513025633</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1553513025633</updated>
+    </task>
+    <task id="LOCAL-00002" summary="small changes in lexer and parser, added test folder">
+      <created>1553551617312</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1553551617313</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added the ability to make grammar from file">
+      <created>1553596756093</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1553596756094</updated>
+    </task>
+    <task id="LOCAL-00004" summary="it works">
+      <created>1553596985347</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1553596985347</updated>
+    </task>
+    <task id="LOCAL-00005" summary="it works">
+      <created>1553597743955</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1553597743955</updated>
+    </task>
+    <task id="LOCAL-00006" summary="it works">
+      <created>1553597768680</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1553597768680</updated>
+    </task>
+    <task id="LOCAL-00007" summary="it works">
+      <created>1553597832897</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1553597832898</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added exception to parser">
+      <created>1553606024100</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1553606024100</updated>
+    </task>
+    <task id="LOCAL-00009" summary="added exception to parser">
+      <created>1554372641740</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1554372641740</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added exception to parser">
+      <created>1554372830833</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1554372830833</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added exception to parser">
+      <created>1554372903026</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1554372903026</updated>
+    </task>
+    <task id="LOCAL-00012" summary="works">
+      <created>1554375020457</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1554375020457</updated>
+    </task>
+    <task id="LOCAL-00013" summary="works">
+      <created>1554381584867</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1554381584867</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Commentmus">
+      <created>1554385437076</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1554385437076</updated>
+    </task>
+    <task id="LOCAL-00015" summary="GrammarBuilder tests done">
+      <created>1554713044784</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1554713044784</updated>
+    </task>
+    <task id="LOCAL-00016" summary="GrammarBuilder tests done">
+      <created>1554716524962</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1554716524962</updated>
+    </task>
+    <task id="LOCAL-00017" summary="currently works">
+      <created>1554720664822</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1554720664822</updated>
+    </task>
+    <task id="LOCAL-00018" summary="tests for stack class done">
+      <created>1554724014081</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1554724014081</updated>
+    </task>
+    <task id="LOCAL-00019" summary="updated test_build_grammar_from_file">
+      <created>1554797259074</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1554797259074</updated>
+    </task>
+    <task id="LOCAL-00020" summary="jen">
+      <created>1554807110529</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1554807110529</updated>
+    </task>
+    <task id="LOCAL-00021" summary="only need test_match for parser tests now">
+      <created>1554816599830</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1554816599830</updated>
+    </task>
+    <task id="LOCAL-00022" summary="update on test_grammarBuilder with new testgrammar">
+      <created>1555071773804</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1555071773804</updated>
+    </task>
+    <task id="LOCAL-00023" summary="update 2">
+      <created>1555074291017</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1555074291017</updated>
+    </task>
+    <task id="LOCAL-00024" summary="grammarBuilder fully works with new test grammar">
+      <created>1555314340678</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1555314340678</updated>
+    </task>
+    <task id="LOCAL-00025" summary="test_grammar updated">
+      <created>1555401907814</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1555401907814</updated>
+    </task>
+    <task id="LOCAL-00026" summary="all tests updated with new testgrammar">
+      <created>1555406396132</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1555406396132</updated>
+    </task>
+    <task id="LOCAL-00027" summary="skeleton for symbol_table">
+      <created>1556017449289</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1556017449289</updated>
+    </task>
+    <task id="LOCAL-00028" summary="symbol table update with to-dos">
+      <created>1556111014271</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1556111014271</updated>
+    </task>
+    <task id="LOCAL-00029" summary="symbol table updaterino">
+      <created>1556285444501</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1556285444502</updated>
+    </task>
+    <task id="LOCAL-00030" summary="symbol table updaterino">
+      <created>1556615615095</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1556615615096</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Need to fix visits of NoneType, FunctionNode and WhenNode">
+      <created>1556630237184</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1556630237184</updated>
+    </task>
+    <task id="LOCAL-00032" summary="AST visitor done">
+      <created>1556783494581</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1556783494581</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Symboltable stuff">
+      <created>1557401558028</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1557401558028</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Symboltable fixed types with assignment">
+      <created>1557480931031</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1557480931031</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Jener stuff has been extracted into simons stuff&#10;8===D&lt;===8">
+      <created>1557741481112</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1557741481112</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Changed the lexer a bit, and refactored the astbuilder">
+      <created>1557864190390</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1557864190390</updated>
+    </task>
+    <task id="LOCAL-00037" summary="made the graph thing a visitor">
+      <created>1557869877560</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1557869877560</updated>
+    </task>
+    <task id="LOCAL-00038" summary="made the graph thing a visitor">
+      <created>1557869893354</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1557869893354</updated>
+    </task>
+    <task id="LOCAL-00039" summary="made the graph thing a visitor">
+      <created>1557870362021</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1557870362021</updated>
+    </task>
+    <task id="LOCAL-00040" summary="made the graph thing a visitor">
+      <created>1557905349414</created>
       <option name="number" value="00040" />
       <option name="presentableId" value="LOCAL-00040" />
       <option name="project" value="LOCAL" />
-      <updated>1557855756321</updated>
+      <updated>1557905349414</updated>
     </task>
-    <task id="LOCAL-00041" summary="some code for jener">
-      <created>1557858189468</created>
+    <task id="LOCAL-00041" summary="made the graph thing a visitor">
+      <created>1557905912906</created>
       <option name="number" value="00041" />
       <option name="presentableId" value="LOCAL-00041" />
       <option name="project" value="LOCAL" />
-      <updated>1557858189468</updated>
+      <updated>1557905912906</updated>
     </task>
-    <task id="LOCAL-00042" summary="some code for jener">
-      <created>1557858211681</created>
+    <task id="LOCAL-00042" summary="made the graph thing a visitor">
+      <created>1557906750043</created>
       <option name="number" value="00042" />
       <option name="presentableId" value="LOCAL-00042" />
       <option name="project" value="LOCAL" />
-      <updated>1557858211681</updated>
+      <updated>1557906750043</updated>
     </task>
-    <task id="LOCAL-00043" summary="Codejen now with if statements">
-      <created>1557868808702</created>
+    <task id="LOCAL-00043" summary="fixed runNode">
+      <created>1557906834884</created>
       <option name="number" value="00043" />
       <option name="presentableId" value="LOCAL-00043" />
       <option name="project" value="LOCAL" />
-      <updated>1557868808702</updated>
+      <updated>1557906834884</updated>
     </task>
-    <task id="LOCAL-00044" summary="src.ast">
-      <created>1557906564797</created>
+    <task id="LOCAL-00044" summary="fixed the is mathew">
+      <created>1557921674914</created>
       <option name="number" value="00044" />
       <option name="presentableId" value="LOCAL-00044" />
       <option name="project" value="LOCAL" />
-      <updated>1557906564797</updated>
+      <updated>1557921674914</updated>
     </task>
-    <task id="LOCAL-00045" summary="Changed name to turnedOn">
-      <created>1557906958698</created>
+    <task id="LOCAL-00045" summary="fixed the is mathew">
+      <created>1557921713540</created>
       <option name="number" value="00045" />
       <option name="presentableId" value="LOCAL-00045" />
       <option name="project" value="LOCAL" />
-      <updated>1557906958698</updated>
+      <updated>1557921713540</updated>
     </task>
-    <task id="LOCAL-00046" summary="Fixed repr some places">
-      <created>1557911120576</created>
+    <task id="LOCAL-00046" summary="very important name change">
+      <created>1558524997224</created>
       <option name="number" value="00046" />
       <option name="presentableId" value="LOCAL-00046" />
       <option name="project" value="LOCAL" />
-      <updated>1557911120576</updated>
+      <updated>1558524997224</updated>
     </task>
-    <task id="LOCAL-00047" summary="Fixed repr some places">
-      <created>1557912917465</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1557912917465</updated>
-    </task>
-    <task id="LOCAL-00048" summary="small thing">
-      <created>1557913087957</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1557913087957</updated>
-    </task>
-    <task id="LOCAL-00049" summary="codejen visitor cleaned up a bit">
-      <created>1557915835344</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1557915835344</updated>
-    </task>
-    <task id="LOCAL-00050" summary="more spring cleaning">
-      <created>1557919219722</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1557919219722</updated>
-    </task>
-    <task id="LOCAL-00051" summary="Click button program now works">
-      <created>1557933703287</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1557933703287</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Click button program now works">
-      <created>1557933891789</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1557933891789</updated>
-    </task>
-    <task id="LOCAL-00053" summary="More optimized codegen">
-      <created>1557939633415</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1557939633415</updated>
-    </task>
-    <task id="LOCAL-00054" summary="More optimized codegen">
-      <created>1557941074988</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1557941074988</updated>
-    </task>
-    <task id="LOCAL-00055" summary="Created a the first test file and fixed minor assignment bug">
-      <created>1557949368715</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1557949368715</updated>
-    </task>
-    <task id="LOCAL-00056" summary="removed current string">
-      <created>1557949749879</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1557949749879</updated>
-    </task>
-    <task id="LOCAL-00057" summary="More codegen cleaning">
-      <created>1557951601145</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1557951601145</updated>
-    </task>
-    <task id="LOCAL-00058" summary="minor fix">
-      <created>1557992719817</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1557992719817</updated>
-    </task>
-    <task id="LOCAL-00059" summary="changed string">
-      <created>1557993889152</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1557993889152</updated>
-    </task>
-    <task id="LOCAL-00060" summary="added pin5">
-      <created>1558002834729</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1558002834745</updated>
-    </task>
-    <task id="LOCAL-00061" summary="Working two rooms">
-      <created>1558007309906</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1558007309906</updated>
-    </task>
-    <task id="LOCAL-00062" summary="Code gen now with thermometer">
-      <created>1558013789059</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1558013789059</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Code gen now with thermometer">
-      <created>1558014756693</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1558014756693</updated>
-    </task>
-    <task id="LOCAL-00064" summary="setupclass are called in a function now">
-      <created>1558027955115</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1558027955115</updated>
-    </task>
-    <task id="LOCAL-00065" summary="Var dcl works in when">
-      <created>1558030267353</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1558030267353</updated>
-    </task>
-    <task id="LOCAL-00066" summary="Var dcl works in when">
-      <created>1558030318318</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1558030318318</updated>
-    </task>
-    <task id="LOCAL-00067" summary="Codegen very much cleaned">
-      <created>1558035315311</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1558035315311</updated>
-    </task>
-    <task id="LOCAL-00068" summary="Fixed constructor comma">
-      <created>1558083689994</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1558083689994</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Changed names of std functions">
-      <created>1558090715534</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1558090715534</updated>
-    </task>
-    <task id="LOCAL-00070" summary="fixed all test files">
-      <created>1558093733621</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1558093733621</updated>
-    </task>
-    <task id="LOCAL-00071" summary="Return types and functions not used not generated">
-      <created>1558096292053</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1558096292054</updated>
-    </task>
-    <task id="LOCAL-00072" summary="multiple vars with same type and clean job">
-      <created>1558110401622</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1558110401622</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Codegen improvements">
-      <created>1558120585167</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1558120585167</updated>
-    </task>
-    <task id="LOCAL-00074" summary="Codegen improvements">
-      <created>1558121056874</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1558121056874</updated>
-    </task>
-    <task id="LOCAL-00075" summary="Changed standard_classes a bit">
-      <created>1558284489948</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1558284489948</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Changed standard_classes a bit">
-      <created>1558296050798</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1558296050798</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Changed standard_classes a bit">
-      <created>1558297512813</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1558297512813</updated>
-    </task>
-    <task id="LOCAL-00078" summary="added radiator methods">
-      <created>1558340282199</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1558340282203</updated>
-    </task>
-    <task id="LOCAL-00079" summary="added radiator methods">
-      <created>1558341304742</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1558341304742</updated>
-    </task>
-    <task id="LOCAL-00080" summary="added radiator methods">
-      <created>1558342691776</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1558342691776</updated>
-    </task>
-    <task id="LOCAL-00081" summary="added radiator methods">
-      <created>1558343280238</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1558343280239</updated>
-    </task>
-    <task id="LOCAL-00082" summary="Added a class stack instead of list">
-      <created>1558355062155</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1558355062155</updated>
-    </task>
-    <task id="LOCAL-00083" summary="Cleaned up the start of code gen">
-      <created>1558355524293</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1558355524293</updated>
-    </task>
-    <task id="LOCAL-00084" summary="Changed return type of std functions">
-      <created>1558426731474</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1558426731474</updated>
-    </task>
-    <task id="LOCAL-00085" summary="Removed tabserino and made assignnode_visit easier to understand">
-      <created>1558428971119</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1558428971119</updated>
-    </task>
-    <task id="LOCAL-00086" summary="testMultipleRooms">
-      <created>1558434927558</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1558434927558</updated>
-    </task>
-    <task id="LOCAL-00087" summary="added some methods to the code gen visitor">
-      <created>1558453482750</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1558453482750</updated>
-    </task>
-    <task id="LOCAL-00088" summary="added some methods to the code gen visitor">
-      <created>1558454517530</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1558454517530</updated>
-    </task>
-    <option name="localTasksCounter" value="89" />
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -867,51 +761,50 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="457775000" />
+    <option name="totallyTimeSpent" value="337161000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1618" height="877" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="0" width="1920" height="1040" extended-state="6" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.14762516" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.102768905" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3261745" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4994664" visible="true" weight="0.2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.23624161" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49893504" weight="0.32681867" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49840257" visible="true" weight="0.330076" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39914164" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4994664" weight="0.32751676" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49893504" weight="0.32790446" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053364" side_tool="true" weight="0.32832617" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50159746" side_tool="true" weight="0.6840391" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32885906" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.32960597" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
     <layout-to-restore>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.11681643" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.11579509" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32751676" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4994664" visible="true" weight="0.27114093" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.23624161" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32832617" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4994664" visible="true" weight="0.25214592" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4994664" weight="0.32751676" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4994664" weight="0.32832617" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053364" side_tool="true" weight="0.32832617" />
       <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32885906" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -923,41 +816,45 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Created a the first test file and fixed minor assignment bug" />
-    <MESSAGE value="removed current string" />
-    <MESSAGE value="More codegen cleaning" />
-    <MESSAGE value="minor fix" />
-    <MESSAGE value="changed string" />
-    <MESSAGE value="added pin5" />
-    <MESSAGE value="Working two rooms" />
-    <MESSAGE value="Code gen now with thermometer" />
-    <MESSAGE value="setupclass are called in a function now" />
-    <MESSAGE value="Var dcl works in when" />
-    <MESSAGE value="Codegen very much cleaned" />
-    <MESSAGE value="Fixed constructor comma" />
-    <MESSAGE value="Changed names of std functions" />
-    <MESSAGE value="fixed all test files" />
-    <MESSAGE value="Return types and functions not used not generated" />
-    <MESSAGE value="multiple vars with same type and clean job" />
-    <MESSAGE value="Codegen improvements" />
-    <MESSAGE value="Changed standard_classes a bit" />
-    <MESSAGE value="added radiator methods" />
-    <MESSAGE value="Added a class stack instead of list" />
-    <MESSAGE value="Cleaned up the start of code gen" />
-    <MESSAGE value="Changed return type of std functions" />
-    <MESSAGE value="Removed tabserino and made assignnode_visit easier to understand" />
-    <MESSAGE value="testMultipleRooms" />
-    <MESSAGE value="added some methods to the code gen visitor" />
-    <option name="LAST_COMMIT_MESSAGE" value="added some methods to the code gen visitor" />
+    <MESSAGE value="Commentmus" />
+    <MESSAGE value="GrammarBuilder tests done" />
+    <MESSAGE value="currently works" />
+    <MESSAGE value="tests for stack class done" />
+    <MESSAGE value="updated test_build_grammar_from_file" />
+    <MESSAGE value="jen" />
+    <MESSAGE value="only need test_match for parser tests now" />
+    <MESSAGE value="update on test_grammarBuilder with new testgrammar" />
+    <MESSAGE value="update 2" />
+    <MESSAGE value="grammarBuilder fully works with new test grammar" />
+    <MESSAGE value="test_grammar updated" />
+    <MESSAGE value="all tests updated with new testgrammar" />
+    <MESSAGE value="skeleton for symbol_table" />
+    <MESSAGE value="symbol table update with to-dos" />
+    <MESSAGE value="symbol table updaterino" />
+    <MESSAGE value="Need to fix visits of NoneType, FunctionNode and WhenNode" />
+    <MESSAGE value="AST visitor done" />
+    <MESSAGE value="Symboltable stuff" />
+    <MESSAGE value="Symboltable fixed types with assignment" />
+    <MESSAGE value="Jener stuff has been extracted into simons stuff&#10;8===D&lt;===8" />
+    <MESSAGE value="Changed the lexer a bit, and refactored the astbuilder" />
+    <MESSAGE value="made the graph thing a visitor" />
+    <MESSAGE value="fixed runNode" />
+    <MESSAGE value="fixed the is mathew" />
+    <MESSAGE value="very important name change" />
+    <option name="LAST_COMMIT_MESSAGE" value="very important name change" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Birdject$Unittests_for_test_grammar_TestGrammar_test_get_rules_for.coverage" NAME="Unittests for test_grammar.TestGrammar.test_get_rules_for Coverage Results" MODIFIED="1554312997343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/Birdject$Unittests_in_test_grammar_py.coverage" NAME="Unittests in test_grammar.py Coverage Results" MODIFIED="1554372509218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/Birdject$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1554665954240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1557732709094" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$parser.coverage" NAME="parser Coverage Results" MODIFIED="1553767623223" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/Birdject$Unittests_for_test_grammar_TestGrammar_test_get_rules_for.coverage" NAME="Unittests for test_grammar.TestGrammar.test_get_rules_for Coverage Results" MODIFIED="1554312997343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/Birdject$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1554665954240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/Birdject$Unittests_in_test_grammar_py.coverage" NAME="Unittests in test_grammar.py Coverage Results" MODIFIED="1554372509218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/Birdjectworking$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1558525328810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/token.py" />
+    <entry file="file://$PROJECT_DIR$/test/test_lambda.py" />
+    <entry file="file://$PROJECT_DIR$/test/test_grammar.py" />
     <entry file="file://$PROJECT_DIR$/test/test_grammarBuilder.py" />
     <entry file="file://$PROJECT_DIR$/test/test_parser.py" />
     <entry file="file://$PROJECT_DIR$/src/resources/testexample" />
@@ -1020,13 +917,6 @@
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tokens.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
@@ -1101,10 +991,116 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/crap_table.py" />
+    <entry file="file://$PROJECT_DIR$/src/tokens.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/Example.jnr">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="49" column="28" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/testgrammar.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
+        <state relative-caret-position="375">
           <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/Example1.jnr">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/grammar.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="80" column="32" selection-start-line="80" selection-start-column="26" selection-end-line="80" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parse_tree.gv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="37" selection-end-line="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1050">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lexer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/keywords.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="2" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/token_spec.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/grammar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parsetree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="83" column="35" lean-forward="true" selection-start-line="83" selection-start-column="35" selection-end-line="83" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codegen/strsplit.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codegen/codegen.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codegen/builder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codegen/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codegen/program.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
@@ -1117,193 +1113,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/grammar.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1620">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codegen/program.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="954">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/graphviz/lang.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="153" selection-start-line="153" selection-end-line="153" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/crap_table.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsetree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="224" column="22" selection-start-line="224" selection-start-column="19" selection-end-line="224" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/keywords.txt">
+    <entry file="file://$PROJECT_DIR$/src/resources/program.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lexer.py">
+    <entry file="file://$PROJECT_DIR$/src/AST.gv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="43" column="35" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="300">
+          <caret line="20" column="17" lean-forward="true" selection-end-line="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/token_spec.txt">
+    <entry file="file://$PROJECT_DIR$/src/resources/standard_classes.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/Example1.jnr">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="690">
+          <caret line="46" column="33" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ast.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="263" column="11" selection-start-line="263" selection-start-column="6" selection-end-line="263" selection-end-column="11" />
+        <state relative-caret-position="2080">
+          <caret line="369" selection-start-line="369" selection-end-line="369" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/TestUsingAnd.jnr">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/TestTempOneLight.jnr">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/TestClassFunctions.jnr">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="33" lean-forward="true" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/TestOneSwitchTwoRooms.jnr">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AST.gv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="364" lean-forward="true" selection-end-line="364" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/grammar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="183" column="40" selection-start-line="183" selection-start-column="36" selection-end-line="183" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/Example.jnr">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/TestButton.jnr">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1">
-          <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/TestMultipleRooms.jnr">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="36" column="27" lean-forward="true" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+        <state relative-caret-position="182">
+          <caret line="57" column="43" lean-forward="true" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
+    <entry file="file://$PROJECT_DIR$/src/compiler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="40" column="32" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
+        <state relative-caret-position="465">
+          <caret line="57" column="21" selection-start-line="57" selection-start-column="14" selection-end-line="57" selection-end-column="21" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/tester.jnr">
+    <entry file="file://$PROJECT_DIR$/src/codegen/visitor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/compiler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-478">
-          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/standard_classes.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="99" column="21" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/program.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1111">
-          <caret line="206" column="14" lean-forward="true" selection-end-line="236" />
+        <state relative-caret-position="75">
+          <caret line="30" column="36" lean-forward="true" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
         </state>
       </provider>
     </entry>

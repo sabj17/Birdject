@@ -3,7 +3,7 @@ import os
 from prettytable import PrettyTable
 
 from codegen.program import Program
-from codegen.visitor import Visitor
+from codegen.visitor import CodeGenVisitor
 from src.symbol_table import BuildSymbolTableVisitor
 from src.grammar import *
 from src.lexer import Lexer

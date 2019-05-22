@@ -21,7 +21,7 @@ class NodeVisitor:
         node.visit_children(self)
 
 
-class Visitor(NodeVisitor):
+class CodeGenVisitor(NodeVisitor):
 
     def __init__(self, symtable):
         self.table_stack = Stack()
