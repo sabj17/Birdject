@@ -164,30 +164,25 @@ class BuildSymbolTableVisitor(NodeVisitor):
         return type_of_term_node
 
     def eval_bin_expr_type(self, binExpNode):
-        left_child = None
-        right_child = None
-
-        if isinstance(binExpNode.expr1, TermNode):
-            left_child = self.eval_term_node_type(binExpNode.expr1)
-        elif isinstance(binExpNode.expr1, UnaryExpNode):
-            left_child = self.ignore_unary_symbols(binExpNode.expr1)
-        elif isinstance(binExpNode.expr1, BinaryExpNode):
-            left_child = self.eval_bin_expr_type(binExpNode.expr1)
-        elif isinstance(binExpNode.expr1, RunNode):
-            left_child = self.get_returnType_from_func(binExpNode.expr1)
-
-        if isinstance(binExpNode.expr2, TermNode):
-            right_child = self.eval_term_node_type(binExpNode.expr2)
-        elif isinstance(binExpNode.expr2, UnaryExpNode):
-            right_child = self.ignore_unary_symbols(binExpNode.expr2)
-        elif isinstance(binExpNode.expr2, BinaryExpNode):
-            right_child = self.eval_bin_expr_type(binExpNode.expr2)
-        elif isinstance(binExpNode.expr2, RunNode):
-            right_child = self.get_returnType_from_func(binExpNode.expr2)
+        left_child = self.eval_type_of_child(binExpNode.expr1)
+        right_child = self.eval_type_of_child(binExpNode.expr2)
 
         self.check_binExpr_exceptions(binExpNode, left_child, right_child)
         final_type = self.type_w_higest_precedence(right_child, left_child)
         return final_type
+
+    def eval_type_of_child(self, child):
+        child_type = None
+        if isinstance(child, TermNode):
+            child_type = self.eval_term_node_type(child)
+        elif isinstance(child, UnaryExpNode):
+            child_type = self.ignore_unary_symbols(child)
+        elif isinstance(child, BinaryExpNode):
+            child_type = self.eval_bin_expr_type(child)
+        elif isinstance(child, RunNode):
+            child_type = self.get_returnType_from_func(child)
+
+        return child_type
 
     def type_w_higest_precedence(self, type_of_node, current_type=None):
         final_type = current_type
