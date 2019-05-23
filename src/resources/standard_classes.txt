@@ -92,16 +92,16 @@ class Radiator : public Output {
   public:
     Radiator (int inputPin): Output(inputPin) {}
 
-    bool setMode(int newMode) {
-      if (0 <= newMode && newMode <= 5){
-        state = newMode;
-        digitalWrite(pin, newMode);
-      }
-      return newMode;
+    int getHeatLevel(){
+        Serial.println(String("Current Heat Level Is: ") + Output::isTurnedOn());
+        return Output::isTurnedOn();
     }
 
-    int getHeatLevel(){
-        return Output::isTurnedOn();
+    void setHeatLevel(int level){
+        if(0 <= level && level <= 5){
+            state = level;
+            Serial.println(String("New Heat Level Is: ") + level);
+        }
     }
 
     int increase(){

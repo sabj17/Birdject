@@ -16,7 +16,9 @@ class SymbolTable:
                                      'close' : [],      # no input parameters
                                      'openTo' : [int], # int as input parameter
                                      'increase' : [],   # no input parameters
-                                     'decrease' : []}   # no input parameters
+                                     'decrease' : [], # no input parameters
+                                     'setHeatLevel' : [int], # int as input parameter
+                                     'getHeatLevel' : []} # no input parameters
 
     def new_scope(self, enclosing_scope):
         scope_object = SymbolTable(
@@ -128,7 +130,10 @@ class BuildSymbolTableVisitor(NodeVisitor):
                                             'close' : int,
                                             'openTo' : int,
                                             'increase' : int,
-                                            'decrease' : int}
+                                            'decrease' : int,
+                                            'setHeatLevel' : 'void',
+                                            'getHeatLevel' : int,
+                                            }
         last_id = runNode.id.ids[-1].name  # Is the last name of a dot sequence like LivingRoom.light.setState
         temp_scope = self.current_scope
         return_type = None

@@ -92,16 +92,16 @@ class Radiator : public Output {
   public:
     Radiator (int inputPin): Output(inputPin) {}
 
-    bool setMode(int newMode) {
-      if (0 <= newMode && newMode <= 5){
-        state = newMode;
-        digitalWrite(pin, newMode);
-      }
-      return newMode;
+    int getHeatLevel(){
+        Serial.println(String("Current Heat Level Is: ") + Output::isTurnedOn());
+        return Output::isTurnedOn();
     }
 
-    int getHeatLevel(){
-        return Output::isTurnedOn();
+    void setHeatLevel(int level){
+        if(0 <= level && level <= 5){
+            state = level;
+            Serial.println(String("New Heat Level Is: ") + level);
+        }
     }
 
     int increase(){
@@ -165,30 +165,18 @@ class Thermometer : public Input {
 
 class LivingRoomClass {
   public:
-Window window1;
-Window window2;
-Thermometer thermometer;
+Radiator radiator;
+Switch upSwitch;
+Switch downSwitch;
 
-void openAllWindows (int degrees){
-window1.openTo(degrees);
-window2.openTo(degrees);
-delay(60000);
-}
-
-void closeAllWindows (){
-window1.close();
-window2.close();
-delay(60000);
-}
-
-LivingRoomClass() : window1(pin8) , window2(pin9) , thermometer(pinA0) {}
+LivingRoomClass() : radiator(pin8) , upSwitch(pin2) , downSwitch(pin3) {}
 
 } LivingRoom;
 
 void initializeObjects(){
-LivingRoom.window1.initialize();
-LivingRoom.window2.initialize();
-LivingRoom.thermometer.initialize();
+LivingRoom.radiator.initialize();
+LivingRoom.upSwitch.initialize();
+LivingRoom.downSwitch.initialize();
 }
 
 void setup() {
@@ -198,11 +186,15 @@ initializeObjects();
 
 void loop() {
 
-if (LivingRoom.thermometer.getTemp() > 23.0){
-LivingRoom.openAllWindows(50);
+if (true){
+Serial.println(LivingRoom.radiator.getHeatLevel());
 }
 
-if (LivingRoom.thermometer.getTemp() < 21.0){
-LivingRoom.closeAllWindows();
+if (LivingRoom.upSwitch.isTurnedOn()){
+LivingRoom.radiator.increase();
+}
+
+if (LivingRoom.downSwitch.isTurnedOn()){
+LivingRoom.radiator.decrease();
 }
 }
