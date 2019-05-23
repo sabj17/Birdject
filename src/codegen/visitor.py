@@ -23,7 +23,8 @@ class NodeVisitor:
 
 class CodeGenVisitor(NodeVisitor):
 
-    def __init__(self, symtable):
+    def __init__(self, symtable, output_path):
+        self.output_path = output_path
         self.table_stack = Stack()
         self.var_stack = Stack()
         self.class_stack = Stack()
@@ -79,17 +80,6 @@ class CodeGenVisitor(NodeVisitor):
         self.setup_list.append("}\n")
         self.loop_list.append("}")
 
-    def code_gen(self, node, output_file):
-        self.setup()
-
-        # Starts visiting all nodes in the AST
-        node.accept(self)
-
-        self.end_code()
-
-        # Writes the code to program.txt
-        self.write_to_file(output_file)
-
 
     def write_to_file(self, output_file):
         # Opens the two txt files and reads from standard_classes
@@ -111,8 +101,16 @@ class CodeGenVisitor(NodeVisitor):
 
 
     def visit_ProgNode(self, node):
+        self.setup()
+
+        # Starts visiting all nodes in the AST
         for node in node.stmts:
             node.accept(self)
+
+        self.end_code()
+
+        # Writes the code to an output path
+        self.write_to_file(self.output_path)
 
 
     def create_object_setup_func(self):

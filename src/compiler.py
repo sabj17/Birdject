@@ -38,5 +38,5 @@ ast.accept(visitor)
 symtable = visitor.current_scope
 
 # Generate Ardujeno Code
-codeVisitor = CodeGenVisitor(symtable)
-codeVisitor.code_gen(ast.prog, output_path)
+codeVisitor = CodeGenVisitor(symtable, output_path)
+ast.accept(codeVisitor)
