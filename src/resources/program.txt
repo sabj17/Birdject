@@ -165,28 +165,10 @@ class Thermometer : public Input {
 };
 
 // ///////////////// Generated Code Below ///////////////// //
-
-
-class LivingRoomClass {
-  public:
-Light light1;
-Light light2;
-
-void switch_all_lights (){
-light1.changeMode();
-light2.changeMode();
-}
-
-LivingRoomClass() : light1(pin8) , light2(pin9) {}
-
-} LivingRoom;
-
-Switch switch1(pin2);
+Thermometer dab(x);
 
 void initializeObjects(){
-LivingRoom.light1.initialize();
-LivingRoom.light2.initialize();
-switch1.initialize();
+dab.initialize();
 }
 
 void setup() {
@@ -195,8 +177,4 @@ initializeObjects();
 }
 
 void loop() {
-
-if (switch1.isTurnedOn()){
-LivingRoom.switch_all_lights();
-}
 }

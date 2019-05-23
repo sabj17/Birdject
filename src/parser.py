@@ -55,7 +55,8 @@ class Parser:
                     raise Exception(f"Could not recognize token: {ts.peek()}")
 
                 if rule_number == 0:
-                    raise Exception(f"Syntax error — no production applicable for {tos.name} and {ts.peek().kind}: {ts.peek()}")
+                    token = ts.peek()
+                    raise Exception(f'Syntax error: "{token.value}" on line {token.line}')
                 else:  # Applies the RHS to the stack
                     self.apply(rule_number, self.stack, parse_tree)
 

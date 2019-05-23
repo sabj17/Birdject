@@ -20,12 +20,12 @@ token_spec_file = os.path.join(wd, 'resources/token_spec.txt')
 grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
 
 program = '''
-    set dab to Thermometer();
+    set dab to ;
 '''
 
 #print(grammar)
 
-lexer = Lexer(program_file, keyword_file, token_spec_file)
+lexer = Lexer(program, keyword_file, token_spec_file)
 tokens = lexer.lex()
 
 # print("\n".join([str(x) for x in tokens]))

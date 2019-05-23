@@ -32,7 +32,7 @@ class Lexer:
         line_num = 1
         line_start = 0
         for match in re.finditer(token_re, self.program):
-            # finditer returns an iterator over all non-overlapping matches for the regular expression
+            # finditer returns an iterator over all non-overlapping matches for the regular expressionl
 
             kind = match.lastgroup  # returns the name of the matched group/kind
             value = match.group()  # returns value that was matched e.g. "if"

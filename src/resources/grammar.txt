@@ -72,15 +72,17 @@
 <arith-expr3> ->  MINUS, <arith-expr3>
 <arith-expr3> -> NOT, <arith-expr3>
 <term> -> <id-operation>
-<term> -> BOOL
+<term> -> <boolean>
 <term> -> <val>
-<term> -> STRING
+<term> -> <string>
 <term> -> <run>
 <id-operation> -> <id>, <id-operator>
 <id-operator> -> <dot-ref>
 <id-operator> -> LPAREN, <actual-params>, RPAREN
 <val> -> INTEGER
 <val> -> FLOAT
+<string> -> STRING
+<boolean> -> BOOL
 <id> -> ID, <array-subscript>
 <array-subscript> -> LSQUARE, INTEGER, RSQUARE
 <array-subscript> -> LAMBDA
