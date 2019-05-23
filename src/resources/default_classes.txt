@@ -24,6 +24,9 @@ dht DHT;
 // Not implemented
 class List{
   public:
+    void add(){}
+    void remove(){}
+    int size(){}
 };
 
 class Output {

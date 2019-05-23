@@ -93,7 +93,7 @@ class CodeGenVisitor(NodeVisitor):
 
     def write_to_file(self):
         # Opens the two txt files and reads from standard_classes
-        file_std = open("resources/standard_classes.txt", "r")
+        file_std = open("resources/default_classes.txt", "r")
         contents = file_std.read()
         program_file = open("resources/program.txt", "w")
         program_file.write(contents)

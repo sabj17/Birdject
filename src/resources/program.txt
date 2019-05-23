@@ -24,6 +24,9 @@ dht DHT;
 // Not implemented
 class List{
   public:
+    void add(){}
+    void remove(){}
+    int size(){}
 };
 
 class Output {
@@ -198,8 +201,8 @@ initializeObjects();
 void loop() {
 
 if (LivingRoom.upSwitch.isTurnedOn()){
-LivingRoom.radiator.increase();
 LivingRoom.closeWindowIfOpen();
+LivingRoom.radiator.increase();
 delay(60000);
 }
 
