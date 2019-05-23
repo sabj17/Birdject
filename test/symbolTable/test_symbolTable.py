@@ -69,6 +69,20 @@ class TestSymbolTable(TestCase):
         symtable = self.make_table(program)
         self.assertNotEqual(symtable.lookup('TestClassScope'), None)
 
+    # Does also checks that the funtion changes the type of the formal parameters to the actual.
+    def test_lookup_func_in_a_class(self):
+        program = '''
+                TestClass{
+                    function testFunc(x, y){
+                        return "test123";
+                    }
+                }
+                run TestClass.testFunc(123, "test");
+                '''
+        symtable = self.make_table(program)
+        class_scope = symtable.lookup('TestClassScope')
+        self.assertEqual(class_scope.lookup('testFunc'), [int, str])
+
     def test_eval_binExpr(self):
         program = '''
                 set window1 to Window();
