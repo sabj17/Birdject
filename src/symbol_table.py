@@ -36,7 +36,7 @@ class SymbolTable:
         if self.enclosing_scope is not None:
             return self.enclosing_scope.lookup(name)
         else:
-            raise NameError(name, 'was not found')
+            raise NameError(name, 'was not found in the symbol table.')
 
     def get_outer_scope_of_variable(self, name):
         if self.symbols.get(name) is None:
@@ -206,10 +206,10 @@ class BuildSymbolTableVisitor(NodeVisitor):
     def check_binExpr_exceptions(self, parent, lchild, rchild):
 
         if lchild == bool or rchild == bool:
-            raise TypeError('using booleans in binary expression assignment is illegal')
+            raise TypeError(parent, 'using booleans in binary expression assignment is illegal')
         elif not isinstance(parent, PlusNode):
             if lchild == str or rchild == str:
-                raise TypeError('only plus with strings is allowed')
+                raise TypeError(parent, 'is not allowed. Only plus with strings is allowed in expressions')
 
     def visit_FunctionNode(self, node):
         param_list = []
@@ -264,7 +264,10 @@ class BuildSymbolTableVisitor(NodeVisitor):
                 raise TypeError(node.expression.name, 'is a not a boolean')
         elif isinstance(node.expression, RunNode):
             if self.get_returnType_from_func(node.expression) != bool:
-                raise TypeError(node.expression, 'do not return a boolean')
+                if isinstance(node.expression.id, DotNode):
+                    raise TypeError(node.expression.id.ids, 'does not return a boolean. A function call that is not compared against anything has to return a boolean in when- and if-statements.')
+                else:
+                    raise TypeError(node.expression.id, 'does not return a boolean. A function call that is not compared against anything has to return a boolean in when- and if-statements.')
         elif type(node.expression) in compare_operators:
             # Evaluates the LHS of the compare operator
             if isinstance(node.expression.expr1, TermNode):
@@ -288,9 +291,9 @@ class BuildSymbolTableVisitor(NodeVisitor):
                 RHS_type_of_equal = self.ignore_unary_symbols(node.expression.expr2)
 
             if LHS_type_of_equal != RHS_type_of_equal:
-                raise TypeError(LHS_type_of_equal, 'and', RHS_type_of_equal, 'is not the same and cannot be compared')
+                raise TypeError(LHS_type_of_equal, 'and', RHS_type_of_equal, 'is not the same and cannot be compared.')
         else:
-            raise TypeError(type(node.expression), 'is not a legal compare operator in an if- or when-statement')
+            raise TypeError(type(node.expression), 'is not a legal type or compare operator in a when- or if-statement.')
 
         node.visit_children(self)
 
@@ -324,19 +327,18 @@ class BuildSymbolTableVisitor(NodeVisitor):
                 actual_param = self.get_actual_params(node)
 
                 if actual_param != []:
-                    assert all([xparam in list_of_types for xparam in actual_param])  # Checks all actual parameters has type
                     if formal_param[0] not in list_of_types:  # Checks the first formal parameter is not a type
+                        assert all([xparam in list_of_types for xparam in actual_param])  # Checks all actual parameters has type
                         assert all([yparam not in list_of_types for yparam in formal_param])  # Checks none of the formal parameters has a type
-
                         self.current_scope = self.current_scope.get_outer_scope_of_variable(node.id.name)
                         self.current_scope.symbols[node.id.name] = actual_param
                         self.populate_funcNode(self.current_scope.lookup(node.id.name + 'Node'), self.current_scope, actual_param)
+                        # Sets the scope back to where it were before calling populate_funcnode
                         self.current_scope = cur_scope
                         scope_w_param = self.current_scope.lookup(node.id.name + 'Scope')
 
                         for (fparam, aparam) in zip(formal_param, actual_param):
                             scope_w_param.symbols[fparam] = aparam
-
                     elif formal_param != actual_param:
                         raise TypeError(node.id.name, 'takes input', formal_param, 'and you gave it', actual_param)
                 else:  # Populate functions without input parameter
@@ -381,12 +383,12 @@ class BuildSymbolTableVisitor(NodeVisitor):
                 # If formal parameters has no type, they get set to the types of actual param first time it's called
                 if len(formal_param) == len(actual_param):
                     if actual_param != []:
-                        assert all([param in list_of_types for param in actual_param])  # Makes sure all actual parameters has type
                         if formal_param[0] not in list_of_types: # Checks the first formal parameter is not a type
+                            assert all([param in list_of_types for param in actual_param])  # Makes sure all actual parameters has type
                             assert all([param not in list_of_types for param in formal_param]) # Makes sure none of the formal parameters has a type
-
                             temp_scope.symbols[id.name] = actual_param # Sets the formal params to the type of actual params
                             self.populate_funcNode(temp_scope.lookup(id.name + 'Node'), temp_scope, actual_param)
+                            # Sets the scope back to where it were before calling populate_funcnode
                             self.current_scope = cur_scope
 
                         elif formal_param != actual_param:
@@ -414,4 +416,5 @@ class BuildSymbolTableVisitor(NodeVisitor):
                         param_list.append(self.eval_bin_expr_type(param))
 
         return param_list
+
 

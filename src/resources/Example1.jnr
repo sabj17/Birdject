@@ -1,11 +1,24 @@
 ClassName{
-    function FunctionName(){
+    function FunctionName(x, y){
+        set jajaja to 2 + 2;
         return 2;
+
     }
 
+}
+
+function FunctionName(){
+        set jajaja to 2 + 2;
+        return 2;
 }
 
 set a to "bc";
 set num to a;
 set number to 11 + 1.2 * 3;
-set var to 10 + run ClassName.FunctionName();
+set var to 10 + run ClassName.FunctionName(a, num);
+set var to 10 + run ClassName.FunctionName(a, num);
+
+
+if(1 < 2){
+    set maddi to "mad";
+}
