@@ -1,12 +1,12 @@
 LivingRoom {
-    set window1 to Window(pin8);
+    set light to Light(pin8);
     set temp1 to Thermometer(pinA0);
 }
 
-when (run LivingRoom.temp1.getTemp() < 22){
-    run LivingRoom.window1.setMode(on);
+when (run LivingRoom.temp1.getTemp() < 22.0){
+    run LivingRoom.light.setMode(on);
 }
 
-when (run LivingRoom.temp1.getTemp() > 22){
-    run LivingRoom.window1.setMode(off);
+when (run LivingRoom.temp1.getTemp() > 22.0){
+    run LivingRoom.light.setMode(off);
 }

@@ -169,28 +169,24 @@ class Thermometer : public Input {
 
 class LivingRoomClass {
   public:
-Radiator radiator;
-Window window;
-Thermometer thermometer;
-Switch upSwitch;
-Switch downSwitch;
+Light light1;
+Light light2;
 
-void closeWindowIfOpen (){
-if (window.isTurnedOn()) {
-window.close();
-}
+void switch_all_lights (){
+light1.changeMode();
+light2.changeMode();
 }
 
-LivingRoomClass() : radiator(pin8) , window(pin9) , thermometer(pinA0) , upSwitch(pin3) , downSwitch(pin2) {}
+LivingRoomClass() : light1(pin8) , light2(pin9) {}
 
 } LivingRoom;
 
+Switch switch1(pin2);
+
 void initializeObjects(){
-LivingRoom.radiator.initialize();
-LivingRoom.window.initialize();
-LivingRoom.thermometer.initialize();
-LivingRoom.upSwitch.initialize();
-LivingRoom.downSwitch.initialize();
+LivingRoom.light1.initialize();
+LivingRoom.light2.initialize();
+switch1.initialize();
 }
 
 void setup() {
@@ -200,24 +196,7 @@ initializeObjects();
 
 void loop() {
 
-if (LivingRoom.upSwitch.isTurnedOn()){
-LivingRoom.closeWindowIfOpen();
-LivingRoom.radiator.increase();
-delay(60000);
-}
-
-if (LivingRoom.downSwitch.isTurnedOn()){
-LivingRoom.radiator.decrease();
-delay(60000);
-}
-
-if (LivingRoom.thermometer.getTemp() > 23.0){
-if (LivingRoom.radiator.getHeatLevel() == 0) {
-LivingRoom.window.openTo(40);
-}
-}
-
-if (LivingRoom.thermometer.getTemp() < 20.0){
-LivingRoom.closeWindowIfOpen();
+if (switch1.isTurnedOn()){
+LivingRoom.switch_all_lights();
 }
 }
