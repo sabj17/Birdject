@@ -93,7 +93,6 @@ class Radiator : public Output {
     Radiator (int inputPin): Output(inputPin) {}
 
     int getHeatLevel(){
-        Serial.println(String("Current Heat Level Is: ") + Output::isTurnedOn());
         return Output::isTurnedOn();
     }
 
@@ -108,7 +107,8 @@ class Radiator : public Output {
       if(state < 5){
         state++;
       }
-      Serial.println("Radiator value increased to: " + state);
+      Serial.println(String("Radiator value increased to: ") + state);
+      digitalWrite(pin, state);
       delay(200);
       return state;
     }
@@ -117,7 +117,8 @@ class Radiator : public Output {
       if(state > 0){
         state--;
       }
-      Serial.println("Radiator value decreased to: " + state);
+      Serial.println(String("Radiator value decreased to: ") + state);
+      digitalWrite(pin, state);
       delay(200);
       return state;
     }
@@ -155,7 +156,7 @@ class Thermometer : public Input {
 
     float getTemp(){
         DHT.read11(pin);
-        delay(100);
+        delay(200);
         return DHT.temperature;
     }
 };

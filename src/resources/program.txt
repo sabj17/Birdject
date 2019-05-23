@@ -93,7 +93,6 @@ class Radiator : public Output {
     Radiator (int inputPin): Output(inputPin) {}
 
     int getHeatLevel(){
-        Serial.println(String("Current Heat Level Is: ") + Output::isTurnedOn());
         return Output::isTurnedOn();
     }
 
@@ -108,7 +107,8 @@ class Radiator : public Output {
       if(state < 5){
         state++;
       }
-      Serial.println("Radiator value increased to: " + state);
+      Serial.println(String("Radiator value increased to: ") + state);
+      digitalWrite(pin, state);
       delay(200);
       return state;
     }
@@ -117,7 +117,8 @@ class Radiator : public Output {
       if(state > 0){
         state--;
       }
-      Serial.println("Radiator value decreased to: " + state);
+      Serial.println(String("Radiator value decreased to: ") + state);
+      digitalWrite(pin, state);
       delay(200);
       return state;
     }
@@ -155,7 +156,7 @@ class Thermometer : public Input {
 
     float getTemp(){
         DHT.read11(pin);
-        delay(100);
+        delay(200);
         return DHT.temperature;
     }
 };
@@ -166,15 +167,25 @@ class Thermometer : public Input {
 class LivingRoomClass {
   public:
 Radiator radiator;
+Window window;
+Thermometer thermometer;
 Switch upSwitch;
 Switch downSwitch;
 
-LivingRoomClass() : radiator(pin8) , upSwitch(pin2) , downSwitch(pin3) {}
+void closeWindowIfOpen (){
+if (window.isTurnedOn()) {
+window.close();
+}
+}
+
+LivingRoomClass() : radiator(pin8) , window(pin9) , thermometer(pinA0) , upSwitch(pin3) , downSwitch(pin2) {}
 
 } LivingRoom;
 
 void initializeObjects(){
 LivingRoom.radiator.initialize();
+LivingRoom.window.initialize();
+LivingRoom.thermometer.initialize();
 LivingRoom.upSwitch.initialize();
 LivingRoom.downSwitch.initialize();
 }
@@ -186,15 +197,24 @@ initializeObjects();
 
 void loop() {
 
-if (true){
-Serial.println(LivingRoom.radiator.getHeatLevel());
-}
-
 if (LivingRoom.upSwitch.isTurnedOn()){
 LivingRoom.radiator.increase();
+LivingRoom.closeWindowIfOpen();
+delay(60000);
 }
 
 if (LivingRoom.downSwitch.isTurnedOn()){
 LivingRoom.radiator.decrease();
+delay(60000);
+}
+
+if (LivingRoom.thermometer.getTemp() > 23.0){
+if (LivingRoom.radiator.getHeatLevel() == 0) {
+LivingRoom.window.openTo(40);
+}
+}
+
+if (LivingRoom.thermometer.getTemp() < 20.0){
+LivingRoom.closeWindowIfOpen();
 }
 }

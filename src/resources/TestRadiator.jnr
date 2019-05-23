@@ -1,17 +1,34 @@
 LivingRoom {
     set radiator to Radiator(pin8);
-    set upSwitch to Switch(pin2);
-    set downSwitch to Switch(pin3);
-}
+    set window to Window(pin9);
+    set thermometer to Thermometer(pinA0);
+    set upSwitch to Switch(pin3);
+    set downSwitch to Switch(pin2);
 
-when(on){
-    run print(run LivingRoom.radiator.getHeatLevel());
+    function closeWindowIfOpen(){
+        if(run window.isTurnedOn()){
+            run window.close();
+        }
+    }
 }
 
 when (run LivingRoom.upSwitch.isTurnedOn()){
+    run LivingRoom.closeWindowIfOpen();
     run LivingRoom.radiator.increase();
+    run wait(60000);
 }
 
 when (run LivingRoom.downSwitch.isTurnedOn()){
     run LivingRoom.radiator.decrease();
+    run wait(60000);
+}
+
+when (run LivingRoom.thermometer.getTemp() > 23.0){
+    if(run LivingRoom.radiator.getHeatLevel() is 0){
+        run LivingRoom.window.openTo(40);
+    }
+}
+
+when(run LivingRoom.thermometer.getTemp() < 20.0){
+    run LivingRoom.closeWindowIfOpen();
 }
