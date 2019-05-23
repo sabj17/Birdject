@@ -350,7 +350,7 @@ class CodeGenVisitor(NodeVisitor):
         else:
             if node.id.accept(self) == "print":
                 string += "Serial.println("
-            elif node.id.accept(self) == "await":
+            elif node.id.accept(self) == "wait":
                 string += "delay("
             else:
                 string += node.id.accept(self) + "("

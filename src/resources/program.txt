@@ -69,17 +69,21 @@ class Window : public Output {
   public:
     Window (int inputPin): Output(inputPin) {}
 
-    int open_to(int degree){
+    int openTo(int degree){
         if(state != degree){
             state = degree;
+            Serial.println(String("Window opened to ") + degree + String(" degrees"));
         }
+        digitalWrite(pin, true);
         return state;
     }
 
     int close(){
         if(state > 0){
             state = 0;
+            Serial.println("Window closed");
         }
+        digitalWrite(pin, false);
         return state;
     }
 };
@@ -104,6 +108,7 @@ class Radiator : public Output {
       if(state < 5){
         state++;
       }
+      Serial.println("Radiator value increased to: " + state);
       delay(200);
       return state;
     }
@@ -112,6 +117,7 @@ class Radiator : public Output {
       if(state > 0){
         state--;
       }
+      Serial.println("Radiator value decreased to: " + state);
       delay(200);
       return state;
     }
@@ -149,6 +155,7 @@ class Thermometer : public Input {
 
     float getTemp(){
         DHT.read11(pin);
+        delay(100);
         return DHT.temperature;
     }
 };
@@ -158,18 +165,30 @@ class Thermometer : public Input {
 
 class LivingRoomClass {
   public:
-Radiator radiator;
-Switch upSwitch;
-Switch downSwitch;
+Window window1;
+Window window2;
+Thermometer thermometer;
 
-LivingRoomClass() : radiator(pin8) , upSwitch(pin2) , downSwitch(pin3) {}
+void openAllWindows (int degrees){
+window1.openTo(degrees);
+window2.openTo(degrees);
+delay(60000);
+}
+
+void closeAllWindows (){
+window1.close();
+window2.close();
+delay(60000);
+}
+
+LivingRoomClass() : window1(pin8) , window2(pin9) , thermometer(pinA0) {}
 
 } LivingRoom;
 
 void initializeObjects(){
-LivingRoom.radiator.initialize();
-LivingRoom.upSwitch.initialize();
-LivingRoom.downSwitch.initialize();
+LivingRoom.window1.initialize();
+LivingRoom.window2.initialize();
+LivingRoom.thermometer.initialize();
 }
 
 void setup() {
@@ -179,15 +198,11 @@ initializeObjects();
 
 void loop() {
 
-if (true){
-Serial.println(LivingRoom.radiator.getHeatLevel());
+if (LivingRoom.thermometer.getTemp() > 23.0){
+LivingRoom.openAllWindows(50);
 }
 
-if (LivingRoom.upSwitch.isTurnedOn()){
-LivingRoom.radiator.increase();
-}
-
-if (LivingRoom.downSwitch.isTurnedOn()){
-LivingRoom.radiator.decrease();
+if (LivingRoom.thermometer.getTemp() < 21.0){
+LivingRoom.closeAllWindows();
 }
 }

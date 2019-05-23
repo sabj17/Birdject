@@ -13,7 +13,7 @@ from src.ast import GraphASTVisitor
 
 wd = os.getcwd()
 grammar_file = os.path.join(wd, 'resources/grammar.txt')
-program_file = os.path.join(wd, 'resources/Example.jnr')
+program_file = os.path.join(wd, 'resources/TestWindows.jnr')
 keyword_file = os.path.join(wd, 'resources/keywords.txt')
 token_spec_file = os.path.join(wd, 'resources/token_spec.txt')
 
@@ -53,6 +53,5 @@ ast.accept(GraphASTVisitor())
 visitor = BuildSymbolTableVisitor()
 ast.accept(visitor)
 symtable = visitor.current_scope
-print(symtable.symbols)
-#codeVisitor = CodeGenVisitor(symtable)
-#codeVisitor.code_gen(ast.prog)
+codeVisitor = CodeGenVisitor(symtable)
+codeVisitor.code_gen(ast.prog)

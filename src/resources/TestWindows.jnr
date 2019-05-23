@@ -1,0 +1,25 @@
+LivingRoom {
+    set window1 to Window(pin8);
+    set window2 to Window(pin9);
+    set thermometer to Thermometer(pinA0);
+
+    function openAllWindows(degrees){
+        run window1.openTo(degrees);
+        run window2.openTo(degrees);
+        run wait(60000);
+    }
+
+    function closeAllWindows(){
+        run window1.close();
+        run window2.close();
+        run wait(60000);
+    }
+}
+
+when(run LivingRoom.thermometer.getTemp() > 23.0){
+    run LivingRoom.openAllWindows(50);
+}
+
+when (run LivingRoom.thermometer.getTemp() < 21.0){
+    run LivingRoom.closeAllWindows();
+}

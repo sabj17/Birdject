@@ -14,7 +14,7 @@ class SymbolTable:
                                      'getTemp': [],     # no input parameters
                                      'changeMode': [],  # no input parameters
                                      'close' : [],      # no input parameters
-                                     'open_to' : [int], # int as input parameter
+                                     'openTo' : [int], # int as input parameter
                                      'increase' : [],   # no input parameters
                                      'decrease' : []}   # no input parameters
 
@@ -126,7 +126,7 @@ class BuildSymbolTableVisitor(NodeVisitor):
                                             'getTemp' : float,
                                             'changeMode' : bool,
                                             'close' : int,
-                                            'open_to' : int,
+                                            'openTo' : int,
                                             'increase' : int,
                                             'decrease' : int}
         last_id = runNode.id.ids[-1].name  # Is the last name of a dot sequence like LivingRoom.light.setState

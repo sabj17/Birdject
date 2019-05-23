@@ -1,31 +1,18 @@
 
 LivingRoom {
-    set light1 to Light(pin8);
+    set light to Light(pin8);
     set switch1 to Switch(pin2);
 }
 
 Kitchen {
-    set light2 to Light(pin9);
-    set switch2 to Switch(pin3);
+    set light to Light(pin9);
+    set switch1 to Switch(pin3);
 }
 
 when (run LivingRoom.switch1.isTurnedOn()){
-    run LivingRoom.light1.changeMode();
-
-    if(run LivingRoom.light1.isTurnedOn()){
-        run print("LivingRoom Light is on");
-    } else {
-        run print("LivingRoom Light is off");
-    }
+    run LivingRoom.light.changeMode();
 }
 
-when (run Kitchen.switch2.isTurnedOn()){
-    run Kitchen.light2.changeMode();
-
-    if(run Kitchen.light2.isTurnedOn()){
-        run print("Kitchen Light is on");
-    } else {
-        run print("Kitchen Light is off");
-    }
-
+when (run Kitchen.switch1.isTurnedOn()){
+    run Kitchen.light.changeMode();
 }
