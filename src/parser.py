@@ -1,6 +1,6 @@
 from src.parsetree import *
 from src.tokens import TokenStream
-
+from prettytable import PrettyTable
 
 class Stack:
     def __init__(self):
@@ -107,3 +107,13 @@ class Parser:
                     raise Exception("Grammar not LL(1)")
 
         return parse_table
+
+    def pprint_table(self):
+        ptable = PrettyTable(['Nonterminals'] + list(self.grammar.terminals.keys()))
+        for val in self.parse_table:
+            row = []
+            for key, value in self.parse_table[val].items():
+                row.append(value)
+            ptable.add_row([val] + row)
+
+        print("\n", ptable)

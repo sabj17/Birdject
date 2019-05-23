@@ -79,7 +79,7 @@ class CodeGenVisitor(NodeVisitor):
         self.setup_list.append("}\n")
         self.loop_list.append("}")
 
-    def code_gen(self, node):
+    def code_gen(self, node, output_file):
         self.setup()
 
         # Starts visiting all nodes in the AST
@@ -88,14 +88,14 @@ class CodeGenVisitor(NodeVisitor):
         self.end_code()
 
         # Writes the code to program.txt
-        self.write_to_file()
+        self.write_to_file(output_file)
 
 
-    def write_to_file(self):
+    def write_to_file(self, output_file):
         # Opens the two txt files and reads from standard_classes
         file_std = open("resources/default_classes.txt", "r")
         contents = file_std.read()
-        program_file = open("resources/program.txt", "w")
+        program_file = open(output_file, "w")
         program_file.write(contents)
 
         # All generated code is added to 'program.txt'
