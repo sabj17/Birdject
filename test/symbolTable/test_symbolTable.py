@@ -33,10 +33,12 @@ class TestSymbolTable(TestCase):
         symtable = visitor.current_scope
         return symtable
 
+
+    # The test would failed if any errors is detected in the source program.
+    # No specific error is detected but the entire program as a whole.
     def test_big_program(self):
         program = os.path.abspath(os.path.join('../..', 'src/resources/testSymTable.jnr'))
-        pass
-
+        self.make_table(program)
 
     def test_symbols_gets_added_to_table(self):
         program = '''
