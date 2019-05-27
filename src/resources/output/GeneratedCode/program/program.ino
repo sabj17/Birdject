@@ -169,24 +169,29 @@ class Thermometer : public Input {
 
 class LivingRoomClass {
   public:
-Light light1;
-Light light2;
+Light light;
+Switch switch1;
 
-void switch_all_lights (){
-light1.changeMode();
-light2.changeMode();
-}
-
-LivingRoomClass() : light1(pin8) , light2(pin9) {}
+LivingRoomClass() : light(pin8) , switch1(pin2) {}
 
 } LivingRoom;
 
-Switch switch1(pin2);
+
+
+class KitchenClass {
+  public:
+Light light1234;
+Switch switch1234;
+
+KitchenClass() : light1234(pin9) , switch1234(pin3) {}
+
+} Kitchen;
 
 void initializeObjects(){
-LivingRoom.light1.initialize();
-LivingRoom.light2.initialize();
-switch1.initialize();
+LivingRoom.light.initialize();
+LivingRoom.switch1.initialize();
+Kitchen.light1234.initialize();
+Kitchen.switch1234.initialize();
 }
 
 void setup() {
@@ -196,7 +201,11 @@ initializeObjects();
 
 void loop() {
 
-if (switch1.isTurnedOn()){
-LivingRoom.switch_all_lights();
+if (LivingRoom.switch1.isTurnedOn()){
+LivingRoom.light.changeMode();
+}
+
+if (Kitchen.switch1234.isTurnedOn()){
+Kitchen.light1234.changeMode();
 }
 }

@@ -17,7 +17,7 @@ class PTNode:
         self.children.append(child)
 
     def graph(self, graph, parent=None):
-        id = str(hash(self))
+        id = str(hash(self) % 1000)
         graph.node(id, nohtml(self.name + ": " + str(self.value)))
         if parent is not None:
             graph.edge(parent, id)

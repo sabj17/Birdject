@@ -6,15 +6,18 @@ from src.lexer import Lexer
 from src.parser import Parser
 from src.parsetree import BuildASTVisitor
 from src.ast import GraphASTVisitor
+import time
 
 wd = os.getcwd()
 grammar_file = os.path.join(wd, 'resources/input/grammar.txt')
-program_file = os.path.join(wd, 'resources/test_programs/TestClassFunctions.jnr')
+program_file = os.path.join(wd, 'resources/test_programs/TestMultipleRooms.jnr')
 keyword_file = os.path.join(wd, 'resources/input/keywords.txt')
 token_spec_file = os.path.join(wd, 'resources/input/token_spec.txt')
 output_path = os.path.join(wd, "resources/output/GeneratedCode/program/program.ino")
 parse_tree_path = os.path.join(wd, "resources/output/parse_tree.gv")
 ast_path = os.path.join(wd, "resources/output/ast.gv")
+
+start = time.time()
 
 # Build grammar
 grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
@@ -42,3 +45,7 @@ symtable = visitor.current_scope
 # Generate Ardujeno Code
 codeVisitor = CodeGenVisitor(symtable, output_path)
 ast.accept(codeVisitor)
+
+end = time.time()
+diff = end - start
+print(f'Compiled in {diff:.3f} seconds')
