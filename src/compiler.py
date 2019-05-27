@@ -36,17 +36,7 @@ ast.accept(GraphASTVisitor())
 visitor = BuildSymbolTableVisitor()
 ast.accept(visitor)
 symtable = visitor.current_scope
-print('Global')
-print(symtable.symbols)
-print('GlobalFunctionScope')
-glb = symtable.lookup('GlobalFunctionScope')
-print(glb.symbols)
-print('ClasseNameScope')
-atab = symtable.lookup('ClassNameScope')
-print(atab.symbols)
-print('FunctionNameScope')
-btab = atab.lookup('FunctionNameScope')
-print(btab.symbols)
+
 
 # Generate Ardujeno Code
 #codeVisitor = CodeGenVisitor(symtable, output_path)

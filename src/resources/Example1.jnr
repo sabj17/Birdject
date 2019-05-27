@@ -1,25 +1,43 @@
-ClassName{
-    function FunctionName(y, x){
-        set jajaja to 2 + 2;
-        return 2;
+set global_var to not false;
+set global_light to Light(pin1);
 
+Home {
+    set var to 1 + 2 - 3 * (4 / 5);
+    set float_var to 10 + 10.5;
+    set string_var to "This is a string" + var;
+    set light to Light(pin8);
+    set switch1 to Switch(pin2);
+
+    function home_func(param1, param2){
+        return param1 * param2;
     }
 
+    Room {
+        set var to on;
+        set light to Light(pin9);
+
+        function room_func(mode){
+            run light.setMode(mode);
+        }
+    }
 }
 
-function GlobalFunction(x, y){
-        set jajaja to 2 + 2;
-        return 2;
+set res to run Home.home_func(5, 5.5);
+run print("Result: " + res);
+
+when(run Home.switch1.isTurnedOn()){
+    set res to 1;
+    if(run Home.light.isTurnedOn() and run Home.Room.light.isTurnedOn()){
+        run Home.light.setMode(off);
+        run Home.Room.room_func(off);
+    } else if (run Home.light.isTurnedOn() or run Home.Room.light.isTurnedOn()){
+        run print("One light is turned on!");
+    } else {
+        run Home.light.setMode(on);
+        run Home.Room.room_func(on);
+    }
 }
 
-set a to "bc";
-set num to a;
-set number to 11 + 1.2 * 3;
-set var to 10 + run GlobalFunction(number, a);
-set var to 10 + run ClassName.FunctionName(number, a);
-//set var to 10 + run ClassName.FunctionName(number, number);
-
-
-if(1 < 2){
-    set maddi to "mad";
+when(run Home.switch1.isTurnedOn() is false){
+    run print("Home switch is turned off");
 }

@@ -226,7 +226,6 @@ class BuildSymbolTableVisitor(NodeVisitor):
         inner_scope = scope.new_scope(scope)
         self.current_scope = inner_scope
         self.current_scope.symbols['returnType'] = 'void' # Puts in a return type "void" as default
-
         if node.params is not None:  # Adds the parameters to the scope
             self.add_params_to_scope(node, actual_param)
 
@@ -320,12 +319,12 @@ class BuildSymbolTableVisitor(NodeVisitor):
 
     def idNode_in_runNode(self, idNode):
         cur_scope = self.current_scope
-        formal_param = self.current_scope.lookup(idNode.id.name)
-        actual_param = self.get_actual_params(idNode)
 
         if idNode.id.name in self.current_scope.predef_func_not_on_objects:
             pass
-        elif len(formal_param) == len(actual_param):
+        elif self.current_scope.lookup(idNode.id.name) == self.get_actual_params(idNode):
+            formal_param = self.current_scope.lookup(idNode.id.name)
+            actual_param = self.get_actual_params(idNode)
             self.run_funcNode_and_typeCheck_params(formal_param, actual_param, idNode.id.name, cur_scope)
         else:
             raise TypeError(idNode.id.name, 'takes', len(self.current_scope.lookup(idNode.id.name)), 'parameter(s) and', len(self.get_actual_params(idNode)), 'was given.')
@@ -368,12 +367,13 @@ class BuildSymbolTableVisitor(NodeVisitor):
             if formal_param[0] not in list_of_types:  # Checks the first formal parameter is not a type
                 self.call_funcNode(formal_param, actual_param, id_name, cur_scope)
             elif formal_param != actual_param:
-                raise TypeError(id.name, 'takes input', formal_param, 'and you gave it', actual_param)
-        else:  # Ellers bliver funktioner som open window ikke "bygget" fordi den ikke har input parameter
-            self.populate_funcNode(self.current_scope.lookup(id.name + 'Node'), self.current_scope, actual_param)
+                raise TypeError(id_name, 'takes input', formal_param, 'and you gave it', actual_param)
+        else:  # Populates functions without parameters
+            self.populate_funcNode(self.current_scope.lookup(id_name + 'Node'), self.current_scope, actual_param)
             self.current_scope = cur_scope
 
     def call_funcNode(self, formal_param, actual_param, id_name, cur_scope):
+
         self.check_type_of_param_is_legal(formal_param, actual_param)
         # Change the scope to where the function is in.
         self.current_scope = self.current_scope.get_outer_scope_of_symbol(id_name)
