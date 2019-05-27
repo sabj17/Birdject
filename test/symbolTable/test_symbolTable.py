@@ -17,11 +17,10 @@ class TestSymbolTable(TestCase):
 
     def make_table(self, program):
         grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/input/grammar.txt'))
-        program_file = os.path.abspath(os.path.join('../..', 'src/resources/testSymTable.jnr'))
         keyword_file = os.path.abspath(os.path.join('../..', 'src/resources/input/keywords.txt'))
         token_spec_file = os.path.abspath(os.path.join('../..', 'src/resources/input/token_spec.txt'))
         grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
-        lexer = Lexer(program_file, keyword_file, token_spec_file)
+        lexer = Lexer(program, keyword_file, token_spec_file)
         tokens = lexer.lex()
         parser = Parser(grammar)
         parse_tree = parser.parse(tokens)
