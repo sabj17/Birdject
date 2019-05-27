@@ -1,4 +1,4 @@
-include <dht.h>
+#include <dht.h>
 dht DHT;
 
 #define pin1 1
