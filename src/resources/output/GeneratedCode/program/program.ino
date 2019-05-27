@@ -180,18 +180,18 @@ LivingRoomClass() : light(pin8) , switch1(pin2) {}
 
 class KitchenClass {
   public:
-Light light1234;
-Switch switch1234;
+Light light;
+Switch switch;
 
-KitchenClass() : light1234(pin9) , switch1234(pin3) {}
+KitchenClass() : light(pin9) , switch(pin3) {}
 
 } Kitchen;
 
 void initializeObjects(){
 LivingRoom.light.initialize();
 LivingRoom.switch1.initialize();
-Kitchen.light1234.initialize();
-Kitchen.switch1234.initialize();
+Kitchen.light.initialize();
+Kitchen.switch.initialize();
 }
 
 void setup() {
@@ -205,7 +205,7 @@ if (LivingRoom.switch1.isTurnedOn()){
 LivingRoom.light.changeMode();
 }
 
-if (Kitchen.switch1234.isTurnedOn()){
-Kitchen.light1234.changeMode();
+if (Kitchen.switch.isTurnedOn()){
+Kitchen.light.changeMode();
 }
 }
