@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="311eaa91-087f-4edd-b12e-d967ecc45f3e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/output/ast.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/output/ast.gv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/output/parse_tree.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/output/parse_tree.gv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/symbolTable/test_symbolTable.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/symbolTable/test_symbolTable.py" afterDir="false" />
-    </list>
+    <list default="true" id="311eaa91-087f-4edd-b12e-d967ecc45f3e" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,8 +61,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test/symbolTable/test_symbolTable.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="166">
-                  <caret line="19" selection-start-line="19" selection-end-line="19" />
+                <state relative-caret-position="1930">
+                  <caret line="105" column="48" lean-forward="true" selection-start-line="105" selection-start-column="48" selection-end-line="105" selection-end-column="48" />
                 </state>
               </provider>
             </entry>
@@ -508,14 +503,7 @@
       <workItem from="1558632674716" duration="1264000" />
       <workItem from="1558644106358" duration="6819000" />
       <workItem from="1558682486418" duration="11835000" />
-      <workItem from="1558927127312" duration="18130000" />
-    </task>
-    <task id="LOCAL-00017" summary="currently works">
-      <created>1554720664822</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1554720664822</updated>
+      <workItem from="1558927127312" duration="18424000" />
     </task>
     <task id="LOCAL-00018" summary="tests for stack class done">
       <created>1554724014081</created>
@@ -853,22 +841,17 @@
       <option name="project" value="LOCAL" />
       <updated>1558965219606</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="fixed symtable test">
+      <created>1558967882323</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1558967882323</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_symbolTable_py - 2019.05.27 at 16h 28m 17s.xml">
-      <configuration name="Unittests in test_symbolTable.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_symbolTable_py - 2019.05.27 at 16h 28m 56s.xml">
-      <configuration name="Unittests in test_symbolTable.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_symbolTable_py - 2019.05.27 at 16h 29m 57s.xml">
-      <configuration name="Unittests in test_symbolTable.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_symbolTable_TestSymbolTable_test_symbols_gets_added_to_table - 2019.05.27 at 16h 30m 21s.xml">
-      <configuration name="Unittests for test_symbolTable.TestSymbolTable.test_symbols_gets_added_to_table" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_test_symbolTable_TestSymbolTable_test_big_program - 2019.05.27 at 16h 30m 25s.xml">
       <configuration name="Unittests for test_symbolTable.TestSymbolTable.test_big_program" configurationId="tests" />
     </history-entry>
@@ -887,9 +870,21 @@
     <history-entry file="Unittests_in_test_symbolTable_py - 2019.05.27 at 16h 34m 55s.xml">
       <configuration name="Unittests in test_symbolTable.py" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_test_symbolTable_py - 2019.05.27 at 16h 35m 49s.xml">
+      <configuration name="Unittests in test_symbolTable.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_symbolTable_TestSymbolTable_test_big_program - 2019.05.27 at 16h 36m 45s.xml">
+      <configuration name="Unittests for test_symbolTable.TestSymbolTable.test_big_program" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_symbolTable_py - 2019.05.27 at 16h 37m 43s.xml">
+      <configuration name="Unittests in test_symbolTable.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_symbolTable_py - 2019.05.27 at 16h 37m 52s.xml">
+      <configuration name="Unittests in test_symbolTable.py" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="504665000" />
+    <option name="totallyTimeSpent" value="504959000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="13" width="1922" height="1068" extended-state="6" />
@@ -945,7 +940,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed irrelevant symbtable stuff that is not getting used anymore" />
     <MESSAGE value="final version of symboltable for now" />
     <MESSAGE value="another final version, where the formal parameters gets added to the functionName instead of &quot;type1, type2&quot;" />
     <MESSAGE value="fixed so bool is not allowed in binary expression" />
@@ -970,12 +964,13 @@
     <MESSAGE value="should work now" />
     <MESSAGE value="should work now... again" />
     <MESSAGE value="removed unnes stuff from test af symtable" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed unnes stuff from test af symtable" />
+    <MESSAGE value="fixed symtable test" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed symtable test" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1558965297790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$Unittests_for_test_symbolTable_TestSymbolTable_test_symbols_gets_added_to_table.coverage" NAME="Unittests for test_symbolTable.TestSymbolTable.test_symbols_gets_added_to_table Coverage Results" MODIFIED="1558967420986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/symbolTable" />
-    <SUITE FILE_PATH="coverage/Birdject$Unittests_in_test_symbolTable_py.coverage" NAME="Unittests in test_symbolTable.py Coverage Results" MODIFIED="1558967871646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/symbolTable" />
+    <SUITE FILE_PATH="coverage/Birdject$Unittests_in_test_symbolTable_py.coverage" NAME="Unittests in test_symbolTable.py Coverage Results" MODIFIED="1558968210241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/symbolTable" />
     <SUITE FILE_PATH="coverage/Birdject$Unittests_in_test_lexer_py.coverage" NAME="Unittests in test_lexer.py Coverage Results" MODIFIED="1558965681780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/lexer" />
     <SUITE FILE_PATH="coverage/Birdject$parser.coverage" NAME="parser Coverage Results" MODIFIED="1553767623223" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$Unittests_for_test_symbolTable_TestSymbolTable_test_big_program.coverage" NAME="Unittests for test_symbolTable.TestSymbolTable.test_big_program Coverage Results" MODIFIED="1558967805432" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/symbolTable" />
@@ -1328,8 +1323,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/symbolTable/test_symbolTable.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="1930">
+          <caret line="105" column="48" lean-forward="true" selection-start-line="105" selection-start-column="48" selection-end-line="105" selection-end-column="48" />
         </state>
       </provider>
     </entry>
