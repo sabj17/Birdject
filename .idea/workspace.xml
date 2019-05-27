@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="311eaa91-087f-4edd-b12e-d967ecc45f3e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AST.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/AST.gv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parse_tree.gv" beforeDir="false" afterPath="$PROJECT_DIR$/src/parse_tree.gv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/symbol_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbol_table.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,8 +97,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2465">
-                  <caret line="223" column="8" selection-start-line="223" selection-start-column="8" selection-end-line="223" selection-end-column="8" />
+                <state relative-caret-position="180">
+                  <caret line="338" column="11" selection-start-line="338" selection-start-column="11" selection-end-line="338" selection-end-column="11" />
                 </state>
               </provider>
             </entry>
@@ -455,21 +452,7 @@
       <workItem from="1558632674716" duration="1264000" />
       <workItem from="1558644106358" duration="6819000" />
       <workItem from="1558682486418" duration="11835000" />
-      <workItem from="1558927127312" duration="5913000" />
-    </task>
-    <task id="LOCAL-00011" summary="added exception to parser">
-      <created>1554372903026</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1554372903026</updated>
-    </task>
-    <task id="LOCAL-00012" summary="works">
-      <created>1554375020457</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1554375020457</updated>
+      <workItem from="1558927127312" duration="7881000" />
     </task>
     <task id="LOCAL-00013" summary="works">
       <created>1554381584867</created>
@@ -800,7 +783,21 @@
       <option name="project" value="LOCAL" />
       <updated>1558938947294</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="better comments">
+      <created>1558939345242</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1558939345242</updated>
+    </task>
+    <task id="LOCAL-00061" summary="probs just more structure">
+      <created>1558941785991</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1558941785991</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -836,18 +833,17 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="492448000" />
+    <option name="totallyTimeSpent" value="494416000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="13" width="1922" height="1068" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="2" weight="0.13660619" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32725322" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49876338" weight="0.26180258" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49876338" visible="true" weight="0.26180258" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39806867" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -892,7 +888,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Jener stuff has been extracted into simons stuff&#10;8===D&lt;===8" />
     <MESSAGE value="fix" />
     <MESSAGE value="made eval_term_node_type" />
     <MESSAGE value="for you maddi" />
@@ -917,10 +912,11 @@
     <MESSAGE value="big test file added to symbol table test" />
     <MESSAGE value="more clean run node" />
     <MESSAGE value="better comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="better comments" />
+    <MESSAGE value="probs just more structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="probs just more structure" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1558939334642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Birdject$compiler.coverage" NAME="compiler Coverage Results" MODIFIED="1558941768019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$Unittests_in_test_symbolTable_py.coverage" NAME="Unittests in test_symbolTable.py Coverage Results" MODIFIED="1558685483565" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/symbolTable" />
     <SUITE FILE_PATH="coverage/Birdject$parser.coverage" NAME="parser Coverage Results" MODIFIED="1553767623223" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Birdject$Unittests_for_test_grammar_TestGrammar_test_get_rules_for.coverage" NAME="Unittests for test_grammar.TestGrammar.test_get_rules_for Coverage Results" MODIFIED="1554312997343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
@@ -1248,8 +1244,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/symbol_table.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="363" column="34" lean-forward="true" selection-start-line="363" selection-start-column="34" selection-end-line="363" selection-end-column="34" />
+        <state relative-caret-position="180">
+          <caret line="338" column="11" selection-start-line="338" selection-start-column="11" selection-end-line="338" selection-end-column="11" />
         </state>
       </provider>
     </entry>
