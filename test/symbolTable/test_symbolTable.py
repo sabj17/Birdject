@@ -16,18 +16,18 @@ class TestSymbolTable(TestCase):
         pass
 
     def make_table(self, program):
-        grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/grammar.txt'))
+        grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/input/grammar.txt'))
         program_file = os.path.abspath(os.path.join('../..', 'src/resources/testSymTable.jnr'))
-        keyword_file = os.path.abspath(os.path.join('../..', 'src/resources/keywords.txt'))
-        token_spec_file = os.path.abspath(os.path.join('../..', 'src/resources/token_spec.txt'))
+        keyword_file = os.path.abspath(os.path.join('../..', 'src/resources/input/keywords.txt'))
+        token_spec_file = os.path.abspath(os.path.join('../..', 'src/resources/input/token_spec.txt'))
         grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
-        lexer = Lexer(program, keyword_file, token_spec_file)
+        lexer = Lexer(program_file, keyword_file, token_spec_file)
         tokens = lexer.lex()
         parser = Parser(grammar)
         parse_tree = parser.parse(tokens)
-        parse_tree.graph()
+        parse_tree.graph(os.path.join(os.getcwd(), "resources/output/parse_tree.gv"))
         ast = parse_tree.accept(BuildASTVisitor())
-        ast.accept(GraphASTVisitor())
+        ast.accept(GraphASTVisitor(os.path.join(os.getcwd(), "resources/output/ast.gv")))
         visitor = BuildSymbolTableVisitor()
         ast.accept(visitor)
         symtable = visitor.current_scope

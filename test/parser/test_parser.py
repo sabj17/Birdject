@@ -10,7 +10,7 @@ class TestParser(TestCase):
 
     @classmethod
     def setUpClass(cls):  # Before all tests
-        cls.grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/grammar.txt'))
+        cls.grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/input/grammar.txt'))
         cls.grammar = GrammarBuilder.build_grammar_from_file(cls.grammar_file)
 
     @classmethod
