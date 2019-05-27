@@ -9,7 +9,7 @@ from src.ast import GraphASTVisitor
 
 wd = os.getcwd()
 grammar_file = os.path.join(wd, 'resources/input/grammar.txt')
-program_file = os.path.join(wd, 'resources/test_programs/TestWindows.jnr')
+program_file = os.path.join(wd, 'resources/test_programs/TestClassFunctions.jnr')
 keyword_file = os.path.join(wd, 'resources/input/keywords.txt')
 token_spec_file = os.path.join(wd, 'resources/input/token_spec.txt')
 output_path = os.path.join(wd, "resources/output/GeneratedCode/program/program.ino")

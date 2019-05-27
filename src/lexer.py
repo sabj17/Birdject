@@ -23,6 +23,8 @@ class Lexer:
                 self.program = program_file.read()
         except FileNotFoundError:
             self.program = program
+        except OSError:
+            self.program = program
 
 
     def lex(self):

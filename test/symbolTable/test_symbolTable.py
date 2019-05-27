@@ -24,9 +24,10 @@ class TestSymbolTable(TestCase):
         tokens = lexer.lex()
         parser = Parser(grammar)
         parse_tree = parser.parse(tokens)
-        parse_tree.graph(os.path.join(os.getcwd(), "resources/output/parse_tree.gv"))
+        wd = os.getcwd()
+        parse_tree.graph(os.path.join(wd, "resources/output/parse_tree.gv"))
         ast = parse_tree.accept(BuildASTVisitor())
-        ast.accept(GraphASTVisitor(os.path.join(os.getcwd(), "resources/output/ast.gv")))
+        ast.accept(GraphASTVisitor(os.path.join(wd, "resources/output/ast.gv")))
         visitor = BuildSymbolTableVisitor()
         ast.accept(visitor)
         symtable = visitor.current_scope

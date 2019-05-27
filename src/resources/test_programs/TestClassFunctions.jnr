@@ -11,6 +11,5 @@ LivingRoom {
 set switch1 to Switch(pin2);
 
 when (run switch1.isTurnedOn()){
-    run print("hello");
     run LivingRoom.switch_all_lights();
 }

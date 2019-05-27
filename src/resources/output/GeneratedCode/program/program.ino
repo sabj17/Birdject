@@ -169,30 +169,24 @@ class Thermometer : public Input {
 
 class LivingRoomClass {
   public:
-Window window1;
-Window window2;
-Thermometer thermometer;
+Light light1;
+Light light2;
 
-void openAllWindows (int degrees){
-window1.openTo(degrees);
-window2.openTo(degrees);
-delay(60000);
+void switch_all_lights (){
+light1.changeMode();
+light2.changeMode();
 }
 
-void closeAllWindows (){
-window1.close();
-window2.close();
-delay(60000);
-}
-
-LivingRoomClass() : window1(pin8) , window2(pin9) , thermometer(pinA0) {}
+LivingRoomClass() : light1(pin8) , light2(pin9) {}
 
 } LivingRoom;
 
+Switch switch1(pin2);
+
 void initializeObjects(){
-LivingRoom.window1.initialize();
-LivingRoom.window2.initialize();
-LivingRoom.thermometer.initialize();
+LivingRoom.light1.initialize();
+LivingRoom.light2.initialize();
+switch1.initialize();
 }
 
 void setup() {
@@ -202,11 +196,7 @@ initializeObjects();
 
 void loop() {
 
-if (LivingRoom.thermometer.getTemp() > 23.0){
-LivingRoom.openAllWindows(50);
-}
-
-if (LivingRoom.thermometer.getTemp() < 21.0){
-LivingRoom.closeAllWindows();
+if (switch1.isTurnedOn()){
+LivingRoom.switch_all_lights();
 }
 }
