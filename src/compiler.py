@@ -37,7 +37,6 @@ visitor = BuildSymbolTableVisitor()
 ast.accept(visitor)
 symtable = visitor.current_scope
 
-
 # Generate Ardujeno Code
-#codeVisitor = CodeGenVisitor(symtable, output_path)
-#ast.accept(codeVisitor)
+codeVisitor = CodeGenVisitor(symtable, output_path)
+ast.accept(codeVisitor)

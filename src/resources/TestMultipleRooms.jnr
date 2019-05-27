@@ -1,18 +1,17 @@
-
 LivingRoom {
     set light to Light(pin8);
     set switch1 to Switch(pin2);
 }
 
 Kitchen {
-    set light to Light(pin9);
-    set switch1 to Switch(pin3);
+    set light1234 to Light(pin9);
+    set switch1234 to Switch(pin3);
 }
 
 when (run LivingRoom.switch1.isTurnedOn()){
     run LivingRoom.light.changeMode();
 }
 
-when (run Kitchen.switch1.isTurnedOn()){
-    run Kitchen.light.changeMode();
+when (run Kitchen.switch1234.isTurnedOn()){
+    run Kitchen.light1234.changeMode();
 }

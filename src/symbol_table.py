@@ -322,6 +322,7 @@ class BuildSymbolTableVisitor(NodeVisitor):
 
         if idNode.id.name in self.current_scope.predef_func_not_on_objects:
             pass
+        # Compare parameters
         elif self.current_scope.lookup(idNode.id.name) == self.get_actual_params(idNode):
             formal_param = self.current_scope.lookup(idNode.id.name)
             actual_param = self.get_actual_params(idNode)
@@ -333,6 +334,7 @@ class BuildSymbolTableVisitor(NodeVisitor):
         last_id = runNode.id.ids[-1].name # Is the last name of a dot sequence like LivingRoom.light.setState
         cur_scope = self.current_scope
 
+
         for id in runNode.id.ids:
             # Checks if the last id is a built in function
             if self.current_scope.predefined_functions.get(last_id) is not None:
@@ -342,6 +344,7 @@ class BuildSymbolTableVisitor(NodeVisitor):
 
                     if (formal_param) != (actual_param):
                         raise TypeError(id.name, 'takes input', formal_param, 'and you gave it', actual_param)
+                    self.current_scope = cur_scope
                 # Checks that the second last id is a predefined type
                 elif id.name == runNode.id.ids[-2].name:
                     if self.current_scope.lookup(id.name) not in self.current_scope.predefined_types:
