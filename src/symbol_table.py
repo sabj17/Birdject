@@ -349,7 +349,7 @@ class BuildSymbolTableVisitor(NodeVisitor):
                         raise TypeError(id.name, 'is not one of the pre-defined object types: ', self.current_scope.predefined_types)
                 else:
                     self.current_scope = self.current_scope.lookup(str(id.name + 'Scope'))
-            # Takes the node of the last id instead of entering its scope
+            # Takes the node of the last id instead of trying to entering its scope
             elif id.name == last_id:
                 formal_param = self.current_scope.lookup(id.name)
                 actual_param = self.get_actual_params(runNode)
