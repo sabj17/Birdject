@@ -38,9 +38,9 @@ class SymbolTable:
         else:
             raise NameError(name, 'was not found in the symbol table.')
 
-    def get_outer_scope_of_variable(self, name):
+    def get_outer_scope_of_symbol(self, name):
         if self.symbols.get(name) is None:
-            return self.enclosing_scope.get_outer_scope_of_variable(name)
+            return self.enclosing_scope.get_outer_scope_of_symbol(name)
         else:
             return self
 
@@ -375,13 +375,13 @@ class BuildSymbolTableVisitor(NodeVisitor):
 
     def call_funcNode(self, formal_param, actual_param, id_name, cur_scope):
         self.check_type_of_param_is_legal(formal_param, actual_param)
-        self.current_scope = self.current_scope.get_outer_scope_of_variable(id_name)  ## can't be in function
+        # Change the scope to where the function is in.
+        self.current_scope = self.current_scope.get_outer_scope_of_symbol(id_name)
+        # Overwrites the formal params from e.g (x, y) to type of actual e.g (int, str)
         self.current_scope.symbols[id_name] = actual_param
         self.populate_funcNode(self.current_scope.lookup(id_name + 'Node'), self.current_scope, actual_param)
         # Sets the scope back to where it were before calling populate_funcnode
         self.current_scope = cur_scope
-
-
 
     # Returns a list of types of the actual parameters
     def get_actual_params(self, runNode):

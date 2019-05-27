@@ -35,7 +35,7 @@ class SymbolTable:
 
     def get_outer_scope_of_variable(self, name):
         if self.symbols.get(name) is None:
-            return self.enclosing_scope.get_outer_scope_of_variable(name)
+            return self.enclosing_scope.get_outer_scope_of_symbol(name)
         else:
             return self
 
@@ -306,7 +306,7 @@ class AstNodeVisitor(NodeVisitor):
                     if formal_param[0] not in list_of_types:  # Checks the first formal parameter is not a type
                         assert all([yparam not in list_of_types for yparam in formal_param])  # Checks none of the formal parameters has a type
 
-                        self.current_scope = self.current_scope.get_outer_scope_of_variable(node.id.name)
+                        self.current_scope = self.current_scope.get_outer_scope_of_symbol(node.id.name)
                         self.current_scope.symbols[node.id.name] = actual_param
                         self.populate_funcNode(self.current_scope.lookup(node.id.name + 'Node'), self.current_scope, actual_param)
                         self.current_scope = cur_scope
@@ -318,7 +318,7 @@ class AstNodeVisitor(NodeVisitor):
                     elif formal_param != actual_param:
                         raise TypeError(node.id.name, 'takes input', formal_param, 'and you gave it', actual_param)
                 else:  # Populate functions without input parameter
-                    self.current_scope = self.current_scope.get_outer_scope_of_variable(node.id.name)
+                    self.current_scope = self.current_scope.get_outer_scope_of_symbol(node.id.name)
                     self.current_scope.symbols[node.id.name] = actual_param
                     self.populate_funcNode(self.current_scope.lookup(node.id.name + 'Node'), self.current_scope, actual_param)
                     self.current_scope = cur_scope
