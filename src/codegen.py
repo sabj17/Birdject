@@ -1,8 +1,5 @@
-import os
-
 from src.parser import Stack
-from src.ast import BinaryExpNode, PlusNode, AbstractNode, NewObjectNode, IfNode, FormalParameterNode, DotNode, \
-    AssignNode, UnaryExpNode, RunNode
+from src.ast import BinaryExpNode, NewObjectNode, IfNode, DotNode, UnaryExpNode, RunNode
 
 
 class NodeVisitor:
@@ -83,12 +80,12 @@ class CodeGenVisitor(NodeVisitor):
 
     def write_to_file(self, output_file):
         # Opens the two txt files and reads from standard_classes
-        file_std = open("resources/default_classes.txt", "r")
+        file_std = open("resources/input/default_classes.txt", "r")
         contents = file_std.read()
         program_file = open(output_file, "w")
         program_file.write(contents)
 
-        # All generated code is added to 'program.txt'
+        # All generated code is added to 'program.ino'
         for string in self.global_list:
             program_file.write(string + "\n")
         for string in self.setup_list:
@@ -102,7 +99,6 @@ class CodeGenVisitor(NodeVisitor):
 
     def visit_ProgNode(self, node):
         self.setup()
-
         # Starts visiting all nodes in the AST
         for node in node.stmts:
             node.accept(self)

@@ -1,5 +1,3 @@
-import random
-
 from graphviz import Digraph, nohtml
 
 
@@ -237,6 +235,7 @@ class BlockNode(AbstractNode):
         super().__init__()
         self.parts = parts
 
+
 class BlockBodyPartNode(AbstractNode):
     pass
 
@@ -372,9 +371,10 @@ class ArrayRefNode(AbstractNode):
 
 class GraphASTVisitor:
 
-    def __init__(self):
+    def __init__(self, output_path):
         self.parent = None
         self.graph = Digraph('G', node_attr={'style': 'filled'}, graph_attr={'ratio': 'fill', 'ranksep': '1.5'})
+        self.output_path = output_path
 
 
     def visit_children(self, node):
@@ -410,4 +410,4 @@ class GraphASTVisitor:
         self.visit_children(node)
 
         self.graph.attr(overlap='false')
-        self.graph.save(filename='AST.gv')
+        self.graph.save(filename=self.output_path)

@@ -1,0 +1,176 @@
+digraph G {
+	graph [ranksep=1.5 ratio=fill]
+	node [style=filled]
+	3242373 [label=ProgNode]
+	3250715 [label=ClassNode]
+	3242373 -> 3250715
+	3250717 [label="IdNode: LivingRoom"]
+	3250715 -> 3250717
+	3250713 [label=ClassBodyNode]
+	3250715 -> 3250713
+	3250723 [label=AssignNode]
+	3250713 -> 3250723
+	3250719 [label="IdNode: window1"]
+	3250723 -> 3250719
+	3250741 [label=NewObjectNode]
+	3250723 -> 3250741
+	3250745 [label="IdNode: Window"]
+	3250741 -> 3250745
+	3250743 [label=ActualParameterNode]
+	3250741 -> 3250743
+	3250767 [label="IdNode: pin8"]
+	3250743 -> 3250767
+	3250725 [label=AssignNode]
+	3250713 -> 3250725
+	3250733 [label="IdNode: window2"]
+	3250725 -> 3250733
+	3250751 [label=NewObjectNode]
+	3250725 -> 3250751
+	3250757 [label="IdNode: Window"]
+	3250751 -> 3250757
+	3250753 [label=ActualParameterNode]
+	3250751 -> 3250753
+	3250785 [label="IdNode: pin9"]
+	3250753 -> 3250785
+	3250727 [label=AssignNode]
+	3250713 -> 3250727
+	3250747 [label="IdNode: thermometer"]
+	3250727 -> 3250747
+	3250765 [label=NewObjectNode]
+	3250727 -> 3250765
+	3250771 [label="IdNode: Thermometer"]
+	3250765 -> 3250771
+	3250763 [label=ActualParameterNode]
+	3250765 -> 3250763
+	3250797 [label="IdNode: pinA0"]
+	3250763 -> 3250797
+	3250729 [label=FunctionNode]
+	3250713 -> 3250729
+	3250737 [label="IdNode: openAllWindows"]
+	3250729 -> 3250737
+	3250739 [label=FormalParameterNode]
+	3250729 -> 3250739
+	3250759 [label="IdNode: degrees"]
+	3250739 -> 3250759
+	3250749 [label=BlockNode]
+	3250729 -> 3250749
+	3250761 [label=RunNode]
+	3250749 -> 3250761
+	3250775 [label=DotNode]
+	3250761 -> 3250775
+	3250781 [label="IdNode: window1"]
+	3250775 -> 3250781
+	3250789 [label="IdNode: openTo"]
+	3250775 -> 3250789
+	3250783 [label=ActualParameterNode]
+	3250761 -> 3250783
+	3250809 [label="IdNode: degrees"]
+	3250783 -> 3250809
+	3250777 [label=RunNode]
+	3250749 -> 3250777
+	3250801 [label=DotNode]
+	3250777 -> 3250801
+	3250793 [label="IdNode: window2"]
+	3250801 -> 3250793
+	3250799 [label="IdNode: openTo"]
+	3250801 -> 3250799
+	3250779 [label=ActualParameterNode]
+	3250777 -> 3250779
+	3250819 [label="IdNode: degrees"]
+	3250779 -> 3250819
+	3250787 [label=RunNode]
+	3250749 -> 3250787
+	3250811 [label="IdNode: wait"]
+	3250787 -> 3250811
+	3250803 [label=ActualParameterNode]
+	3250787 -> 3250803
+	375057 [label="IntegerNode: 60000"]
+	3250803 -> 375057
+	3250769 [label=FunctionNode]
+	3250713 -> 3250769
+	3250791 [label="IdNode: closeAllWindows"]
+	3250769 -> 3250791
+	3250807 [label=BlockNode]
+	3250769 -> 3250807
+	3250805 [label=RunNode]
+	3250807 -> 3250805
+	3250823 [label=DotNode]
+	3250805 -> 3250823
+	3250825 [label="IdNode: window1"]
+	3250823 -> 3250825
+	3250827 [label="IdNode: close"]
+	3250823 -> 3250827
+	3250813 [label=RunNode]
+	3250807 -> 3250813
+	3250833 [label=DotNode]
+	3250813 -> 3250833
+	3250831 [label="IdNode: window2"]
+	3250833 -> 3250831
+	3250835 [label="IdNode: close"]
+	3250833 -> 3250835
+	3250821 [label=RunNode]
+	3250807 -> 3250821
+	3250841 [label="IdNode: wait"]
+	3250821 -> 3250841
+	3250837 [label=ActualParameterNode]
+	3250821 -> 3250837
+	3250859 [label="IntegerNode: 60000"]
+	3250837 -> 3250859
+	3250731 [label=WhenNode]
+	3242373 -> 3250731
+	3250795 [label=GreaterThanNode]
+	3250731 -> 3250795
+	3250839 [label=RunNode]
+	3250795 -> 3250839
+	3250861 [label=DotNode]
+	3250839 -> 3250861
+	3250849 [label="IdNode: LivingRoom"]
+	3250861 -> 3250849
+	3250853 [label="IdNode: thermometer"]
+	3250861 -> 3250853
+	3250855 [label="IdNode: getTemp"]
+	3250861 -> 3250855
+	3250857 [label="FloatNode: 23.0"]
+	3250795 -> 3250857
+	3250815 [label=BlockNode]
+	3250731 -> 3250815
+	3250773 [label=RunNode]
+	3250815 -> 3250773
+	3250847 [label=DotNode]
+	3250773 -> 3250847
+	3250845 [label="IdNode: LivingRoom"]
+	3250847 -> 3250845
+	3250863 [label="IdNode: openAllWindows"]
+	3250847 -> 3250863
+	3250817 [label=ActualParameterNode]
+	3250773 -> 3250817
+	3250877 [label="IntegerNode: 50"]
+	3250817 -> 3250877
+	3250755 [label=WhenNode]
+	3242373 -> 3250755
+	3250867 [label=LessThanNode]
+	3250755 -> 3250867
+	3250873 [label=RunNode]
+	3250867 -> 3250873
+	3250889 [label=DotNode]
+	3250873 -> 3250889
+	3250883 [label="IdNode: LivingRoom"]
+	3250889 -> 3250883
+	3250887 [label="IdNode: thermometer"]
+	3250889 -> 3250887
+	3250891 [label="IdNode: getTemp"]
+	3250889 -> 3250891
+	3250893 [label="FloatNode: 21.0"]
+	3250867 -> 3250893
+	3250851 [label=BlockNode]
+	3250755 -> 3250851
+	3250843 [label=RunNode]
+	3250851 -> 3250843
+	3250879 [label=DotNode]
+	3250843 -> 3250879
+	3250881 [label="IdNode: LivingRoom"]
+	3250879 -> 3250881
+	3250895 [label="IdNode: closeAllWindows"]
+	3250879 -> 3250895
+	overlap=false
+}

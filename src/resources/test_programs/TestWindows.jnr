@@ -16,6 +16,7 @@ LivingRoom {
     }
 }
 
+
 when(run LivingRoom.thermometer.getTemp() > 23.0){
     run LivingRoom.openAllWindows(50);
 }

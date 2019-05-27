@@ -1,4 +1,4 @@
-#include <dht.h>
+include <dht.h>
 dht DHT;
 
 #define pin1 1
@@ -165,78 +165,48 @@ class Thermometer : public Input {
 };
 
 // ///////////////// Generated Code Below ///////////////// //
-bool global_var =  !(false);
-
-Light global_light(pin1);
 
 
-
-class HomeClass {
+class LivingRoomClass {
   public:
-int var = 1 + 2 - 3 * (4 / 5);
-float float_var = 10 + 10.5;
-String string_var = String("This is a string") + var;
-Light light;
-Switch switch1;
+Window window1;
+Window window2;
+Thermometer thermometer;
 
-float home_func (int param1, float param2){
-return param1 * param2;
+void openAllWindows (int degrees){
+window1.openTo(degrees);
+window2.openTo(degrees);
+delay(60000);
 }
 
-
-class RoomClass {
-  public:
-bool var = true;
-Light light;
-
-void room_func (bool mode){
-light.setMode(mode);
+void closeAllWindows (){
+window1.close();
+window2.close();
+delay(60000);
 }
 
-RoomClass() : light(pin9) {}
+LivingRoomClass() : window1(pin8) , window2(pin9) , thermometer(pinA0) {}
 
-} Room;
-
-HomeClass() : light(pin8) , switch1(pin2) {}
-
-} Home;
-
-float res = Home.home_func(5, 5.5);
+} LivingRoom;
 
 void initializeObjects(){
-global_light.initialize();
-Home.light.initialize();
-Home.switch1.initialize();
-Home.Room.light.initialize();
+LivingRoom.window1.initialize();
+LivingRoom.window2.initialize();
+LivingRoom.thermometer.initialize();
 }
 
 void setup() {
 Serial.begin(9600);
-Home.home_func(5, 5.5);
-
-Serial.println(String("Result: ") + res);
-
 initializeObjects();
 }
 
 void loop() {
 
-if (Home.switch1.isTurnedOn()){
-int res = 1;
-if (Home.light.isTurnedOn() && Home.Room.light.isTurnedOn()) {
-Home.light.setMode(false);
-Home.Room.room_func(false);
-}
-else if (Home.light.isTurnedOn() || Home.Room.light.isTurnedOn()) {
-Serial.println(String("One light is turned on!"));
-}
-else {
-Home.light.setMode(true);
-Home.Room.room_func(true);
-}
+if (LivingRoom.thermometer.getTemp() > 23.0){
+LivingRoom.openAllWindows(50);
 }
 
-if (Home.switch1.isTurnedOn() == false){
-Serial.println(String("Home switch is turned off"));
+if (LivingRoom.thermometer.getTemp() < 21.0){
+LivingRoom.closeAllWindows();
 }
 }

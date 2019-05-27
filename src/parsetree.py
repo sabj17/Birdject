@@ -1,7 +1,6 @@
 from src.ast import *
 from src.grammar import *
 from graphviz import Digraph, nohtml
-import random
 
 
 class PTNode:
@@ -79,11 +78,11 @@ class ParseTree:
         return self.root.accept(visitor)
 
 
-    def graph(self):
+    def graph(self, output_path):
         graph = Digraph('G', node_attr={'style': 'filled'}, graph_attr={'ratio': 'fill', 'ranksep': '1.5'})
         graph.attr(overlap='false')
         self.root.graph(graph)
-        graph.save(filename='parse_tree.gv')
+        graph.save(filename=output_path)
 
     def __str__(self):
         return self.root.__str__()
