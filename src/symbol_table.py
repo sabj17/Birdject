@@ -326,7 +326,7 @@ class BuildSymbolTableVisitor(NodeVisitor):
         if idNode.id.name in self.current_scope.predef_func_not_on_objects:
             pass
         elif len(formal_param) == len(actual_param):
-            self.type_check_params(formal_param, actual_param, idNode.id.name, cur_scope)
+            self.run_funcNode_and_typeCheck_params(formal_param, actual_param, idNode.id.name, cur_scope)
         else:
             raise TypeError(idNode.id.name, 'takes', len(self.current_scope.lookup(idNode.id.name)), 'parameter(s) and', len(self.get_actual_params(idNode)), 'was given.')
 
@@ -355,13 +355,13 @@ class BuildSymbolTableVisitor(NodeVisitor):
                 actual_param = self.get_actual_params(runNode)
 
                 if len(formal_param) == len(actual_param):
-                    self.type_check_params(formal_param, actual_param, id.name, cur_scope)
+                    self.run_funcNode_and_typeCheck_params(formal_param, actual_param, id.name, cur_scope)
                 else:
                     raise TypeError(id.name, 'takes', len(formal_param), 'parameter(s) and', len(actual_param), 'was given.')
             else:
                 self.current_scope = self.current_scope.lookup(str(id.name + 'Scope'))
 
-    def type_check_params(self, formal_param, actual_param, id_name, cur_scope):
+    def run_funcNode_and_typeCheck_params(self, formal_param, actual_param, id_name, cur_scope):
         list_of_types = [str, bool, int, float]
 
         if actual_param != []:
