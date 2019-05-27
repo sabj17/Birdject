@@ -17,7 +17,6 @@ class TestSymbolTable(TestCase):
 
     def make_table(self, program):
         grammar_file = os.path.abspath(os.path.join('../..', 'src/resources/grammar.txt'))
-        program_file = os.path.abspath(os.path.join('../..', 'src/resources/testSymTable.jnr'))
         keyword_file = os.path.abspath(os.path.join('../..', 'src/resources/keywords.txt'))
         token_spec_file = os.path.abspath(os.path.join('../..', 'src/resources/token_spec.txt'))
         grammar = GrammarBuilder.build_grammar_from_file(grammar_file)
