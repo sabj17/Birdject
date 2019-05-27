@@ -310,55 +310,32 @@ class BuildSymbolTableVisitor(NodeVisitor):
         self.current_scope.symbols['returnType'] = return_type
 
     def visit_RunNode(self, node):
-        list_of_types = [str, bool, int, float]
-        cur_scope = self.current_scope
-        # Gets the formal parameters if it's a dotNode
-        if isinstance(node.id, DotNode):  # Looks for if Class.method exist
+        # Type checks parameters and populate the funcNode if the run is a call to a sub-id. (LivingRoom.FunctionName).
+        if isinstance(node.id, DotNode):
             self.dotNode_in_runNode(node)
 
-        # Get the formal parameters if the runNode just has a IdNode and not a DotNode
-        # Compares formal and actual params. If formal has no type it gets set to type of actual first time called
+        # Type checks parameters and pupulate the funcNode if the run is just an id.
         elif isinstance(node.id, IdNode):
+            self.idNode_in_runNode(node)
 
-            if node.id.name in self.current_scope.predef_func_not_on_objects:
-                pass
-            elif len(self.current_scope.lookup(node.id.name)) == len(self.get_actual_params(node)):
-                formal_param = self.current_scope.lookup(node.id.name)
-                actual_param = self.get_actual_params(node)
+    def idNode_in_runNode(self, idNode):
+        cur_scope = self.current_scope
+        formal_param = self.current_scope.lookup(idNode.id.name)
+        actual_param = self.get_actual_params(idNode)
 
-                if actual_param != []:
-                    if formal_param[0] not in list_of_types:  # Checks the first formal parameter is not a type
-                        assert all([xparam in list_of_types for xparam in actual_param])  # Checks all actual parameters has type
-                        assert all([yparam not in list_of_types for yparam in formal_param])  # Checks none of the formal parameters has a type
-                        self.current_scope = self.current_scope.get_outer_scope_of_variable(node.id.name)
-                        self.current_scope.symbols[node.id.name] = actual_param
-                        self.populate_funcNode(self.current_scope.lookup(node.id.name + 'Node'), self.current_scope, actual_param)
-                        # Sets the scope back to where it were before calling populate_funcnode
-                        self.current_scope = cur_scope
-                        scope_w_param = self.current_scope.lookup(node.id.name + 'Scope')
-
-                        for (fparam, aparam) in zip(formal_param, actual_param):
-                            scope_w_param.symbols[fparam] = aparam
-                    elif formal_param != actual_param:
-                        raise TypeError(node.id.name, 'takes input', formal_param, 'and you gave it', actual_param)
-                else:  # Populate functions without input parameter
-                    self.current_scope = self.current_scope.get_outer_scope_of_variable(node.id.name)
-                    self.current_scope.symbols[node.id.name] = actual_param
-                    self.populate_funcNode(self.current_scope.lookup(node.id.name + 'Node'), self.current_scope, actual_param)
-                    self.current_scope = cur_scope
-
-            else:
-                raise TypeError(node.id.name, 'takes', len(self.current_scope.lookup(node.id.name)), 'parameter(s) and', len(self.get_actual_params(node)), 'was given.')
-
+        if idNode.id.name in self.current_scope.predef_func_not_on_objects:
+            pass
+        elif len(formal_param) == len(actual_param):
+            self.type_check_params(formal_param, actual_param, idNode.id.name, cur_scope)
+        else:
+            raise TypeError(idNode.id.name, 'takes', len(self.current_scope.lookup(idNode.id.name)), 'parameter(s) and', len(self.get_actual_params(idNode)), 'was given.')
 
     def dotNode_in_runNode(self, runNode):
-        list_of_types = [str, bool, int, float]
         last_id = runNode.id.ids[-1].name # Is the last name of a dot sequence like LivingRoom.light.setState
         cur_scope = self.current_scope
-        temp_scope = self.current_scope
 
         for id in runNode.id.ids:
-            # Checks if the last id in the dot sequence is a built in function
+            # Checks if the last id is a built in function
             if self.current_scope.predefined_functions.get(last_id) is not None:
                 if id.name == last_id:
                     formal_param = self.current_scope.predefined_functions.get(last_id)
@@ -366,40 +343,45 @@ class BuildSymbolTableVisitor(NodeVisitor):
 
                     if (formal_param) != (actual_param):
                         raise TypeError(id.name, 'takes input', formal_param, 'and you gave it', actual_param)
-                # Breaks the recursion at the second last id because
-                # built in functions can't be looked up in the regular scopes
+                # Checks that the second last id is a predefined type
                 elif id.name == runNode.id.ids[-2].name:
-                    if temp_scope.lookup(id.name) not in self.current_scope.predefined_types: # Makes sure that the object is of predefined types
+                    if self.current_scope.lookup(id.name) not in self.current_scope.predefined_types:
                         raise TypeError(id.name, 'is not one of the pre-defined object types: ', self.current_scope.predefined_types)
                 else:
-                    temp_scope = temp_scope.lookup(str(id.name + 'Scope'))
-
-            # Gets the parameters of the function which matches the last id instead of entering it's scope
+                    self.current_scope = self.current_scope.lookup(str(id.name + 'Scope'))
+            # Takes the node of the last id instead of entering its scope
             elif id.name == last_id:
-                formal_param = temp_scope.lookup(id.name)
+                formal_param = self.current_scope.lookup(id.name)
                 actual_param = self.get_actual_params(runNode)
 
-                # Throws exceptions if the formal and actual parameters dosen't match in type or lenght.
-                # If formal parameters has no type, they get set to the types of actual param first time it's called
                 if len(formal_param) == len(actual_param):
-                    if actual_param != []:
-                        if formal_param[0] not in list_of_types: # Checks the first formal parameter is not a type
-                            assert all([param in list_of_types for param in actual_param])  # Makes sure all actual parameters has type
-                            assert all([param not in list_of_types for param in formal_param]) # Makes sure none of the formal parameters has a type
-                            temp_scope.symbols[id.name] = actual_param # Sets the formal params to the type of actual params
-                            self.populate_funcNode(temp_scope.lookup(id.name + 'Node'), temp_scope, actual_param)
-                            # Sets the scope back to where it were before calling populate_funcnode
-                            self.current_scope = cur_scope
-
-                        elif formal_param != actual_param:
-                            raise TypeError(id.name, 'takes input', formal_param, 'and you gave it', actual_param)
-                    else: # Ellers bliver funktioner som open window ikke "bygget" fordi den ikke har input parameter
-                        self.populate_funcNode(temp_scope.lookup(id.name + 'Node'), temp_scope, actual_param)
-                        self.current_scope = cur_scope
+                    self.type_check_params(formal_param, actual_param, id.name, cur_scope)
                 else:
                     raise TypeError(id.name, 'takes', len(formal_param), 'parameter(s) and', len(actual_param), 'was given.')
             else:
-                temp_scope = temp_scope.lookup(str(id.name + 'Scope'))
+                self.current_scope = self.current_scope.lookup(str(id.name + 'Scope'))
+
+    def type_check_params(self, formal_param, actual_param, id_name, cur_scope):
+        list_of_types = [str, bool, int, float]
+
+        if actual_param != []:
+            if formal_param[0] not in list_of_types:  # Checks the first formal parameter is not a type
+                self.call_funcNode(formal_param, actual_param, id_name, cur_scope)
+            elif formal_param != actual_param:
+                raise TypeError(id.name, 'takes input', formal_param, 'and you gave it', actual_param)
+        else:  # Ellers bliver funktioner som open window ikke "bygget" fordi den ikke har input parameter
+            self.populate_funcNode(self.current_scope.lookup(id.name + 'Node'), self.current_scope, actual_param)
+            self.current_scope = cur_scope
+
+    def call_funcNode(self, formal_param, actual_param, id_name, cur_scope):
+        self.check_type_of_param_is_legal(formal_param, actual_param)
+        self.current_scope = self.current_scope.get_outer_scope_of_variable(id_name)  ## can't be in function
+        self.current_scope.symbols[id_name] = actual_param
+        self.populate_funcNode(self.current_scope.lookup(id_name + 'Node'), self.current_scope, actual_param)
+        # Sets the scope back to where it were before calling populate_funcnode
+        self.current_scope = cur_scope
+
+
 
     # Returns a list of types of the actual parameters
     def get_actual_params(self, runNode):
@@ -417,4 +399,8 @@ class BuildSymbolTableVisitor(NodeVisitor):
 
         return param_list
 
+    def check_type_of_param_is_legal(self, formal_param, actual_param):
+        list_of_types = [str, bool, int, float]
 
+        assert all([aparam in list_of_types for aparam in actual_param])  # Checks all actual parameters has type
+        assert all([fparam not in list_of_types for fparam in formal_param])  # Checks none of the formal parameters has a type

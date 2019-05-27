@@ -62,7 +62,7 @@ class TestSymbolTable(TestCase):
         symtable = self.make_table(program)
         self.assertEqual(symtable.lookup('varName'), float)
 
-    def test_lookup_classes(self):
+    def test_classScopes_gets_added(self):
         program = '''
                 TestClass{
                     set testVar to 123;

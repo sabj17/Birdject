@@ -1,5 +1,5 @@
 ClassName{
-    function FunctionName(x, y){
+    function FunctionName(y, x){
         set jajaja to 2 + 2;
         return 2;
 
@@ -7,7 +7,7 @@ ClassName{
 
 }
 
-function FunctionName(){
+function GlobalFunction(x, y){
         set jajaja to 2 + 2;
         return 2;
 }
@@ -15,8 +15,9 @@ function FunctionName(){
 set a to "bc";
 set num to a;
 set number to 11 + 1.2 * 3;
-set var to 10 + run ClassName.FunctionName(a, num);
-set var to 10 + run ClassName.FunctionName(a, num);
+set var to 10 + run GlobalFunction(number, a);
+set var to 10 + run ClassName.FunctionName(number, a);
+//set var to 10 + run ClassName.FunctionName(number, number);
 
 
 if(1 < 2){
